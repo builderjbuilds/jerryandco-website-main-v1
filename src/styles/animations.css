@@ -1,0 +1,86 @@
+/* ═══════════════════════════════════════════════════
+   ANIMATIONS — Jerry & Co.
+   Phase 2: Load-in & Scroll Animation System
+   All values: transform + opacity only (zero repaints)
+═══════════════════════════════════════════════════ */
+
+/* ── JS detection guard ───────────────────────────────────────
+   Elements stay visible if JS never runs (progressive enhancement) */
+.js [data-reveal] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* ── Keyframes ────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Reveal utility — JS adds .is-visible to trigger ──────── */
+[data-reveal].is-visible {
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 0.65s;
+}
+
+[data-reveal="up"].is-visible    { animation-name: fadeUp; }
+[data-reveal="in"].is-visible    { animation-name: fadeIn; }
+[data-reveal="scale"].is-visible { animation-name: scaleIn; }
+[data-reveal="left"].is-visible  { animation-name: slideRight; }
+[data-reveal="right"].is-visible { animation-name: slideLeft; }
+
+/* ── Stagger delay tokens ─────────────────────────────────── */
+[data-delay].is-visible { animation-duration: 0.6s; }
+[data-delay="1"].is-visible { animation-delay: 0.07s; }
+[data-delay="2"].is-visible { animation-delay: 0.14s; }
+[data-delay="3"].is-visible { animation-delay: 0.21s; }
+[data-delay="4"].is-visible { animation-delay: 0.29s; }
+[data-delay="5"].is-visible { animation-delay: 0.37s; }
+[data-delay="6"].is-visible { animation-delay: 0.46s; }
+
+/* ── Hero entrance — CSS-only (above fold, no observer needed) */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Mobile — tighter motion ──────────────────────────────── */
+@media (max-width: 600px) {
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideRight {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideLeft {
+    from { opacity: 0; transform: translateX(12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  [data-delay="2"].is-visible { animation-delay: 0.09s; }
+  [data-delay="3"].is-visible { animation-delay: 0.16s; }
+  [data-delay="4"].is-visible { animation-delay: 0.22s; }
+  [data-delay="5"].is-visible { animation-delay: 0.28s; }
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ceri-charlestown",
+    "name": "Ceri L.",
+    "location": "Charlestown, MA",
+    "project": "Ongoing renovation partnership",
+    "quote": "Jerry has completed multiple projects for us over the years, from repairs and finish work to larger renovations. His craftsmanship, reliability, and attention to detail are consistently outstanding. We trust him completely and wouldn't hesitate to recommend Jerry & Co. to others.",
+    "reviewUrl": null,
+    "projectSlug": "ceri-charlestown",
+    "headshot": "ceri-charlestown-ma_testimonial-headshot.jpg",
+    "returningClient": true,
+    "photos": [
+      "ceri-charlestown-ma_testimonial-photo-01.jpg",
+      "ceri-charlestown-ma_testimonial-photo-02.jpg",
+      "ceri-charlestown-ma_testimonial-photo-03.jpg"
+    ]
+  },
+  {
+    "id": "alyssa-charlestown",
+    "name": "Alyssa A.",
+    "location": "Charlestown, MA",
+    "project": "Bathroom refresh",
+    "quote": "Jerry transformed our outdated bathroom into a bright, timeless space that we absolutely love. He was professional, communicative, and detail-oriented throughout the entire project. The craftsmanship exceeded our expectations, and the finished result is exactly what we envisioned.",
+    "reviewUrl": null,
+    "projectSlug": "alyssa-charlestown",
+    "headshot": "alyssa-charlestown-ma_testimonial-headshot.jpg",
+    "returningClient": true,
+    "photos": [
+      "alyssa-charlestown-ma_testimonial-photo-01.jpg",
+      "alyssa-charlestown-ma_testimonial-photo-02.jpg",
+      "alyssa-charlestown-ma_testimonial-photo-03.jpg"
+    ]
+  },
+  {
+    "id": "julia-boston",
+    "name": "Julia T.",
+    "location": "Boston, MA",
+    "project": "Bathroom refresh & custom storage",
+    "quote": "Working with Jerry was a fantastic experience from start to finish. He listened carefully to our vision, helped us make smart design decisions, and delivered exceptional quality throughout. The finished bathroom and custom storage solutions are beautiful, functional, and built to last.",
+    "reviewUrl": null,
+    "projectSlug": "julia-boston",
+    "headshot": "julia-boston-ma_testimonial-headshot.jpg",
+    "returningClient": true,
+    "photos": [
+      "julia-boston-ma_testimonial-photo-01.jpg",
+      "julia-boston-ma_testimonial-photo-02.jpg",
+      "julia-boston-ma_testimonial-photo-03.jpg"
+    ]
+  },
+  {
+    "id": "julia-kitchen-boston",
+    "name": "Julia T.",
+    "location": "Boston, MA",
+    "project": "Cabinet refinishing",
+    "quote": "Working with Jerry was a fantastic experience from start to finish. He listened carefully to our vision, helped us make smart design decisions, and delivered exceptional quality throughout. The finished bathroom and custom storage solutions are beautiful, functional, and built to last.",
+    "reviewUrl": null,
+    "projectSlug": "julia-kitchen-boston",
+    "headshot": "julia-boston-ma_testimonial-headshot.jpg",
+    "returningClient": true,
+    "photos": [
+      "julia-boston-ma_testimonial-photo-04.jpg",
+      "julia-boston-ma_testimonial-photo-05.jpg",
+      "julia-boston-ma_testimonial-photo-06.jpg"
+    ]
+  },
+  {
+    "id": "nick-somerville",
+    "name": "Nick C.",
+    "location": "Somerville, MA",
+    "project": "Bathroom refresh",
+    "quote": "Jerry completely transformed our bathroom into a modern, functional space that feels brand new. His communication, professionalism, and attention to detail were exceptional throughout the project. The finished result exceeded our expectations, and we couldn't be happier with the outcome.",
+    "reviewUrl": null,
+    "projectSlug": "nick-somerville",
+    "headshot": "nick-sommerville-ma_testimonial-headshot.jpg",
+    "returningClient": true,
+    "photos": [
+      "nick-sommerville-ma_testimonial-photo-01.jpg",
+      "nick-sommerville-ma_testimonial-photo-02.jpg",
+      "nick-sommerville-ma_testimonial-photo-03.jpg"
+    ]
+  }
+]

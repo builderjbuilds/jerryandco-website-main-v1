@@ -1,0 +1,550 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CTABand from '../components/CTABand.astro';
+import SchemaLD from '../components/SchemaLD.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import PlaceholderImage from '../components/PlaceholderImage.astro';
+
+const title = 'Cabinet Refinishing vs. Replacement | $2,000 vs. $50,000 | Jerry & Co.';
+const description =
+  'Side-by-side: cabinet refinishing vs. DIY painting vs. full replacement — cost, timeline, result, and longevity for Boston kitchens. MA HIC #208336.';
+
+const breadcrumbSchemaData = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohomeservices.com' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Cabinet Refinishing vs. Replacement',
+      item: 'https://www.jerryandcohomeservices.com/cabinet-refinishing-vs-replacement/',
+    },
+  ],
+};
+
+const crumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Why Refinish', href: '#' },
+  { label: 'vs. Replacement' },
+];
+
+const compareRows = [
+  {
+    feature: 'Typical cost',
+    diy: '~$200–$800 in materials',
+    jerry: '$1,800–$9,500',
+    replacement: '$20,000–$50,000+',
+  },
+  {
+    feature: 'Project timeline',
+    diy: 'A weekend or more — on your own schedule',
+    jerry: '2–5 days, professionally managed',
+    replacement: '6–16 weeks from order to install',
+  },
+  {
+    feature: 'Visual result',
+    diy: 'Brush marks, lap lines, uneven film',
+    jerry: 'Factory-smooth spray finish — looks new',
+    replacement: 'New cabinets (layout unchanged)',
+  },
+  {
+    feature: 'In-unit disruption',
+    diy: 'High — you do the work, you manage the mess',
+    jerry: 'Low — doors leave the unit, boxes fully masked',
+    replacement: 'Extreme — demo, weeks without cabinets',
+  },
+  {
+    feature: 'Longevity',
+    diy: '1–3 years before peeling or chipping',
+    jerry: '10+ years with 2K polyurethane',
+    replacement: '10–20+ years (depends on material)',
+  },
+  {
+    feature: 'Color flexibility',
+    diy: 'Any color, but quality varies by painter skill',
+    jerry: '100s of colors, professional color-match',
+    replacement: "Manufacturer's SKU options only",
+  },
+  {
+    feature: 'Workmanship guarantee',
+    diy: 'None',
+    jerry: '2-year guarantee + touch-up kit',
+    replacement: 'Varies by manufacturer and installer',
+  },
+];
+
+const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dxuuydoee';
+const cld = (path: string, w = 960) =>
+  `https://res.cloudinary.com/${cloud}/image/upload/f_auto,q_auto,w_${w}/${path}.jpg`;
+---
+
+<Base title={title} description={description}>
+  <Fragment slot="head">
+    <SchemaLD type="BreadcrumbList" data={breadcrumbSchemaData} />
+  </Fragment>
+
+  <Header />
+
+  <!-- Dark page hero -->
+  <section class="vs-hero">
+    <div class="wrap">
+      <Breadcrumb crumbs={crumbs} />
+      <p class="eyebrow" style="color: var(--gold);">The honest comparison</p>
+      <h1>Refinishing vs. Replacement</h1>
+      <p class="lede">
+        Full cabinet replacement costs $20,000–$50,000+ and takes months. DIY painting lasts a year or two before it peels. Here's what actually separates each option — so you can choose without regret.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== COST CHART ===== -->
+  <section class="cost-chart-section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Cost at a glance</p>
+        <h2>The price gap is real</h2>
+      </div>
+
+      <figure class="chart-figure" aria-label="Cost comparison bar chart: DIY, Refinishing, and Full Replacement">
+        <svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg" class="cost-chart-svg" role="img" aria-hidden="true">
+          <!-- Grid lines -->
+          <line x1="60" y1="20" x2="60" y2="210" stroke="#20281F" stroke-opacity="0.08" stroke-width="1"/>
+          <line x1="60" y1="210" x2="500" y2="210" stroke="#20281F" stroke-opacity="0.12" stroke-width="1"/>
+
+          <!-- DIY bar -->
+          <rect x="90" y="178" width="90" height="32" fill="#EFE7D6" rx="2"/>
+          <text x="135" y="168" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#6E6A5E" font-weight="500">~$500</text>
+          <text x="135" y="242" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#6E6A5E">DIY Paint</text>
+          <text x="135" y="256" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#6E6A5E" opacity="0.6">materials only</text>
+
+          <!-- Refinishing bar (gold — hero option) -->
+          <rect x="225" y="108" width="90" height="102" fill="#C8A055" rx="2"/>
+          <text x="270" y="98" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#14241F" font-weight="600">$1,800–$9,500</text>
+          <text x="270" y="242" text-anchor="middle" font-family="Fraunces, serif" font-size="12" fill="#14241F" font-weight="500">Jerry &amp; Co.</text>
+          <text x="270" y="256" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#6E6A5E" opacity="0.6">refinishing</text>
+
+          <!-- Replacement bar (ink) -->
+          <rect x="360" y="26" width="90" height="184" fill="#14241F" rx="2"/>
+          <text x="405" y="16" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#14241F" font-weight="600">$20k–$50k+</text>
+          <text x="405" y="242" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#6E6A5E">Full Replacement</text>
+          <text x="405" y="256" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#6E6A5E" opacity="0.6">new cabinetry + install</text>
+        </svg>
+        <figcaption class="chart-caption">
+          Typical cost ranges for a standard Boston-area kitchen. Replacement figure per industry data and contractor quotes.
+        </figcaption>
+      </figure>
+
+      <!-- Cost-contrast thumbnails -->
+      <div class="cost-contrast">
+        <div class="cc-thumb">
+          <PlaceholderImage publicId="cost/refinish-kitchen" aspect="4/3" alt="Refinished kitchen — Jerry & Co. result" loading="lazy" />
+          <span class="cc-label">Jerry &amp; Co. refinishing</span>
+          <span class="cc-price">~$1,800–$9,500</span>
+        </div>
+        <div class="cc-vs" aria-hidden="true">vs.</div>
+        <div class="cc-thumb">
+          <PlaceholderImage publicId="cost/replace-kitchen" aspect="4/3" alt="Full kitchen cabinet replacement" loading="lazy" />
+          <span class="cc-label">Full replacement</span>
+          <span class="cc-price">$20k–$50k+</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPARE TABLE ===== -->
+  <section class="compare-section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Side by side</p>
+        <h2>The full comparison</h2>
+      </div>
+
+      <div class="compare-table-wrap">
+        <table class="compare-table" aria-label="Cabinet refinishing comparison table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-feature">Feature</th>
+              <th scope="col" class="col-diy">DIY Paint</th>
+              <th scope="col" class="col-jerry">
+                <span class="col-jerry-stars" aria-label="5 out of 5 stars">★★★★★</span>
+                <span class="col-jerry-label">Jerry &amp; Co.</span>
+                <span class="col-jerry-sub">Refinishing</span>
+              </th>
+              <th scope="col" class="col-replace">Full Replacement</th>
+            </tr>
+          </thead>
+          <tbody>
+            {compareRows.map((row, i) => (
+              <tr class:list={['compare-row', { 'compare-row--alt': i % 2 === 1 }]}>
+                <td class="cell-feature">{row.feature}</td>
+                <td class="cell-diy">{row.diy}</td>
+                <td class="cell-jerry"><span class="jerry-check" aria-hidden="true"></span>{row.jerry}</td>
+                <td class="cell-replace">{row.replacement}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DECISION LIST ===== -->
+  <section class="decision-section">
+    <div class="wrap">
+      <div class="decision-grid">
+        <div class="decision-col">
+          <p class="eyebrow" style="color: var(--gold);">Good fit</p>
+          <h3>Refinishing makes sense when</h3>
+          <ul class="decision-list decision-list--yes">
+            <li>Your cabinet boxes are structurally sound — no warping, water damage, or delamination</li>
+            <li>You want a fresh color or a factory finish without the cost and timeline of full replacement</li>
+            <li>You're in a condo or rental where a gut renovation isn't practical or permitted</li>
+            <li>You need the kitchen back in days, not weeks or months</li>
+            <li>You'd rather put the saved $15k–$40k into counters, tile, appliances, or another room</li>
+          </ul>
+        </div>
+        <div class="decision-col">
+          <p class="eyebrow" style="color: var(--text-muted);">Consider instead</p>
+          <h3>Replacement makes more sense when</h3>
+          <ul class="decision-list decision-list--no">
+            <li>The cabinet boxes themselves are warped, water-damaged, or structurally failing</li>
+            <li>You need a completely different kitchen layout or configuration</li>
+            <li>You're doing a full gut renovation and pulling permits regardless</li>
+          </ul>
+          <p class="decision-note">
+            Not sure which category you're in? A video estimate takes 20 minutes and we'll tell you honestly if refinishing isn't the right call for your cabinets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BEFORE / AFTER PLACEHOLDER ===== -->
+  <section class="ba-section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Proof of concept</p>
+        <h2>The same kitchen — before refinishing, and 3 days later.</h2>
+      </div>
+      <div class="ba-split">
+        <div class="ba-half">
+          <PlaceholderImage publicId="vs-replacement/before" aspect="4/3" alt="Dated oak builder-grade cabinets before refinishing — Somerville" loading="lazy" className="ba-ph" />
+          <span class="ba-tag ba-tag--before">Before</span>
+          <p class="ba-caption">Dated oak finish, builder-grade</p>
+        </div>
+        <div class="ba-half">
+          <PlaceholderImage publicId="vs-replacement/after" aspect="4/3" alt="Same cabinets after 2K polyurethane spray finish in deep forest green" loading="lazy" className="ba-ph" />
+          <span class="ba-tag ba-tag--after">After</span>
+          <p class="ba-caption">2K polyurethane spray, deep forest green</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Ready to see your numbers?"
+    headline="Get a free estimate — no ranges, no surprises"
+    ctaText="Start my estimate"
+    ctaHref="/#estimate"
+    bgImage={cld('projects/woburn-painting-01-after', 1400)}
+    reassurance="5–12 days · written contract per MA law"
+  />
+
+  <Footer />
+</Base>
+
+<style>
+  /* ── Dark hero ───────────────────────────────────── */
+  .vs-hero {
+    background: var(--ink);
+    color: var(--bone);
+    padding: clamp(44px, 5vw, 76px) 0 clamp(56px, 7vw, 96px);
+  }
+  .vs-hero h1 {
+    color: var(--bone);
+    max-width: 16ch;
+    margin: 0 0 20px;
+  }
+  .vs-hero .lede {
+    color: rgba(247, 243, 234, 0.72);
+  }
+  .vs-hero :global(.breadcrumb-list) {
+    color: rgba(247, 243, 234, 0.45);
+  }
+  .vs-hero :global(.breadcrumb-item a) {
+    color: var(--gold);
+  }
+  .vs-hero :global([aria-current="page"]) {
+    color: rgba(247, 243, 234, 0.72);
+  }
+  .vs-hero :global(.sep) {
+    color: rgba(247, 243, 234, 0.3);
+    opacity: 1;
+  }
+
+  /* ── Cost chart ──────────────────────────────────── */
+  .cost-chart-section {
+    background: var(--bone);
+    padding: clamp(72px, 8vw, 112px) 0;
+  }
+  .chart-figure {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 540px;
+  }
+  .cost-chart-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .chart-caption {
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* ── Compare table ───────────────────────────────── */
+  .compare-section {
+    background: var(--bone-deep);
+    padding: clamp(72px, 8vw, 112px) 0;
+  }
+  .compare-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    background: var(--bone);
+    min-width: 600px;
+  }
+  .compare-table thead tr {
+    border-bottom: 1px solid var(--line);
+  }
+  .compare-table th {
+    padding: 14px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--bone-deep);
+    vertical-align: bottom;
+  }
+  /* Jerry & Co. column — highlighted */
+  .col-jerry {
+    background: var(--bone) !important;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-top: 3px solid var(--gold) !important;
+    color: var(--text) !important;
+  }
+  .col-jerry-stars {
+    display: block;
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+  .col-jerry-label {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text);
+  }
+  .col-jerry-sub {
+    display: block;
+    margin-top: 2px;
+  }
+  .col-feature {
+    width: 22%;
+  }
+  .compare-row td {
+    padding: 14px 20px;
+    vertical-align: top;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--line);
+  }
+  .compare-row:last-child td { border-bottom: none; }
+  .cell-feature {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--text) !important;
+  }
+  .cell-jerry {
+    background: rgba(200, 160, 85, 0.04);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    color: var(--text) !important;
+    font-weight: 500;
+  }
+  /* Green checkmark dot before each Jerry cell */
+  .jerry-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #2A9D5C;
+    margin-right: 8px;
+    flex-shrink: 0;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+  .jerry-check::after {
+    content: '✓';
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .compare-row--alt td { background: rgba(30, 57, 52, 0.02); }
+  .compare-row--alt .cell-jerry { background: rgba(200, 160, 85, 0.07); }
+
+  /* ── Decision list ───────────────────────────────── */
+  .decision-section {
+    background: var(--bone);
+    padding: clamp(72px, 8vw, 112px) 0;
+  }
+  .decision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 5vw, 80px);
+    align-items: start;
+  }
+  .decision-col h3 {
+    margin: 0 0 24px;
+  }
+  .decision-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .decision-list li {
+    display: flex;
+    gap: 12px;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+  .decision-list li::before {
+    content: '';
+    display: block;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-top: 2px;
+  }
+  .decision-list--yes li::before {
+    background: rgba(200, 160, 85, 0.18);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none' stroke='%238A6A33' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='3 9 7 13 15 5'/%3E%3C/svg%3E");
+    background-size: 14px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .decision-list--no li::before {
+    background: rgba(30, 36, 31, 0.06);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none' stroke='%236E6A5E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='5' x2='13' y2='13'/%3E%3Cline x1='13' y1='5' x2='5' y2='13'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .decision-note {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 38ch;
+  }
+  .decision-note a { color: var(--gold-deep); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ── Before / After real photos ─────────────────── */
+  .ba-section {
+    background: var(--bone-deep);
+    padding: clamp(72px, 8vw, 112px) 0;
+  }
+  .ba-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(20,36,31,0.12);
+    max-width: 960px;
+    margin: clamp(32px,4vw,56px) auto 0;
+  }
+  .ba-half {
+    position: relative;
+    overflow: hidden;
+  }
+  :global(.ba-ph) { border-radius:0; }
+  :global(.ba-ph .ph-img) { aspect-ratio:4/3; object-fit:cover; width:100%; }
+  .ba-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+  .ba-tag--before { background: var(--ink); color: var(--bone); }
+  .ba-tag--after  { background: var(--gold); color: var(--ink); }
+  .ba-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(to top, rgba(14,25,20,0.78) 0%, transparent 100%);
+    font-size: 12px;
+    color: rgba(247,243,234,0.85);
+    margin: 0;
+  }
+
+  /* ── Cost-contrast thumbnails ─────────────────────── */
+  .cost-contrast {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+    margin: 40px auto 0;
+    max-width: 540px;
+  }
+  .cc-thumb { display:flex; flex-direction:column; gap:8px; }
+  :global(.cc-thumb .ph) { border-radius:3px; }
+  .cc-label { font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.05em; text-align:center; text-transform:uppercase; }
+  .cc-price { font-family:var(--font-serif); font-size:1.0625rem; color:var(--forest); text-align:center; letter-spacing:-0.02em; }
+  .cc-vs { font-size:1.375rem; font-family:var(--font-serif); color:var(--text-muted); opacity:0.45; text-align:center; }
+
+  /* ── Responsive ──────────────────────────────────── */
+  @media (max-width: 760px) {
+    .decision-grid { grid-template-columns: 1fr; gap: 48px; }
+    .compare-table th, .compare-table td { padding: 12px 14px; }
+  }
+  @media (max-width: 540px) {
+    .ba-split { grid-template-columns: 1fr; }
+    .cost-contrast { grid-template-columns: 1fr; }
+    .cc-vs { padding: 4px 0; }
+  }
+</style>

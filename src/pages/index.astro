@@ -1,0 +1,890 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TrustBar from '../components/TrustBar.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
+import MultiStepForm from '../components/MultiStepForm.astro';
+import PlaceholderImage from '../components/PlaceholderImage.astro';
+import TestimonialsCarousel from '../components/TestimonialsCarousel.astro';
+import testimonials from '../../data/testimonials.json';
+
+const title = 'Cabinet Refinishing Boston | From $2,000 | Factory 2K Finish | Jerry & Co.';
+const description = 'Factory-grade cabinet refinishing for Boston condo owners. HOA-compliant, low-VOC, done in 2–5 days. MA HIC #208336.';
+
+const galleryItems = [
+  { cat: 'cabinet',  slug: 'somerville-cabinet', label: 'Cabinet refinishing', sub: 'Somerville — condo, deep forest green'       },
+  { cat: 'bathroom', slug: 'cambridge-bathroom',  label: 'Bathroom refresh',    sub: 'Cambridge — triple-decker, gut-free'          },
+  { cat: 'painting', slug: 'arlington-painting',  label: 'Interior painting',   sub: 'Arlington — condo pre-listing refresh'        },
+  { cat: 'cabinet',  slug: 'medford-cabinet',     label: 'Cabinet refinishing', sub: 'Medford — condo conversion, bone white'       },
+  { cat: 'condo',    slug: 'malden-multi',        label: 'Cabinet refinishing', sub: 'Malden — 3-unit multi-family turnover'        },
+  { cat: 'bathroom', slug: 'everett-bathroom',    label: 'Bathroom refresh',    sub: 'Everett — condo board-approved update'        },
+  { cat: 'painting', slug: 'woburn-painting',     label: 'Interior painting',   sub: 'Woburn — owner-occupied colonial refresh'     },
+  { cat: 'kitchen',  slug: 'winchester-kitchen',  label: 'Kitchen refresh',     sub: 'Winchester — cabinets + paint bundle'         },
+];
+
+const processSteps = [
+  { num: '01', slug: 'video-walkthrough',  alt: 'Owner walking a kitchen on a live video estimate call',        title: 'Your estimate in 60 minutes — no in-person appointment',  body: 'A 20-minute video call gets us a line-item estimate the same day — no waiting on a site visit. We also gather building access requirements, elevator reservation windows, and HOA documentation needs at this stage.' },
+  { num: '02', slug: 'prep-containment',   alt: 'Sealed plastic dust containment inside a condo kitchen',       title: 'Day 1: Everything masked, tagged, and staged — while you’re at work', body: 'Fully sealed dust containment within your unit. All equipment staged within your unit — no lobby or hallway storage. Cabinets are removed, labeled, and your kitchen is fully masked.' },
+  { num: '03', slug: 'hand-sand',          alt: 'Hand-sanding a cabinet door with a cork block',                title: 'Day 2: Hand-sanded, repaired, ready for finish', body: 'Hand-sanding only — no loud power tools that travel through condo walls. Every surface is sanded and any dents, gaps, or chips are filled and leveled.' },
+  { num: '04', slug: 'spray-finish',       alt: 'HVLP spray applying 2K polyurethane to a cabinet door',       title: 'Day 2–3: The factory finish goes on — smooth, hard, and odor-gone by evening',    body: 'Low-VOC formula — safe for shared ventilation systems common in multi-unit buildings. A factory-grade polyurethane finish, sprayed in a controlled environment for a smooth, durable result.' },
+  { num: '05', slug: 'cure-walkthrough',   alt: 'Finished kitchen walkthrough with labeled touch-up bottle',    title: 'Day 4–5: The reveal — plus your labeled touch-up bottle and 2-year guarantee', body: 'Doors cure, hardware is reinstalled, and we walk the finished space with you. Final walkthrough includes elevator condition check and hallway inspection before we leave.' },
+];
+---
+
+<Base title={title} description={description}>
+  <Header />
+
+  <!-- ===== HERO ===== -->
+  <HeroCarousel />
+
+  <!-- ===== TRUST BAR ===== -->
+  <TrustBar />
+
+  <!-- ===== CONDO-READY CARDS ===== -->
+  <div class="condo-strip">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal="up">7 years in Boston's most restrictive buildings</p>
+      <h2 class="condo-strip-headline" data-reveal="up" data-delay="1">The HOA won't be a problem. The elevator window is already scheduled. Your neighbors won't hear a thing.</h2>
+      <div class="condo-cards-grid">
+        <div class="condo-bcard" data-reveal="scale" data-delay="1">
+          <div class="condo-bcard-img">
+            <PlaceholderImage publicId="condo/hoa-documentation" aspect="4/3" alt="Building manager and contractor reviewing HOA documentation" className="condo-bcard-photo" loading="lazy" />
+          </div>
+          <div class="condo-bcard-body">
+            <h3>No board rejections. No project delays.</h3>
+            <p>Building rules, documentation, and insurance certificates handled before day one — no surprises with your condo board.</p>
+          </div>
+        </div>
+        <div class="condo-bcard" data-reveal="scale" data-delay="2">
+          <div class="condo-bcard-img">
+            <PlaceholderImage publicId="condo/neighbor-safe-process" aspect="4/3" alt="Clean, dust-contained cabinet refinishing workspace in a Boston condo" className="condo-bcard-photo" loading="lazy" />
+          </div>
+          <div class="condo-bcard-body">
+            <h3>Zero Neighbor Drama</h3>
+            <p>Low-VOC spray contained within your unit. By noon on spray day the unit smells normal — your neighbors won't know the work happened.</p>
+          </div>
+        </div>
+        <div class="condo-bcard" data-reveal="scale" data-delay="3">
+          <div class="condo-bcard-img">
+            <PlaceholderImage publicId="condo/building-logistics" aspect="4/3" alt="Contractor coordinating elevator access in a Greater Boston condo building" className="condo-bcard-photo" loading="lazy" />
+          </div>
+          <div class="condo-bcard-body">
+            <h3>You don't talk to building management once.</h3>
+            <p>Elevator scheduling, condo board paperwork, neighbor notification — every logistics detail is coordinated by Jeremiah.</p>
+          </div>
+        </div>
+      </div>
+      <p class="condo-proof-line" data-reveal="up">7 years · 100+ projects · every building type in the ICC zone.</p>
+    </div>
+  </div>
+
+  <!-- ===== SERVICES ===== -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">What we do — and what it costs</p>
+        <h2>From a 3-day kitchen transformation to a gut-free bath refresh — choose the scope that fits your condo.</h2>
+        <p class="section-lede-center">You get three price options on every job — good, better, best — so you're never forced between cheap and right.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card featured" id="cabinet-feature" data-reveal="scale" data-delay="1">
+          <PlaceholderImage
+            publicId="services/cabinet-refinishing"
+            alt="Satin white refinished cabinet door with brass knob"
+            aspect="16/10"
+            className="svc-img"
+            caption="Service result photo"
+            loading="lazy"
+          />
+          <div class="card-body">
+            <h3>Cabinet refinishing — 2K factory finish</h3>
+            <p class="price">$1,800 – $9,500</p>
+            <p>Factory-grade 2K polyurethane spray finish on existing cabinet boxes — the look of new cabinets, the cost of paint. No demo, no dumpster, no elevator damage — done in 2–5 days. Compare to $20,000–$50,000 full replacement.</p>
+            <p class="tag">2–5 days · the only factory-grade finish available in Greater Boston</p>
+            <a class="svc-guide-link" href="/guides/cabinet-refinishing/">
+              Is your kitchen a candidate? Self-assess before you call
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+          <div class="card-badge-col">
+            <span class="badge-featured">Featured this season</span>
+          </div>
+        </div>
+        <div class="service-card" data-reveal="scale" data-delay="2">
+          <PlaceholderImage
+            publicId="services/bathroom-refresh"
+            alt="Bright bathroom refresh with white subway tile"
+            aspect="16/10"
+            className="svc-img"
+            caption="Service result photo"
+            loading="lazy"
+          />
+          <div class="card-body">
+            <h3>Gut-free bathroom refresh</h3>
+            <p class="price">$2,800 – $6,500</p>
+            <p>New tile, fixtures, and paint without demo. Gut-free refresh that meets condo renovation bylaws — no permit triggers in most ICC buildings. Starting at $2,800 — typically paired with cabinet refinishing for a full kitchen-and-bath update.</p>
+            <p class="tag">2–5 days · most clients combine with cabinet refinishing</p>
+            <a class="svc-guide-link" href="/guides/bathroom-refresh/">
+              Tile, fixtures &amp; permit questions — sorted before the estimate
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="service-card" data-reveal="scale" data-delay="3">
+          <PlaceholderImage
+            publicId="services/interior-painting"
+            alt="Freshly painted bright living room with natural light"
+            aspect="16/10"
+            className="svc-img"
+            caption="Service result photo"
+            loading="lazy"
+          />
+          <div class="card-body">
+            <h3>Lead-safe interior painting — low-VOC, contained within your unit</h3>
+            <p class="price">$1,400 – $6,500</p>
+            <p>Pre-1978 condo? We handle lead-safe prep, low-VOC product, and full containment — no building fines, no neighbor complaints.</p>
+            <p class="tag">1–4 days · acknowledged within 60 min, quoted within 24 hrs</p>
+            <a class="svc-guide-link" href="/guides/interior-painting/">
+              Pre-1978 home? Color, sheen &amp; lead-safe — the full pre-project guide
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="service-card" data-reveal="scale" data-delay="4">
+          <PlaceholderImage
+            publicId="services/full-bathroom-reno"
+            alt="Complete bathroom renovation, dark tile and brass"
+            aspect="16/10"
+            className="svc-img"
+            caption="Service result photo"
+            loading="lazy"
+          />
+          <div class="card-body">
+            <h3>Full bathroom renovation</h3>
+            <p class="price">$6,500 – $18,000</p>
+            <p>Complete gut renovation — subfloor, waterproofing, tile, and finish. May require building board approval — we help you navigate the documentation.</p>
+            <p class="tag">5–12 days · written contract per MA law</p>
+            <a class="svc-guide-link" href="/guides/bathroom-renovation/">
+              Permits, board approval &amp; tile decisions — know before demo day
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="service-card" data-reveal="scale" data-delay="5">
+          <PlaceholderImage
+            publicId="services/multi-unit"
+            alt="Clean refreshed hallway of condo unit doors"
+            aspect="16/10"
+            className="svc-img"
+            caption="Service result photo"
+            loading="lazy"
+          />
+          <div class="card-body">
+            <h3>Multi-unit cabinet &amp; bath refresh — per-unit preferred-vendor pricing</h3>
+            <p class="price">Custom pricing</p>
+            <p>Coordinated refresh for property managers, landlords, and building owners across multiple units. Scheduled around tenant occupancy and building rules. Same 2K factory finish across every unit — one contractor, one scope, per-unit fixed pricing.</p>
+            <p class="tag">Turnover window guaranteed — ask about per-unit pricing</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="process-band" id="process">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">The 5-step factory-finish process</p>
+        <h2>The Jerry &amp; Co. factory-finish process</h2>
+        <p>You know exactly what happens each day — and your kitchen is back in 2–5 days.</p>
+      </div>
+      <div class="process-list">
+        {processSteps.map((s, i) => (
+          <div class="process-step" data-reveal="up" data-delay={String(i + 1)}>
+            <PlaceholderImage
+              publicId={`process/step-${s.num}-${s.slug}`}
+              alt={s.alt}
+              aspect="4/3"
+              className="proc-img"
+              caption="Process step photo"
+              loading="lazy"
+            />
+            <div class="ps-header">
+              <div class="process-num">{s.num}</div>
+              <h3>{s.title}</h3>
+            </div>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="process-link-row"><a href="/our-process/" class="btn btn-outline" data-ph-event="cta_clicked" data-ph-label="process_see_full">See our full process →</a></div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="section-head left" data-reveal="up">
+        <p class="eyebrow">Real projects — Boston condos and triple-deckers</p>
+        <h2>This is what $5,000 looks like in a Medford kitchen.</h2>
+        <p class="section-lede">Real transformations in Greater Boston condos, triple-deckers, and multi-family units. Filter by service to see results from Medford to Cambridge to Winchester.</p>
+      </div>
+
+      <div class="filter-row" role="group" aria-label="Filter gallery by project type" data-reveal="in" data-delay="2">
+        <button class="filter-btn active" data-filter="all">All projects</button>
+        <button class="filter-btn" data-filter="cabinet">Cabinet refinishing</button>
+        <button class="filter-btn" data-filter="bathroom">Bathroom refresh</button>
+        <button class="filter-btn" data-filter="painting">Painting</button>
+        <button class="filter-btn" data-filter="kitchen">Kitchen</button>
+        <button class="filter-btn" data-filter="condo">Condo &amp; multi-unit</button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid" data-reveal="in" data-delay="3">
+        {galleryItems.map(item => (
+          <div class="gallery-item" data-cat={item.cat}>
+            <PlaceholderImage
+              publicId={`featured/${item.slug}`}
+              alt={`${item.label} — ${item.sub}`}
+              aspect="3/4"
+              className="gi-img"
+              loading="lazy"
+            />
+            <div class="gi-overlay">
+              <span class="g-label">{item.label}</span>
+              <span class="g-sub">{item.sub}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="gallery-link-row"><a href="/gallery/" class="btn btn-outline-dark" data-ph-event="cta_clicked" data-ph-label="gallery_view_full">View full gallery →</a></div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICE AREA ===== -->
+  <section id="area" class="area-section">
+    <div class="wrap area-grid">
+      <div data-reveal="left">
+        <p class="eyebrow">Your town — yes, we work there</p>
+        <h2>If your building has a freight elevator policy and an HOA, we've probably already worked in it.</h2>
+        <p class="section-lede">If your building has HOA rules, a freight elevator policy, and neighbors who will notice the work — that's exactly where we work.</p>
+        <div class="chip-group">
+          <a href="/cabinet-refinishing-medford/" class="chip chip-primary">Medford</a>
+          <a href="/cabinet-refinishing-malden/" class="chip chip-primary">Malden</a>
+          <a href="/cabinet-refinishing-everett/" class="chip chip-primary">Everett</a>
+          <a href="/cabinet-refinishing-arlington/" class="chip chip-primary">Arlington</a>
+          <a href="/cabinet-refinishing-somerville/" class="chip chip-primary">Somerville</a>
+          <a href="/cabinet-refinishing-cambridge/" class="chip chip-primary">Cambridge</a>
+          <a href="/cabinet-refinishing-woburn/" class="chip chip-primary">Woburn</a>
+          <a href="/cabinet-refinishing-winchester/" class="chip chip-primary">Winchester</a>
+        </div>
+        <p class="area-note">Locally owned and operated — serving the ICC zone for 7 years.</p>
+      </div>
+      <div data-reveal="right" data-delay="2">
+        <p class="eyebrow">Expanding to your town</p>
+        <h2 style="font-size:1.4rem;">Stoneham · Burlington · Wilmington · Reading — ask if we can help</h2>
+        <p class="section-lede">Lower-competition towns with active renovation cycles and strong school-driven demand.</p>
+        <div class="chip-group">
+          <span class="chip chip-secondary">Stoneham</span>
+          <span class="chip chip-secondary">Burlington</span>
+          <span class="chip chip-secondary">Wilmington</span>
+          <span class="chip chip-secondary">Reading</span>
+        </div>
+        <p class="area-note">Not listed? <a href="#estimate" style="color:var(--gold-deep);font-weight:600;">Ask</a> — we've said yes to towns not on this list.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonial-band" id="reviews">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--gold);" data-reveal="up">What Boston condo owners say — in their own words</p>
+      <h2 class="testimonial-headline" data-reveal="up" data-delay="1">Condo owners who didn't want the drama — here's what they found.</h2>
+      <TestimonialsCarousel testimonials={testimonials} />
+      <div class="testimonial-scores">
+        <div class="testimonial-score-item" data-reveal="up" data-delay="1">
+          <div class="testimonial-score-num">5.0</div>
+          <div class="testimonial-score-src">Google</div>
+          <div class="testimonial-score-label">Verified reviews</div>
+        </div>
+        <div class="testimonial-score-item" data-reveal="up" data-delay="3">
+          <div class="testimonial-score-num">5.0</div>
+          <div class="testimonial-score-src">Houzz Pro</div>
+          <div class="testimonial-score-label">Portfolio verified</div>
+        </div>
+        <div class="testimonial-score-item" data-reveal="up" data-delay="5">
+          <div class="testimonial-score-num">#208336</div>
+          <div class="testimonial-score-src">Mass.gov</div>
+          <div class="testimonial-score-label">MA HIC Licensed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ESTIMATE FORM ===== -->
+  <section class="estimate-band" id="estimate">
+    <div class="wrap estimate-grid">
+      <div class="estimate-info" data-reveal="left">
+        <p class="eyebrow">3 details. 60 seconds. Same-day estimate.</p>
+        <h2>3 details. 60 seconds. Same-day written estimate — no obligation.</h2>
+        <p class="section-lede">A 60-second form. A written fixed-price estimate by end of day. Zero obligation.</p>
+        <div class="estimate-stats">
+          <div class="estimate-stat">
+            <span class="num">1 hr</span>
+            <span><strong>Personal callback</strong> to schedule your walkthrough</span>
+          </div>
+          <div class="estimate-stat">
+            <span class="num">24 hr</span>
+            <span><strong>Written estimate</strong> delivered, no waiting</span>
+          </div>
+          <div class="estimate-stat">
+            <span class="num">3</span>
+            <span><strong>Price options</strong> on every estimate — good, better, best. You pick the scope.</span>
+          </div>
+        </div>
+        <p class="estimate-reassurance">Local accountability beats a national warranty — and if refinishing isn't the right call for your cabinets, we'll tell you upfront, not after a deposit.</p>
+        <p class="estimate-reassurance">Send 4–6 photos or a short video walkthrough — even filmed on your phone — and you'll typically have a written quote the same day.</p>
+      </div>
+      <MultiStepForm />
+    </div>
+  </section>
+
+  <!-- ===== TIERS / CLOSE ===== -->
+  <section class="close-cta" id="tiers">
+    <div class="close-cta-bg" aria-hidden="true">
+      <PlaceholderImage publicId="cta/finished-kitchen-wide" aspect="16/9" alt="" className="close-cta-ph" />
+      <div class="close-cta-overlay"></div>
+    </div>
+    <div class="wrap">
+      <p class="eyebrow">Trusted by condo owners from Medford to Cambridge to Winchester</p>
+      <h2>You won't be forced to choose between cheap and right.</h2>
+      <p class="tiers-sub">So you're never stuck choosing between "do it cheap" and "do it right." Pick the tier that fits your budget — and upgrade only what matters.</p>
+      <div class="tiers-grid">
+        <div class="tier-card" data-reveal="scale" data-delay="1">
+          <div class="tier-name">Good</div>
+          <h3>Factory finish, core doors</h3>
+          <p>Spray existing cabinet doors and boxes in your chosen color — the core factory-grade transformation.</p>
+        </div>
+        <div class="tier-card best" data-reveal="scale" data-delay="2">
+          <div class="tier-name">Better</div>
+          <h3>The complete transformation</h3>
+          <p>Everything in Good, plus new soft-close hinges and updated hardware for a complete refresh.</p>
+        </div>
+        <div class="tier-card" data-reveal="scale" data-delay="3">
+          <div class="tier-name">Best</div>
+          <h3>Every surface, one standard.</h3>
+          <p>Everything in Better, plus interior shelving refresh and matching island or pantry cabinetry.</p>
+        </div>
+      </div>
+      <div class="tiers-footer">
+        <a class="btn btn-gold" href="#estimate" data-ph-event="cta_clicked" data-ph-label="tiers_get_estimate">Start with a video walkthrough — pick my tier after</a>
+        <p class="tiers-note">Every tier includes: zero lobby or hallway staging, low-VOC materials only, same-day cleanup, and a certificate of insurance for your HOA.</p>
+        <div class="tiers-links">
+          <a href="/financing/">Pay over time — ask about financing →</a>
+          <span style="color:rgba(247,243,234,0.25)">·</span>
+          <a href="/guarantee/">Workmanship guarantee →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-seal" id="why-jerry-co">
+    <div class="wrap">
+      <p class="eyebrow">Still on the fence? Fair.</p>
+      <h2>Here's the whole deal, one more time.</h2>
+      <p class="seal-lede">Three days from now, you could be walking into a kitchen that stops your partner in the doorway — <em>is this the same kitchen?</em> No dust. No deposit horror stories. Just the math, the guarantee, and a phone call to make it real.</p>
+
+      <div class="seal-badges" data-reveal="in" data-delay="1">
+        <div class="seal-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          <p>Written, fixed-price quote — before a drop of paint.</p>
+        </div>
+        <div class="seal-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          <p>2-year workmanship guarantee, backed by the owner — not a franchise call center.</p>
+        </div>
+        <div class="seal-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          <p>Licensed, insured, MA HIC #208336 — verified on Mass.gov.</p>
+        </div>
+        <div class="seal-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          <p>Zero dust, zero odor, zero neighbor drama — HOA paperwork handled for you.</p>
+        </div>
+      </div>
+
+      <div class="seal-faq">
+        <div class="seal-faq-item" data-reveal="in" data-delay="1">
+          <h3>"What if I hate the color, or it doesn't look like the photos?"</h3>
+          <p>You approve the exact color and sheen before we spray a single door. <a href="/faq/#materials">More on materials →</a></p>
+        </div>
+        <div class="seal-faq-item" data-reveal="in" data-delay="2">
+          <h3>"Will my building or HOA give me grief about this?"</h3>
+          <p>We've worked inside Boston-area condo associations since 2019 — freight elevators, curfews, and COI paperwork handled before we show up. <a href="/faq/#condo">More on condo rules →</a></p>
+        </div>
+        <div class="seal-faq-item" data-reveal="in" data-delay="3">
+          <h3>"Will it actually hold up, or chip in a year like everyone says?"</h3>
+          <p>Same 2K polyurethane used in automotive manufacturing — not brush-on cabinet paint. It's why we put 2 years on it in writing. <a href="/faq/#durability">More on durability →</a></p>
+        </div>
+      </div>
+
+      <p class="seal-recap">The offer hasn't changed: factory-spray 2K polyurethane cabinet refinishing starting at <strong>$2,000</strong> — a fraction of the $30,000–$50,000 a full replacement runs — finished in 3 to 5 days, with zero disruption to your home or your neighbors.</p>
+
+      <div class="seal-cta">
+        <a class="btn btn-gold" href="#estimate" data-ph-event="cta_clicked" data-ph-label="final_seal_estimate">Start my video estimate — no obligation</a>
+        <p class="seal-reassurance">Free, 20-minute video call. We'll tell you honestly if refinishing isn't the right fit for your cabinets — before you pay a deposit.</p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ── Condo strip ──────────────────────────────────── */
+  .condo-strip {
+    background: var(--bone-deep);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(48px, 6vw, 80px) 0;
+  }
+
+  .condo-strip-headline {
+    margin: 8px 0 36px;
+    max-width: 28ch;
+  }
+
+  .condo-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+
+  .condo-bcard {
+    background: var(--bone);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
+  }
+  .condo-bcard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(20, 36, 31, 0.1);
+  }
+  .condo-bcard:hover :global(.condo-bcard-photo img) {
+    transform: scale(1.05);
+  }
+
+  .condo-bcard-img {
+    overflow: hidden;
+  }
+  :global(.condo-bcard-photo) { display: block; }
+  :global(.condo-bcard-photo img) {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .condo-bcard-body {
+    padding: 24px 28px 28px;
+  }
+  .condo-bcard-body h3 {
+    font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+    font-weight: 600;
+    color: var(--forest);
+    margin: 0 0 10px;
+    letter-spacing: -0.02em;
+  }
+  .condo-bcard-body p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .condo-proof-line {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-align: center;
+    letter-spacing: 0.01em;
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  /* ── Services section ──────────────────────────────── */
+  #services {
+    background: var(--bone);
+  }
+  .section-lede-center {
+    max-width: 48ch;
+    margin: 16px auto 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.72;
+    text-align: center;
+  }
+
+  /* ── Area section ────────────────────────────────────── */
+  .area-section { background: var(--bone-deep); }
+  .area-section a.chip { text-decoration: none; transition: background 0.15s, opacity 0.15s; }
+  .area-section a.chip:hover { background: var(--ink); }
+  .area-section h2 { margin-bottom: 20px; }
+
+  /* ── Process link row ─────────────────────────────── */
+  .process-link-row {
+    text-align: center;
+    margin-top: clamp(40px, 5vw, 72px);
+  }
+
+  /* ── Process step image cards ─────────────────────── */
+  .ps-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  /* Process step image — contained, dark-themed */
+  :global(.proc-img) {
+    margin-bottom: 16px;
+    border-radius: var(--radius-xs);
+    overflow: hidden;
+    border: 1px solid var(--line-dark);
+  }
+  :global(.process-step .ph),
+  :global(.process-step .ph-shell) {
+    background: var(--ink-soft);
+  }
+  :global(.process-step .ph-shell) { color: var(--gold); }
+  :global(.process-step .ph-caption) { color: rgba(247, 243, 234, 0.4); }
+
+  /* ── Gallery link row ─────────────────────────────── */
+  .gallery-link-row {
+    text-align: center;
+    margin-top: clamp(32px, 4vw, 56px);
+  }
+
+  /* ── Gallery image cards ──────────────────────────── */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 3px;
+    margin-top: clamp(28px, 4vw, 48px);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  /* ── Gallery image tiles ─────────────────────────── */
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--bone-deep);
+    padding: 0;
+    display: block;
+  }
+  :global(.gi-img .ph-img) {
+    transition: opacity .4s ease, transform .6s ease;
+  }
+  :global(.gallery-item:hover .gi-img .ph-img) {
+    transform: scale(1.05);
+  }
+  .gi-overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 14px 16px;
+    background: linear-gradient(0deg, rgba(20,36,31,.82), rgba(20,36,31,0));
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .gallery-item:hover .gi-overlay {
+    opacity: 1;
+    transform: none;
+  }
+  .gi-overlay .g-label {
+    color: var(--bone);
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .gi-overlay .g-sub {
+    color: rgba(247, 243, 234, .78);
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  .gallery-item.hidden { display: none; }
+
+  /* ── Tiers ─────────────────────────────────────────── */
+  .tiers-sub {
+    font-size: 1rem;
+    color: rgba(247, 243, 234, 0.56);
+    max-width: 46ch;
+    margin: 16px auto clamp(0px, 0vw, 0px);
+    line-height: 1.72;
+    text-align: center;
+    position: relative;
+  }
+  .tiers-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: clamp(40px, 5vw, 64px);
+    position: relative;
+  }
+  .tiers-note {
+    font-size: 12px;
+    color: rgba(247, 243, 234, 0.42);
+    max-width: 52ch;
+    text-align: center;
+    line-height: 1.72;
+    letter-spacing: 0.02em;
+  }
+  .tiers-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .tiers-links a {
+    color: rgba(247, 243, 234, 0.45);
+    text-decoration: none;
+    transition: color 0.15s;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .tiers-links a:hover { color: var(--gold); }
+
+  /* ── Testimonial section ── */
+  .testimonial-band {
+    background: var(--ink);
+    color: var(--bone);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .testimonial-headline {
+    color: var(--bone);
+    margin: 8px 0 40px;
+  }
+
+  /* Ghost serif backdrop */
+  .testimonial-band::before {
+    content: '"';
+    position: absolute;
+    left: 50%;
+    top: -10%;
+    transform: translateX(-50%);
+    font-family: var(--font-serif);
+    font-size: clamp(200px, 28vw, 380px);
+    font-weight: 500;
+    color: rgba(247, 243, 234, 0.022);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+  .testimonial-scores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(247,243,234,0.1);
+    border: 1px solid rgba(247,243,234,0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .testimonial-score-item {
+    padding: 28px 24px;
+    background: transparent;
+    transition: background 0.2s;
+  }
+  .testimonial-score-item:hover { background: rgba(247,243,234,0.035); }
+  .testimonial-score-num {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 500;
+    color: var(--bone);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .testimonial-score-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(247,243,234,0.45);
+  }
+  .testimonial-score-src {
+    font-size: 11px;
+    color: var(--gold);
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Responsive ──────────────────────────────────── */
+  @media (max-width: 900px) {
+    .condo-strip-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .condo-strip-grid::after { display: none; }
+    .condo-strip-grid::before { left: 50%; }
+    .testimonial-scores { grid-template-columns: 1fr; max-width: 320px; }
+  }
+
+  @media (max-width: 640px) {
+    .condo-cards-grid { grid-template-columns: 1fr; }
+    .tiers-links { flex-direction: column; gap: 12px; }
+    .testimonial-quote { font-size: 1.125rem; }
+  }
+
+  /* Gallery overlay always-on for touch devices */
+  @media (max-width: 768px) {
+    .gi-overlay {
+      opacity: 0.92;
+      transform: translateY(0);
+    }
+  }
+
+  /* ── Condo cards tablet (2-col only between 641–880px) */
+  @media (min-width: 641px) and (max-width: 880px) {
+    .condo-cards-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── Close CTA background image ───────────────────── */
+  .close-cta-bg { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .close-cta-overlay { position:absolute; inset:0; background:linear-gradient(105deg,rgba(20,36,31,0.92) 0%,rgba(20,36,31,0.82) 55%,rgba(20,36,31,0.68) 100%); }
+  :global(.close-cta-ph) { position:absolute; inset:0; aspect-ratio:unset; height:100%; border-radius:0; }
+  .close-cta .wrap { position:relative; z-index:1; }
+
+  /* ── Final seal ─────────────────────────────────────── */
+  .final-seal {
+    background: var(--bone);
+    text-align: center;
+  }
+  .final-seal .eyebrow { margin: 0 0 16px; }
+  .final-seal h2 { max-width: 20ch; margin: 0 auto; }
+  .seal-lede {
+    font-size: 1.0625rem;
+    color: var(--text-muted);
+    max-width: 56ch;
+    margin: 18px auto 0;
+    line-height: 1.78;
+  }
+  .seal-lede em { font-style: italic; color: var(--ink); }
+
+  .seal-badges {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: clamp(40px, 5vw, 64px) auto 0;
+  }
+  .seal-badge {
+    background: var(--bone);
+    padding: clamp(24px, 2.6vw, 32px) clamp(18px, 2vw, 24px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+  .seal-badge svg { width: 26px; height: 26px; color: var(--gold-deep); flex-shrink: 0; }
+  .seal-badge p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .seal-faq {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(28px, 3vw, 44px);
+    text-align: left;
+    margin: clamp(56px, 6vw, 88px) auto 0;
+    max-width: 1080px;
+  }
+  .seal-faq-item h3 {
+    font-family: var(--font-sans);
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: 0 0 10px;
+  }
+  .seal-faq-item p {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    line-height: 1.72;
+    margin: 0;
+  }
+  .seal-faq-item a {
+    color: var(--gold-deep);
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .seal-faq-item a:hover { text-decoration: underline; }
+
+  .seal-recap {
+    max-width: 60ch;
+    margin: clamp(56px, 6vw, 88px) auto 0;
+    font-size: 1.0625rem;
+    line-height: 1.78;
+    color: var(--ink);
+    padding-top: clamp(40px, 5vw, 56px);
+    border-top: 1px solid var(--line);
+  }
+  .seal-recap strong { color: var(--gold-deep); }
+
+  .seal-cta {
+    margin-top: clamp(28px, 3vw, 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .seal-reassurance {
+    font-size: 13px;
+    color: var(--text-muted);
+    max-width: 48ch;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 900px) {
+    .seal-badges { grid-template-columns: repeat(2, 1fr); }
+    .seal-faq { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .seal-badges { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Gallery filter
+  (function () {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const items = document.querySelectorAll<HTMLElement>('.gallery-item');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter') ?? 'all';
+        items.forEach((item) => {
+          const cats = item.getAttribute('data-cat') ?? '';
+          if (filter === 'all' || cats.split(' ').includes(filter)) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+  })();
+</script>

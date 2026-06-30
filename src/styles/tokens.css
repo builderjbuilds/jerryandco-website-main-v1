@@ -1,0 +1,43 @@
+:root {
+  /* ── Brand palette ─────────────────────────────── */
+  --bone:       #FDFAF5;
+  --bone-deep:  #F6F1E7;
+  --ink:        #14241F;
+  --ink-soft:   #1E332D;
+  --forest:     #1E3934;
+  --gold:       #C8A055;
+  --gold-deep:  #8A6A33;
+  --text:       #20281F;
+  --text-muted: #6E6A5E;
+  --line:       rgba(30, 57, 52, 0.10);
+  --line-dark:  rgba(247, 243, 234, 0.12);
+
+  /* ── Spacing scale (8px base) ──────────────────── */
+  --sp-1:  8px;
+  --sp-2:  16px;
+  --sp-3:  24px;
+  --sp-4:  32px;
+  --sp-5:  48px;
+  --sp-6:  64px;
+  --sp-7:  96px;
+  --sp-8:  128px;
+  --sp-9:  160px;
+
+  /* ── Layout ────────────────────────────────────── */
+  --gutter:            clamp(24px, 5vw, 96px);
+  --radius:            20px;
+  --radius-sm:         12px;
+  --radius-xs:         6px;
+  --radius-pill:       999px;
+  --control-h:         52px;
+  --control-h-compact: 44px;
+  --tap-min:           44px;
+
+  /* ── Rhythm ────────────────────────────────────── */
+  --section-pad: clamp(48px, 6vw, 80px);
+  --section-pad-tight: clamp(40px, 5vw, 72px);  /* for denser sections like testimonials */
+
+  /* ── Typography ─────────────────────────────────── */
+  --font-serif: 'Fraunces', serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+}

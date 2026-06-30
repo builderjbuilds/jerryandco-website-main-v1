@@ -1,0 +1,290 @@
+{
+  "_comment": "Full content packages for /projects/[slug]/ pages. Image paths use first-name-only filenames matching public/img/testimonials/ on disk. heroPublicId, beforePublicId, and afterPublicId require Cloudinary uploads. Nick's local files retain the 'sommerville' (double-m) typo from source. returningClient flags Alyssa, Ceri, Julia, and Nick as repeat clients.",
+
+  "projects": [
+    {
+      "slug": "ceri-charlestown",
+      "client": "Ceri L.",
+      "clientFullName": "Ceri Llewelyn",
+      "location": "Charlestown, MA",
+      "projectType": "Condo renovation & rental repairs",
+      "headline": "A condo renovation done right — and a contractor kept on call for the rentals",
+      "ctaHeadline": "Your Charlestown kitchen — written quote in 24 hours. Same process, same finish.",
+      "beforeAfterH2": "What changed in Charlestown.",
+      "scope": [
+        "Condo renovation",
+        "Finish & repair work",
+        "Rental property jobs"
+      ],
+      "timeline": "Condo reno + ongoing rental jobs",
+      "finish": "Cabinetry and finish work in factory-grade 2K polyurethane, color-matched per room",
+      "investment": {
+        "display": "$13,500",
+        "note": "A condo renovation, plus ongoing repair jobs across Ceri's rentals"
+      },
+      "result": "A condo renovation finished to a standard that earned Jerry repeat calls across Ceri's rental properties.",
+      "challenge": "Ceri needed a multi-room condo renovation finished to a high, consistent standard — and a contractor reliable enough to keep calling for smaller repair and finish jobs across their rental properties. The challenge was delivering renovation-grade quality on the main project, then the same care on every smaller job that followed.",
+      "testimonial": {
+        "name": "Ceri L.",
+        "quote": "Jerry has completed multiple projects for us over the years, from repairs and finish work to larger renovations. His craftsmanship, reliability, and attention to detail are consistently outstanding. We trust him completely and wouldn't hesitate to recommend Jerry & Co. to others.",
+        "headshotSrc": "/img/testimonials/ceri-charlestown-ma_testimonial-headshot.jpg"
+      },
+      "heroPublicId": "projects/ceri-charlestown-hero",
+      "heroAlt": "Finished multi-room condo renovation in Charlestown — cabinetry and finish work in factory-grade 2K polyurethane",
+      "beforePublicId": "projects/ceri-charlestown-before",
+      "afterPublicId": "projects/ceri-charlestown-after",
+      "beforeAlt": "Original cabinetry and finishes in a Charlestown condo before refinishing",
+      "afterAlt": "Refinished cabinetry and finish work after factory-grade 2K polyurethane application",
+      "returningClient": true,
+      "galleryPhotos": [
+        {
+          "src": "/img/testimonials/ceri-charlestown-ma_testimonial-photo-01.jpg",
+          "alt": "Refinished cabinet doors in a Charlestown condo — bone white 2K polyurethane"
+        },
+        {
+          "src": "/img/testimonials/ceri-charlestown-ma_testimonial-photo-02.jpg",
+          "alt": "Finish carpentry detail from an ongoing renovation partnership — Charlestown"
+        },
+        {
+          "src": "/img/testimonials/ceri-charlestown-ma_testimonial-photo-03.jpg",
+          "alt": "Completed renovation work in a Charlestown condo — color-matched finish"
+        }
+      ],
+      "processNotes": {
+        "video-walkthrough": "A video walkthrough of the condo set the full renovation scope, building access windows, and finish direction, with a written quote to follow. The same fast, clear process later made scoping the smaller rental jobs just as simple.",
+        "prep-containment": "The condo was fully contained and sealed before work began — dust and materials kept within the unit, building access and HOA windows respected. The same low-disruption playbook carried over to the rental-property jobs.",
+        "hand-sand": "Every surface to be refinished was hand-sanded to a clean base — cork blocks, no power-tool shortcuts. Consistent prep is why the finish looks right across the whole condo and every job since.",
+        "spray-finish": "Cabinetry and finish work were sprayed in factory-grade 2K polyurethane, color-matched room to room — the same durable, low-VOC finish later used on the rental jobs.",
+        "cure-walkthrough": "The finished condo was walked room by room with Ceri, with any touch-ups handled before sign-off. The result earned Jerry the repeat calls for repairs and finish work across their rentals."
+      }
+    },
+
+    {
+      "slug": "alyssa-charlestown",
+      "client": "Alyssa A.",
+      "clientFullName": "Alyssa Acker",
+      "location": "Charlestown, MA",
+      "projectType": "Bathroom refresh",
+      "headline": "An outdated bathroom made bright, timeless, and exactly as envisioned",
+      "ctaHeadline": "Your Charlestown bathroom — 3 days, written quote in 24 hours. No gut required.",
+      "beforeAfterH2": "Three days in Charlestown — before and after.",
+      "scope": [
+        "Bathroom refresh",
+        "Vanity refinishing",
+        "Fixtures & tile refresh"
+      ],
+      "timeline": "3 days",
+      "finish": "Vanity refinished in bone white 2K polyurethane, refreshed tile, matte black fixtures",
+      "investment": {
+        "display": "$6,800",
+        "note": "Bathroom refresh — vanity refinishing, new fixtures, and tile refresh"
+      },
+      "result": "A bright, timeless bathroom delivered exactly as Alyssa envisioned — a full transformation in 3 days, no gut required.",
+      "challenge": "Alyssa wanted her dated bathroom to feel bright, timeless, and brand new — without the cost, mess, and multi-week disruption of a full gut renovation. The challenge was delivering a complete visual transformation through a contained refresh: refinishing, new fixtures, and refreshed tile, finished to match her vision exactly.",
+      "testimonial": {
+        "name": "Alyssa A.",
+        "quote": "Jerry transformed our outdated bathroom into a bright, timeless space that we absolutely love. He was professional, communicative, and detail-oriented throughout the entire project. The craftsmanship exceeded our expectations, and the finished result is exactly what we envisioned.",
+        "headshotSrc": "/img/testimonials/alyssa-charlestown-ma_testimonial-headshot.jpg"
+      },
+      "heroPublicId": "projects/alyssa-charlestown-hero",
+      "heroAlt": "Finished bathroom refresh in a Charlestown condo — bone white vanity, refreshed tile, and matte black fixtures",
+      "beforePublicId": "projects/alyssa-charlestown-before",
+      "afterPublicId": "projects/alyssa-charlestown-after",
+      "beforeAlt": "Outdated bathroom in a Charlestown condo before the refresh",
+      "afterAlt": "Completed bathroom refresh — bone white vanity, refreshed tile, matte black fixtures",
+      "returningClient": true,
+      "galleryPhotos": [
+        {
+          "src": "/img/testimonials/alyssa-charlestown-ma_testimonial-photo-01.jpg",
+          "alt": "Refreshed bathroom with updated tile and matte black fixtures — Charlestown condo"
+        },
+        {
+          "src": "/img/testimonials/alyssa-charlestown-ma_testimonial-photo-02.jpg",
+          "alt": "Vanity refinished in bone white 2K polyurethane — Charlestown condo"
+        },
+        {
+          "src": "/img/testimonials/alyssa-charlestown-ma_testimonial-photo-03.jpg",
+          "alt": "Tile and fixture detail in the finished bathroom refresh — Charlestown condo"
+        }
+      ],
+      "processNotes": {
+        "video-walkthrough": "A single video walkthrough captured the full refresh scope — what to refinish, the fixtures to swap, and the tile and vanity finish — and produced a written, same-day quote. Alyssa locked her selections on the call, so the schedule was set before day one.",
+        "prep-containment": "Full dust containment was sealed inside the bathroom, with all work staged so the rest of the home — and the neighbors — stayed clean. A refresh means no demo dumpster and no debris in the hallways.",
+        "hand-sand": "Every surface being refinished was hand-sanded to a clean, even base before any finish went on — the vanity in particular, prepped and filled for its custom coat. The prep is exactly where a 'like-new' result is built.",
+        "spray-finish": "The vanity was refinished in bone white 2K polyurethane, the tile refreshed, and matte black fixtures installed — factory-grade durability that holds up to daily bathroom use without yellowing or wear.",
+        "cure-walkthrough": "On the final day, every refinished surface, fixture, and tile line was inspected with Alyssa before sign-off. One minor touch-up was handled on the spot, and the hallway and elevator were checked before departure."
+      }
+    },
+
+    {
+      "slug": "julia-boston",
+      "client": "Julia T.",
+      "clientFullName": "Julia Tam",
+      "location": "Boston, MA",
+      "projectType": "Bathroom refresh & custom storage",
+      "headline": "Boston bathroom refresh and custom storage — built in bone white 2K poly to look original to the space.",
+      "ctaHeadline": "Your Boston renovation — one contractor, one scope, written quote in 24 hours.",
+      "beforeAfterH2": "What $11,200 looks like in a Boston bathroom.",
+      "scope": [
+        "Bathroom refresh",
+        "Custom storage build",
+        "Finish work"
+      ],
+      "timeline": "5 days",
+      "finish": "Custom built-ins in bone white 2K polyurethane, with the bathroom refreshed to match",
+      "investment": {
+        "display": "$11,200",
+        "note": "Bathroom refresh plus a custom built-in storage build and finish"
+      },
+      "result": "A refreshed bathroom and custom storage built to Julia's exact spec — beautiful, functional, and built to last.",
+      "challenge": "Julia wanted her bathroom refreshed and her storage handled as one intentional design — custom built-ins that read as original to the space, not an afterthought bolted on later. The challenge was pairing a contained bathroom refresh with a bespoke storage build in a single coordinated visit, with zero compromise on either scope.",
+      "testimonial": {
+        "name": "Julia T.",
+        "quote": "Working with Jerry was a fantastic experience from start to finish. He listened carefully to our vision, helped us make smart design decisions, and delivered exceptional quality throughout. The finished bathroom and custom storage solutions are beautiful, functional, and built to last.",
+        "headshotSrc": "/img/testimonials/julia-boston-ma_testimonial-headshot.jpg"
+      },
+      "heroPublicId": "projects/julia-boston-hero",
+      "heroAlt": "Finished bathroom with integrated custom built-in storage in a Boston condo — bone white 2K polyurethane finish",
+      "beforePublicId": "projects/julia-boston-before",
+      "afterPublicId": "projects/julia-boston-after",
+      "beforeAlt": "Bathroom and adjoining storage area before renovation — original layout in a Boston condo",
+      "afterAlt": "Completed bathroom and custom built-in storage — bone white finish, refreshed tile and fixtures",
+      "returningClient": true,
+      "galleryPhotos": [
+        {
+          "src": "/img/testimonials/julia-boston-ma_testimonial-photo-01.jpg",
+          "alt": "Refreshed bathroom vanity in bone white 2K polyurethane — Boston condo"
+        },
+        {
+          "src": "/img/testimonials/julia-boston-ma_testimonial-photo-02.jpg",
+          "alt": "Custom built-in storage finished to match the bathroom vanity — Boston condo"
+        },
+        {
+          "src": "/img/testimonials/julia-boston-ma_testimonial-photo-03.jpg",
+          "alt": "Tile and fixture detail in the finished bathroom — Boston condo"
+        }
+      ],
+      "processNotes": {
+        "video-walkthrough": "A single video walkthrough covered the bathroom refresh and the storage build together, so both came back as one coordinated proposal instead of two disconnected quotes. Julia made her key finish and design decisions on the call, locking the plan and schedule the same day.",
+        "prep-containment": "Both the bathroom and the storage build areas were fully contained and sealed before any work began. All materials were staged inside the unit — nothing in shared or common areas, and no disruption to neighbors.",
+        "hand-sand": "Every custom storage carcass was hand-sanded and prepped to a clean, even base before any finish went on. Doing the substrate work up front is what keeps the final finish flawless and consistent across both scopes.",
+        "spray-finish": "The custom built-ins were finished in 2K polyurethane to match the refreshed bathroom vanity, so sheen and durability stayed consistent throughout. Built-ins and fixtures were installed in sequence for a clean, integrated result.",
+        "cure-walkthrough": "After cure, we walked the refreshed bathroom and finished storage with Julia on completion day. Every door, drawer, and fixture was tested and adjusted before sign-off — built to last, not just to look good on day one."
+      }
+    },
+
+    {
+      "slug": "julia-kitchen-boston",
+      "client": "Julia T.",
+      "clientFullName": "Julia Tam",
+      "location": "Boston, MA",
+      "projectType": "Cabinet refinishing",
+      "headline": "The kitchen gets the same finish as the bathroom — returning client, same 3-day standard.",
+      "ctaHeadline": "Your Boston kitchen — same factory finish Julia's whole home now has. Written quote in 24 hours.",
+      "beforeAfterH2": "The kitchen — same factory finish as the bathroom.",
+      "scope": [
+        "Cabinet refinishing",
+        "2K polyurethane finish",
+        "Hardware reinstall"
+      ],
+      "timeline": "3 days",
+      "finish": "Bone white 2K polyurethane spray finish, factory-grade",
+      "investment": {
+        "display": "$3,700",
+        "note": "Cabinet refinishing — full kitchen, bone white 2K polyurethane spray finish"
+      },
+      "result": "Kitchen cabinets refinished to the same factory-grade standard as Julia's earlier bathroom and storage work — consistent finish, consistent process, same result.",
+      "challenge": "Returning after the bathroom refresh and custom storage build, Julia brought Jerry back to finish the job — the kitchen cabinets were the last room to bring up to the standard set elsewhere in the home. The challenge was matching the finish quality already in place and completing the work without disrupting the rest of the apartment.",
+      "testimonial": {
+        "name": "Julia T.",
+        "quote": "Working with Jerry was a fantastic experience from start to finish. He listened carefully to our vision, helped us make smart design decisions, and delivered exceptional quality throughout. The finished bathroom and custom storage solutions are beautiful, functional, and built to last.",
+        "headshotSrc": "/img/testimonials/julia-boston-ma_testimonial-headshot.jpg"
+      },
+      "heroPublicId": "projects/julia-kitchen-boston-hero",
+      "heroAlt": "Refinished kitchen cabinets in a Boston condo — bone white factory-grade 2K polyurethane finish",
+      "beforePublicId": "projects/julia-kitchen-boston-before",
+      "afterPublicId": "projects/julia-kitchen-boston-after",
+      "beforeAlt": "Original kitchen cabinets in a Boston condo before refinishing",
+      "afterAlt": "Refinished kitchen cabinets in bone white 2K polyurethane — Boston condo",
+      "returningClient": true,
+      "galleryPhotos": [
+        {
+          "src": "/img/testimonials/julia-boston-ma_testimonial-photo-04.jpg",
+          "alt": "Refinished kitchen cabinet doors in bone white 2K polyurethane — Boston condo"
+        },
+        {
+          "src": "/img/testimonials/julia-boston-ma_testimonial-photo-05.jpg",
+          "alt": "Kitchen cabinet refinishing detail — factory-smooth finish, Boston condo"
+        },
+        {
+          "src": "/img/testimonials/julia-boston-ma_testimonial-photo-06.jpg",
+          "alt": "Completed kitchen cabinet refinishing — returning client project, Boston"
+        }
+      ],
+      "processNotes": {
+        "video-walkthrough": "Julia's second project with Jerry started the same way as the first — a short video walkthrough to scope the kitchen cabinets, confirm the finish direction, and produce a written same-day quote. No re-explaining the process; she already knew what to expect.",
+        "prep-containment": "Doors removed, labeled, and transported off-site. Kitchen contained and sealed so cooking surfaces and adjacent rooms stayed clean throughout. No hallway or elevator impact.",
+        "hand-sand": "Each door hand-sanded with cork blocks to a consistent, clean base. Chips and worn edges filled and leveled before any finish was applied — the same prep standard as every other project.",
+        "spray-finish": "Bone white 2K polyurethane applied in two controlled coats in a dedicated off-site spray environment — the same factory-grade finish already in the bathroom and storage build, now consistent across the whole home.",
+        "cure-walkthrough": "Doors returned, hardware reinstalled, and every surface walked with Julia before sign-off. Cure window confirmed, touch-up quantity left, hallway cleared before departure."
+      }
+    },
+
+    {
+      "slug": "nick-somerville",
+      "client": "Nick C.",
+      "clientFullName": "Nick Coury",
+      "location": "Somerville, MA",
+      "projectType": "Bathroom refresh",
+      "headline": "A dated bathroom made modern and brand-new — in days, not weeks",
+      "ctaHeadline": "Your Somerville bathroom — 3 days, $7,400 or similar, written quote in 24 hours.",
+      "beforeAfterH2": "What $7,400 looks like in a Somerville bathroom.",
+      "scope": [
+        "Bathroom refresh",
+        "Vanity & tile refresh",
+        "Fixtures & paint"
+      ],
+      "timeline": "3 days",
+      "finish": "Vanity refinished in bone white 2K poly, refreshed tile, matte black fixtures, semi-gloss walls",
+      "investment": {
+        "display": "$7,400",
+        "note": "Bathroom refresh — vanity and tile refresh, fixtures, and paint"
+      },
+      "result": "A dated bathroom transformed into a modern, brand-new space — through a contained refresh finished in 3 days.",
+      "challenge": "Nick wanted his bathroom to feel modern and brand new — but didn't want to gut it to the studs to get there. The challenge was achieving a dramatic before-and-after through a fast, contained refresh in a Somerville apartment, with finish quality high enough that the result reads as a full renovation.",
+      "testimonial": {
+        "name": "Nick C.",
+        "quote": "Jerry completely transformed our bathroom into a modern, functional space that feels brand new. His communication, professionalism, and attention to detail were exceptional throughout the project. The finished result exceeded our expectations, and we couldn't be happier with the outcome.",
+        "headshotSrc": "/img/testimonials/nick-sommerville-ma_testimonial-headshot.jpg"
+      },
+      "heroPublicId": "projects/nick-somerville-hero",
+      "heroAlt": "Refreshed bathroom in a Somerville apartment — refinished vanity, refreshed tile, matte black fixtures, semi-gloss walls",
+      "beforePublicId": "projects/nick-somerville-before",
+      "afterPublicId": "projects/nick-somerville-after",
+      "beforeAlt": "Dated bathroom in a Somerville apartment before the refresh",
+      "afterAlt": "Refreshed modern bathroom — refinished vanity, refreshed tile, and matte black fixtures",
+      "returningClient": true,
+      "galleryPhotos": [
+        {
+          "src": "/img/testimonials/nick-sommerville-ma_testimonial-photo-01.jpg",
+          "alt": "Modern refreshed bathroom with updated tile and matte black fixtures — Somerville apartment"
+        },
+        {
+          "src": "/img/testimonials/nick-sommerville-ma_testimonial-photo-02.jpg",
+          "alt": "Matte black fixtures and tile detail in the finished bathroom — Somerville"
+        },
+        {
+          "src": "/img/testimonials/nick-sommerville-ma_testimonial-photo-03.jpg",
+          "alt": "Refreshed wet area with updated tile and vanity — Somerville apartment"
+        }
+      ],
+      "processNotes": {
+        "video-walkthrough": "A 20-minute video walkthrough set the full refresh scope — what to refinish, which fixtures to swap, and the tile and paint direction — with a written, same-day quote. Nick knew exactly what he was getting before day one.",
+        "prep-containment": "All work was contained within the bathroom — no dust or debris reached the living space or hallway, and no demo dumpster on site. A refresh keeps building disruption to a minimum.",
+        "hand-sand": "Every surface being refinished was hand-sanded to a clean base before any finish went on. This prep is what separates a refresh that lasts from a quick coat that peels within a year.",
+        "spray-finish": "The vanity was refinished in 2K polyurethane, the tile refreshed, matte black fixtures installed, and the walls repainted in semi-gloss — a coordinated finish that reads as a full renovation.",
+        "cure-walkthrough": "On the final day, every refinished surface, fixture, and tile line was inspected with Nick before sign-off, with touch-ups handled on the spot. The hallway and elevator were checked clean before departure."
+      }
+    }
+  ]
+}

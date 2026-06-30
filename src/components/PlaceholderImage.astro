@@ -1,0 +1,55 @@
+---
+interface Props {
+  publicId: string;
+  alt: string;
+  aspect?: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  className?: string;
+  caption?: string;
+}
+
+const {
+  publicId,
+  alt,
+  aspect = '4/3',
+  widths = [480, 800, 1200, 1600],
+  sizes = '100vw',
+  loading = 'lazy',
+  fetchpriority,
+  className,
+  caption,
+} = Astro.props;
+
+const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dxuuydoee';
+const cldUrl = (w: number) =>
+  `https://res.cloudinary.com/${cloud}/image/upload/f_auto,q_auto,dpr_auto,w_${w}/${publicId}.jpg`;
+
+const src = cldUrl(widths[Math.floor(widths.length / 2)] ?? widths[0]);
+const srcset = widths.map(w => `${cldUrl(w)} ${w}w`).join(', ');
+---
+
+<figure class:list={['ph', className]} style={`--ph-aspect:${aspect}`}>
+  <div class="ph-shell" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/>
+      <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    {caption && <span class="ph-caption">{caption}</span>}
+  </div>
+  <img
+    class="ph-img"
+    src={src}
+    srcset={srcset}
+    sizes={sizes}
+    alt={alt}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding={loading === 'eager' ? 'sync' : 'async'}
+    onerror="this.style.opacity='0'"
+    onload="this.dataset.loaded='1'"
+  />
+</figure>

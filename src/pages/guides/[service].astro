@@ -1,0 +1,1433 @@
+---
+import guidesData from '../../../data/guides.json';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CTABand from '../../components/CTABand.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import SchemaLD from '../../components/SchemaLD.astro';
+import PlaceholderImage from '../../components/PlaceholderImage.astro';
+
+export async function getStaticPaths() {
+  return guidesData.guides.map(g => ({
+    params: { service: g.service },
+    props: { guide: g },
+  }));
+}
+
+// ── Types ────────────────────────────────────────────────────────────────────
+interface AssessmentQ {
+  q: string; status: 'green' | 'yellow' | 'red'; label: string; hint: string;
+}
+interface PreplanCategory { title: string; icon: string; items: string[]; }
+interface Decision { label: string; question: string; options: string[]; jerrySays: string; }
+interface WorkbookPhase { phase: string; label: string; color: string; items: string[]; }
+interface MaintenanceCard { title: string; items: string[]; }
+interface GuideMedia {
+  heroPublicId: string; heroAlt: string;
+  workbookPhotoPublicId: string; workbookPhotoAlt: string;
+  outcomeBeforePublicId: string; outcomeBeforeAlt: string;
+  outcomeAfterPublicId: string; outcomeAfterAlt: string;
+  closePhotoPublicId: string; closePhotoAlt: string;
+}
+interface Guide {
+  service: string;
+  meta: { title: string; description: string; };
+  hero: { eyebrow: string; headline: string; subhead: string; };
+  selfAssessment: { heading: string; intro: string; questions: AssessmentQ[]; outcomeNote: string; };
+  preplanning: { heading: string; intro: string; categories: PreplanCategory[]; callout: string; };
+  decisions: { heading: string; intro: string; items: Decision[]; };
+  workbook: { heading: string; phases: WorkbookPhase[]; };
+  outcomes: { heading: string; gets: string[]; know: string[]; };
+  maintenance: { heading: string; cards: MaintenanceCard[]; };
+  warranty: { heading: string; covered: string[]; notCovered: string[]; };
+  media: GuideMedia;
+}
+interface Props { guide: Guide; }
+
+const { guide } = Astro.props;
+const { meta, hero, selfAssessment, preplanning, decisions, workbook, outcomes, maintenance, warranty, media } = guide;
+const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dxuuydoee';
+
+const canonical = `https://www.jerryandcohomeservices.com/guides/${guide.service}/`;
+
+// ── Breadcrumb schema ─────────────────────────────────────────────────────────
+const breadcrumbSchema = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://www.jerryandcohomeservices.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://www.jerryandcohomeservices.com/guides/' },
+    { '@type': 'ListItem', position: 3, name: meta.title.split('—')[0].trim(), item: canonical },
+  ],
+};
+
+// ── Status helpers ────────────────────────────────────────────────────────────
+const statusClass: Record<string, string> = {
+  green: 'aq-green',
+  yellow: 'aq-yellow',
+  red: 'aq-red',
+};
+const statusIcon: Record<string, string> = {
+  green: '✓',
+  yellow: '!',
+  red: '✗',
+};
+---
+
+<Base title={meta.title} description={meta.description} canonical={canonical}>
+  <Fragment slot="head">
+    <SchemaLD type="BreadcrumbList" data={breadcrumbSchema} />
+  </Fragment>
+
+  <Header />
+
+  <!-- ── Breadcrumb ─────────────────────────────────────────────────────── -->
+  <div class="wrap breadcrumb-wrap">
+    <Breadcrumb crumbs={[
+      { label: 'Home',   href: '/' },
+      { label: 'Guides', href: '/guides/' },
+      { label: meta.title.split('—')[0].trim() },
+    ]} />
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       1 · HERO
+  ══════════════════════════════════════════════════════ -->
+  <section class="guide-hero">
+    <div class="wrap guide-hero-inner">
+      <div class="guide-hero-left">
+        <div class="guide-hero-content">
+          <p class="eyebrow guide-eyebrow">{hero.eyebrow}</p>
+          <h1>{hero.headline}</h1>
+          <p class="guide-subhead">{hero.subhead}</p>
+          <div class="guide-hero-actions">
+            <a class="btn btn-gold" href="/#estimate" data-ph-event="guide_cta" data-ph-label={`guide_${guide.service}_hero`}>
+              {guide.service === 'cabinet-refinishing' ? 'Get a written cost range — no obligation.' : 'Get a free video estimate'}
+            </a>
+            <a class="guide-skip" href="#self-check">
+              Start the self-assessment
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="guide-hero-chips" aria-hidden="true">
+          <span class="ghc">MA HIC #208336</span>
+          <span class="ghc">EPA Lead-Safe Certified</span>
+          <span class="ghc">Low-VOC materials</span>
+          <span class="ghc">Condo-compliant process</span>
+          <span class="ghc">Workmanship guarantee</span>
+        </div>
+      </div>
+      <div class="guide-hero-right">
+        <div class="guide-hero-img-wrap">
+          <PlaceholderImage
+            publicId={media.heroPublicId}
+            alt={media.heroAlt}
+            aspect="4/3"
+            className="guide-hero-ph"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       2 · SELF-ASSESSMENT
+  ══════════════════════════════════════════════════════ -->
+  <section class="guide-section" id="self-check">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Phase 0 — Is this right for you?</p>
+        <h2>{selfAssessment.heading}</h2>
+        <p class="section-lede-center">{selfAssessment.intro}</p>
+      </div>
+
+      <div class="aq-grid" data-reveal="in" data-delay="2">
+        {selfAssessment.questions.map((q, i) => (
+          <div class={`aq-card ${statusClass[q.status]}`}>
+            <div class="aq-num">{String(i + 1).padStart(2, '0')}</div>
+            <p class="aq-q">{q.q}</p>
+            <div class="aq-badge">
+              <span class="aq-icon">{statusIcon[q.status]}</span>
+              <span class="aq-label">{q.label}</span>
+            </div>
+            <p class="aq-hint">{q.hint}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="aq-outcome">
+        <div class="aq-outcome-inner">
+          <span class="aq-outcome-icon" aria-hidden="true">→</span>
+          <p>{selfAssessment.outcomeNote}</p>
+        </div>
+        <a class="btn" href="/#estimate" data-ph-event="guide_cta" data-ph-label={`guide_${guide.service}_assessment`}>
+          Discuss on a free video call
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       3 · PRE-PLANNING CHECKLIST
+  ══════════════════════════════════════════════════════ -->
+  <section class="guide-section guide-section-alt" id="preplanning">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Phase 1 — Before you reach out</p>
+        <h2>{preplanning.heading}</h2>
+        <p class="section-lede-center">{preplanning.intro}</p>
+      </div>
+
+      <div class="pp-grid" data-reveal="in" data-delay="2">
+        {preplanning.categories.map(cat => (
+          <div class="pp-card">
+            <div class="pp-icon" aria-hidden="true">
+              {cat.icon === 'home' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+              )}
+              {cat.icon === 'building' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="1"/><path d="M8 7h.01M12 7h.01M16 7h.01M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg>
+              )}
+              {cat.icon === 'calendar' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              )}
+            </div>
+            <h3 class="pp-title">{cat.title}</h3>
+            <ul class="pp-list">
+              {cat.items.map(item => (
+                <li class="pp-item">
+                  <span class="pp-check" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3.5 3.5L13 5"/></svg>
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div class="pp-callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <p>{preplanning.callout}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       4 · DECISION WORKSHEET
+  ══════════════════════════════════════════════════════ -->
+  <section class="guide-section" id="decisions">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Phase 2 — Your design decisions</p>
+        <h2>{decisions.heading}</h2>
+        <p class="section-lede-center">{decisions.intro}</p>
+      </div>
+
+      <div class="dec-stack" data-reveal="in" data-delay="2">
+        {decisions.items.map((d, i) => (
+          <div class="dec-card">
+            <div class="dec-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
+            <div class="dec-body">
+              <p class="dec-label">{d.label}</p>
+              <h3 class="dec-q">{d.question}</h3>
+              <ul class="dec-options">
+                {d.options.map(opt => <li>{opt}</li>)}
+              </ul>
+            </div>
+            <div class="dec-jerry">
+              <p class="dec-jerry-label">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4 18v-1a6 6 0 0112 0v1"/></svg>
+                Jerry says
+              </p>
+              <p class="dec-jerry-text">{d.jerrySays}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="dec-cta-row">
+        <p class="dec-cta-note">Questions about any of these? The estimate call is the right place to work through them — no commitment required.</p>
+        <a class="btn" href="/#estimate" data-ph-event="guide_cta" data-ph-label={`guide_${guide.service}_decisions`}>
+          Book a free walkthrough
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       5 · WORKBOOK: PRE-CON / PRODUCTION / POST-PRODUCTION
+  ══════════════════════════════════════════════════════ -->
+  <section class="guide-workbook" id="workbook">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Phase 3 — The project workbook</p>
+        <h2>{workbook.heading}</h2>
+      </div>
+
+      <div class="wb-grid" data-reveal="in" data-delay="2">
+        {workbook.phases.map((phase, i) => (
+          <div class={`wb-phase wb-phase-${i}`}>
+            <div class="wb-phase-head">
+              <span class="wb-phase-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <p class="wb-phase-name">{phase.phase}</p>
+                <p class="wb-phase-label">{phase.label}</p>
+              </div>
+            </div>
+            {i === 1 && (
+              <div class="wb-photo">
+                <PlaceholderImage
+                  publicId={media.workbookPhotoPublicId}
+                  alt={media.workbookPhotoAlt}
+                  aspect="16/9"
+                  className="wb-photo-img"
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <ol class="wb-list">
+              {phase.items.map(item => <li>{item}</li>)}
+            </ol>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       6 · OUTCOME EXPECTATIONS
+  ══════════════════════════════════════════════════════ -->
+  <section class="guide-section" id="outcomes">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Phase 4 — What "done" looks like</p>
+        <h2>{outcomes.heading}</h2>
+      </div>
+
+      <div class="out-grid">
+        <div class="out-col out-gets" data-reveal="left">
+          <h3 class="out-col-head">
+            <span class="out-icon out-icon-green" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10l4 4 8-8"/></svg>
+            </span>
+            What you get
+          </h3>
+          <ul class="out-list">
+            {outcomes.gets.map(item => (
+              <li>
+                <span class="out-dot out-dot-green" aria-hidden="true"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="out-col out-know" data-reveal="right" data-delay="2">
+          <h3 class="out-col-head">
+            <span class="out-icon out-icon-amber" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 6v4M10 14h.01M10 18a8 8 0 100-16 8 8 0 000 16z"/></svg>
+            </span>
+            What to know
+          </h3>
+          <ul class="out-list">
+            {outcomes.know.map(item => (
+              <li>
+                <span class="out-dot out-dot-amber" aria-hidden="true"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="out-ba" data-reveal="scale" data-delay="2">
+        <div class="out-ba-item">
+          <div class="out-ba-img-wrap">
+            <PlaceholderImage
+              publicId={media.outcomeBeforePublicId}
+              alt={media.outcomeBeforeAlt}
+              aspect="3/2"
+              className="out-ba-ph"
+              loading="lazy"
+            />
+          </div>
+          <span class="out-ba-label out-ba-label-before">Before</span>
+        </div>
+        <div class="out-ba-item">
+          <div class="out-ba-img-wrap">
+            <PlaceholderImage
+              publicId={media.outcomeAfterPublicId}
+              alt={media.outcomeAfterAlt}
+              aspect="3/2"
+              className="out-ba-ph"
+              loading="lazy"
+            />
+          </div>
+          <span class="out-ba-label out-ba-label-after">After</span>
+        </div>
+      </div>
+
+      <div class="out-projects-link">
+        <a href="/projects/" class="btn btn-outline">See more results →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       7 · MAINTENANCE GUIDE
+  ══════════════════════════════════════════════════════ -->
+  <section class="guide-section guide-section-alt" id="maintenance">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Ongoing care</p>
+        <h2>{maintenance.heading}</h2>
+      </div>
+      <div class="maint-grid">
+        {maintenance.cards.map((card, i) => (
+          <div class="maint-card" data-reveal="up" data-delay={String(i + 1)}>
+            <div class="maint-icon" aria-hidden="true">
+              {i === 0 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>}
+              {i === 1 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>}
+              {i === 2 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>}
+            </div>
+            <h3 class="maint-title">{card.title}</h3>
+            <ul class="maint-list">
+              {card.items.map(item => <li>{item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       8 · WARRANTY
+  ══════════════════════════════════════════════════════ -->
+  <section class="guide-section guide-warranty" id="warranty">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Our commitment</p>
+        <h2>{warranty.heading}</h2>
+      </div>
+      <div class="warr-grid">
+        <div class="warr-col" data-reveal="left">
+          <h3 class="warr-col-head warr-covered">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 18s7-3.5 7-8.75V4.375L10 2 3 4.375V9.25C3 14.5 10 18 10 18z"/><path d="M7 10l2.5 2.5L13 8"/></svg>
+            Covered
+          </h3>
+          <ul class="warr-list warr-list-covered">
+            {warranty.covered.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="warr-divider" aria-hidden="true"></div>
+        <div class="warr-col" data-reveal="right" data-delay="2">
+          <h3 class="warr-col-head warr-not">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M7 13l6-6M13 13L7 7"/></svg>
+            Not covered
+          </h3>
+          <ul class="warr-list warr-list-not">
+            {warranty.notCovered.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+      <p class="warr-link-line">
+        <a href="/guarantee/">Read the full workmanship guarantee →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       9 · CONVERSION CLOSE
+  ══════════════════════════════════════════════════════ -->
+  <section class="guide-close">
+    <div class="wrap guide-close-inner">
+      <div class="guide-close-text">
+        <p class="eyebrow">You're ready</p>
+        <h2>Three steps to get started</h2>
+        <div class="guide-close-img">
+          <PlaceholderImage
+            publicId={media.closePhotoPublicId}
+            alt={media.closePhotoAlt}
+            aspect="4/3"
+            className="guide-close-ph"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div class="close-steps">
+        <div class="cs-step">
+          <span class="cs-num">1</span>
+          <div>
+            <strong>Schedule a free 20-minute video walkthrough</strong>
+            <p>We assess your space, confirm scope, and answer every question from this guide.</p>
+          </div>
+        </div>
+        <div class="cs-step">
+          <span class="cs-num">2</span>
+          <div>
+            <strong>Receive a written quote within 24 hours</strong>
+            <p>Three-tier proposal with options — you choose the scope that fits your timeline and budget.</p>
+          </div>
+        </div>
+        <div class="cs-step">
+          <span class="cs-num">3</span>
+          <div>
+            <strong>Lock your start date</strong>
+            <p>We handle building paperwork, access coordination, and the pre-arrival checklist.</p>
+          </div>
+        </div>
+      </div>
+      <div class="guide-close-cta">
+        <a class="btn btn-gold" href="/#estimate" data-ph-event="guide_cta" data-ph-label={`guide_${guide.service}_close`}>
+          Get my free estimate
+        </a>
+        <p class="close-reassure">No commitment required. Written quote within 24 hours. MA HIC #208336.</p>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Questions? Talk to Jerry directly."
+    headline="Every estimate starts with a video walkthrough — no obligation, no pressure, just a clear written scope."
+    ctaText="Schedule the walkthrough"
+  />
+
+  <Footer />
+</Base>
+
+<style>
+  /* ── Breadcrumb ─────────────────────────────────────────── */
+  .breadcrumb-wrap { padding-top: 20px; }
+
+  /* ══════════════════════════════════════════════════════════
+     1 · HERO
+  ══════════════════════════════════════════════════════════ */
+  .guide-hero {
+    background: var(--ink);
+    color: var(--bone);
+    padding: clamp(28px, 4vw, 52px) 0 clamp(24px, 3.5vw, 44px);
+    position: relative;
+    overflow: hidden;
+  }
+  .guide-hero::before {
+    content: '✓';
+    position: absolute;
+    right: -1%;
+    bottom: -10%;
+    font-size: clamp(120px, 18vw, 240px);
+    color: rgba(247, 243, 234, 0.018);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    font-family: var(--font-sans);
+  }
+  .guide-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-7);
+    align-items: center;
+  }
+  .guide-hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+  .guide-hero-right { position: relative; }
+  .guide-hero-img-wrap {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    position: relative;
+  }
+  .guide-hero-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-sm);
+    box-shadow: inset 0 0 0 1px rgba(247, 243, 234, 0.1);
+    pointer-events: none;
+  }
+  :global(.guide-hero-ph) { display: block; width: 100%; }
+  .guide-hero-content { max-width: 600px; }
+  .guide-eyebrow { color: var(--gold); }
+  .guide-hero h1 {
+    color: var(--bone);
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .guide-subhead {
+    color: rgba(247, 243, 234, 0.6);
+    font-size: 1.0625rem;
+    line-height: 1.72;
+    max-width: 60ch;
+    margin: 0 0 32px;
+  }
+  .guide-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+  }
+  .guide-skip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(247, 243, 234, 0.5);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.15s;
+  }
+  .guide-skip:hover { color: var(--bone); }
+  .guide-skip svg { width: 14px; height: 14px; }
+  .guide-hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ghc {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(247, 243, 234, 0.4);
+    border: 1px solid rgba(247, 243, 234, 0.12);
+    border-radius: var(--radius-xs);
+    padding: 5px 10px;
+  }
+
+  /* ── Workbook production photo ────────────────────────────── */
+  .wb-photo {
+    border-radius: var(--radius-xs);
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  :global(.wb-photo-img) { display: block; width: 100%; }
+
+  /* ── Outcomes before/after pair ──────────────────────────── */
+  .out-ba {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-4);
+    margin-top: var(--sp-5);
+  }
+  .out-ba-item { position: relative; }
+  .out-ba-img-wrap {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  :global(.out-ba-ph) { display: block; width: 100%; }
+  .out-ba-label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-xs);
+    pointer-events: none;
+  }
+  .out-ba-label-before {
+    background: rgba(20, 36, 31, 0.6);
+    color: var(--bone);
+    backdrop-filter: blur(4px);
+  }
+  .out-ba-label-after {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  /* ── Close section photo ──────────────────────────────────── */
+  .guide-close-img {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid rgba(247, 243, 234, 0.1);
+    margin-top: var(--sp-4);
+  }
+  :global(.guide-close-ph) { display: block; width: 100%; }
+
+  /* ══════════════════════════════════════════════════════════
+     SHARED SECTION SHELL
+  ══════════════════════════════════════════════════════════ */
+  .guide-section {
+    background: var(--bone);
+    padding: clamp(56px, 7vw, 88px) 0;
+  }
+  .guide-section-alt { background: var(--bone-deep); }
+
+  /* ══════════════════════════════════════════════════════════
+     2 · SELF-ASSESSMENT
+  ══════════════════════════════════════════════════════════ */
+  .aq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--sp-3);
+    margin-top: var(--sp-5);
+  }
+  .aq-card {
+    background: var(--bone-deep);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: clamp(20px, 2.5vw, 28px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top-width: 3px;
+    position: relative;
+  }
+  .aq-green  { border-top-color: #2D6A4F; }
+  .aq-yellow { border-top-color: var(--gold); }
+  .aq-red    { border-top-color: #8B2323; }
+
+  .aq-num {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--line);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .aq-q {
+    font-size: 0.9375rem;
+    color: var(--forest);
+    line-height: 1.5;
+    font-weight: 500;
+    margin: 0;
+  }
+  .aq-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+  }
+  .aq-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-family: var(--font-sans);
+    line-height: 1;
+  }
+  .aq-green  .aq-icon { background: #2D6A4F; color: #fff; }
+  .aq-yellow .aq-icon { background: var(--gold); color: var(--ink); }
+  .aq-red    .aq-icon { background: #8B2323; color: #fff; }
+  .aq-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .aq-green  .aq-label { color: #2D6A4F; }
+  .aq-yellow .aq-label { color: var(--gold-deep); }
+  .aq-red    .aq-label { color: #8B2323; }
+  .aq-hint {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.62;
+    margin: 0;
+  }
+  .aq-outcome {
+    margin-top: var(--sp-5);
+    background: var(--bone-deep);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius: var(--radius-xs);
+    padding: var(--sp-4);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+  }
+  .aq-outcome-inner {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 200px;
+  }
+  .aq-outcome-icon {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .aq-outcome p {
+    font-size: 13.5px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     3 · PRE-PLANNING
+  ══════════════════════════════════════════════════════════ */
+  .pp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+    margin-top: var(--sp-5);
+  }
+  .pp-card {
+    background: var(--bone);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: clamp(24px, 3vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .pp-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(200, 160, 85, 0.1);
+    border-radius: var(--radius-xs);
+    flex-shrink: 0;
+    color: var(--gold-deep);
+  }
+  .pp-icon svg { width: 20px; height: 20px; }
+  .pp-title {
+    font-size: 1rem;
+    color: var(--forest);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .pp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pp-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.58;
+  }
+  .pp-check {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(200, 160, 85, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    color: var(--gold-deep);
+  }
+  .pp-check svg { width: 9px; height: 9px; }
+  .pp-callout {
+    margin-top: var(--sp-5);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--bone);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xs);
+    padding: var(--sp-3) var(--sp-4);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pp-callout svg {
+    width: 18px;
+    height: 18px;
+    color: var(--gold-deep);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .pp-callout p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.62;
+    font-style: italic;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     4 · DECISION WORKSHEET
+  ══════════════════════════════════════════════════════════ */
+  .dec-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-top: var(--sp-5);
+  }
+  .dec-card {
+    background: var(--bone-deep);
+    display: grid;
+    grid-template-columns: 64px 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  .dec-num {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--gold);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    padding: clamp(20px, 2.5vw, 28px);
+    display: flex;
+    align-items: flex-start;
+    padding-top: clamp(24px, 3vw, 32px);
+    border-right: 1px solid var(--line);
+  }
+  .dec-body {
+    padding: clamp(20px, 2.5vw, 28px);
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dec-label {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin: 0;
+  }
+  .dec-q {
+    font-size: 1rem;
+    color: var(--forest);
+    margin: 0;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .dec-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .dec-options li {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding-left: 14px;
+    position: relative;
+  }
+  .dec-options li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 18px;
+    line-height: 1;
+    top: -1px;
+  }
+  .dec-jerry {
+    padding: clamp(20px, 2.5vw, 28px);
+    background: rgba(200, 160, 85, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+  .dec-jerry-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin: 0;
+  }
+  .dec-jerry-label svg { width: 14px; height: 14px; }
+  .dec-jerry-text {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.68;
+    margin: 0;
+    font-style: italic;
+  }
+  .dec-cta-row {
+    margin-top: var(--sp-5);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .dec-cta-note {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    max-width: 52ch;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     5 · WORKBOOK
+  ══════════════════════════════════════════════════════════ */
+  .guide-workbook {
+    background: var(--ink);
+    color: var(--bone);
+    padding: clamp(56px, 7vw, 88px) 0;
+  }
+  .guide-workbook .section-head h2 { color: var(--bone); }
+  .wb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(247, 243, 234, 0.08);
+    border: 1px solid rgba(247, 243, 234, 0.08);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-top: var(--sp-5);
+  }
+  .wb-phase {
+    background: rgba(247, 243, 234, 0.03);
+    padding: clamp(24px, 3vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .wb-phase-0 { background: rgba(200, 160, 85, 0.06); }
+  .wb-phase-1 { background: rgba(45, 106, 79, 0.12); }
+  .wb-phase-2 { background: rgba(247, 243, 234, 0.03); }
+  .wb-phase-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .wb-phase-num {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    color: var(--gold);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .wb-phase-name {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 4px;
+    opacity: 0.7;
+  }
+  .wb-phase-label {
+    font-size: 0.9375rem;
+    color: var(--bone);
+    margin: 0;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .wb-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    counter-reset: wb-counter;
+  }
+  .wb-list li {
+    counter-increment: wb-counter;
+    font-size: 13px;
+    color: rgba(247, 243, 234, 0.55);
+    line-height: 1.58;
+    padding-left: 24px;
+    position: relative;
+  }
+  .wb-list li::before {
+    content: counter(wb-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.6;
+    line-height: 1.8;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     6 · OUTCOMES
+  ══════════════════════════════════════════════════════════ */
+  .out-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-5);
+    margin-top: var(--sp-5);
+  }
+  .out-col {
+    background: var(--bone-deep);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: clamp(24px, 3vw, 36px);
+  }
+  .out-col-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+    color: var(--forest);
+  }
+  .out-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .out-icon svg { width: 14px; height: 14px; }
+  .out-icon-green { background: rgba(45, 106, 79, 0.12); color: #2D6A4F; }
+  .out-icon-amber { background: rgba(200, 160, 85, 0.15); color: var(--gold-deep); }
+  .out-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .out-list li {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.62;
+    padding-left: 20px;
+    position: relative;
+  }
+  .out-dot {
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .out-dot-green { background: #2D6A4F; }
+  .out-dot-amber { background: var(--gold); }
+  .out-projects-link {
+    margin-top: var(--sp-5);
+    text-align: center;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     7 · MAINTENANCE
+  ══════════════════════════════════════════════════════════ */
+  .maint-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+    margin-top: var(--sp-5);
+  }
+  .maint-card {
+    background: var(--bone);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: clamp(22px, 3vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .maint-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(200, 160, 85, 0.1);
+    border-radius: var(--radius-xs);
+    color: var(--gold-deep);
+    flex-shrink: 0;
+  }
+  .maint-icon svg { width: 18px; height: 18px; }
+  .maint-title {
+    font-size: 0.9375rem;
+    color: var(--forest);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .maint-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .maint-list li {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.58;
+    padding-left: 14px;
+    position: relative;
+  }
+  .maint-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 18px;
+    line-height: 1;
+    top: -2px;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     8 · WARRANTY
+  ══════════════════════════════════════════════════════════ */
+  .guide-warranty { background: var(--bone); }
+  .warr-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--sp-5);
+    align-items: start;
+    margin-top: var(--sp-5);
+  }
+  .warr-divider {
+    width: 1px;
+    background: var(--line);
+    align-self: stretch;
+  }
+  .warr-col-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+    color: var(--forest);
+  }
+  .warr-col-head svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .warr-covered .warr-col-head,
+  .warr-col-head.warr-covered { color: #2D6A4F; }
+  .warr-not .warr-col-head,
+  .warr-col-head.warr-not { color: var(--text-muted); }
+  .warr-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .warr-list li {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.62;
+    padding-left: 20px;
+    position: relative;
+  }
+  .warr-list-covered li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #2D6A4F;
+    font-size: 12px;
+    line-height: 1.6;
+    font-weight: 700;
+  }
+  .warr-list-not li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--line);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .warr-link-line {
+    text-align: center;
+    margin-top: var(--sp-5);
+    font-family: var(--font-sans);
+    font-size: 13px;
+  }
+  .warr-link-line a {
+    color: var(--gold-deep);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: color 0.15s;
+  }
+  .warr-link-line a:hover { color: var(--forest); }
+
+  /* ══════════════════════════════════════════════════════════
+     9 · CLOSE
+  ══════════════════════════════════════════════════════════ */
+  .guide-close {
+    background: var(--forest);
+    color: var(--bone);
+    padding: clamp(56px, 7vw, 88px) 0;
+  }
+  .guide-close-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--sp-7);
+    align-items: start;
+  }
+  .guide-close-text { padding-top: 4px; }
+  .guide-close-text .eyebrow { color: var(--gold); }
+  .guide-close-text h2 {
+    color: var(--bone);
+    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    letter-spacing: -0.03em;
+    margin: 8px 0 0;
+  }
+  .close-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+  .cs-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .cs-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .cs-step strong {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--bone);
+    margin-bottom: 4px;
+  }
+  .cs-step p {
+    font-size: 13px;
+    color: rgba(247, 243, 234, 0.5);
+    margin: 0;
+    line-height: 1.58;
+  }
+  .guide-close-cta {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: var(--sp-3);
+    padding-top: var(--sp-4);
+    border-top: 1px solid rgba(247, 243, 234, 0.1);
+  }
+  .close-reassure {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: rgba(247, 243, 234, 0.38);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .guide-hero-inner { grid-template-columns: 1fr; gap: var(--sp-5); }
+    .guide-hero-right { display: none; }
+    .guide-hero-content { max-width: 720px; }
+    .dec-card { grid-template-columns: 48px 1fr; }
+    .dec-jerry { grid-column: 2; border-top: 1px solid var(--line); }
+    .dec-num { border-bottom: 0; }
+  }
+  @media (max-width: 900px) {
+    .guide-close-inner { grid-template-columns: 1fr; gap: var(--sp-5); }
+    .guide-close-img { display: none; }
+    .out-ba { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .pp-grid { grid-template-columns: 1fr; }
+    .wb-grid { grid-template-columns: 1fr; }
+    .out-grid { grid-template-columns: 1fr; }
+    .out-ba { grid-template-columns: 1fr; }
+    .maint-grid { grid-template-columns: 1fr; }
+    .warr-grid { grid-template-columns: 1fr; }
+    .warr-divider { display: none; }
+    .dec-card { grid-template-columns: 1fr; }
+    .dec-num { display: none; }
+    .dec-body { border-right: none; border-bottom: 1px solid var(--line); }
+  }
+  @media (max-width: 540px) {
+    .aq-grid { grid-template-columns: 1fr; }
+    .guide-close-cta { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ── 3G: Guide mobile fixes ───────────────────────────── */
+  @media (max-width: 600px) {
+    .guide-hero-inner { padding: var(--sp-6) 0; }
+    .guide-hero-content h1 { font-size: clamp(1.625rem, 5.5vw, 2.5rem); }
+  }
+  @media (max-width: 640px) {
+    .out-grid { grid-template-columns: 1fr; }
+    .out-ba { grid-template-columns: 1fr; }
+  }
+
+  /* ── Hero entrance — CSS-only stagger ────────────────────────── */
+  .guide-hero-content .eyebrow {
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.10s both;
+  }
+  .guide-hero-content h1 {
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+  }
+  .guide-subhead {
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.34s both;
+  }
+  .guide-hero-actions {
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.48s both;
+  }
+  .guide-hero-chips {
+    animation: fadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.56s both;
+  }
+  .guide-hero-right {
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.30s both;
+  }
+</style>

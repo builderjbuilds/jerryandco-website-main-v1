@@ -1,0 +1,153 @@
+---
+const items = [
+  {
+    text: 'MA HIC #208336 — Mass.gov Verified',
+    href: '/about/',
+    icon: `<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/>`,
+  },
+  {
+    text: 'EPA RRP Lead-Safe Certified',
+    href: '/faq/#materials',
+    icon: `<circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/>`,
+  },
+  {
+    text: 'One point of contact — no rotating crews',
+    href: '/about/',
+    icon: `<circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/>`,
+  },
+  {
+    text: 'HOA docs handled, freight elevator booked, COI on request',
+    href: '/our-process/',
+    icon: `<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>`,
+  },
+  {
+    text: '2-year workmanship guarantee — in writing, backed by the owner.',
+    href: '/guarantee/',
+    icon: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>`,
+  },
+  {
+    text: '2–5 day typical cabinet refinish',
+    href: '/our-process/',
+    icon: `<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>`,
+  },
+  {
+    text: 'Zero dust · Zero odor · Zero neighbor drama',
+    href: '/#services',
+    icon: `<path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0"/><path d="M9 12l2 2 4-4"/>`,
+  },
+  {
+    text: 'Free video estimates — no sales pitch',
+    href: '/#estimate',
+    icon: `<polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>`,
+  },
+];
+---
+
+<div class="ticker" aria-label="Credentials and trust signals">
+  <div class="ticker-track" aria-hidden="true">
+    {/* First set */}
+    {items.map(item => (
+      <a class="ticker-item" href={item.href}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={item.icon} />
+        {item.text}
+        <span class="ticker-dot" aria-hidden="true">✦</span>
+      </a>
+    ))}
+    {/* Duplicate for seamless loop */}
+    {items.map(item => (
+      <a class="ticker-item" href={item.href} tabindex="-1" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={item.icon} />
+        {item.text}
+        <span class="ticker-dot" aria-hidden="true">✦</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .ticker {
+    background: var(--ink);
+    border-bottom: 1px solid rgba(200, 160, 85, 0.18);
+    overflow: hidden;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Fade edges */
+  .ticker::before,
+  .ticker::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .ticker::before {
+    left: 0;
+    background: linear-gradient(to right, var(--ink), transparent);
+  }
+  .ticker::after {
+    right: 0;
+    background: linear-gradient(to left, var(--ink), transparent);
+  }
+
+  .ticker-track {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: ticker-scroll 52s linear infinite;
+    will-change: transform;
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 clamp(20px, 3vw, 40px);
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(247, 243, 234, 0.72);
+    text-decoration: none;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+  .ticker-item:hover { color: var(--bone); }
+  .ticker-item svg {
+    width: 13px;
+    height: 13px;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .ticker-dot {
+    font-size: 7px;
+    color: var(--gold);
+    opacity: 0.55;
+    margin-left: clamp(20px, 3vw, 40px);
+  }
+
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none;
+      flex-wrap: wrap;
+      height: auto;
+      white-space: normal;
+    }
+    .ticker {
+      height: auto;
+      padding: 12px 0;
+    }
+  }
+</style>

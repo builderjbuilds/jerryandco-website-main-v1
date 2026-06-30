@@ -1,0 +1,926 @@
+{
+  "guides": [
+    {
+      "service": "cabinet-refinishing",
+      "meta": {
+        "title": "Cabinet Refinishing Planning Guide — Jerry & Co.",
+        "description": "Everything to check, decide, and expect before refinishing your condo cabinets. Self-assessment, decision worksheet, day-by-day workbook, and warranty terms."
+      },
+      "hero": {
+        "eyebrow": "Your condo kitchen — before you call anyone.",
+        "headline": "Everything you need to know before refinishing your condo cabinets",
+        "subhead": "This guide walks you through what to check, what to decide, and what to expect — so your estimate call is fast, your project runs smoothly, and the finish lasts."
+      },
+      "selfAssessment": {
+        "heading": "5 questions before you reach out",
+        "intro": "Answer these honestly. They'll tell you whether refinishing is right for your cabinets — and flag anything to discuss on the estimate call.",
+        "questions": [
+          {
+            "q": "Are your cabinet boxes structurally sound — no soft wood, delamination, or water damage at the base?",
+            "status": "green",
+            "label": "Good to go",
+            "hint": "Box integrity is the foundation. If yes, refinishing makes sense."
+          },
+          {
+            "q": "Are your doors a flat or simple routed profile — not heavily carved, glass-front, or thermofoil wrap?",
+            "status": "yellow",
+            "label": "Discuss on call",
+            "hint": "Most profiles work. Thermofoil and intricate carved doors need a closer look — we'll assess on the video walkthrough."
+          },
+          {
+            "q": "Does your building allow contractor access during standard weekday hours (8am–5pm)?",
+            "status": "yellow",
+            "label": "Confirm first",
+            "hint": "Access hours and elevator reservation windows affect scheduling. Get this from your condo docs before booking."
+          },
+          {
+            "q": "Are you comfortable being without your kitchen for 2–3 consecutive days during the project?",
+            "status": "green",
+            "label": "Good to go",
+            "hint": "That's the typical production window. Planning around it makes everything easier."
+          },
+          {
+            "q": "Do you want a lasting result built for daily use — not just a cosmetic fix that needs touching up in a year?",
+            "status": "green",
+            "label": "Right service",
+            "hint": "2K polyurethane is harder and more durable than most brush-on paints. If durability matters, this is the right call."
+          }
+        ],
+        "outcomeNote": "Mostly green → strong candidate. Yellow items → bring them to the video walkthrough, no commitment needed. Red on box condition → let's talk honestly about whether repair or replacement makes more sense first."
+      },
+      "preplanning": {
+        "heading": "What to document before the walkthrough",
+        "intro": "You don't need all of this locked down — but clients who come prepared get a written quote faster and avoid scope surprises.",
+        "categories": [
+          {
+            "title": "Your cabinets",
+            "icon": "home",
+            "items": [
+              "Count total door and drawer front count",
+              "Photograph each run front-on in good light",
+              "Close-up photos of any chipped edges, worn corners, or staining",
+              "Note whether boxes have existing paint or stain (affects prep)"
+            ]
+          },
+          {
+            "title": "Your building",
+            "icon": "building",
+            "items": [
+              "Check condo bylaws for contractor access hours and elevator reservation process",
+              "Confirm whether your building requires a certificate of insurance from contractors",
+              "Note any shared ventilation restrictions — relevant for low-VOC finish selection",
+              "Find out if neighboring units will need notice for any reason"
+            ]
+          },
+          {
+            "title": "Your timeline",
+            "icon": "calendar",
+            "items": [
+              "Identify any hard date constraints — guests arriving, listing date, lease renewal",
+              "Confirm 2–5 consecutive weekdays are available for the project",
+              "Decide if you'll be present during work or provide key access",
+              "Note any travel or building blackout periods coming up"
+            ]
+          }
+        ],
+        "callout": "Clients who send 4–6 photos before the walkthrough call typically receive their written quote the same day."
+      },
+      "decisions": {
+        "heading": "Decisions you'll make before work begins",
+        "intro": "None of these need to be answered before the estimate call — but knowing what's coming helps you think them through.",
+        "items": [
+          {
+            "label": "Color",
+            "question": "What color do you want the finished cabinets?",
+            "options": ["Bone white (most popular in Boston condos)", "Deep forest green", "Matte black", "Custom color match to an existing element"],
+            "jerrySays": "Start with the countertop and hardware finish, then build the cabinet color around those. Bone white reads lighter in person than on a screen — always request a sample before committing."
+          },
+          {
+            "label": "Sheen level",
+            "question": "How much sheen do you want on the finished surface?",
+            "options": ["Matte — lowest sheen, hides surface texture", "Satin — most popular, easy to wipe clean", "Semi-gloss — highest durability, shows imperfections more"],
+            "jerrySays": "Satin is the right call for 80% of kitchens. Matte looks elegant but shows fingerprints and is harder to wipe. Semi-gloss is worth it for high-traffic households."
+          },
+          {
+            "label": "Hardware",
+            "question": "Are you keeping your existing hardware, upgrading, or replacing it?",
+            "options": ["Keep existing hardware (reinstalled after finishing)", "Upgrade to a new finish (e.g. brass to matte black)", "Full replacement — new pulls and knobs"],
+            "jerrySays": "If replacing, order hardware before the project starts — lead times catch people off guard. Measure hole-to-hole spacing on your current pulls before ordering anything new."
+          },
+          {
+            "label": "Scope",
+            "question": "Which surfaces are included in this project?",
+            "options": ["Kitchen doors and drawer fronts only", "Doors, drawer fronts, and visible cabinet boxes", "Kitchen plus bathroom vanity or laundry cabinet in same session"],
+            "jerrySays": "Bundling the bathroom vanity in the same project visit is the most efficient way to get consistent color across your home. It adds minimal time and typically less than $600 to the total."
+          }
+        ]
+      },
+      "workbook": {
+        "heading": "What happens, day by day",
+        "phases": [
+          {
+            "phase": "Pre-construction",
+            "label": "Before we arrive",
+            "color": "gold",
+            "items": [
+              "Written quote reviewed and signed",
+              "Color and sheen level locked — no changes after this point",
+              "Hardware ordered if replacing (allow 5–10 business days)",
+              "Building elevator and access window reserved",
+              "Pre-arrival checklist sent — you'll clear cabinet contents and leave key access"
+            ]
+          },
+          {
+            "phase": "Production",
+            "label": "Days 1–5 in your unit",
+            "color": "forest",
+            "items": [
+              "Day 1: Hardware removed, doors labeled, doors transported off-site for prep",
+              "Day 1–2: Hand-sanding with cork blocks — no power tools, no noise through walls",
+              "Day 2: Chips, dents, and edge damage filled and leveled",
+              "Day 3–4: 2K polyurethane applied in two controlled coats, off-site spray environment",
+              "Day 5: Doors returned, hardware reinstalled, alignment checked"
+            ]
+          },
+          {
+            "phase": "Post-construction",
+            "label": "After sign-off",
+            "color": "ink",
+            "items": [
+              "48-hour cure window — avoid wiping or placing items against doors during this period",
+              "Final walkthrough together — you inspect every door, edge, and hinge point",
+              "Touch-up items addressed before you sign off, not after",
+              "Building hallway and elevator inspected and cleared before departure",
+              "Written warranty issued with your sign-off confirmation"
+            ]
+          }
+        ]
+      },
+      "outcomes": {
+        "heading": "What 'done' actually looks like",
+        "gets": [
+          "Factory-smooth, consistent finish across every door and drawer front",
+          "2K polyurethane surface harder and more durable than most brush-on paints",
+          "Hardware aligned and functioning the same as or better than before",
+          "Zero hallway damage, zero dust migration to other rooms",
+          "A written sign-off with a 2-year workmanship warranty"
+        ],
+        "know": [
+          "Open-grain wood (oak, ash) will show the grain through the finish — that's normal and expected, not a defect",
+          "Deep structural damage to boxes or doors must be repaired before finishing — we assess and flag this in the walkthrough",
+          "Color will appear slightly different under warm incandescent vs. cool natural light — always sample in your actual space",
+          "The first 48 hours after application are the critical cure window — the finish is touch-dry but not fully hardened until then"
+        ]
+      },
+      "maintenance": {
+        "heading": "Keeping the finish looking factory-grade",
+        "cards": [
+          {
+            "title": "Day-to-day care",
+            "items": [
+              "Wipe with a damp cloth and mild dish soap",
+              "Dry immediately — don't leave wet cloths against the surface",
+              "Use a microfiber cloth for fingerprints — no paper towels"
+            ]
+          },
+          {
+            "title": "Annual check",
+            "items": [
+              "Inspect hinge points and leading edges for any chips",
+              "Call for a touch-up visit at the first sign of edge chipping — early repair prevents spread",
+              "Check hardware tightness — loose hinges cause door-edge wear"
+            ]
+          },
+          {
+            "title": "What to avoid",
+            "items": [
+              "Ammonia-based cleaners (Windex, many multi-surface sprays)",
+              "Bleach or abrasive scrubbing pads",
+              "Steam directly from stovetop exhaust vented toward the cabinets",
+              "Adhesive hooks or contact paper stuck directly to the finish"
+            ]
+          }
+        ]
+      },
+      "warranty": {
+        "heading": "2 years. Factory-grade. Backed by the owner.",
+        "covered": [
+          "Finish adhesion failure — any delamination or peeling within 2 years, re-coated at no charge",
+          "Color inconsistency on delivered work — corrected before sign-off, not after",
+          "Hardware misalignment at final walkthrough — adjusted same day"
+        ],
+        "notCovered": [
+          "Chips or scratches from impact, dropped objects, or misuse after sign-off",
+          "Discoloration or damage from ammonia-based cleaners, bleach, or abrasive products",
+          "Normal surface wear over time — touch-up available at standard service rate"
+        ]
+      },
+      "media": {
+        "heroPublicId": "services/cabinet-refinishing",
+        "heroAlt": "Cabinet doors receiving a 2K polyurethane spray finish",
+        "workbookPhotoPublicId": "projects/ceri-charlestown-after",
+        "workbookPhotoAlt": "Completed cabinet refinishing — Charlestown condo kitchen",
+        "outcomeBeforePublicId": "projects/ceri-charlestown-before",
+        "outcomeBeforeAlt": "Worn kitchen cabinets before refinishing",
+        "outcomeAfterPublicId": "projects/ceri-charlestown-after",
+        "outcomeAfterAlt": "Kitchen cabinets after 2K polyurethane finish — factory smooth",
+        "closePhotoPublicId": "projects/ceri-charlestown-hero",
+        "closePhotoAlt": "Completed cabinet refinishing project — Charlestown"
+      }
+    },
+
+    {
+      "service": "bathroom-refresh",
+      "meta": {
+        "title": "Bathroom Refresh Planning Guide — Jerry & Co.",
+        "description": "What to check, select, and expect before a gut-free bathroom refresh. Tile, fixtures, vanity, and timeline — all in one place."
+      },
+      "hero": {
+        "eyebrow": "Planning guide · Gut-free bathroom refresh",
+        "headline": "Everything you need to know before refreshing your bathroom without a gut",
+        "subhead": "New tile, fixtures, and paint without demolition or permit risk. This guide covers what to assess, what to select, and what to expect from start to finish."
+      },
+      "selfAssessment": {
+        "heading": "5 questions before you reach out",
+        "intro": "These determine whether a gut-free refresh is the right scope — or whether a full renovation is the better investment.",
+        "questions": [
+          {
+            "q": "Is the subfloor and substrate behind your existing tile in good condition — no soft spots, water damage, or visible mold?",
+            "status": "yellow",
+            "label": "Verify first",
+            "hint": "If unknown, we assess this in the video walkthrough. Substrate issues can change the scope from refresh to full reno."
+          },
+          {
+            "q": "Are you comfortable keeping plumbing supply and drain locations exactly where they are?",
+            "status": "green",
+            "label": "Right for refresh",
+            "hint": "Moving supply or drain lines triggers permit requirements. A gut-free refresh works within the existing footprint — fast, compliant, no board approval needed in most buildings."
+          },
+          {
+            "q": "Is your building ICC residential — most Boston, Cambridge, and Somerville condos built after 1980?",
+            "status": "green",
+            "label": "Usually no permit needed",
+            "hint": "Like-for-like fixture and tile replacement typically doesn't require a permit in ICC residential classification. We confirm this in your building's specific context."
+          },
+          {
+            "q": "Do you have a direction for the tile style and fixture finish — or are you starting from scratch?",
+            "status": "yellow",
+            "label": "Good to think through",
+            "hint": "Not required before the estimate call. We walk through options together. Having a reference image or two helps us get to a quote faster."
+          },
+          {
+            "q": "Can you be without this bathroom for 3–5 consecutive days?",
+            "status": "green",
+            "label": "Plan ahead",
+            "hint": "If this is your only bathroom, we can stage the work to minimize disruption. We'll discuss logistics on the call."
+          }
+        ],
+        "outcomeNote": "Mostly green → great fit for a refresh. Yellow on substrate condition → we assess in the walkthrough. If we find issues that require a full gut, we'll scope that for you on the spot and let you decide."
+      },
+      "preplanning": {
+        "heading": "What to document before the walkthrough",
+        "intro": "A few photos and measurements cut 20 minutes off the estimate call and get you a written quote faster.",
+        "categories": [
+          {
+            "title": "Your bathroom",
+            "icon": "home",
+            "items": [
+              "Photograph all four walls, the floor, and the ceiling",
+              "Close-up of any grout discoloration, cracked tile, or damaged fixtures",
+              "Measure the floor footprint and note ceiling height",
+              "Note current tile size and format if visible"
+            ]
+          },
+          {
+            "title": "Your building",
+            "icon": "building",
+            "items": [
+              "Check whether your building requires a scope letter or COI before wet work",
+              "Note if neighboring units share a wet stack on this wall",
+              "Confirm contractor access hours and elevator reservation process",
+              "Ask if the building has a designated debris removal window"
+            ]
+          },
+          {
+            "title": "Your selections",
+            "icon": "calendar",
+            "items": [
+              "Save 2–3 tile references you like (Pinterest, Houzz, or manufacturer links)",
+              "Decide on a fixture finish direction — chrome, matte black, or brushed nickel",
+              "Think about vanity preference: refinish in 2K polyurethane, or replace",
+              "Note any items you want to keep (towel bars, mirror, toilet)"
+            ]
+          }
+        ],
+        "callout": "Clients who send bathroom photos in advance receive same-day written quotes 3x more often than those who arrive to the walkthrough without them."
+      },
+      "decisions": {
+        "heading": "Decisions you'll make before work begins",
+        "intro": "Refresh projects have more client-side selection than refinishing — this is where most of your input goes.",
+        "items": [
+          {
+            "label": "Floor tile",
+            "question": "What goes on your bathroom floor?",
+            "options": ["12×12 or larger format (fewest grout lines, modern look)", "Hex mosaic (classic, pairs well with subway wall tile)", "Large-format 24×24 (most contemporary, grout-joint minimal)", "Porcelain wood-look plank (warm, durable)"],
+            "jerrySays": "Larger format tile makes small bathrooms feel bigger — it's counterintuitive but it works. For grip in a shower floor, go smaller and add grout joints. For a dry floor, large format reads cleaner."
+          },
+          {
+            "label": "Wall tile",
+            "question": "What goes on your bathroom walls?",
+            "options": ["3×6 subway (classic, works with any fixture finish)", "4×12 or 4×16 subway (more current scale)", "Large-format 12×24 or 18×36 (fewest grout lines, bold)", "Full-height tile vs. tile to chair-rail height with paint above"],
+            "jerrySays": "Full-height subway is the safest choice for resale. If you're staying long-term, large-format with minimal grout lines is where design is heading and it photographs beautifully."
+          },
+          {
+            "label": "Fixtures",
+            "question": "What fixture pieces are you replacing?",
+            "options": ["Toilet only", "Vanity faucet and hardware only", "Shower fixtures (head, valve trim, hand spray)", "Full fixture package — toilet, faucet, shower, towel bars, mirror"],
+            "jerrySays": "Mixing fixture generations in the same bathroom ages poorly — if you're doing one, do them all in the same finish. Matte black and brushed nickel are most durable in humid environments; chrome shows water spots."
+          },
+          {
+            "label": "Vanity",
+            "question": "What happens to the existing vanity?",
+            "options": ["Keep and refinish in 2K polyurethane to match or update the color", "Keep and repaint (less durable, better for tight budgets)", "Replace with a new vanity (adds most cost, full control of style)"],
+            "jerrySays": "2K polyurethane on an existing vanity gets you a factory-grade finish for a fraction of the replacement cost. If the vanity box is solid and the size works, this is almost always the right call."
+          }
+        ]
+      },
+      "workbook": {
+        "heading": "What happens, day by day",
+        "phases": [
+          {
+            "phase": "Pre-construction",
+            "label": "Before we arrive",
+            "color": "gold",
+            "items": [
+              "Tile, grout color, and fixture selections finalized and ordered",
+              "Vanity decision made — refinish or replace",
+              "Building scope letter or COI submitted if required",
+              "Elevator reservation and access window confirmed",
+              "You clear the bathroom of all personal items"
+            ]
+          },
+          {
+            "phase": "Production",
+            "label": "Days 1–5 in your unit",
+            "color": "forest",
+            "items": [
+              "Day 1: Existing tile removal, debris staged and removed in one elevator window",
+              "Day 1–2: Substrate inspection, repair, and waterproofing application",
+              "Day 2–3: Floor tile set and grouted; wall tile set",
+              "Day 3–4: Wall tile grouted, fixtures installed, vanity finished",
+              "Day 5: Caulk lines, final touches, fixture function test, paint"
+            ]
+          },
+          {
+            "phase": "Post-construction",
+            "label": "After sign-off",
+            "color": "ink",
+            "items": [
+              "24-hour grout cure before use — avoid moisture contact during this period",
+              "Final walkthrough: every grout line, fixture, and finish surface inspected together",
+              "Any touch-up items addressed same day before sign-off",
+              "Grout sealer applied at the 72-hour mark (we schedule a follow-up if needed)",
+              "Maintenance guide left with you — grout sealing schedule, fixture care"
+            ]
+          }
+        ]
+      },
+      "outcomes": {
+        "heading": "What 'done' actually looks like",
+        "gets": [
+          "Fresh tile, grout, and fixtures installed to trade standard — tight lines, level plane, plumb fixtures",
+          "Vanity refinished or replaced to match the new palette",
+          "No permit triggered in most ICC residential buildings",
+          "Zero debris left in hallways or common areas",
+          "Grout sealed and fixture function tested before sign-off"
+        ],
+        "know": [
+          "Grout color shifts slightly as it cures over 28 days — the final color is lighter than it appears wet",
+          "Tile is set to existing substrate level — if substrate varies, there may be minor lippage on large-format tile",
+          "We cannot guarantee zero movement in tile over time in buildings with significant floor flex",
+          "Plumbing supply connection points are replaced but underlying supply line condition is outside scope"
+        ]
+      },
+      "maintenance": {
+        "heading": "Keeping your refresh looking new",
+        "cards": [
+          {
+            "title": "Day-to-day care",
+            "items": [
+              "Squeegee tile walls after every shower — it's the single best thing you can do for grout",
+              "Use a pH-neutral tile cleaner (avoid bleach-based sprays on colored grout)",
+              "Wipe vanity dry after use — standing water on the finish accelerates wear"
+            ]
+          },
+          {
+            "title": "Annual check",
+            "items": [
+              "Re-apply grout sealer every 12–18 months (we recommend a penetrating silicone sealer)",
+              "Inspect caulk lines at wall-floor junctions and around fixtures — re-caulk if cracking or separating",
+              "Check fixture connections under the vanity for any slow drip"
+            ]
+          },
+          {
+            "title": "What to avoid",
+            "items": [
+              "Bleach-based cleaners on unsealed or colored grout — causes discoloration",
+              "Abrasive scrubbing pads on any glazed tile surface",
+              "Leaving wet bath mats against the floor tile long-term — traps moisture under the mat"
+            ]
+          }
+        ]
+      },
+      "warranty": {
+        "heading": "Vanity finish, tile installation, fixtures — here's what holds and for how long.",
+        "covered": [
+          "Tile installation defects — lippage beyond trade tolerance, cracked tile at delivery, grout voids",
+          "Fixture installation — leaks or improper function within 90 days of sign-off",
+          "Vanity finish adhesion failure within 2 years"
+        ],
+        "notCovered": [
+          "Grout cracking or discoloration from improper cleaning products or failure to seal on schedule",
+          "Tile cracking caused by building movement or subfloor deflection after sign-off",
+          "Fixture damage from improper use or third-party modification"
+        ]
+      },
+      "media": {
+        "heroPublicId": "services/bathroom-refresh",
+        "heroAlt": "Freshly tiled gut-free bathroom refresh with new fixtures",
+        "workbookPhotoPublicId": "projects/julia-boston-after",
+        "workbookPhotoAlt": "Bathroom refresh in progress — tile and fixture installation",
+        "outcomeBeforePublicId": "projects/julia-boston-before",
+        "outcomeBeforeAlt": "Bathroom before gut-free refresh",
+        "outcomeAfterPublicId": "projects/julia-boston-after",
+        "outcomeAfterAlt": "Bathroom after gut-free tile and fixture refresh — Boston condo",
+        "closePhotoPublicId": "projects/julia-boston-hero",
+        "closePhotoAlt": "Completed gut-free bathroom refresh — Boston"
+      }
+    },
+
+    {
+      "service": "interior-painting",
+      "meta": {
+        "title": "Interior Painting Planning Guide — Jerry & Co.",
+        "description": "What to prepare, decide, and expect before interior painting in your condo or home. Lead-safe, low-VOC, and done in 1–4 days."
+      },
+      "hero": {
+        "eyebrow": "Planning guide · Lead-safe, low-VOC, condo-compliant painting",
+        "headline": "Interior painting for condos built before 1978 — lead-safe, low-VOC, and done in 1–4 days.",
+        "subhead": "Lead-safe, low-VOC, and contained within your unit. This guide covers everything from surface condition to sheen selection to what happens on production day."
+      },
+      "selfAssessment": {
+        "heading": "5 questions before you reach out",
+        "intro": "These flag anything that could change the scope or approach — and confirm whether painting is the right service for your space right now.",
+        "questions": [
+          {
+            "q": "Was your home built before 1978?",
+            "status": "yellow",
+            "label": "Lead assessment required",
+            "hint": "Pre-1978 homes likely have lead paint. Jerry is EPA RRP certified — this is handled correctly and safely. Flag it now so we build it into the estimate."
+          },
+          {
+            "q": "Are your walls in reasonable condition — no major holes, significant water staining, or actively peeling existing paint?",
+            "status": "yellow",
+            "label": "Surface assessment",
+            "hint": "Minor holes and surface prep are included. Significant plaster damage or moisture-related peeling changes the scope — we assess this on the walkthrough."
+          },
+          {
+            "q": "Do you know what you want to do with trim, doors, and ceiling — or are you focused on walls only?",
+            "status": "yellow",
+            "label": "Scope decision",
+            "hint": "Walls only is the most common scope. Adding trim and doors adds 1–2 days. Knowing now helps us price accurately the first time."
+          },
+          {
+            "q": "Is the unit occupied during the project?",
+            "status": "yellow",
+            "label": "Plan for low-VOC",
+            "hint": "We use low-VOC formulas — safe for occupied units. You'll need to move furniture away from walls and have a plan for pets."
+          },
+          {
+            "q": "Do you have a color direction in mind, or do you need help choosing?",
+            "status": "yellow",
+            "label": "We can help",
+            "hint": "Color consultation is part of the estimate call. If you have references, bring them. If not, we'll narrow it down together."
+          }
+        ],
+        "outcomeNote": "Interior painting has the most flexible conditions of all our services. Most yellow items above are handled in the estimate call — they don't stop the project, they shape it."
+      },
+      "preplanning": {
+        "heading": "What to document before the walkthrough",
+        "intro": "A quick walk-through of your space on video or in photos gives us what we need to build an accurate quote.",
+        "categories": [
+          {
+            "title": "Your space",
+            "icon": "home",
+            "items": [
+              "Walk the rooms you want painted on video, or photograph each wall",
+              "Note ceiling heights — standard 8ft vs. vaulted affects pricing",
+              "Flag any water stains, cracks, or peeling areas with close-up photos",
+              "Note existing paint finish (flat, eggshell, gloss) if you know it"
+            ]
+          },
+          {
+            "title": "Your building",
+            "icon": "building",
+            "items": [
+              "Check condo bylaws for contractor access hours",
+              "Confirm elevator is available for equipment staging",
+              "Note whether you need to provide a COI to the building management",
+              "Pre-1978 building: ask your building records for any prior lead abatement documentation"
+            ]
+          },
+          {
+            "title": "Your timeline",
+            "icon": "calendar",
+            "items": [
+              "Painting is our most flexible service — 1–4 days depending on scope",
+              "Plan to have furniture moved away from walls the morning we start",
+              "If the unit is occupied, identify a space for displaced furniture temporarily",
+              "Color decisions must be final before we primer — no changes after prep begins"
+            ]
+          }
+        ],
+        "callout": "A short video walkthrough of your space — even filmed on your phone — gives us everything we need to quote remotely without an in-person visit."
+      },
+      "decisions": {
+        "heading": "Decisions you'll make before work begins",
+        "intro": "Fewer decisions than most services — but color and sheen are locked before the first coat goes on.",
+        "items": [
+          {
+            "label": "Color",
+            "question": "What color or colors are going in each space?",
+            "options": ["Single color throughout (most cohesive, best value)", "Accent wall in a contrasting color", "Different colors per room", "Ceiling in a lighter tint of the wall color"],
+            "jerrySays": "Test your color in the actual room before committing — the same swatch reads completely differently under north light vs. south light. We always recommend a sample pot first."
+          },
+          {
+            "label": "Sheen",
+            "question": "What finish level goes where?",
+            "options": ["Flat — ceilings and low-traffic walls (hides imperfections best)", "Eggshell — most interior walls (subtle sheen, wipeable)", "Satin — kitchens, bathrooms, high-traffic areas", "Semi-gloss — trim, doors, and casework (most durable, easiest to clean)"],
+            "jerrySays": "Eggshell for walls, flat for ceilings, semi-gloss for trim is the standard that works for most homes. Don't use flat on walls in a kitchen or bathroom — it won't hold up to wiping."
+          },
+          {
+            "label": "Scope",
+            "question": "What surfaces are included in this project?",
+            "options": ["Walls only", "Walls plus ceiling", "Walls, ceiling, and trim (baseboards, door and window casings)", "Full room — walls, ceiling, trim, and doors"],
+            "jerrySays": "If the trim is in good shape, walls-only gets you 80% of the visual impact at 60% of the cost. If the trim is scuffed and dingy, add it — fresh trim amplifies the wall color significantly."
+          },
+          {
+            "label": "Furniture",
+            "question": "What needs to move before we start?",
+            "options": ["You'll move everything out of the rooms beforehand", "Furniture stays — we work around and cover in place", "Mix — some rooms cleared, some covered"],
+            "jerrySays": "Moving out gets you better results at corners and along baseboards. Covering in place is fine for larger pieces — we protect everything. Either way, walls behind furniture count toward the quote."
+          }
+        ]
+      },
+      "workbook": {
+        "heading": "What happens, day by day",
+        "phases": [
+          {
+            "phase": "Pre-construction",
+            "label": "Before we arrive",
+            "color": "gold",
+            "items": [
+              "Color selections finalized — paint ordered or confirmed at the paint store",
+              "Scope locked: which rooms, which surfaces, which sheen levels",
+              "Lead assessment documented if pre-1978 building",
+              "Furniture plan confirmed — what moves, what gets covered",
+              "You'll receive a pre-arrival checklist 48 hours before start"
+            ]
+          },
+          {
+            "phase": "Production",
+            "label": "Days 1–4 in your unit",
+            "color": "forest",
+            "items": [
+              "Day 1: Surface prep — patch holes, sand rough areas, caulk gaps at trim",
+              "Day 1: Primer coat on patched areas and any stained surfaces",
+              "Day 2: First finish coat on walls — edges cut in by hand before roller",
+              "Day 3: Second finish coat (most walls need two coats for full coverage)",
+              "Day 4 (if full scope): Trim and doors painted last to avoid lap marks on walls"
+            ]
+          },
+          {
+            "phase": "Post-construction",
+            "label": "After sign-off",
+            "color": "ink",
+            "items": [
+              "1-hour dry-to-touch on most low-VOC formulas — light use same day",
+              "Full cure in 14–30 days — wait before washing walls or hanging items with adhesive",
+              "Final walkthrough: inspect edges, corners, and any patched areas together",
+              "Touch-up items addressed before sign-off — we leave a small touch-up quantity for future use",
+              "Furniture can return same day if paint is dry to the touch"
+            ]
+          }
+        ]
+      },
+      "outcomes": {
+        "heading": "What 'done' actually looks like",
+        "gets": [
+          "Clean, consistent color across all specified surfaces — no holidays, lap marks, or uneven sheen",
+          "Patched areas blended into the surrounding surface — flush and invisible after paint",
+          "Lead-safe process documentation if applicable — we provide a certificate",
+          "Touch-up paint quantity left with you for future nicks and scuffs"
+        ],
+        "know": [
+          "Two coats are standard — very dark or very light colors over a contrasting base may need a third coat (discussed before, not after)",
+          "Fresh paint reads slightly different once fully cured at 30 days — it typically lightens and the sheen settles",
+          "Texture differences between patched and original surfaces can appear under raking light — we sand and feather to minimize, but perfect invisibility isn't guaranteed on older plaster",
+          "Wall color makes existing trim imperfections more visible — we note any trim issues in the walkthrough"
+        ]
+      },
+      "maintenance": {
+        "heading": "Getting the most out of your paint job",
+        "cards": [
+          {
+            "title": "Day-to-day care",
+            "items": [
+              "Use the touch-up paint we leave — a quick dab on a fresh scuff prevents the mark from setting",
+              "Wipe walls with a barely damp cloth — never soaking wet",
+              "Allow 30 days before washing walls with any cleaner"
+            ]
+          },
+          {
+            "title": "Annual check",
+            "items": [
+              "Inspect corner joints and trim caulk lines — re-caulk if cracking",
+              "Check around windows and exterior walls for any moisture-related bubbling",
+              "Touch up any areas with visible wear before they compound"
+            ]
+          },
+          {
+            "title": "What to avoid",
+            "items": [
+              "Magic Erasers on eggshell or flat finishes — they remove sheen and create dull patches",
+              "Hanging art with adhesive strips on walls for 30 days after painting",
+              "Steam from humidifiers or cooking directed at walls long-term"
+            ]
+          }
+        ]
+      },
+      "warranty": {
+        "heading": "Coverage / adhesion / color match — backed for 1 year.",
+        "covered": [
+          "Coverage uniformity — any holidays, thin spots, or missed sections corrected before sign-off",
+          "Adhesion failure within 1 year — peeling or delamination on a properly prepared surface",
+          "Color match accuracy — if a mixed color is significantly off, we remix and re-coat at no charge"
+        ],
+        "notCovered": [
+          "Scuffs, marks, or damage from furniture, art, or normal use after sign-off",
+          "Peeling caused by underlying moisture that was present but not visible during prep",
+          "Color appearance under lighting conditions different from those during application"
+        ]
+      },
+      "media": {
+        "heroPublicId": "services/interior-painting",
+        "heroAlt": "Freshly painted interior — clean walls and crisp trim in a Boston condo",
+        "workbookPhotoPublicId": "projects/nick-somerville-after",
+        "workbookPhotoAlt": "Interior painting in progress — fresh coat on walls",
+        "outcomeBeforePublicId": "projects/nick-somerville-before",
+        "outcomeBeforeAlt": "Interior walls before professional painting",
+        "outcomeAfterPublicId": "projects/nick-somerville-after",
+        "outcomeAfterAlt": "Interior walls after professional painting — Somerville condo",
+        "closePhotoPublicId": "projects/nick-somerville-hero",
+        "closePhotoAlt": "Completed interior painting project — Somerville"
+      }
+    },
+
+    {
+      "service": "bathroom-renovation",
+      "meta": {
+        "title": "Full Bathroom Renovation Planning Guide — Jerry & Co.",
+        "description": "Complete planning guide for a full bathroom gut renovation. Self-assessment, tile and fixture decisions, permit navigation, day-by-day workbook, and warranty terms."
+      },
+      "hero": {
+        "eyebrow": "Planning guide · Full gut renovation — permit navigation, board approval, and what it actually costs.",
+        "headline": "Everything to plan, decide, and expect before a full bathroom gut renovation",
+        "subhead": "This is our most complex scope — subfloor, waterproofing, tile, fixtures, and finish. This guide walks you through every decision and phase so nothing surprises you."
+      },
+      "selfAssessment": {
+        "heading": "5 questions before you reach out",
+        "intro": "A full renovation is a significant investment. These questions confirm it's the right scope — and flag anything that needs to be addressed upfront.",
+        "questions": [
+          {
+            "q": "Do you want a complete gut — removing all tile to the studs, replacing waterproofing membrane, and starting fresh?",
+            "status": "green",
+            "label": "Right service",
+            "hint": "If yes, this is the right scope. If you're open to keeping the substrate and just refreshing surfaces, a gut-free refresh may be a better fit."
+          },
+          {
+            "q": "Does your condo building require board approval or a permit for wet-area gut work?",
+            "status": "yellow",
+            "label": "Plan ahead",
+            "hint": "Most Boston-area condo buildings require a scope letter and may require a permit for gut work affecting the wet stack. We help you navigate this — but it adds lead time before start."
+          },
+          {
+            "q": "Have you identified a tile direction, fixture finish, and layout intent — or are you still in early exploration?",
+            "status": "yellow",
+            "label": "Need to lock before quoting",
+            "hint": "A full renovation quote is highly selection-dependent. The estimate call helps you narrow decisions, but final tile and fixture selections must be confirmed before work begins."
+          },
+          {
+            "q": "Is your plumbing stack in good condition — no known leaks, corrosion, or prior water damage in the walls?",
+            "status": "yellow",
+            "label": "Assess in walkthrough",
+            "hint": "We assess this during the video walkthrough. Hidden supply line issues can change scope and budget — we surface them early, not mid-project."
+          },
+          {
+            "q": "Are you prepared for a 5–12 day timeline with no access to this bathroom?",
+            "status": "green",
+            "label": "Must plan ahead",
+            "hint": "If this is your only bathroom, we discuss logistics and staging options on the estimate call. Plan ahead — this is the one constraint that most affects scheduling."
+          }
+        ],
+        "outcomeNote": "Green on question 1 + 5 means you're ready to plan. Yellow items are project shaping inputs — we work through all of them in the walkthrough. If you're unsure about board approval or permits, bring your condo docs to the call and we'll review them together."
+      },
+      "preplanning": {
+        "heading": "What to document before the walkthrough",
+        "intro": "A full renovation quote requires more detail than other services. The more you bring to the walkthrough, the more accurate and complete your quote will be.",
+        "categories": [
+          {
+            "title": "Your bathroom",
+            "icon": "home",
+            "items": [
+              "Photograph all four walls, floor, ceiling, and inside the vanity cabinet",
+              "Video walk through slowly — we want to see the condition of every tile and grout line",
+              "Note any visible moisture staining, cracks, or soft spots in the wall near the shower",
+              "Measure the room dimensions — length, width, ceiling height, shower niche if applicable"
+            ]
+          },
+          {
+            "title": "Your building",
+            "icon": "building",
+            "items": [
+              "Pull your condo association bylaws — look for contractor access, wet work, and permit language",
+              "Confirm whether your unit has a private shut-off for the wet stack or requires a building engineer",
+              "Ask building management whether similar renovations in the building required permits",
+              "Identify the building's debris removal process — dumpster location or elevator window schedule"
+            ]
+          },
+          {
+            "title": "Your design direction",
+            "icon": "calendar",
+            "items": [
+              "Save 5–10 bathroom photos that represent the look you want — Pinterest, Houzz, Instagram",
+              "Identify your fixture finish preference: matte black, brushed nickel, polished chrome, or unlacquered brass",
+              "Decide on layout intent: keep plumbing locations as-is, or move something (move = permit threshold)",
+              "Think about lighting — are you replacing the fixture, and if so, do you need an electrician?"
+            ]
+          }
+        ],
+        "callout": "A full renovation estimate requires a complete video walkthrough — not just photos. Book a 20-minute FaceTime or video call and we'll scope the entire project in one session."
+      },
+      "decisions": {
+        "heading": "Decisions you'll make before work begins",
+        "intro": "Full renovations require the most client input of any scope we do. These decisions shape the budget, the permit requirement, and the production timeline.",
+        "items": [
+          {
+            "label": "Layout",
+            "question": "Are you keeping the existing plumbing locations or moving anything?",
+            "options": ["Keep all plumbing exactly as-is — fastest, lowest cost, no permit in most cases", "Move toilet or vanity supply only (minor repositioning)", "Reconfigure shower or tub — moves drain or supply line", "Full layout redesign — new footprint, new drain location"],
+            "jerrySays": "Keeping plumbing in place is the single biggest cost lever in a bathroom renovation. Even moving a toilet 12 inches can add $2,000–$4,000 and trigger a permit. Unless the current layout is genuinely unusable, keep it."
+          },
+          {
+            "label": "Tile package",
+            "question": "What tile goes on the floor, walls, and shower enclosure?",
+            "options": ["Matching floor and wall tile (cohesive, fewer transitions)", "Contrasting floor and wall tile (two distinct looks)", "Full-height shower tile vs. partial height with painted wall above", "Shower niche — location, size, and tile treatment"],
+            "jerrySays": "Order 10–15% more tile than the square footage requires — cuts and breakage are real. Discontinued tiles can't be back-ordered. Get the material before we demo the existing."
+          },
+          {
+            "label": "Fixtures",
+            "question": "What fixture pieces are you replacing and in what finish?",
+            "options": ["Full package: toilet, vanity faucet, shower valve and trim, towel bars, mirror", "Partial: toilet and shower only, keep vanity faucet", "Premium: wall-hung toilet, thermostatic shower, freestanding vanity", "Spec-to-budget: builder-grade fixtures for a flip or rental"],
+            "jerrySays": "Buy fixtures in the same finish family from one manufacturer — mixing brands creates subtle finish variation that's obvious in finished photos. Matte black is the easiest to maintain. Unlacquered brass is the hardest."
+          },
+          {
+            "label": "Waterproofing system",
+            "question": "What waterproofing membrane goes behind the tile?",
+            "options": ["Schluter Kerdi system — bonded membrane over cement board", "Redgard liquid-applied membrane over cement board", "Wedi foam board system — integrated waterproofing panel", "Durock + liquid waterproofing for budget builds"],
+            "jerrySays": "We specify Schluter or Redgard for all wet areas — both are warrantied systems with proven track records. We assess the existing substrate and recommend the right system for your specific walls and floor on the walkthrough."
+          },
+          {
+            "label": "Permit",
+            "question": "Does your project require a permit?",
+            "options": ["Like-for-like replacement — no permit in most ICC residential buildings", "Supply line relocation — may trigger permit", "Drain relocation or structural change — permit required", "Building board approval required regardless of permit status"],
+            "jerrySays": "We help you determine permit requirement based on your building classification and project scope. If a permit is needed, we handle the documentation and coordinate inspection. This adds 2–4 weeks to the pre-construction timeline."
+          }
+        ]
+      },
+      "workbook": {
+        "heading": "What happens, day by day",
+        "phases": [
+          {
+            "phase": "Pre-construction",
+            "label": "Before we arrive (2–4 weeks out)",
+            "color": "gold",
+            "items": [
+              "Tile, fixture, and hardware selections finalized and ordered — allow 2–3 weeks for delivery",
+              "Permit applied for if required — we handle documentation, you provide condo association info",
+              "Board approval obtained if your building requires it",
+              "Building shut-off and access window scheduled with building management",
+              "You've cleared the bathroom and confirmed no-bathroom logistics for the project window"
+            ]
+          },
+          {
+            "phase": "Production",
+            "label": "Days 1–12 in your unit",
+            "color": "forest",
+            "items": [
+              "Day 1: Full demolition — tile, fixtures, and any damaged substrate removed; debris staged and removed same day",
+              "Day 1–2: Subfloor inspection and repair; cement board or foam board installed",
+              "Day 2–3: Waterproofing membrane applied and tested",
+              "Day 3–5: Floor tile set, allowed to cure; wall tile set in sections",
+              "Day 5–7: Wall tile grouted; shower niche and transition trim installed",
+              "Day 7–9: Fixtures rough-in and final trim; vanity set and plumbed",
+              "Day 9–11: Paint, accessories, and final punch list",
+              "Day 12: Final inspection with permit inspector if applicable; final walkthrough"
+            ]
+          },
+          {
+            "phase": "Post-construction",
+            "label": "After sign-off",
+            "color": "ink",
+            "items": [
+              "72-hour cure before grout sealer application — we schedule a follow-up or leave sealer with instructions",
+              "Final walkthrough: every tile, grout joint, fixture, and finish surface inspected together",
+              "Permit inspection completed if required — we coordinate and attend",
+              "All punch list items resolved before final sign-off — not after",
+              "Written warranty issued; copy of any permit or board approval documentation left with you"
+            ]
+          }
+        ]
+      },
+      "outcomes": {
+        "heading": "What 'done' actually looks like",
+        "gets": [
+          "A fully waterproofed, trade-standard wet area from subfloor to ceiling",
+          "Tile set to level and plumb, grout consistent and sealed",
+          "All fixtures installed, plumbed, and function-tested before sign-off",
+          "Permit documentation and certificate of completion if applicable",
+          "A bathroom that photographs, sells, and holds up to daily use for 15+ years"
+        ],
+        "know": [
+          "Full renovations have inherent discovery risk — conditions behind the existing tile are not always visible until demo. We surface surprises early and present options before proceeding with any scope change",
+          "Permit and board approval timelines are outside our control — a 2-week permit process can become 4-6 weeks in certain municipalities",
+          "Tile and fixture lead times can affect project start — order early once selections are finalized",
+          "Grout color and sheen settle as they cure over 28 days — the day-1 appearance is not the final appearance"
+        ]
+      },
+      "maintenance": {
+        "heading": "Protecting your renovation investment",
+        "cards": [
+          {
+            "title": "Day-to-day care",
+            "items": [
+              "Squeegee shower walls after every use — the single most effective thing you can do for grout longevity",
+              "Run the bathroom exhaust fan during every shower and for 20 minutes after",
+              "Use a pH-neutral cleaner on tile — never bleach-based products on colored grout"
+            ]
+          },
+          {
+            "title": "Annual schedule",
+            "items": [
+              "Re-seal grout every 12–18 months with a penetrating silicone sealer",
+              "Inspect all caulk lines — re-caulk at the first sign of cracking or mold",
+              "Check under-vanity connections for any slow drip at supply lines"
+            ]
+          },
+          {
+            "title": "What to avoid",
+            "items": [
+              "Harsh chemical drain cleaners — use enzymatic cleaners instead to protect the p-trap and grout joint at the drain",
+              "Leaving soap and shampoo bottles directly on the tile floor long-term — they stain grout",
+              "Ignoring a dripping faucet or running toilet — water intrusion is the enemy of a tile installation"
+            ]
+          }
+        ]
+      },
+      "warranty": {
+        "heading": "Waterproofing system / tile / fixtures / permit re-inspection — here's what we stand behind.",
+        "covered": [
+          "Waterproofing system integrity — any failure within 2 years resulting in water intrusion through the tile assembly",
+          "Tile installation defects — grout voids, significant lippage, or cracked tile at delivery",
+          "Fixture installation — leaks or improper function within 90 days of sign-off",
+          "Permit inspection pass — we cover the cost of any required re-inspection if our work is the cause of a failed inspection"
+        ],
+        "notCovered": [
+          "Tile cracking caused by building settlement, seismic activity, or subfloor deflection after sign-off",
+          "Grout discoloration caused by failure to seal on schedule or use of incompatible cleaning products",
+          "Plumbing supply line failure beyond the shutoff — this is a building or pre-existing condition",
+          "Manufacturer defects in fixtures or tile — covered by their respective manufacturer warranties"
+        ]
+      },
+      "media": {
+        "heroPublicId": "services/full-bathroom-reno",
+        "heroAlt": "Full gut bathroom renovation — new tile, waterproofing, and fixtures",
+        "workbookPhotoPublicId": "projects/alyssa-charlestown-after",
+        "workbookPhotoAlt": "Full bathroom renovation in progress — tile installation phase",
+        "outcomeBeforePublicId": "projects/alyssa-charlestown-before",
+        "outcomeBeforeAlt": "Bathroom before full gut renovation",
+        "outcomeAfterPublicId": "projects/alyssa-charlestown-after",
+        "outcomeAfterAlt": "Bathroom after full gut renovation — new tile and fixtures — Charlestown",
+        "closePhotoPublicId": "projects/alyssa-charlestown-hero",
+        "closePhotoAlt": "Completed full bathroom renovation — Charlestown condo"
+      }
+    }
+  ]
+}

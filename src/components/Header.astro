@@ -1,0 +1,495 @@
+---
+const townLinks = [
+  { label: 'Medford', href: '/cabinet-refinishing-medford/' },
+  { label: 'Malden', href: '/cabinet-refinishing-malden/' },
+  { label: 'Everett', href: '/cabinet-refinishing-everett/' },
+  { label: 'Arlington', href: '/cabinet-refinishing-arlington/' },
+  { label: 'Somerville', href: '/cabinet-refinishing-somerville/' },
+  { label: 'Cambridge', href: '/cabinet-refinishing-cambridge/' },
+  { label: 'Woburn', href: '/cabinet-refinishing-woburn/' },
+  { label: 'Winchester', href: '/cabinet-refinishing-winchester/' },
+];
+---
+
+<header>
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="Jerry & Co. Home Improvement — home">
+      <img
+        class="logo-img"
+        src="/img/brand/logo-horizontal-light.png"
+        alt="Jerry & Co. Home Improvement"
+        height="34"
+      />
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="nav-links" role="list">
+      <!-- Services dropdown -->
+      <li class="nav-item has-dropdown">
+        <button class="nav-trigger" aria-expanded="false" aria-haspopup="true">
+          Services <span class="nav-arrow" aria-hidden="true">▾</span>
+        </button>
+        <ul class="dropdown" role="list">
+          <li><a href="/#cabinet-feature">Cabinet Refinishing</a></li>
+          <li><a href="/#services">Bathroom Refresh</a></li>
+          <li><a href="/#services">Interior Painting</a></li>
+          <li><a href="/#services">Full Bathroom Renovation</a></li>
+        </ul>
+      </li>
+
+      <!-- Why Refinish dropdown -->
+      <li class="nav-item has-dropdown">
+        <button class="nav-trigger" aria-expanded="false" aria-haspopup="true">
+          Why Refinish <span class="nav-arrow" aria-hidden="true">▾</span>
+        </button>
+        <ul class="dropdown" role="list">
+          <li><a href="/cabinet-refinishing-vs-replacement/">vs. Replacement</a></li>
+          <li><a href="/our-process/">Our Process</a></li>
+          <li><a href="/guarantee/">Guarantee</a></li>
+          <li><a href="/financing/">Financing</a></li>
+        </ul>
+      </li>
+
+      <li><a href="/gallery/" class="nav-link">Gallery</a></li>
+      <li><a href="/faq/" class="nav-link">FAQ</a></li>
+      <li><a href="/about/" class="nav-link">About</a></li>
+
+      <!-- Areas dropdown -->
+      <li class="nav-item has-dropdown">
+        <button class="nav-trigger" aria-expanded="false" aria-haspopup="true">
+          Areas <span class="nav-arrow" aria-hidden="true">▾</span>
+        </button>
+        <ul class="dropdown dropdown-wide" role="list">
+          {townLinks.map((town) => (
+            <li><a href={town.href}>{town.label}</a></li>
+          ))}
+        </ul>
+      </li>
+    </ul>
+
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:+13476026801">
+        <span class="live-dot" aria-hidden="true"></span>(347) 602-6801
+      </a>
+      <a class="btn btn-gold" href="/#estimate">Get video estimate — same day</a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="hamburger" id="navOpen" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile overlay -->
+  <div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true">
+    <button class="mobile-close" id="navClose" aria-label="Close navigation menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <ul role="list">
+      <li><strong>Services</strong></li>
+      <li><a href="/#services">Cabinet Refinishing</a></li>
+      <li><a href="/#services">Bathroom Refresh</a></li>
+      <li><a href="/#services">Interior Painting</a></li>
+      <li><a href="/#services">Full Bathroom Renovation</a></li>
+      <li class="nav-divider"></li>
+      <li><strong>Why Refinish</strong></li>
+      <li><a href="/cabinet-refinishing-vs-replacement/">vs. Replacement</a></li>
+      <li><a href="/our-process/">Our Process</a></li>
+      <li><a href="/guarantee/">Guarantee</a></li>
+      <li><a href="/financing/">Financing</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="/gallery/">Gallery</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li><a href="/about/">About</a></li>
+      <li class="nav-divider"></li>
+      <li><strong>Service Areas</strong></li>
+      {townLinks.map((town) => (
+        <li><a href={town.href}>{town.label}</a></li>
+      ))}
+    </ul>
+    <a class="btn btn-gold btn-block mobile-cta" href="/#estimate">Get video estimate — same day</a>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--ink);
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px var(--gutter);
+    max-width: 1440px;
+    margin: 0 auto;
+    color: var(--bone);
+    gap: 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--bone);
+    flex-shrink: 0;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+  }
+  .brand:hover { transform: scale(1.04); opacity: 0.9; }
+  .logo-img { height: 34px; width: auto; display: block; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: var(--bone);
+    opacity: 0.8;
+    transition: opacity 0.15s;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+  .nav-link:hover { opacity: 1; }
+
+  /* Dropdown trigger */
+  .nav-item { position: relative; }
+  .nav-trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: var(--bone);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+  }
+  .nav-trigger:hover { opacity: 1; }
+  .nav-arrow { font-size: 10px; transition: transform 0.15s; }
+
+  /* Dropdown — opacity/transform reveal (replaces display:none hard cut) */
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: var(--ink-soft);
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius-sm);
+    padding: 8px 0;
+    min-width: 200px;
+    list-style: none;
+    margin: 0;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    pointer-events: none;
+  }
+  .dropdown-wide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-width: 280px;
+  }
+  .dropdown a {
+    display: block;
+    padding: 10px 18px;
+    text-decoration: none;
+    color: rgba(247, 243, 234, 0.8);
+    font-size: 15px;
+    transition: color 0.12s, background 0.12s;
+    white-space: nowrap;
+  }
+  .dropdown a:hover {
+    color: var(--bone);
+    background: rgba(247, 243, 234, 0.06);
+  }
+
+  .nav-item:focus-within .dropdown,
+  .nav-item:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .nav-item:focus-within .nav-trigger,
+  .nav-item:hover .nav-trigger { opacity: 1; }
+  .nav-item:focus-within .nav-arrow,
+  .nav-item:hover .nav-arrow { transform: rotate(180deg); }
+
+  .nav-cta {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .nav-phone {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--bone);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    opacity: 0.9;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .nav-phone:hover { opacity: 1; }
+
+  .live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .live-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: #22c55e;
+    opacity: 0.35;
+    animation: livepulse 1.8s ease-out infinite;
+  }
+  @keyframes livepulse {
+    0%   { transform: scale(1);   opacity: 0.35; }
+    70%  { transform: scale(2.2); opacity: 0; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+  .nav-phone::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.2s ease;
+  }
+  .nav-phone:hover::after { width: 100%; }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    min-width: var(--tap-min);
+    min-height: var(--tap-min);
+    padding: 4px;
+    color: var(--bone);
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  /* Mobile close button */
+  .mobile-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--tap-min);
+    min-height: var(--tap-min);
+    background: none;
+    border: none;
+    color: var(--bone);
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+  }
+  .mobile-close:hover { opacity: 1; }
+  .mobile-close svg { width: 22px; height: 22px; }
+
+  /* Scrim behind sliding nav */
+  .nav-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 14, 10, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.32s ease, visibility 0.32s;
+    z-index: 48;
+    pointer-events: none;
+  }
+  header.nav-open .nav-scrim {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Mobile nav overlay — slide from right */
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    background: var(--ink);
+    z-index: 49;
+    padding: 80px 24px 120px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.32s;
+  }
+  .mobile-nav.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+  .mobile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .mobile-nav li { border-bottom: 1px solid var(--line-dark); }
+  .mobile-nav li:last-child { border-bottom: none; }
+  .mobile-nav a {
+    display: block;
+    padding: 14px 0;
+    color: rgba(247, 243, 234, 0.85);
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.15s;
+  }
+  .mobile-nav a:hover { color: var(--bone); }
+  .mobile-nav strong {
+    display: block;
+    padding: 14px 0 8px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: none;
+  }
+  .nav-divider { height: 1px; background: var(--line-dark); margin: 8px 0; border-bottom: none !important; }
+  .mobile-cta { margin-top: 24px; }
+
+  /* Hamburger → X morph on open — driven by aria-expanded, no JS class needed */
+  #navOpen[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  #navOpen[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  #navOpen[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 880px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+  }
+</style>
+
+<script>
+  // ── Mobile nav (CR-04) ─────────────────────────────
+  const openBtn  = document.getElementById('navOpen')  as HTMLButtonElement | null;
+  const closeBtn = document.getElementById('navClose') as HTMLButtonElement | null;
+  const panel    = document.getElementById('mobileNav') as HTMLElement | null;
+  const scrim    = document.getElementById('navScrim')  as HTMLElement | null;
+  const hdr      = openBtn?.closest('header') as HTMLElement | null;
+
+  const FOCUSABLE = 'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])';
+
+  function openNav() {
+    if (!panel || !openBtn) return;
+    panel.classList.add('is-open');
+    panel.setAttribute('aria-hidden', 'false');
+    hdr?.classList.add('nav-open');
+    openBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    closeBtn?.focus();
+  }
+
+  function closeNav() {
+    if (!panel || !openBtn) return;
+    panel.classList.remove('is-open');
+    panel.setAttribute('aria-hidden', 'true');
+    hdr?.classList.remove('nav-open');
+    openBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    openBtn.focus();
+  }
+
+  openBtn?.addEventListener('click', openNav);
+  closeBtn?.addEventListener('click', closeNav);
+  scrim?.addEventListener('click', closeNav);
+
+  // Close on any nav link click
+  panel?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
+
+  // Esc-to-close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && panel?.classList.contains('is-open')) closeNav();
+  });
+
+  // Focus trap
+  panel?.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab' || !panel) return;
+    const focusable = [...panel.querySelectorAll<HTMLElement>(FOCUSABLE)].filter(
+      (el) => el.offsetParent !== null
+    );
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last?.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first?.focus(); }
+    }
+  });
+
+  // ── Desktop dropdown aria-expanded ────────────────
+  document.querySelectorAll<HTMLButtonElement>('.nav-trigger').forEach((btn) => {
+    const item = btn.closest('.nav-item');
+    if (!item) return;
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+    });
+    item.addEventListener('focusout', (e: Event) => {
+      if (!item.contains((e as FocusEvent).relatedTarget as Node)) {
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>

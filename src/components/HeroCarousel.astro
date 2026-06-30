@@ -1,0 +1,343 @@
+---
+const mode = import.meta.env.PUBLIC_HERO_MODE ?? 'carousel';
+const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dxuuydoee';
+
+function cldImg(path: string, w: number) {
+  return `https://res.cloudinary.com/${cloud}/image/upload/f_auto,q_auto,w_${w}/${path}`;
+}
+function cldSrcset(path: string) {
+  return [800, 1200, 1600].map((w) => `${cldImg(path, w)} ${w}w`).join(', ');
+}
+
+const slides = [
+  { path: 'hero/hero-after-kitchen-white',  alt: 'Bright white condo kitchen after factory spray finish, morning light' },
+  { path: 'hero/hero-before-after-split',   alt: 'Split before-and-after of a Boston condo kitchen cabinet refinish' },
+  { path: 'hero/hero-bathroom-refresh',     alt: 'White subway-tile condo bathroom after a gut-free refresh' },
+  { path: 'hero/hero-hallway-install',      alt: 'Building-compliant condo hallway protection during install' },
+];
+
+const videoPoster = cldImg('hero/hero-video-poster', 1600);
+const videoSrc = `https://res.cloudinary.com/${cloud}/video/upload/f_auto,q_auto/hero/hero-video-poster.mp4`;
+---
+
+<section class="hero" id="top" aria-label="Hero">
+  <!-- Background media -->
+  <div class="hero-media" aria-hidden="true">
+    {mode === 'video' ? (
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster={videoPoster}
+      >
+        <source src={videoSrc} type="video/mp4" />
+      </video>
+    ) : (
+      <div class="hero-slides" id="heroSlides">
+        {slides.map((slide, i) => (
+          <div class:list={['hero-slide', { 'hero-slide--active': i === 0 }]} data-index={i}>
+            <img
+              src={cldImg(slide.path, 1200)}
+              srcset={cldSrcset(slide.path)}
+              sizes="100vw"
+              alt={slide.alt}
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
+          </div>
+        ))}
+      </div>
+    )}
+    <div class="hero-overlay"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="wrap hero-inner">
+    <div class="hero-content">
+      <p class="eyebrow">For condo owners in Greater Boston</p>
+      <h1>Your kitchen in factory-smooth 2K polyurethane — the finish that outlasts latex by a decade. Done in 3 days, <em>$15K less than replacement.</em></h1>
+      <p class="hero-lede">We work within HOA guidelines, building curfews, and elevator scheduling. No dust, no odor, no disruption to your neighbors.</p>
+      <div class="hero-actions">
+        <a
+          class="btn btn-gold"
+          href="#estimate"
+          data-ph-event="cta_clicked"
+          data-ph-label="hero_get_estimate"
+        >Get my video estimate — reply in 60 min.</a>
+        <a
+          class="btn btn-outline"
+          href="#gallery"
+          data-ph-event="cta_clicked"
+          data-ph-label="hero_see_gallery"
+        >See the spray finish</a>
+      </div>
+      <p class="hero-credibility">Trusted in Somerville, Cambridge, and Medford triple-deckers and condo conversions since 2019.</p>
+      <div class="hero-meta">
+        <div><strong>2019</strong>Serving Greater Boston</div>
+        <a href="/about/" style="color:inherit;text-decoration:none;"><strong>MA HIC<br />#208336</strong>Licensed &amp; insured</a>
+        <div><strong>2–5 days</strong>Typical cabinet refinish</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dot nav (carousel mode only) -->
+  {mode === 'carousel' && (
+    <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Slide navigation">
+      {slides.map((_, i) => (
+        <button
+          class:list={['dot', { 'dot--active': i === 0 }]}
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          aria-label={`Go to slide ${i + 1}`}
+          data-index={i}
+        ></button>
+      ))}
+    </div>
+  )}
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: var(--bone);
+    background: var(--ink);
+    padding: clamp(28px, 3.5vh, 48px) 0;
+  }
+
+  /* ── Media ─────────────────────────── */
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+  .hero-slide--active { opacity: 1; }
+  .hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(20, 36, 31, 0.88) 0%,
+      rgba(20, 36, 31, 0.70) 45%,
+      rgba(20, 36, 31, 0.35) 100%
+    );
+  }
+
+  /* ── Content ───────────────────────── */
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding-top: clamp(16px, 2.5vh, 32px);
+    padding-bottom: clamp(28px, 4vh, 48px);
+  }
+  .hero-content { max-width: 660px; }
+  .hero-content .eyebrow { margin-bottom: var(--sp-2); }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.08;
+    color: var(--bone);
+    margin-bottom: var(--sp-2);
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+  .hero-lede {
+    color: rgba(247, 243, 234, 0.75);
+    max-width: 50ch;
+    margin-bottom: var(--sp-2);
+    font-size: clamp(1rem, 1.5vw, 1.175rem);
+    line-height: 1.7;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-2);
+  }
+  .hero-credibility {
+    font-size: 13px;
+    color: rgba(247, 243, 234, 0.45);
+    line-height: 1.6;
+    max-width: 48ch;
+    margin-bottom: var(--sp-2);
+    letter-spacing: 0.01em;
+  }
+  .hero-meta {
+    display: flex;
+    gap: clamp(20px, 3vw, 40px);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--line-dark);
+    flex-wrap: wrap;
+  }
+  .hero-meta div { font-size: 13px; color: rgba(247, 243, 234, 0.5); line-height: 1.55; }
+  .hero-meta strong {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: var(--bone);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 2px;
+  }
+
+  /* ── Dot nav ───────────────────────── */
+  .carousel-dots {
+    position: absolute;
+    bottom: clamp(20px, 3vw, 36px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+  }
+  .dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(247, 243, 234, 0.4);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  /* Invisible pseudo-element extends tap target to 44×44px on all viewports */
+  .dot::after {
+    content: '';
+    position: absolute;
+    inset: -18px;
+  }
+  .dot--active {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: scale(1.3);
+  }
+
+  @media (max-width: 600px) {
+    .hero-overlay { background: rgba(20, 36, 31, 0.74); }
+  }
+
+  /* ── 320–420px small phone fixes ───────────────────── */
+  @media (max-width: 420px) {
+    .hero-meta {
+      gap: 16px;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 16px;
+    }
+    .hero-meta div { display: flex; align-items: center; gap: 10px; }
+    .hero-meta strong { display: inline; margin-bottom: 0; font-size: 1.1rem; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn { width: 100%; justify-content: center; }
+  }
+
+  /* ── Hero entrance — CSS-only stagger (above fold, no observer) ── */
+  .hero-content .eyebrow {
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.10s both;
+  }
+  .hero-content h1 {
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+  }
+  .hero-lede {
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both;
+  }
+  .hero-actions {
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.50s both;
+  }
+  .hero-credibility {
+    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.58s both;
+  }
+  .hero-meta {
+    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.66s both;
+  }
+</style>
+
+<script>
+  // Carousel auto-advance + dot nav + touch swipe + pause on hover
+  (function () {
+    const slides = document.querySelectorAll<HTMLElement>('.hero-slide');
+    const dots = document.querySelectorAll<HTMLButtonElement>('#carouselDots .dot');
+    if (!slides.length || !dots.length) return;
+
+    let current = 0;
+    let paused = false;
+    let timer: ReturnType<typeof setInterval>;
+
+    function goTo(index: number) {
+      slides[current].classList.remove('hero-slide--active');
+      dots[current].classList.remove('dot--active');
+      dots[current].setAttribute('aria-selected', 'false');
+      current = ((index % slides.length) + slides.length) % slides.length;
+      slides[current].classList.add('hero-slide--active');
+      dots[current].classList.add('dot--active');
+      dots[current].setAttribute('aria-selected', 'true');
+    }
+
+    function start() { timer = setInterval(() => { if (!paused) goTo(current + 1); }, 5000); }
+    function stop() { clearInterval(timer); }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => { stop(); goTo(i); start(); });
+    });
+
+    const hero = document.getElementById('top');
+    if (hero) {
+      hero.addEventListener('mouseenter', () => { paused = true; });
+      hero.addEventListener('mouseleave', () => { paused = false; });
+      hero.addEventListener('focusin', () => { paused = true; });
+      hero.addEventListener('focusout', (e) => {
+        if (!hero.contains(e.relatedTarget as Node)) paused = false;
+      });
+      let tx = 0;
+      hero.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true });
+      hero.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - tx;
+        if (Math.abs(dx) > 40) { stop(); goTo(dx < 0 ? current + 1 : current - 1); start(); }
+      }, { passive: true });
+    }
+
+    start();
+  })();
+
+  // Global PostHog click delegation — handles all [data-ph-event] on any page
+  (function () {
+    document.addEventListener('click', (e) => {
+      const el = (e.target as HTMLElement).closest<HTMLElement>('[data-ph-event]');
+      if (!el) return;
+      const event = el.dataset.phEvent;
+      const label = el.dataset.phLabel;
+      if (event && typeof (window as any).posthog !== 'undefined') {
+        (window as any).posthog.capture(event, { label });
+      }
+    });
+  })();
+</script>

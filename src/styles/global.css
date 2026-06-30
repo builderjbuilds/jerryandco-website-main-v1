@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap');
+@import './tokens.css';
+
+/* ── Reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img, video { display: block; max-width: 100%; height: auto; }
+svg { display: block; }
+a { color: inherit; }
+p { margin: 0; }
+
+/* ── Type scale ─────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.08;
+  margin: 0;
+  color: var(--forest);
+  letter-spacing: -0.03em;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+h1 {
+  font-size: clamp(2.75rem, 6vw, 5.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+/* ── Utility text styles ─────────────────────────────── */
+.eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin: 0 0 18px;
+}
+
+.lede {
+  font-size: clamp(1.125rem, 1.5vw, 1.3125rem);
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 50ch;
+  font-weight: 400;
+}
+
+.section-lede {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 52ch;
+  margin-top: 16px;
+}
+
+.section-lede-center {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 48ch;
+  margin: 16px auto 0;
+  text-align: center;
+}
+
+/* ── Layout primitives ───────────────────────────────── */
+.wrap {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+section {
+  padding: clamp(72px, 8vw, 120px) 0;
+}
+
+.section-head {
+  max-width: 680px;
+  margin: 0 auto clamp(56px, 7vw, 96px);
+  text-align: center;
+}
+.section-head .eyebrow { margin-bottom: 16px; }
+.section-head h2       { margin-bottom: 20px; }
+.section-head p {
+  color: var(--text-muted);
+  font-size: 1.125rem;
+  line-height: 1.78;
+  max-width: 46ch;
+  margin: 0 auto;
+}
+
+.section-head.left {
+  max-width: none;
+  margin: 0 0 clamp(40px, 5vw, 72px);
+  text-align: left;
+}
+.section-head.left p {
+  margin: 16px 0 0;
+  max-width: 52ch;
+}
+
+/* ── Focus ───────────────────────────────────────────── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Premium sites hide scrollbars on Webkit — content still scrolls */
+::-webkit-scrollbar { width: 0; background: transparent; }
+* { scrollbar-width: none; }
+
+::selection {
+  background: rgba(200, 160, 85, 0.22);
+  color: var(--forest);
+}
+
+/* ── PlaceholderImage component ─────────────────────── */
+.ph{position:relative;display:block;margin:0;aspect-ratio:var(--ph-aspect,4/3);
+    border-radius:var(--radius-xs);overflow:hidden;background:var(--bone-deep)}
+.ph-shell{position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:10px;
+    background:var(--bone-deep);color:var(--gold-deep)}
+.ph-shell svg{width:28px;height:28px;opacity:.6}
+.ph-caption{font-family:var(--font-sans);font-size:11px;line-height:1.5;
+    color:var(--text-muted);max-width:32ch;text-align:center;padding:0 12px}
+.ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity .4s ease;
+    color:transparent;background-color:var(--forest)}
+.ph-img[data-loaded="1"]{opacity:1}
+
+/* CR-02 — suppress alt-text render on all raw hero/section images */
+.hero-slide img,
+img[class*="-img"] {
+  color: transparent;
+  background-color: var(--forest);
+}
