@@ -90,9 +90,9 @@ const cld = (path: string, w = 960) =>
   <section class="vs-hero">
     <div class="wrap">
       <Breadcrumb crumbs={crumbs} />
-      <p class="eyebrow" style="color: var(--gold);">The honest comparison</p>
-      <h1>Refinishing vs. Replacement</h1>
-      <p class="lede">
+      <p class="eyebrow" data-reveal="up" style="color: var(--gold);">The honest comparison</p>
+      <h1 data-reveal="up" data-delay="1">Refinishing vs. Replacement</h1>
+      <p class="lede" data-reveal="up" data-delay="2">
         Full cabinet replacement costs $20,000–$50,000+ and takes months. DIY painting lasts a year or two before it peels. Here's what actually separates each option — so you can choose without regret.
       </p>
     </div>
@@ -101,12 +101,12 @@ const cld = (path: string, w = 960) =>
   <!-- ===== COST CHART ===== -->
   <section class="cost-chart-section">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <p class="eyebrow">Cost at a glance</p>
         <h2>The price gap is real</h2>
       </div>
 
-      <figure class="chart-figure" aria-label="Cost comparison bar chart: DIY, Refinishing, and Full Replacement">
+      <figure class="chart-figure" data-reveal="scale" data-delay="1" aria-label="Cost comparison bar chart: DIY, Refinishing, and Full Replacement">
         <svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg" class="cost-chart-svg" role="img" aria-hidden="true">
           <!-- Grid lines -->
           <line x1="60" y1="20" x2="60" y2="210" stroke="#20281F" stroke-opacity="0.08" stroke-width="1"/>
@@ -136,7 +136,7 @@ const cld = (path: string, w = 960) =>
       </figure>
 
       <!-- Cost-contrast thumbnails -->
-      <div class="cost-contrast">
+      <div class="cost-contrast" data-reveal="in" data-delay="2">
         <div class="cc-thumb">
           <PlaceholderImage publicId="cost/refinish-kitchen" aspect="4/3" alt="Refinished kitchen — Jerry & Co. result" loading="lazy" />
           <span class="cc-label">Jerry &amp; Co. refinishing</span>
@@ -155,12 +155,12 @@ const cld = (path: string, w = 960) =>
   <!-- ===== COMPARE TABLE ===== -->
   <section class="compare-section">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <p class="eyebrow">Side by side</p>
         <h2>The full comparison</h2>
       </div>
 
-      <div class="compare-table-wrap">
+      <div class="compare-table-wrap" data-reveal="in" data-delay="1">
         <table class="compare-table" aria-label="Cabinet refinishing comparison table">
           <thead>
             <tr>
@@ -193,7 +193,7 @@ const cld = (path: string, w = 960) =>
   <section class="decision-section">
     <div class="wrap">
       <div class="decision-grid">
-        <div class="decision-col">
+        <div class="decision-col" data-reveal="left">
           <p class="eyebrow" style="color: var(--gold);">Good fit</p>
           <h3>Refinishing makes sense when</h3>
           <ul class="decision-list decision-list--yes">
@@ -204,7 +204,7 @@ const cld = (path: string, w = 960) =>
             <li>You'd rather put the saved $15k–$40k into counters, tile, appliances, or another room</li>
           </ul>
         </div>
-        <div class="decision-col">
+        <div class="decision-col" data-reveal="right" data-delay="2">
           <p class="eyebrow" style="color: var(--text-muted);">Consider instead</p>
           <h3>Replacement makes more sense when</h3>
           <ul class="decision-list decision-list--no">
@@ -223,11 +223,11 @@ const cld = (path: string, w = 960) =>
   <!-- ===== BEFORE / AFTER PLACEHOLDER ===== -->
   <section class="ba-section">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <p class="eyebrow">Proof of concept</p>
         <h2>The same kitchen — before refinishing, and 3 days later.</h2>
       </div>
-      <div class="ba-split">
+      <div class="ba-split" data-reveal="in" data-delay="1">
         <div class="ba-half">
           <PlaceholderImage publicId="vs-replacement/before" aspect="4/3" alt="Dated oak builder-grade cabinets before refinishing — Somerville" loading="lazy" className="ba-ph" />
           <span class="ba-tag ba-tag--before">Before</span>

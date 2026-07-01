@@ -184,8 +184,8 @@ const cld = (path: string, w = 800) =>
   <section class="page-hero">
     <div class="wrap">
       <Breadcrumb crumbs={crumbs} />
-      <p class="eyebrow">Every question Boston condo owners ask before booking.</p>
-      <h1>Cabinet Refinishing FAQ</h1>
+      <p class="eyebrow" data-reveal="up">Every question Boston condo owners ask before booking.</p>
+      <h1 data-reveal="up" data-delay="1">Cabinet Refinishing FAQ</h1>
       <p class="lede">
         Everything homeowners and condo residents ask before booking — answered straight, no fluff.
         If something's missing, <a href="/#estimate">send us your question</a>.
@@ -209,60 +209,60 @@ const cld = (path: string, w = 800) =>
   <!-- ===== DURABILITY ===== -->
   <section id="durability" class="faq-group">
     <div class="wrap faq-wrap">
-      <div class="faq-group-head">
+      <div class="faq-group-head" data-reveal="up">
         <p class="eyebrow">01 — How long it lasts.</p>
         <h2>How long does it hold up?</h2>
         <p class="group-lede">How the finish holds up over time — and what we do when it doesn't.</p>
       </div>
-      <Accordion items={durabilityFAQs} groupLabel="Durability & Longevity" />
+      <div data-reveal="in" data-delay="2"><Accordion items={durabilityFAQs} groupLabel="Durability & Longevity" /></div>
     </div>
   </section>
 
   <!-- ===== MATERIALS ===== -->
   <section id="materials" class="faq-group faq-group--alt">
     <div class="wrap faq-wrap">
-      <div class="faq-group-head">
+      <div class="faq-group-head" data-reveal="up">
         <p class="eyebrow">02 — What goes on your cabinets.</p>
         <h2>What we actually apply — and why it matters.</h2>
         <p class="group-lede">What goes on your cabinets and why it matters.</p>
       </div>
-      <Accordion items={materialsFAQs} groupLabel="Materials & Coatings" />
+      <div data-reveal="in" data-delay="2"><Accordion items={materialsFAQs} groupLabel="Materials & Coatings" /></div>
     </div>
   </section>
 
   <!-- ===== PROCESS & DISRUPTION ===== -->
   <section id="process-disruption" class="faq-group">
     <div class="wrap faq-wrap">
-      <div class="faq-group-head">
+      <div class="faq-group-head" data-reveal="up">
         <p class="eyebrow">03 — What project days look like.</p>
         <h2>Process & Disruption</h2>
         <p class="group-lede">What the workdays actually look like inside your home.</p>
       </div>
-      <Accordion items={processDisruptionFAQs} groupLabel="Process & Disruption" />
+      <div data-reveal="in" data-delay="2"><Accordion items={processDisruptionFAQs} groupLabel="Process & Disruption" /></div>
     </div>
   </section>
 
   <!-- ===== CONDO & BUILDING ===== -->
   <section id="condo" class="faq-group faq-group--alt">
     <div class="wrap faq-wrap">
-      <div class="faq-group-head">
+      <div class="faq-group-head" data-reveal="up">
         <p class="eyebrow">04 — Building rules and logistics.</p>
         <h2>We've done this in your building type. Here's how.</h2>
         <p class="group-lede">We've done this in dozens of buildings — here's how we handle the rules.</p>
       </div>
-      <Accordion items={condoFAQs} groupLabel="Condo & Building Logistics" />
+      <div data-reveal="in" data-delay="2"><Accordion items={condoFAQs} groupLabel="Condo & Building Logistics" /></div>
     </div>
   </section>
 
   <!-- ===== COST & FINANCING ===== -->
   <section id="cost" class="faq-group">
     <div class="wrap faq-wrap">
-      <div class="faq-group-head">
+      <div class="faq-group-head" data-reveal="up">
         <p class="eyebrow">05 — Real numbers, no ranges.</p>
         <h2>What it costs — and how to pay over time.</h2>
         <p class="group-lede">Straight numbers, no ranges that become something else at invoice.</p>
       </div>
-      <Accordion items={costFAQs} groupLabel="Cost & Financing" />
+      <div data-reveal="in" data-delay="2"><Accordion items={costFAQs} groupLabel="Cost & Financing" /></div>
       <p class="group-note">Not sure which category you're in? A video estimate takes 20 minutes and we'll tell you honestly if refinishing isn't the right call for your cabinets.</p>
     </div>
   </section>

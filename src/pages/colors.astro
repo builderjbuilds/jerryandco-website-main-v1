@@ -105,7 +105,7 @@ const breadcrumbSchema = {
   <!-- ===== HERO ===== -->
   <section class="hero-colors">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <p class="eyebrow">Finish palette</p>
         <h1>8 cabinet colors. Factory-smooth 2K finish. Which one is your kitchen?</h1>
         <p class="lede">
@@ -120,7 +120,7 @@ const breadcrumbSchema = {
   <!-- ===== PALETTE GRID ===== -->
   <section class="section-palette">
     <div class="wrap">
-      <div class="palette-finish-note">
+      <div class="palette-finish-note" data-reveal="in">
         <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.25"/>
           <path d="M8 5.5v4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
@@ -130,8 +130,8 @@ const breadcrumbSchema = {
       </div>
 
       <div class="palette-grid">
-        {palettes.map(p => (
-          <div class={`palette-card${p.brand ? ' palette-card-featured' : ''}`}>
+        {palettes.map((p, i) => (
+          <div class={`palette-card${p.brand ? ' palette-card-featured' : ''}`} data-reveal="scale" data-delay={String(Math.min(i + 1, 6))}>
             <!-- Swatch image -->
             <div class="palette-swatch-wrap">
               <img
@@ -168,7 +168,7 @@ const breadcrumbSchema = {
       </div>
 
       <!-- ── Custom color note ────────────────────────────── -->
-      <div class="custom-color-note">
+      <div class="custom-color-note" data-reveal="in">
         <div class="ccn-inner">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/>
@@ -188,7 +188,7 @@ const breadcrumbSchema = {
   <!-- ===== QUIZ CTA ===== -->
   <section class="section-quiz-cta">
     <div class="wrap quiz-cta-inner">
-      <div class="quiz-cta-text">
+      <div class="quiz-cta-text" data-reveal="left">
         <p class="eyebrow">Not sure which finish fits your kitchen?</p>
         <h2>Take the 2-minute cabinet fit quiz.</h2>
         <p class="section-lede">
@@ -198,7 +198,7 @@ const breadcrumbSchema = {
         </p>
         <a href="/cabinet-quiz/" class="btn btn-gold">Take the quiz →</a>
       </div>
-      <div class="quiz-cta-grid" aria-hidden="true">
+      <div class="quiz-cta-grid" aria-hidden="true" data-reveal="right" data-delay="2">
         {['deep-forest', 'bone-white', 'soft-sage', 'navy-shaker'].map(slug => (
           <div class="qcg-dot" style={`background: ${palettes.find(p => p.slug === slug)?.hex ?? '#ccc'}`}></div>
         ))}
@@ -209,11 +209,11 @@ const breadcrumbSchema = {
   <!-- ===== FINISH EXPLAINER ===== -->
   <section class="section-finish-detail">
     <div class="wrap">
-      <div class="section-head section-head-left">
+      <div class="section-head section-head-left" data-reveal="up">
         <p class="eyebrow">Why the finish matters as much as the color</p>
         <h2>2K polyurethane vs. standard paint</h2>
       </div>
-      <div class="finish-compare-grid">
+      <div class="finish-compare-grid" data-reveal="in" data-delay="1">
         <div class="fc-col fc-col-bad">
           <h3 class="fc-heading">Standard latex paint</h3>
           <ul class="fc-list">

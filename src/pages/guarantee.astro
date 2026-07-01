@@ -55,7 +55,7 @@ const cld = (path: string, w = 800) =>
   <section class="hero-guarantee">
     <div class="wrap">
       <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Guarantee' }]} />
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <p class="eyebrow">Your protection — in writing.</p>
         <!-- PLACEHOLDER: "2-year" term below is a working placeholder — confirm before launch -->
         <h1>2 years. Workmanship defects. Backed by the owner, personally.</h1>
@@ -70,7 +70,7 @@ const cld = (path: string, w = 800) =>
   <!-- ===== WHAT'S COVERED ===== -->
   <section class="section-covered">
     <div class="wrap covered-layout">
-      <div class="covered-left">
+      <div class="covered-left" data-reveal="left">
         <div class="section-head left">
           <p class="eyebrow">What protects you — and for how long.</p>
           <!-- PLACEHOLDER: "2-year" term — confirm before launch -->
@@ -120,7 +120,7 @@ const cld = (path: string, w = 800) =>
         </div>
         </div><!-- end covered-items -->
       </div><!-- end covered-left -->
-      <div class="covered-photo">
+      <div class="covered-photo" data-reveal="right" data-delay="2">
         <PlaceholderImage publicId="guarantee/finished-result" aspect="4/3" alt="Close-up of a factory-smooth 2K polyurethane finish on a refinished cabinet door" loading="lazy" />
       </div>
     </div>
@@ -129,7 +129,7 @@ const cld = (path: string, w = 800) =>
   <!-- ===== TOUCH-UP PROGRAM ===== -->
   <section class="section-touchup">
     <div class="wrap touchup-inner">
-      <div class="touchup-text">
+      <div class="touchup-text" data-reveal="left">
         <p class="eyebrow">What you get at project close.</p>
         <h2>Your touch-up kit is included.</h2>
         <p class="section-lede">
@@ -156,7 +156,7 @@ const cld = (path: string, w = 800) =>
           </li>
         </ul>
       </div>
-      <div class="touchup-visual">
+      <div class="touchup-visual" data-reveal="right" data-delay="2">
         <PlaceholderImage publicId="guarantee/touchup-kit" aspect="1/1" alt="Labeled color-matched touch-up bottle included at project close" loading="lazy" />
       </div>
     </div>
@@ -165,7 +165,7 @@ const cld = (path: string, w = 800) =>
   <!-- ===== LOCAL ACCOUNTABILITY ===== -->
   <section class="section-accountability">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <p class="eyebrow">Why a local guarantee beats a national warranty.</p>
         <h2>Local accountability beats a national warranty.</h2>
         <p>
@@ -175,17 +175,17 @@ const cld = (path: string, w = 800) =>
         </p>
       </div>
       <div class="accountability-cols">
-        <div class="ac-col">
+        <div class="ac-col" data-reveal="up" data-delay="1">
           <div class="ac-number">01</div>
           <h3>No call center</h3>
           <p>Guarantee claims go directly to Jeremiah. No ticket system, no escalation ladder, no waiting on hold.</p>
         </div>
-        <div class="ac-col">
+        <div class="ac-col" data-reveal="up" data-delay="2">
           <div class="ac-number">02</div>
           <h3>The owner responds</h3>
           <p>The person who did your job is the person who evaluates your concern — with full context of what was applied and how.</p>
         </div>
-        <div class="ac-col">
+        <div class="ac-col" data-reveal="up" data-delay="3">
           <div class="ac-number">03</div>
           <h3>We show up</h3>
           <p>If your issue is covered, we schedule a return visit — typically within one week of your contact.</p>
@@ -197,7 +197,7 @@ const cld = (path: string, w = 800) =>
   <!-- ===== CONDO ADDENDUM ===== -->
   <section class="section-condo-addendum">
     <div class="wrap addendum-inner">
-      <div class="addendum-tag" aria-label="Applies to condo and multi-unit properties">
+      <div class="addendum-tag" aria-label="Applies to condo and multi-unit properties" data-reveal="in">
         Condo addendum
       </div>
       <div class="section-head left">
@@ -209,7 +209,7 @@ const cld = (path: string, w = 800) =>
         </p>
       </div>
       <div class="addendum-items">
-        <div class="addendum-item">
+        <div class="addendum-item" data-reveal="up" data-delay="1">
           <h4>Elevator &amp; hallway protection</h4>
           <p>
             We use protective padding on freight elevator walls and hallway surfaces
@@ -217,7 +217,7 @@ const cld = (path: string, w = 800) =>
             caused by our materials in transit is our responsibility to repair.
           </p>
         </div>
-        <div class="addendum-item">
+        <div class="addendum-item" data-reveal="up" data-delay="2">
           <h4>Unit containment</h4>
           <p>
             Finish, dust, and VOC containment is maintained within the contracted
@@ -225,7 +225,7 @@ const cld = (path: string, w = 800) =>
             adjacent areas that results from our work.
           </p>
         </div>
-        <div class="addendum-item">
+        <div class="addendum-item" data-reveal="up" data-delay="3">
           <h4>HOA &amp; building manager coordination</h4>
           <p>
             If a building manager or HOA identifies a concern related to our work
@@ -240,47 +240,47 @@ const cld = (path: string, w = 800) =>
   <!-- ===== WHAT'S NOT COVERED ===== -->
   <section class="section-not-covered">
     <div class="wrap">
-      <div class="section-head left">
+      <div class="section-head left" data-reveal="up">
         <p class="eyebrow">Plain language — what's not covered</p>
         <h2>We don't cover everything. Here's what we don't.</h2>
       </div>
       <div class="not-covered-grid">
-        <div class="nc-item">
+        <div class="nc-item" data-reveal="up" data-delay="1">
           <span class="nc-x" aria-hidden="true">✕</span>
           <div>
             <h4>Normal wear and aging</h4>
             <p>Gradual dulling or patina development over years of use is not a workmanship defect.</p>
           </div>
         </div>
-        <div class="nc-item">
+        <div class="nc-item" data-reveal="up" data-delay="2">
           <span class="nc-x" aria-hidden="true">✕</span>
           <div>
             <h4>Damage from improper cleaners</h4>
             <p>Abrasive scrubbers, bleach-based cleaners, or solvents that strip the topcoat are not covered. We provide finish-safe cleaning guidance at project close.</p>
           </div>
         </div>
-        <div class="nc-item">
+        <div class="nc-item" data-reveal="up" data-delay="3">
           <span class="nc-x" aria-hidden="true">✕</span>
           <div>
             <h4>Impact damage</h4>
             <p>Chips, dents, or gouges from physical impact after project completion are not covered under workmanship.</p>
           </div>
         </div>
-        <div class="nc-item">
+        <div class="nc-item" data-reveal="up" data-delay="4">
           <span class="nc-x" aria-hidden="true">✕</span>
           <div>
             <h4>Water submersion or flooding</h4>
             <p>Finish damage resulting from water immersion, flooding, or prolonged water exposure is excluded.</p>
           </div>
         </div>
-        <div class="nc-item">
+        <div class="nc-item" data-reveal="up" data-delay="5">
           <span class="nc-x" aria-hidden="true">✕</span>
           <div>
             <h4>Color changes after completion</h4>
             <p>Requests to change the selected color after project completion are outside guarantee scope and billed as a new project.</p>
           </div>
         </div>
-        <div class="nc-item">
+        <div class="nc-item" data-reveal="up" data-delay="6">
           <span class="nc-x" aria-hidden="true">✕</span>
           <div>
             <h4>Pre-existing substrate issues</h4>

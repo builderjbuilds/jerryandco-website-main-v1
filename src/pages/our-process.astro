@@ -150,7 +150,7 @@ const steps = [
   <section class="hero-process">
     <div class="wrap">
       <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Our Process' }]} />
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <p class="eyebrow">The 5-step factory-finish process</p>
         <h1>The process, step by step.</h1>
         <p class="lede">
@@ -158,7 +158,7 @@ const steps = [
           from remote video estimate to hallway inspection at close.
         </p>
       </div>
-      <div class="process-timeline-bar" aria-hidden="true">
+      <div class="process-timeline-bar" aria-hidden="true" data-reveal="in" data-delay="2">
         {steps.map((s, i) => (
           <div class="ptb-step">
             <span class="ptb-num">{s.num}</span>
@@ -174,7 +174,7 @@ const steps = [
     <div class="wrap">
       <ol class="steps-list" aria-label="Cabinet refinishing process steps">
         {steps.map((step, i) => (
-          <li class="step-item" id={`step-${step.num}`}>
+          <li class="step-item" id={`step-${step.num}`} data-reveal="up" data-delay={String((i % 4) + 1)}>
             <div class="step-marker" aria-hidden="true">
               <span class="step-num-lg">{step.num}</span>
               {i < steps.length - 1 && <span class="step-connector-line"></span>}
@@ -218,12 +218,12 @@ const steps = [
   <!-- ===== WHAT YOU GET ===== -->
   <section class="section-deliverables">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-reveal="up">
         <p class="eyebrow">What you receive at project close</p>
         <h2>Everything included. Nothing to chase.</h2>
       </div>
       <div class="deliverables-grid">
-        <div class="deliv-item">
+        <div class="deliv-item" data-reveal="scale" data-delay="1">
           <div class="deliv-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>
@@ -232,7 +232,7 @@ const steps = [
           <h3>Written workmanship guarantee</h3>
           <p>A 2-year workmanship guarantee against peeling, adhesion failure, or finish defects attributed to workmanship — delivered at close.</p>
         </div>
-        <div class="deliv-item">
+        <div class="deliv-item" data-reveal="scale" data-delay="2">
           <div class="deliv-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 9h18M3 15h18M12 3v18"/>
@@ -241,7 +241,7 @@ const steps = [
           <h3>Labeled touch-up bottle</h3>
           <p>Color-matched finish in a labeled bottle with mixing instructions. One complimentary in-person touch-up visit included.</p>
         </div>
-        <div class="deliv-item">
+        <div class="deliv-item" data-reveal="scale" data-delay="2">
           <div class="deliv-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
@@ -250,7 +250,7 @@ const steps = [
           <h3>Certificate of insurance</h3>
           <p>Available on request for HOA boards, building managers, or property management companies. Provided same-day via email.</p>
         </div>
-        <div class="deliv-item">
+        <div class="deliv-item" data-reveal="scale" data-delay="3">
           <div class="deliv-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/>

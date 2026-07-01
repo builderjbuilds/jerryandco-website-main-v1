@@ -286,11 +286,11 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
   <!-- ===== SECTION 2 — BeforeAfter ===== -->
   <section class="section-ba">
     <div class="wrap">
-      <div class="ba-intro">
+      <div class="ba-intro" data-reveal="up">
         <p class="eyebrow">Recent work in {town}</p>
         <h2>This is what 3 days looks like in a {town} kitchen.</h2>
       </div>
-      <div class="ba-wrap">
+      <div class="ba-wrap" data-reveal="in" data-delay="1">
         <BeforeAfter
           beforeSrc={`${CLD}/f_auto,q_auto,w_1600/projects/${townData.imageSlug}-before.jpg`}
           afterSrc={`${CLD}/f_auto,q_auto,w_1600/projects/${townData.imageSlug}-after.jpg`}
@@ -305,7 +305,7 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
   <!-- ===== SECTION 3 — Housing stock / Why refinishing ===== -->
   <section class="section-why">
     <div class="wrap why-inner">
-      <div class="why-text">
+      <div class="why-text" data-reveal="left">
         <p class="eyebrow">Why {town} homeowners choose refinishing</p>
         <h2>{WHY_H2[town_slug] ?? 'The right call for this housing stock.'}</h2>
         <p class="why-para">{housingNote}</p>
@@ -316,7 +316,7 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
           How refinishing compares to replacement →
         </a>
       </div>
-      <div class="why-stats">
+      <div class="why-stats" data-reveal="right" data-delay="2">
         <div class="why-stat-card">
           <span class="wsc-num">$1,800–$9,500</span>
           <span class="wsc-label">typical refinishing cost</span>
@@ -357,13 +357,13 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
   <!-- ===== SECTION 5 — Services grid ===== -->
   <section class="section-services">
     <div class="wrap">
-      <div class="section-head section-head-left">
+      <div class="section-head section-head-left" data-reveal="up">
         <p class="eyebrow">What we do in {town}</p>
         <h2>Cabinet refinishing is the priority. Bathroom and painting available too.</h2>
       </div>
       <div class="services-grid">
-        {serviceCards.map(card => (
-          <a href={card.href} class="svc-card">
+        {serviceCards.map((card, i) => (
+          <a href={card.href} class="svc-card" data-reveal="scale" data-delay={String(i + 1)}>
             <div class="svc-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                 <path d={card.icon}/>
@@ -380,16 +380,16 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
   <!-- ===== SECTION 6 — Mini-FAQ ===== -->
   <section class="section-mini-faq">
     <div class="wrap">
-      <div class="section-head section-head-left">
+      <div class="section-head section-head-left" data-reveal="up">
         <p class="eyebrow">Common questions in {town}</p>
         <h2>What {town} homeowners ask before booking.</h2>
       </div>
       <div class="mini-faq-list">
-        {mini_faq_anchors.map(anchor => {
+        {mini_faq_anchors.map((anchor, i) => {
           const faq = FAQ_CONTENT[anchor];
           if (!faq) return null;
           return (
-            <div class="mfaq-item">
+            <div class="mfaq-item" data-reveal="up" data-delay={String(i + 1)}>
               <h3 class="mfaq-q">{faq.q}</h3>
               <p class="mfaq-a" set:html={faq.a} />
               <a href={`/faq/${anchor}`} class="mfaq-link">
@@ -405,8 +405,8 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
   <!-- ===== SECTION 7 — Also serving nearby ===== -->
   <section class="section-neighbors">
     <div class="wrap">
-      <p class="eyebrow neighbors-eyebrow">Also serving nearby</p>
-      <div class="neighbors-row">
+      <p class="eyebrow neighbors-eyebrow" data-reveal="up">Also serving nearby</p>
+      <div class="neighbors-row" data-reveal="in" data-delay="1">
         {primaryNeighbors.map(neighbor => (
           <a href={`/cabinet-refinishing-${slugify(neighbor)}/`} class="neighbor-chip">
             {neighbor}

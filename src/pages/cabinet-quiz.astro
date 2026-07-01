@@ -35,7 +35,7 @@ const breadcrumbSchema = {
   <section class="quiz-page-header">
     <div class="wrap">
       <div class="qph-inner">
-        <div class="qph-text">
+        <div class="qph-text" data-reveal="left">
           <p class="eyebrow">2-minute self-assessment</p>
           <h1>Is cabinet refinishing right for your home?</h1>
           <p class="lede">
@@ -48,7 +48,7 @@ const breadcrumbSchema = {
             <span class="trust-chip">Honest assessment</span>
           </div>
         </div>
-        <div class="qph-aside">
+        <div class="qph-aside" data-reveal="right" data-delay="2">
           <div class="qph-stat-card">
             <span class="qph-stat-num">~2 min</span>
             <span class="qph-stat-label">to complete</span>
@@ -68,7 +68,7 @@ const breadcrumbSchema = {
 
   <!-- ===== QUIZ ISLAND ===== -->
   <section class="quiz-section">
-    <div class="wrap quiz-wrap">
+    <div class="wrap quiz-wrap" data-reveal="up">
       <Quiz />
     </div>
   </section>
@@ -76,7 +76,7 @@ const breadcrumbSchema = {
   <!-- ===== CONTEXT STRIP ===== -->
   <section class="quiz-context-strip">
     <div class="wrap context-inner">
-      <div class="context-item">
+      <div class="context-item" data-reveal="up" data-delay="1">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>
         </svg>
@@ -85,7 +85,7 @@ const breadcrumbSchema = {
           <p>If refinishing isn't the right call for your cabinets, we'll tell you upfront — not after you've paid a deposit.</p>
         </div>
       </div>
-      <div class="context-item">
+      <div class="context-item" data-reveal="up" data-delay="2">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/>
         </svg>
@@ -94,7 +94,7 @@ const breadcrumbSchema = {
           <p>Quiz result maps directly to your estimate form — no re-entering answers. We pick up where this left off.</p>
         </div>
       </div>
-      <div class="context-item">
+      <div class="context-item" data-reveal="up" data-delay="3">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
         </svg>
