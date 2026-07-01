@@ -56,7 +56,7 @@ const newsletterAction = newsletterId ? `https://submit-form.com/${newsletterId}
     <!-- Col 1: Brand -->
     <div>
       <a class="footer-brand" href="/" aria-label="Jerry & Co. Home Improvement">
-        <img src="/img/brand/logo-icon-mark.svg" alt="" class="footer-logo" height="36" width="auto" aria-hidden="true" />
+        <img src="/img/brand/logo-mark-light.png" alt="" class="footer-logo" height="36" width="auto" aria-hidden="true" />
         <span class="brand-text">Jerry &amp; Co.</span>
       </a>
       <p class="footer-blurb">
@@ -178,7 +178,7 @@ const newsletterAction = newsletterId ? `https://submit-form.com/${newsletterId}
   </div>
 
   <!-- LocalBusiness JSON-LD -->
-  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 </footer>
 
 <style>
