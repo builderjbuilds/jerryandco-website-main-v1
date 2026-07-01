@@ -38,8 +38,17 @@ const localBusinessSchema = {
     "@type": "EducationalOccupationalCredential",
     "name": "Massachusetts Home Improvement Contractor Registration",
     "identifier": "MA HIC #208336"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "5",
+    "bestRating": "5",
+    "worstRating": "1"
   }
 };
+const newsletterId = import.meta.env.FORMSPARK_NEWSLETTER_ID ?? '';
+const newsletterAction = newsletterId ? `https://submit-form.com/${newsletterId}` : '#';
 ---
 
 <footer>
@@ -137,7 +146,7 @@ const localBusinessSchema = {
       <p class="fn-headline">The Boston condo owner's home improvement newsletter — one useful update a month.</p>
       <p class="fn-sub">For homeowners who want the job done right, not just done.</p>
     </div>
-    <form class="fn-form" action="#" method="post" aria-label="Newsletter signup">
+    <form class="fn-form" id="fn-form" action={newsletterAction} method="post" aria-label="Newsletter signup">
       <label for="fnEmail" class="sr-only">Email address</label>
       <input
         id="fnEmail"
@@ -148,8 +157,11 @@ const localBusinessSchema = {
         autocomplete="email"
         class="fn-input"
       />
-      <button type="submit" class="fn-btn">Send me the guide</button>
+      <!-- Honeypot spam guard -->
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+      <button type="submit" class="fn-btn" id="fn-btn">Send me the guide</button>
     </form>
+    <p class="fn-success" id="fn-success" hidden>You're in — check your inbox.</p>
   </div>
 
   <div class="footer-bottom wrap">
@@ -454,4 +466,40 @@ const localBusinessSchema = {
   @media (max-width: 360px) {
     .footer-grid { grid-template-columns: 1fr; }
   }
+
+  .fn-success {
+    font-size: 14px;
+    color: var(--gold);
+    font-weight: 600;
+    flex-shrink: 0;
+    letter-spacing: 0.01em;
+    padding: 10px 0;
+  }
 </style>
+
+<script>
+  const form = document.getElementById('fn-form') as HTMLFormElement | null;
+  const success = document.getElementById('fn-success') as HTMLElement | null;
+  if (form && success) {
+    form.addEventListener('submit', async (e) => {
+      if (form.action === '#' || !form.action) return; // no endpoint configured
+      e.preventDefault();
+      const btn = document.getElementById('fn-btn') as HTMLButtonElement;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      try {
+        const data = new FormData(form);
+        await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        form.hidden = true;
+        success.hidden = false;
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Send me the guide';
+      }
+    });
+  }
+</script>

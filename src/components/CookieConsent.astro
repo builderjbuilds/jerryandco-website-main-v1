@@ -1,0 +1,113 @@
+---
+---
+
+<div class="cc-bar" id="cc-bar" role="region" aria-label="Cookie preferences" hidden>
+  <p class="cc-text">
+    We use analytics to understand how visitors use this site. No data is sold.
+    <a href="/privacy/#cookies" class="cc-link">Privacy Policy</a>
+  </p>
+  <div class="cc-actions">
+    <button class="cc-btn cc-opt-out" id="cc-opt-out">Opt out</button>
+    <button class="cc-btn cc-accept" id="cc-accept">Got it</button>
+  </div>
+</div>
+
+<script>
+  const KEY = 'jc-consent';
+  const bar = document.getElementById('cc-bar') as HTMLElement;
+
+  function dismiss(value: 'yes' | 'no') {
+    localStorage.setItem(KEY, value);
+    bar.classList.add('cc-hide');
+    setTimeout(() => { bar.hidden = true; }, 280);
+    if (value === 'no' && typeof (window as any).posthog !== 'undefined') {
+      (window as any).posthog.opt_out_capturing();
+    }
+  }
+
+  // Show only if no stored preference
+  if (!localStorage.getItem(KEY)) {
+    bar.hidden = false;
+    requestAnimationFrame(() => bar.classList.add('cc-show'));
+  }
+
+  document.getElementById('cc-accept')?.addEventListener('click', () => dismiss('yes'));
+  document.getElementById('cc-opt-out')?.addEventListener('click', () => dismiss('no'));
+</script>
+
+<style>
+  .cc-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    background: var(--ink);
+    border-top: 1px solid rgba(200, 160, 85, 0.25);
+    padding: 14px clamp(16px, 4vw, 40px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 32px;
+    flex-wrap: wrap;
+    transform: translateY(100%);
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+    opacity: 0;
+  }
+  .cc-bar.cc-show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .cc-bar.cc-hide {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  .cc-text {
+    font-size: 13px;
+    color: rgba(247, 243, 234, 0.6);
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+    min-width: 220px;
+  }
+  .cc-link {
+    color: var(--gold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    white-space: nowrap;
+  }
+  .cc-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .cc-btn {
+    height: 34px;
+    padding: 0 16px;
+    border-radius: var(--radius-xs);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .cc-accept {
+    background: var(--gold);
+    color: var(--ink);
+  }
+  .cc-accept:hover { background: var(--gold-deep); color: var(--bone); }
+  .cc-opt-out {
+    background: transparent;
+    color: rgba(247, 243, 234, 0.45);
+    border: 1px solid rgba(247, 243, 234, 0.15);
+  }
+  .cc-opt-out:hover { color: var(--bone); border-color: rgba(247, 243, 234, 0.35); }
+
+  /* Sit above mobile CTA bar on small screens */
+  @media (max-width: 768px) {
+    .cc-bar { bottom: 68px; }
+  }
+</style>

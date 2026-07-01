@@ -1,4 +1,6 @@
 ---
+const BASE = 'https://www.jerryandcohome.com';
+
 interface Crumb {
   label: string;
   href?: string;
@@ -9,7 +11,20 @@ interface Props {
 }
 
 const { crumbs } = Astro.props;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((crumb, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: crumb.label,
+    ...(crumb.href ? { item: `${BASE}${crumb.href}` } : {}),
+  })),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <ol class="breadcrumb-list">
