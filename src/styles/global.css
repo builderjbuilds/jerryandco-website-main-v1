@@ -63,9 +63,9 @@ h4 {
 .eyebrow {
   display: block;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold-deep);
   margin: 0 0 18px;
@@ -80,16 +80,16 @@ h4 {
 }
 
 .section-lede {
-  font-size: 1.125rem;
-  line-height: 1.75;
+  font-size: 1.1875rem;
+  line-height: 1.8;
   color: var(--text-muted);
   max-width: 52ch;
   margin-top: 16px;
 }
 
 .section-lede-center {
-  font-size: 1.125rem;
-  line-height: 1.75;
+  font-size: 1.1875rem;
+  line-height: 1.8;
   color: var(--text-muted);
   max-width: 48ch;
   margin: 16px auto 0;
@@ -116,8 +116,8 @@ section {
 .section-head h2       { margin-bottom: 20px; }
 .section-head p {
   color: var(--text-muted);
-  font-size: 1.125rem;
-  line-height: 1.78;
+  font-size: 1.1875rem;
+  line-height: 1.8;
   max-width: 46ch;
   margin: 0 auto;
 }

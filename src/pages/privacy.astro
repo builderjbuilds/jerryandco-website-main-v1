@@ -1,0 +1,356 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const title = 'Privacy Policy | Jerry & Co. Home Improvement LLC';
+const description = 'How Jerry & Co. Home Improvement LLC collects, uses, and protects information submitted through our website and estimate request forms.';
+const canonical = 'https://www.jerryandcohome.com/privacy/';
+const EFFECTIVE = 'July 1, 2026';
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <section class="legal-hero">
+    <div class="wrap">
+      <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Privacy Policy' }]} />
+      <p class="eyebrow">Legal</p>
+      <h1>Privacy Policy</h1>
+      <p class="legal-meta">Effective date: {EFFECTIVE} &nbsp;·&nbsp; Jerry &amp; Co. Home Improvement LLC &nbsp;·&nbsp; Greater Boston, MA</p>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="wrap legal-wrap">
+
+      <div class="legal-toc">
+        <p class="toc-head">On this page</p>
+        <ol>
+          <li><a href="#about">About this policy</a></li>
+          <li><a href="#collect">Information we collect</a></li>
+          <li><a href="#use">How we use your information</a></li>
+          <li><a href="#third-parties">Third-party services</a></li>
+          <li><a href="#cookies">Cookies &amp; tracking</a></li>
+          <li><a href="#marketing">Marketing communications</a></li>
+          <li><a href="#retention">Data retention</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#children">Children's privacy</a></li>
+          <li><a href="#rights">Your rights</a></li>
+          <li><a href="#changes">Changes to this policy</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ol>
+      </div>
+
+      <div class="legal-prose">
+
+        <h2 id="about">1. About this policy</h2>
+        <p>Jerry &amp; Co. Home Improvement LLC ("Jerry &amp; Co.," "we," "us," or "our") operates the website at <strong>jerryandcohome.com</strong> (the "Site"). This Privacy Policy explains what personal information we collect when you visit the Site or submit an estimate request, how we use that information, and the choices you have.</p>
+        <p>By using the Site or submitting any form, you acknowledge this Privacy Policy. If you do not agree, please do not use the Site.</p>
+
+        <h2 id="collect">2. Information we collect</h2>
+
+        <h3>Information you provide directly</h3>
+        <p>When you submit an estimate request, contact form, or newsletter sign-up on the Site, we collect:</p>
+        <ul>
+          <li>Full name</li>
+          <li>Email address</li>
+          <li>Phone number</li>
+          <li>Project type, property type, and timeline</li>
+          <li>Town / service area</li>
+          <li>Project description, cabinet count, finish preferences, and building notes</li>
+        </ul>
+        <p>We may also collect partial form data if you begin an estimate request but do not complete the final submission step, provided you have entered a valid phone number or email address. This partial data is used only to follow up on your project inquiry.</p>
+
+        <h3>Information collected automatically</h3>
+        <p>When you visit the Site, we and our service providers automatically collect certain technical information, including:</p>
+        <ul>
+          <li>IP address and approximate geographic location (city/region level)</li>
+          <li>Browser type, operating system, and device type</li>
+          <li>Pages visited, time spent on pages, and navigation paths</li>
+          <li>Referring website or search query</li>
+          <li>Session and interaction events (button clicks, form step completions)</li>
+        </ul>
+        <p>This information is collected through analytics tools described in Section 4.</p>
+
+        <h2 id="use">3. How we use your information</h2>
+        <p>We use the information we collect to:</p>
+        <ul>
+          <li><strong>Respond to your estimate request</strong> — to contact you by phone or email regarding your project and provide a written quote</li>
+          <li><strong>Send a confirmation email</strong> — a transactional message confirming receipt of your request</li>
+          <li><strong>Follow up on partial inquiries</strong> — if you started but did not complete an estimate request, we may reach out once to offer assistance</li>
+          <li><strong>Send our newsletter</strong> — if you opt in via the newsletter form, to send periodic home improvement tips and updates (you may unsubscribe at any time)</li>
+          <li><strong>Analyze and improve the Site</strong> — to understand how visitors use the Site and improve content and functionality</li>
+          <li><strong>Comply with legal obligations</strong> — as required by applicable law</li>
+        </ul>
+        <p>We do not sell, rent, or share your personal information with third parties for their own marketing purposes.</p>
+
+        <h2 id="third-parties">4. Third-party services</h2>
+        <p>We use the following third-party services to operate the Site. Each service has its own privacy policy governing its handling of data.</p>
+
+        <div class="legal-table-wrap">
+          <table class="legal-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Purpose</th>
+                <th>Privacy policy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Formspark</strong></td>
+                <td>Processes estimate request form submissions and stores form data on our behalf</td>
+                <td><a href="https://formspark.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">formspark.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Resend</strong></td>
+                <td>Delivers transactional confirmation emails and internal lead notification emails</td>
+                <td><a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">resend.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PostHog</strong></td>
+                <td>Product analytics — records page views, session events, and form interaction events; may set cookies</td>
+                <td><a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">posthog.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cloudflare</strong></td>
+                <td>Hosting, content delivery network (CDN), and DDoS protection; processes all web traffic</td>
+                <td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">cloudflare.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cloudinary</strong></td>
+                <td>Image hosting and optimization; serves project photos and branding assets</td>
+                <td><a href="https://cloudinary.com/privacy" target="_blank" rel="noopener noreferrer">cloudinary.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Google Fonts</strong></td>
+                <td>Serves web fonts (Inter, Fraunces); Google's servers receive your IP address when fonts load</td>
+                <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">google.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="cookies">5. Cookies &amp; tracking technologies</h2>
+        <p>The Site uses cookies and similar technologies to operate analytics and remember session preferences. A <strong>cookie</strong> is a small text file stored in your browser.</p>
+
+        <h3>Types of cookies used</h3>
+        <ul>
+          <li><strong>Analytics cookies (PostHog)</strong> — track page views, session events, and user interactions to help us understand how the Site is used. PostHog may set a persistent cookie to recognize returning visitors. No personally identifiable information is stored in these cookies.</li>
+          <li><strong>Session cookies</strong> — temporary cookies that expire when you close your browser, used to maintain your form state as you move between steps.</li>
+        </ul>
+
+        <h3>Managing cookies</h3>
+        <p>You can control cookies through your browser settings. Most browsers allow you to refuse cookies, delete existing cookies, or be notified when cookies are set. Disabling cookies may affect certain Site functionality. For PostHog analytics, you may also opt out by visiting <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">posthog.com/privacy</a>.</p>
+
+        <h2 id="marketing">6. Marketing communications</h2>
+        <p>We may send you email communications in the following circumstances:</p>
+        <ul>
+          <li><strong>Transactional</strong> — a one-time confirmation when you submit an estimate request. These are not marketing emails and are exempt from opt-out requirements.</li>
+          <li><strong>Follow-up</strong> — if you submitted an estimate request, we may follow up by phone or email regarding your project. You may ask us to stop at any time.</li>
+          <li><strong>Newsletter</strong> — only if you explicitly opt in via the newsletter sign-up form. Each newsletter includes an unsubscribe link in compliance with the CAN-SPAM Act. To unsubscribe, click the link in any newsletter or contact us at <a href="mailto:jerry@jerryandcohome.com">jerry@jerryandcohome.com</a>.</li>
+        </ul>
+
+        <h2 id="retention">7. Data retention</h2>
+        <p>We retain estimate request information for as long as necessary to respond to your inquiry and for a reasonable period thereafter for business records. Newsletter subscriber information is retained until you unsubscribe. You may request deletion of your data at any time by contacting us at the address in Section 12.</p>
+
+        <h2 id="security">8. Security</h2>
+        <p>We use industry-standard measures — including HTTPS encryption, access controls, and trusted third-party processors — to protect your information. However, no internet transmission is completely secure. We cannot guarantee the absolute security of data transmitted to or from the Site.</p>
+
+        <h2 id="children">9. Children's privacy</h2>
+        <p>The Site is not directed to individuals under the age of 18. We do not knowingly collect personal information from children. If you believe we have inadvertently collected such information, please contact us and we will promptly delete it.</p>
+
+        <h2 id="rights">10. Your rights</h2>
+
+        <h3>California residents (CCPA / CPRA)</h3>
+        <p>If you are a California resident, you have the right to:</p>
+        <ul>
+          <li>Know what personal information we collect about you</li>
+          <li>Request deletion of your personal information</li>
+          <li>Opt out of the sale or sharing of your personal information (we do not sell personal information)</li>
+          <li>Non-discrimination for exercising your privacy rights</li>
+        </ul>
+        <p>To exercise these rights, contact us at <a href="mailto:jerry@jerryandcohome.com">jerry@jerryandcohome.com</a>.</p>
+
+        <h3>All users</h3>
+        <p>Regardless of location, you may request to access, correct, or delete the personal information we hold about you by contacting us. We will respond within a reasonable time.</p>
+
+        <h2 id="changes">11. Changes to this policy</h2>
+        <p>We may update this Privacy Policy from time to time. When we do, we will revise the effective date at the top of this page. Material changes will be posted here at least 30 days before taking effect. Your continued use of the Site after a change constitutes acceptance of the updated policy.</p>
+
+        <h2 id="contact">12. Contact us</h2>
+        <p>For privacy questions, requests, or to exercise your rights:</p>
+        <address>
+          <strong>Jerry &amp; Co. Home Improvement LLC</strong><br />
+          Greater Boston, MA<br />
+          <a href="mailto:jerry@jerryandcohome.com">jerry@jerryandcohome.com</a><br />
+          <a href="tel:+13476026801">(347) 602-6801</a>
+        </address>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .legal-hero {
+    background: var(--ink);
+    color: var(--bone);
+    padding: clamp(24px, 3.5vw, 48px) 0 clamp(32px, 4vw, 56px);
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .legal-hero :global(.breadcrumb-list) { color: rgba(247,243,234,0.4); margin-bottom: 20px; }
+  .legal-hero :global(.breadcrumb-item a) { color: var(--gold); }
+  .legal-hero :global([aria-current="page"]) { color: rgba(247,243,234,0.7); }
+  .legal-hero :global(.sep) { color: rgba(247,243,234,0.28); opacity: 1; }
+  .legal-hero .eyebrow { color: var(--gold); }
+  .legal-hero h1 { color: var(--bone); font-size: clamp(2rem, 4vw, 3.25rem); margin-top: 8px; }
+  .legal-meta {
+    font-size: 14px;
+    color: rgba(247,243,234,0.45);
+    margin-top: 16px;
+    letter-spacing: 0.01em;
+  }
+
+  .legal-body {
+    background: var(--bone);
+    padding: clamp(48px, 6vw, 80px) 0 clamp(64px, 8vw, 104px);
+  }
+
+  .legal-wrap {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+
+  /* ── TOC ─────────────────────────────── */
+  .legal-toc {
+    position: sticky;
+    top: 88px;
+    padding: 24px 20px;
+    background: var(--bone-deep);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+  .toc-head {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin: 0 0 14px;
+  }
+  .legal-toc ol {
+    margin: 0;
+    padding: 0 0 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .legal-toc li { margin: 0; }
+  .legal-toc a {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    line-height: 1.45;
+    transition: color 0.15s;
+  }
+  .legal-toc a:hover { color: var(--forest); }
+
+  /* ── Prose ───────────────────────────── */
+  .legal-prose {
+    min-width: 0;
+  }
+  .legal-prose h2 {
+    font-size: clamp(1.35rem, 2vw, 1.625rem);
+    color: var(--forest);
+    margin: 52px 0 16px;
+    padding-top: 4px;
+    border-top: 1px solid var(--line);
+  }
+  .legal-prose h2:first-child { margin-top: 0; border-top: none; }
+  .legal-prose h3 {
+    font-size: 1.0625rem;
+    color: var(--ink);
+    margin: 28px 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .legal-prose p {
+    font-size: 1rem;
+    line-height: 1.82;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .legal-prose ul, .legal-prose ol {
+    margin: 0 0 18px 0;
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .legal-prose li {
+    font-size: 1rem;
+    line-height: 1.72;
+    color: var(--text);
+  }
+  .legal-prose a { color: var(--gold-deep); text-decoration: underline; text-underline-offset: 2px; }
+  .legal-prose a:hover { color: var(--forest); }
+  .legal-prose address {
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text);
+    background: var(--bone-deep);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xs);
+    padding: 20px 24px;
+    margin-top: 8px;
+    display: inline-block;
+  }
+
+  /* ── Table ───────────────────────────── */
+  .legal-table-wrap {
+    overflow-x: auto;
+    margin: 20px 0 28px;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--line);
+  }
+  .legal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+  .legal-table th {
+    background: var(--bone-deep);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .legal-table td {
+    padding: 14px 16px;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text);
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .legal-table tr:last-child td { border-bottom: none; }
+  .legal-table tr:nth-child(even) td { background: rgba(253, 250, 245, 0.6); }
+
+  /* ── Responsive ──────────────────────── */
+  @media (max-width: 860px) {
+    .legal-wrap { grid-template-columns: 1fr; }
+    .legal-toc { position: static; }
+  }
+</style>

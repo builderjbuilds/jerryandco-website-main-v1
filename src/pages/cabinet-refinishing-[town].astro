@@ -143,14 +143,14 @@ const positioningNote = POSITIONING[town_slug] ?? `Trusted by ${town} homeowners
 // Page meta
 const title = META_TITLES[town_slug] ?? `Cabinet Refinishing in ${town}, MA | Jerry & Co.`;
 const metaDesc = `Cabinet refinishing in ${town}, MA. ${housingNote.split('.')[0].slice(0, 60)}. MA HIC #208336. Free estimate.`;
-const canonical = `https://www.jerryandcohomeservices.com/cabinet-refinishing-${town_slug}/`;
+const canonical = `https://www.jerryandcohome.com/cabinet-refinishing-${town_slug}/`;
 
 // ── Schemas ──────────────────────────────────────────────────────────────────
 const localBusinessSchema = {
   '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
   name: 'Jerry & Co. Home Improvement LLC',
   description: `Factory-grade cabinet refinishing for ${town} condo owners and homeowners — built around your building's rules and your timeline.`,
-  url: 'https://www.jerryandcohomeservices.com',
+  url: 'https://www.jerryandcohome.com',
   telephone: '(347) 602-6801',
   areaServed: `${town}, MA`,
   founder: { '@type': 'Person', name: 'Jeremiah Ugbine' },
@@ -181,7 +181,7 @@ const serviceSchema = {
 
 const breadcrumbSchema = {
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohomeservices.com/' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohome.com/' },
     { '@type': 'ListItem', position: 2, name: `Cabinet Refinishing ${town}`, item: canonical },
   ],
 };

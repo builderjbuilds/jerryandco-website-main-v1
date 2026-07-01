@@ -1,10 +1,10 @@
 // Netlify serverless function — triggered by Formspark webhook on form submission.
 // Sends two emails via Resend:
 //   1. Lead confirmation → client (name/email from form)
-//   2. Internal notification → jerry@jerryandcohomeservices.com
+//   2. Internal notification → jerry@jerryandcohome.com
 //
 // To wire up: In Formspark dashboard → Webhooks → add POST to
-//   https://www.jerryandcohomeservices.com/api/notify
+//   https://www.jerryandcohome.com/api/notify
 // with Header: Authorization: Bearer {FORMSPARK_WEBHOOK_SECRET}
 export const prerender = false;
 
@@ -13,9 +13,9 @@ import { Resend } from 'resend';
 
 const RESEND_KEY    = import.meta.env.RESEND_API_KEY;
 const WEBHOOK_SECRET = import.meta.env.FORMSPARK_WEBHOOK_SECRET ?? '';
-const FROM_DOMAIN   = 'jerry@jerryandcohomeservices.com';
-const NOTIFY_TO     = 'jerry@jerryandcohomeservices.com';
-const SITE_URL      = 'https://www.jerryandcohomeservices.com';
+const FROM_DOMAIN   = 'jerry@jerryandcohome.com';
+const NOTIFY_TO     = 'jerry@jerryandcohome.com';
+const SITE_URL      = 'https://www.jerryandcohome.com';
 
 export const POST: APIRoute = async ({ request }) => {
   // Webhook secret guard
@@ -88,7 +88,7 @@ export const POST: APIRoute = async ({ request }) => {
         </td></tr>
         <!-- Footer -->
         <tr><td style="background:#F7F3EA;border-top:1px solid #DDD8CC;padding:20px 40px;">
-          <p style="margin:0;font-size:11px;color:#B0A898;line-height:1.6;">You're receiving this because you submitted an estimate request at jerryandcohomeservices.com. This is a transactional message, not marketing.</p>
+          <p style="margin:0;font-size:11px;color:#B0A898;line-height:1.6;">You're receiving this because you submitted an estimate request at jerryandcohome.com. This is a transactional message, not marketing.</p>
         </td></tr>
       </table>
     </td></tr>

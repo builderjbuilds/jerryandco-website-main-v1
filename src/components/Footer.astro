@@ -15,9 +15,9 @@ const localBusinessSchema = {
   "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
   "name": "Jerry & Co. Home Improvement LLC",
   "description": "Factory-grade cabinet refinishing and bathroom refresh for condo owners across Greater Boston — built around your building's rules, your neighbors, and your timeline.",
-  "url": "https://www.jerryandcohomeservices.com",
+  "url": "https://www.jerryandcohome.com",
   "telephone": "(347) 602-6801",
-  "email": "jerry@jerryandcohomeservices.com",
+  "email": "jerry@jerryandcohome.com",
   "founder": {
     "@type": "Person",
     "name": "Jeremiah Ugbine"
@@ -47,7 +47,7 @@ const localBusinessSchema = {
     <!-- Col 1: Brand -->
     <div>
       <a class="footer-brand" href="/" aria-label="Jerry & Co. Home Improvement">
-        <img src="/img/brand/logo-mark-light.png" alt="" class="footer-logo" width="36" height="36" aria-hidden="true" />
+        <img src="/img/brand/logo-icon-mark.svg" alt="" class="footer-logo" height="36" width="auto" aria-hidden="true" />
         <span class="brand-text">Jerry &amp; Co.</span>
       </a>
       <p class="footer-blurb">
@@ -57,8 +57,8 @@ const localBusinessSchema = {
         <a href="tel:+13476026801" class="footer-phone">
           <span class="live-dot" aria-hidden="true"></span>(347) 602-6801
         </a>
-        <a href="mailto:jerry@jerryandcohomeservices.com">jerry@jerryandcohomeservices.com</a>
-        <a href="https://www.jerryandcohomeservices.com" style="color:rgba(247,243,234,0.35);font-size:11px;letter-spacing:0.03em;">www.jerryandcohomeservices.com</a>
+        <a href="mailto:jerry@jerryandcohome.com">jerry@jerryandcohome.com</a>
+        <a href="https://www.jerryandcohome.com" style="color:rgba(247,243,234,0.35);font-size:11px;letter-spacing:0.03em;">www.jerryandcohome.com</a>
       </div>
       <!-- Social icons -->
       <div class="social-row" aria-label="Social media links">
@@ -160,6 +160,8 @@ const localBusinessSchema = {
       <a href="/guarantee/">Guarantee</a>
       <a href="/financing/">Financing</a>
       <a href="/faq/">FAQ</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
     </div>
   </div>
 
@@ -239,7 +241,8 @@ const localBusinessSchema = {
   }
   .footer-contact a {
     display: block;
-    font-size: 14px;
+    font-size: 17px;
+    font-weight: 600;
     color: var(--gold);
     text-decoration: none;
     letter-spacing: 0.01em;
@@ -440,7 +443,7 @@ const localBusinessSchema = {
     /* Compact the brand row on mobile */
     .footer-blurb { font-size: 13.5px; margin-bottom: 16px; }
     .footer-contact { margin-bottom: 16px; }
-    .footer-contact a { font-size: 13px; line-height: 1.7; }
+    .footer-contact a { font-size: 16px; line-height: 1.7; }
     .social-row { gap: 18px; }
     .social-row svg { width: 15px; height: 15px; }
     /* Tighter link columns */

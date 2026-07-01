@@ -9,7 +9,7 @@ import SchemaLD from '../components/SchemaLD.astro';
 const title = 'Cabinet Refinishing Colors & Finishes | 2K Polyurethane Palette | Jerry & Co.';
 const description =
   'Explore our cabinet finish palette — Deep Forest, Bone White, Navy Shaker, Charcoal Matte, and more. All applied in factory-grade 2K polyurethane for a smooth result.';
-const canonical = 'https://www.jerryandcohomeservices.com/colors/';
+const canonical = 'https://www.jerryandcohome.com/colors/';
 
 const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dxuuydoee';
 const CLD = `https://res.cloudinary.com/${cloud}/image/upload`;
@@ -84,7 +84,7 @@ const palettes = [
 
 const breadcrumbSchema = {
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://www.jerryandcohomeservices.com/' },
+    { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://www.jerryandcohome.com/' },
     { '@type': 'ListItem', position: 2, name: 'Colors', item: canonical },
   ],
 };

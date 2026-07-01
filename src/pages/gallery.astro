@@ -10,7 +10,7 @@ import GalleryGrid from '../components/GalleryGrid.astro';
 const title = 'Before & After Project Gallery | Jerry & Co.';
 const description =
   'Before-and-after cabinet refinishing projects across Greater Boston — Somerville, Cambridge, Medford, Malden, Arlington, Everett, Woburn, and Winchester.';
-const canonical = 'https://www.jerryandcohomeservices.com/gallery/';
+const canonical = 'https://www.jerryandcohome.com/gallery/';
 
 const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dxuuydoee';
 const CLD = `https://res.cloudinary.com/${cloud}/image/upload`;
@@ -115,7 +115,7 @@ const imageGallerySchema = {
 
 const breadcrumbSchema = {
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohomeservices.com/' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohome.com/' },
     { '@type': 'ListItem', position: 2, name: 'Gallery', item: canonical },
   ],
 };

@@ -1,6 +1,6 @@
 # Sitemap — Jerry & Co. Home Improvement LLC
 
-**Base URL:** `https://www.jerryandcohomeservices.com`
+**Base URL:** `https://www.jerryandcohome.com`
 
 ---
 

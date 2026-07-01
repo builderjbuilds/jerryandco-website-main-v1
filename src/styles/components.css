@@ -6,12 +6,12 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   height: var(--control-h);
-  padding: 0 28px;
+  padding: 0 32px;
   border-radius: var(--radius-sm);
   border: 1.5px solid transparent;
   cursor: pointer;
@@ -79,10 +79,10 @@
 
 /* Sm variant — used in nav */
 .btn-sm {
-  font-size: 11px;
+  font-size: 13px;
   height: var(--control-h-compact);
   padding: 0 20px;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -152,10 +152,10 @@
 .chip {
   display: inline-flex;
   align-items: center;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 10px 22px;
   border-radius: var(--radius-xs);
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
@@ -167,9 +167,9 @@
   background: var(--ink);
 }
 .chip-secondary {
-  border: 1px solid var(--line);
-  color: var(--text-muted);
-  background: transparent;
+  border: 1.5px solid rgba(30, 57, 52, 0.28);
+  color: var(--ink);
+  background: rgba(30, 57, 52, 0.05);
 }
 .chip-group {
   display: flex;
@@ -635,7 +635,7 @@
   align-items: start;
 }
 .area-note {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-muted);
   margin-top: 28px;
   line-height: 1.65;
@@ -731,10 +731,10 @@
 .field { display: flex; flex-direction: column; gap: 5px; }
 
 .field label {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--forest);
-  letter-spacing: 0.09em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
@@ -742,13 +742,13 @@
 .field select,
 .field textarea {
   font-family: var(--font-sans);
-  font-size: 16px;
-  border: 1px solid rgba(30, 57, 52, 0.16);
+  font-size: 17px;
+  border: 1px solid rgba(30, 57, 52, 0.2);
   border-radius: var(--radius-xs);
-  padding: 12px 14px;
+  padding: 14px 16px;
   background: var(--bone);
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.55;
   transition: border-color 0.15s, box-shadow 0.15s;
   -webkit-appearance: none;
   appearance: none;
@@ -769,11 +769,11 @@
 .field textarea { resize: vertical; min-height: 96px; }
 
 .form-foot {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text-muted);
   margin-top: 20px;
   text-align: center;
-  line-height: 1.65;
+  line-height: 1.7;
   letter-spacing: 0.01em;
 }
 

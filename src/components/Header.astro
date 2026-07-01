@@ -16,9 +16,10 @@ const townLinks = [
     <a class="brand" href="/" aria-label="Jerry & Co. Home Improvement — home">
       <img
         class="logo-img"
-        src="/img/brand/logo-horizontal-light.png"
+        src="/img/brand/logo-horizontal-01.svg"
         alt="Jerry & Co. Home Improvement"
         height="34"
+        width="auto"
       />
     </a>
 
@@ -108,6 +109,10 @@ const townLinks = [
         <li><a href={town.href}>{town.label}</a></li>
       ))}
     </ul>
+    <a class="mobile-phone-cta" href="tel:+13476026801">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (347) 602-6801
+    </a>
     <a class="btn btn-gold btn-block mobile-cta" href="/#estimate">Get video estimate — same day</a>
   </div>
 </header>
@@ -245,20 +250,20 @@ const townLinks = [
     gap: 16px;
   }
   .nav-phone {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--bone);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gold);
     text-decoration: none;
     letter-spacing: 0.01em;
-    opacity: 0.9;
-    transition: opacity 0.15s;
+    opacity: 1;
+    transition: color 0.15s;
     white-space: nowrap;
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: 7px;
   }
-  .nav-phone:hover { opacity: 1; }
+  .nav-phone:hover { color: var(--bone); }
 
   .live-dot {
     display: inline-block;
@@ -289,8 +294,8 @@ const townLinks = [
     bottom: -2px;
     left: 0;
     width: 0;
-    height: 1px;
-    background: var(--gold);
+    height: 2px;
+    background: var(--bone);
     transition: width 0.2s ease;
   }
   .nav-phone:hover::after { width: 100%; }
@@ -401,7 +406,26 @@ const townLinks = [
     border-bottom: none;
   }
   .nav-divider { height: 1px; background: var(--line-dark); margin: 8px 0; border-bottom: none !important; }
-  .mobile-cta { margin-top: 24px; }
+  .mobile-phone-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    padding: 16px 24px;
+    border: 2px solid var(--gold);
+    border-radius: var(--radius-xs);
+    font-family: var(--font-sans);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.15s, color 0.15s;
+  }
+  .mobile-phone-cta svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .mobile-phone-cta:hover { background: var(--gold); color: var(--ink); }
+  .mobile-cta { margin-top: 12px; }
 
   /* Hamburger → X morph on open — driven by aria-expanded, no JS class needed */
   #navOpen[aria-expanded="true"] span:nth-child(1) {

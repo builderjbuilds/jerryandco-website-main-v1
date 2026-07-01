@@ -49,13 +49,13 @@ const { guide } = Astro.props;
 const { meta, hero, selfAssessment, preplanning, decisions, workbook, outcomes, maintenance, warranty, media } = guide;
 const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dxuuydoee';
 
-const canonical = `https://www.jerryandcohomeservices.com/guides/${guide.service}/`;
+const canonical = `https://www.jerryandcohome.com/guides/${guide.service}/`;
 
 // ── Breadcrumb schema ─────────────────────────────────────────────────────────
 const breadcrumbSchema = {
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://www.jerryandcohomeservices.com/' },
-    { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://www.jerryandcohomeservices.com/guides/' },
+    { '@type': 'ListItem', position: 1, name: 'Home',   item: 'https://www.jerryandcohome.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://www.jerryandcohome.com/guides/' },
     { '@type': 'ListItem', position: 3, name: meta.title.split('—')[0].trim(), item: canonical },
   ],
 };
