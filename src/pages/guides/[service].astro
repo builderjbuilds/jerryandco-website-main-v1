@@ -532,6 +532,8 @@ const statusIcon: Record<string, string> = {
     grid-template-columns: 1fr 1fr;
     gap: var(--sp-7);
     align-items: center;
+    padding-top: clamp(20px, 3vw, 40px);
+    padding-bottom: clamp(24px, 3.5vw, 48px);
   }
   .guide-hero-left {
     display: flex;
@@ -553,7 +555,10 @@ const statusIcon: Record<string, string> = {
     pointer-events: none;
   }
   :global(.guide-hero-ph) { display: block; width: 100%; }
-  .guide-hero-content { max-width: 600px; }
+  .guide-hero-content {
+    max-width: 600px;
+    padding: clamp(16px, 2.5vw, 28px) 0;
+  }
   .guide-eyebrow { color: var(--gold); }
   .guide-hero h1 {
     color: var(--bone);
@@ -878,19 +883,16 @@ const statusIcon: Record<string, string> = {
   .dec-stack {
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    overflow: hidden;
+    gap: var(--sp-3);
     margin-top: var(--sp-5);
   }
   .dec-card {
     background: var(--bone-deep);
-    display: grid;
-    grid-template-columns: 64px 1fr 1fr;
-    gap: 0;
-    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
   }
   .dec-num {
     font-family: var(--font-serif);
@@ -901,12 +903,10 @@ const statusIcon: Record<string, string> = {
     padding: clamp(20px, 2.5vw, 28px);
     display: flex;
     align-items: flex-start;
-    padding-top: clamp(24px, 3vw, 32px);
-    border-right: 1px solid var(--line);
+    padding-bottom: 0;
   }
   .dec-body {
     padding: clamp(20px, 2.5vw, 28px);
-    border-right: 1px solid var(--line);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -953,7 +953,8 @@ const statusIcon: Record<string, string> = {
   }
   .dec-jerry {
     padding: clamp(20px, 2.5vw, 28px);
-    background: rgba(200, 160, 85, 0.04);
+    background: rgba(200, 160, 85, 0.08);
+    border-top: 1px solid var(--line);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -1374,10 +1375,7 @@ const statusIcon: Record<string, string> = {
   @media (max-width: 1024px) {
     .guide-hero-inner { grid-template-columns: 1fr; gap: var(--sp-5); }
     .guide-hero-right { display: none; }
-    .guide-hero-content { max-width: 720px; }
-    .dec-card { grid-template-columns: 48px 1fr; }
-    .dec-jerry { grid-column: 2; border-top: 1px solid var(--line); }
-    .dec-num { border-bottom: 0; }
+    .guide-hero-content { max-width: 720px; width: 100%; }
   }
   @media (max-width: 900px) {
     .guide-close-inner { grid-template-columns: 1fr; gap: var(--sp-5); }
@@ -1392,9 +1390,48 @@ const statusIcon: Record<string, string> = {
     .maint-grid { grid-template-columns: 1fr; }
     .warr-grid { grid-template-columns: 1fr; }
     .warr-divider { display: none; }
-    .dec-card { grid-template-columns: 1fr; }
+    .dec-stack {
+      gap: var(--sp-3);
+      background: transparent;
+      border: 0;
+      overflow: visible;
+    }
+    .dec-card {
+      display: flex !important;
+      flex-direction: column;
+      border-radius: var(--radius-xs);
+    }
     .dec-num { display: none; }
-    .dec-body { border-right: none; border-bottom: 1px solid var(--line); }
+    .dec-body {
+      width: 100%;
+      padding: 22px 18px 18px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .dec-label { margin-bottom: 8px; }
+    .dec-q {
+      font-size: 1.0625rem;
+      line-height: 1.35;
+    }
+    .dec-options {
+      gap: 9px;
+      margin-top: 4px;
+    }
+    .dec-options li {
+      font-size: 14px;
+      line-height: 1.55;
+      padding-left: 16px;
+    }
+    .dec-jerry {
+      width: 100%;
+      padding: 18px;
+      border-top: 0;
+      background: rgba(200, 160, 85, 0.1);
+    }
+    .dec-jerry-text {
+      font-size: 14px;
+      line-height: 1.68;
+    }
   }
   @media (max-width: 540px) {
     .aq-grid { grid-template-columns: 1fr; }
@@ -1403,8 +1440,20 @@ const statusIcon: Record<string, string> = {
 
   /* ── 3G: Guide mobile fixes ───────────────────────────── */
   @media (max-width: 600px) {
-    .guide-hero-inner { padding: var(--sp-6) 0; }
+    .guide-hero {
+      padding-top: var(--sp-3);
+      padding-bottom: var(--sp-4);
+    }
+    .guide-hero-inner {
+      padding: var(--sp-5) max(var(--gutter), 28px) var(--sp-6);
+    }
+    .guide-hero-content {
+      padding: var(--sp-3) 0;
+    }
     .guide-hero-content h1 { font-size: clamp(1.625rem, 5.5vw, 2.5rem); }
+    /* Prevent long CTA button text from forcing the hero wider than viewport */
+    .guide-hero-content { width: 100%; max-width: 100%; box-sizing: border-box; }
+    .guide-hero-left { width: 100%; min-width: 0; }
   }
   @media (max-width: 640px) {
     .out-grid { grid-template-columns: 1fr; }

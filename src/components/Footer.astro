@@ -56,8 +56,7 @@ const newsletterAction = newsletterId ? `https://submit-form.com/${newsletterId}
     <!-- Col 1: Brand -->
     <div>
       <a class="footer-brand" href="/" aria-label="Jerry & Co. Home Improvement">
-        <img src="/img/brand/logo-mark-light.png" alt="" class="footer-logo" height="36" width="auto" aria-hidden="true" />
-        <span class="brand-text">Jerry &amp; Co.</span>
+        <img src="/img/brand/logo-horizontal-02-white-transparent.png" alt="Jerry & Co. Home Improvement" class="footer-logo" height="48" width="auto" />
       </a>
       <p class="footer-blurb">
         Factory-grade cabinet refinishing and bathroom refresh for condo owners across Greater Boston — built around your building's rules, your neighbors, and your timeline. Starting at $2,000.
@@ -216,27 +215,17 @@ const newsletterAction = newsletterId ? `https://submit-form.com/${newsletterId}
 
   /* Brand column */
   .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: block;
     margin-bottom: 16px;
     text-decoration: none;
-    color: inherit;
     width: fit-content;
     transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
   }
   .footer-brand:hover { transform: scale(1.04); opacity: 0.85; }
   .footer-logo {
-    height: 36px;
+    height: 48px;
     width: auto;
-    flex-shrink: 0;
-  }
-  .footer-brand .brand-text {
-    font-family: var(--font-serif);
-    font-size: 18px;
-    letter-spacing: 0.02em;
-    color: var(--bone);
-    font-weight: 500;
+    display: block;
   }
 
   .footer-blurb {
@@ -422,6 +411,7 @@ const newsletterAction = newsletterId ? `https://submit-form.com/${newsletterId}
     letter-spacing: 0.01em;
     line-height: 1.6;
     margin: 0;
+    overflow-wrap: break-word;
   }
   .footer-legal-links {
     display: flex;
@@ -462,6 +452,8 @@ const newsletterAction = newsletterId ? `https://submit-form.com/${newsletterId}
     .footer-col ul { font-size: 13.5px; gap: 9px; }
     .footer-col h4 { margin-bottom: 14px; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
+    /* Legal links: wrap so "Terms of Service" doesn't clip off-screen */
+    .footer-legal-links { flex-wrap: wrap; gap: 8px 16px; }
   }
   @media (max-width: 360px) {
     .footer-grid { grid-template-columns: 1fr; }

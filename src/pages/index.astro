@@ -12,15 +12,24 @@ import testimonials from '../../data/testimonials.json';
 const title = 'Cabinet Refinishing Boston | From $2,000 | Factory 2K Finish | Jerry & Co.';
 const description = 'Factory-grade cabinet refinishing for Boston condo owners. HOA-compliant, low-VOC, done in 2–5 days. MA HIC #208336.';
 
-const galleryItems = [
-  { cat: 'cabinet',  slug: 'somerville-cabinet', label: 'Cabinet refinishing', sub: 'Somerville — condo, deep forest green'       },
-  { cat: 'bathroom', slug: 'cambridge-bathroom',  label: 'Bathroom refresh',    sub: 'Cambridge — triple-decker, gut-free'          },
-  { cat: 'painting', slug: 'arlington-painting',  label: 'Interior painting',   sub: 'Arlington — condo pre-listing refresh'        },
-  { cat: 'cabinet',  slug: 'medford-cabinet',     label: 'Cabinet refinishing', sub: 'Medford — condo conversion, bone white'       },
-  { cat: 'condo',    slug: 'malden-multi',        label: 'Cabinet refinishing', sub: 'Malden — 3-unit multi-family turnover'        },
-  { cat: 'bathroom', slug: 'everett-bathroom',    label: 'Bathroom refresh',    sub: 'Everett — condo board-approved update'        },
-  { cat: 'painting', slug: 'woburn-painting',     label: 'Interior painting',   sub: 'Woburn — owner-occupied colonial refresh'     },
-  { cat: 'kitchen',  slug: 'winchester-kitchen',  label: 'Kitchen refresh',     sub: 'Winchester — cabinets + paint bundle'         },
+const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dxuuydoee';
+const cld = (id: string, w = 1440) =>
+  `https://res.cloudinary.com/${cloud}/image/upload/f_auto,q_auto,w_${w}/${id}.jpg`;
+
+const galleryItems: { cat: string; publicId: string; label: string; sub: string }[] = [
+  { cat: 'cabinet',  publicId: 'featured/somerville-cabinet',              label: 'Cabinet refinishing', sub: 'Somerville — condo, deep forest green'       },
+  { cat: 'bathroom', publicId: 'featured/cambridge-bathroom',              label: 'Bathroom refresh',    sub: 'Cambridge — triple-decker, gut-free'          },
+  { cat: 'painting', publicId: 'featured/arlington-painting',              label: 'Interior painting',   sub: 'Arlington — condo pre-listing refresh'        },
+  { cat: 'cabinet',  publicId: 'featured/medford-cabinet',                 label: 'Cabinet refinishing', sub: 'Medford — condo conversion, bone white'       },
+  { cat: 'condo',    publicId: 'featured/malden-multi',                    label: 'Cabinet refinishing', sub: 'Malden — 3-unit multi-family turnover'        },
+  { cat: 'bathroom', publicId: 'featured/everett-bathroom',                label: 'Bathroom refresh',    sub: 'Everett — condo board-approved update'        },
+  { cat: 'painting', publicId: 'featured/woburn-painting',                 label: 'Interior painting',   sub: 'Woburn — owner-occupied colonial refresh'     },
+  { cat: 'kitchen',  publicId: 'featured/winchester-kitchen',              label: 'Kitchen refresh',     sub: 'Winchester — cabinets + paint bundle'         },
+  { cat: 'cabinet',  publicId: 'projects/medford-cabinet-01-after',        label: 'Cabinet refinishing', sub: 'Medford — bone white reveal'                  },
+  { cat: 'bathroom', publicId: 'projects/everett-bathroom-01-after',       label: 'Bathroom refresh',    sub: 'Everett — condo board-approved update'        },
+  { cat: 'painting', publicId: 'projects/woburn-painting-01-after',        label: 'Interior painting',   sub: 'Woburn — whole-unit colonial refresh'         },
+  { cat: 'cabinet',  publicId: 'projects/somerville-cabinet-01-after',     label: 'Cabinet refinishing', sub: 'Somerville — navy shaker finish'              },
+  { cat: 'kitchen',  publicId: 'projects/winchester-kitchen-01-after',     label: 'Kitchen refresh',     sub: 'Winchester — period colonial kitchen'         },
 ];
 
 const processSteps = [
@@ -33,6 +42,16 @@ const processSteps = [
 ---
 
 <Base title={title} description={description}>
+  <Fragment slot="head">
+    {/* Preload the hero LCP image so the browser fetches it before layout is complete */}
+    <link
+      rel="preload"
+      as="image"
+      href={`https://res.cloudinary.com/${cloud}/image/upload/f_auto,q_auto,w_1200/hero/hero-after-kitchen-white.jpg`}
+      imagesrcset={`https://res.cloudinary.com/${cloud}/image/upload/f_auto,q_auto,w_800/hero/hero-after-kitchen-white.jpg 800w, https://res.cloudinary.com/${cloud}/image/upload/f_auto,q_auto,w_1200/hero/hero-after-kitchen-white.jpg 1200w, https://res.cloudinary.com/${cloud}/image/upload/f_auto,q_auto,w_1600/hero/hero-after-kitchen-white.jpg 1600w`}
+      imagesizes="100vw"
+    />
+  </Fragment>
   <Header />
 
   <!-- ===== HERO ===== -->
@@ -205,9 +224,8 @@ const processSteps = [
             <PlaceholderImage
               publicId={`process/step-${s.num}-${s.slug}`}
               alt={s.alt}
-              aspect="4/3"
+              aspect="16/9"
               className="proc-img"
-              caption="Process step photo"
               loading="lazy"
             />
             <div class="ps-header">
@@ -244,7 +262,7 @@ const processSteps = [
         {galleryItems.map(item => (
           <div class="gallery-item" data-cat={item.cat}>
             <PlaceholderImage
-              publicId={`featured/${item.slug}`}
+              publicId={item.publicId}
               alt={`${item.label} — ${item.sub}`}
               aspect="3/4"
               className="gi-img"
@@ -263,7 +281,7 @@ const processSteps = [
   </section>
 
   <!-- ===== SERVICE AREA ===== -->
-  <section id="area" class="area-section">
+  <section id="area" class="area-section" style={`background-image: url('${cld('areas/boston-aerial')}')`}>
     <div class="wrap area-grid">
       <div data-reveal="left">
         <p class="eyebrow">Your town — yes, we work there</p>
@@ -397,19 +415,19 @@ const processSteps = [
 
       <div class="seal-badges" data-reveal="in" data-delay="1">
         <div class="seal-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg>
           <p>Written, fixed-price quote — before a drop of paint.</p>
         </div>
         <div class="seal-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
           <p>2-year workmanship guarantee, backed by the owner — not a franchise call center.</p>
         </div>
         <div class="seal-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M8.7 13.6L7 22l5-2.5 5 2.5-1.7-8.4"/></svg>
           <p>Licensed, insured, MA HIC #208336 — verified on Mass.gov.</p>
         </div>
         <div class="seal-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/><path d="M12 7v.01"/></svg>
           <p>Zero dust, zero odor, zero neighbor drama — HOA paperwork handled for you.</p>
         </div>
       </div>
@@ -525,10 +543,30 @@ const processSteps = [
   }
 
   /* ── Area section ────────────────────────────────────── */
-  .area-section { background: var(--bone-deep); }
+  .area-section {
+    background: var(--ink) center / cover no-repeat;
+    position: relative;
+  }
+  .area-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(14,25,20,0.88) 0%, rgba(14,25,20,0.72) 100%);
+    pointer-events: none;
+  }
+  .area-section .wrap { position: relative; }
+  .area-section .eyebrow { color: var(--gold); }
+  .area-section h2 { color: var(--bone); margin-bottom: 20px; }
+  .area-section .section-lede { color: rgba(247,243,234,0.7); }
+  .area-section .area-note { color: rgba(247,243,234,0.5); }
+  .area-section .area-note a { color: var(--gold); }
   .area-section a.chip { text-decoration: none; transition: background 0.15s, opacity 0.15s; }
-  .area-section a.chip:hover { background: var(--ink); }
-  .area-section h2 { margin-bottom: 20px; }
+  .area-section a.chip:hover { background: var(--gold); color: var(--ink); }
+  :global(.area-section .chip-secondary) {
+    border-color: rgba(247,243,234,0.3);
+    color: rgba(247,243,234,0.7);
+    background: rgba(247,243,234,0.08);
+  }
 
   /* ── Process link row ─────────────────────────────── */
   .process-link-row {
@@ -542,19 +580,26 @@ const processSteps = [
     flex-direction: column;
     gap: 6px;
   }
-  /* Process step image — contained, dark-themed */
+  /* Remove card padding so image bleeds edge-to-edge */
+  :global(.process-band .process-step) {
+    padding: 0;
+  }
   :global(.proc-img) {
-    margin-bottom: 16px;
-    border-radius: var(--radius-xs);
-    overflow: hidden;
-    border: 1px solid var(--line-dark);
+    border-radius: 0;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  :global(.process-band .ps-header) {
+    padding: clamp(18px, 2vw, 26px) clamp(20px, 2.5vw, 32px) 0;
+  }
+  :global(.process-band .process-step > p) {
+    padding: 0 clamp(20px, 2.5vw, 32px) clamp(24px, 2.5vw, 36px);
   }
   :global(.process-step .ph),
   :global(.process-step .ph-shell) {
     background: var(--ink-soft);
   }
   :global(.process-step .ph-shell) { color: var(--gold); }
-  :global(.process-step .ph-caption) { color: rgba(247, 243, 234, 0.4); }
 
   /* ── Gallery link row ─────────────────────────────── */
   .gallery-link-row {
@@ -756,7 +801,7 @@ const processSteps = [
 
   /* ── Close CTA background image ───────────────────── */
   .close-cta-bg { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
-  .close-cta-overlay { position:absolute; inset:0; background:linear-gradient(105deg,rgba(20,36,31,0.92) 0%,rgba(20,36,31,0.82) 55%,rgba(20,36,31,0.68) 100%); }
+  .close-cta-overlay { position:absolute; inset:0; background:linear-gradient(105deg,rgba(20, 36, 31,0.88) 0%,rgba(20, 36, 31,0.70) 45%,rgba(20, 36, 31,0.35) 100%); }
   :global(.close-cta-ph) { position:absolute; inset:0; aspect-ratio:unset; height:100%; border-radius:0; }
   .close-cta .wrap { position:relative; z-index:1; }
 
@@ -863,6 +908,14 @@ const processSteps = [
   }
   @media (max-width: 480px) {
     .seal-badges { grid-template-columns: 1fr; }
+    /* Tiers & final-seal CTAs: full-width, centered, breathing room on sides */
+    .tiers-footer .btn,
+    .final-seal .btn {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .tiers-links { flex-direction: column; gap: 12px; align-items: center; }
   }
 </style>
 

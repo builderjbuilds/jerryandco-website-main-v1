@@ -26,7 +26,7 @@
     {
       "town": "Malden",
       "town_slug": "malden",
-      "imageSlug": "malden-painting-01",
+      "imageSlug": "malden-cabinet-01",
       "is_primary_focus": false,
       "neighbors": ["Medford", "Everett", "Stoneham"],
       "housing_stock_note": "PLACEHOLDER - draft unique copy: Malden's dense mix of 2-6 unit multi-family triple-deckers and condo-converted units means cabinet refinishing is a fast, lower-disruption upgrade for both owner-occupants and investor-owners ahead of a tenant turnover.",
@@ -47,7 +47,7 @@
     {
       "town": "Everett",
       "town_slug": "everett",
-      "imageSlug": "everett-bathroom-01",
+      "imageSlug": "everett-cabinet-01",
       "is_primary_focus": false,
       "neighbors": ["Malden", "Somerville", "Medford"],
       "housing_stock_note": "PLACEHOLDER - draft unique copy: Everett's stock of 2-6 unit multi-family homes along the Lower Broadway and Glendale corridors makes cabinet refinishing a popular turnover-ready upgrade for landlords between tenants, starting at $2,000 per unit.",
@@ -152,7 +152,7 @@
     {
       "town": "Winchester",
       "town_slug": "winchester",
-      "imageSlug": "winchester-cabinet-01",
+      "imageSlug": "winchester-kitchen-01",
       "is_primary_focus": true,
       "neighbors": ["Arlington", "Woburn", "Stoneham"],
       "housing_stock_note": "PLACEHOLDER - draft unique copy: Winchester's larger single-family colonials, often with original solid-wood kitchens, are a strong fit for factory-grade refinishing - preserving period character and high-quality cabinet boxes that newer mass-produced cabinetry can't match.",

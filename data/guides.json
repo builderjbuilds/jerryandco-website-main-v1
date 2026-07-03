@@ -218,14 +218,14 @@
       "media": {
         "heroPublicId": "services/cabinet-refinishing",
         "heroAlt": "Cabinet doors receiving a 2K polyurethane spray finish",
-        "workbookPhotoPublicId": "projects/ceri-charlestown-after",
-        "workbookPhotoAlt": "Completed cabinet refinishing — Charlestown condo kitchen",
-        "outcomeBeforePublicId": "projects/ceri-charlestown-before",
+        "workbookPhotoPublicId": "projects/somerville-cabinet-01-after",
+        "workbookPhotoAlt": "Completed cabinet refinishing — Somerville condo kitchen",
+        "outcomeBeforePublicId": "projects/somerville-cabinet-01-before",
         "outcomeBeforeAlt": "Worn kitchen cabinets before refinishing",
-        "outcomeAfterPublicId": "projects/ceri-charlestown-after",
+        "outcomeAfterPublicId": "projects/somerville-cabinet-01-after",
         "outcomeAfterAlt": "Kitchen cabinets after 2K polyurethane finish — factory smooth",
-        "closePhotoPublicId": "projects/ceri-charlestown-hero",
-        "closePhotoAlt": "Completed cabinet refinishing project — Charlestown"
+        "closePhotoPublicId": "projects/somerville-cabinet-01-after",
+        "closePhotoAlt": "Completed cabinet refinishing project — Somerville"
       }
     },
 
@@ -446,14 +446,14 @@
       "media": {
         "heroPublicId": "services/bathroom-refresh",
         "heroAlt": "Freshly tiled gut-free bathroom refresh with new fixtures",
-        "workbookPhotoPublicId": "projects/julia-boston-after",
+        "workbookPhotoPublicId": "projects/cambridge-bathroom-01-after",
         "workbookPhotoAlt": "Bathroom refresh in progress — tile and fixture installation",
-        "outcomeBeforePublicId": "projects/julia-boston-before",
+        "outcomeBeforePublicId": "projects/cambridge-bathroom-01-before",
         "outcomeBeforeAlt": "Bathroom before gut-free refresh",
-        "outcomeAfterPublicId": "projects/julia-boston-after",
-        "outcomeAfterAlt": "Bathroom after gut-free tile and fixture refresh — Boston condo",
-        "closePhotoPublicId": "projects/julia-boston-hero",
-        "closePhotoAlt": "Completed gut-free bathroom refresh — Boston"
+        "outcomeAfterPublicId": "projects/cambridge-bathroom-01-after",
+        "outcomeAfterAlt": "Bathroom after gut-free tile and fixture refresh — Cambridge condo",
+        "closePhotoPublicId": "projects/cambridge-bathroom-01-after",
+        "closePhotoAlt": "Completed gut-free bathroom refresh — Cambridge"
       }
     },
 
@@ -673,14 +673,14 @@
       "media": {
         "heroPublicId": "services/interior-painting",
         "heroAlt": "Freshly painted interior — clean walls and crisp trim in a Boston condo",
-        "workbookPhotoPublicId": "projects/nick-somerville-after",
+        "workbookPhotoPublicId": "projects/arlington-painting-01-after",
         "workbookPhotoAlt": "Interior painting in progress — fresh coat on walls",
-        "outcomeBeforePublicId": "projects/nick-somerville-before",
+        "outcomeBeforePublicId": "projects/arlington-painting-01-before",
         "outcomeBeforeAlt": "Interior walls before professional painting",
-        "outcomeAfterPublicId": "projects/nick-somerville-after",
-        "outcomeAfterAlt": "Interior walls after professional painting — Somerville condo",
-        "closePhotoPublicId": "projects/nick-somerville-hero",
-        "closePhotoAlt": "Completed interior painting project — Somerville"
+        "outcomeAfterPublicId": "projects/arlington-painting-01-after",
+        "outcomeAfterAlt": "Interior walls after professional painting — Arlington condo",
+        "closePhotoPublicId": "projects/arlington-painting-01-after",
+        "closePhotoAlt": "Completed interior painting project — Arlington"
       }
     },
 
@@ -912,14 +912,14 @@
       "media": {
         "heroPublicId": "services/full-bathroom-reno",
         "heroAlt": "Full gut bathroom renovation — new tile, waterproofing, and fixtures",
-        "workbookPhotoPublicId": "projects/alyssa-charlestown-after",
+        "workbookPhotoPublicId": "projects/everett-bathroom-01-after",
         "workbookPhotoAlt": "Full bathroom renovation in progress — tile installation phase",
-        "outcomeBeforePublicId": "projects/alyssa-charlestown-before",
+        "outcomeBeforePublicId": "projects/everett-bathroom-01-before",
         "outcomeBeforeAlt": "Bathroom before full gut renovation",
-        "outcomeAfterPublicId": "projects/alyssa-charlestown-after",
-        "outcomeAfterAlt": "Bathroom after full gut renovation — new tile and fixtures — Charlestown",
-        "closePhotoPublicId": "projects/alyssa-charlestown-hero",
-        "closePhotoAlt": "Completed full bathroom renovation — Charlestown condo"
+        "outcomeAfterPublicId": "projects/everett-bathroom-01-after",
+        "outcomeAfterAlt": "Bathroom after full gut renovation — new tile and fixtures — Everett",
+        "closePhotoPublicId": "projects/everett-bathroom-01-after",
+        "closePhotoAlt": "Completed full bathroom renovation — Everett condo"
       }
     }
   ]

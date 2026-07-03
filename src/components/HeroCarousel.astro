@@ -45,6 +45,8 @@ const videoSrc = `https://res.cloudinary.com/${cloud}/video/upload/f_auto,q_auto
               sizes="100vw"
               alt={slide.alt}
               loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : 'low'}
+              decoding={i === 0 ? 'sync' : 'async'}
             />
           </div>
         ))}
@@ -246,7 +248,12 @@ const videoSrc = `https://res.cloudinary.com/${cloud}/video/upload/f_auto,q_auto
     .hero-overlay { background: rgba(20, 36, 31, 0.74); }
   }
 
-  /* ── 320–420px small phone fixes ───────────────────── */
+  /* ── ≤480px phone fixes ─────────────────────────── */
+  @media (max-width: 480px) {
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn { width: 100%; justify-content: center; }
+  }
+  /* ── ≤420px extra-small fixes ───────────────────── */
   @media (max-width: 420px) {
     .hero-meta {
       gap: 16px;
@@ -256,8 +263,6 @@ const videoSrc = `https://res.cloudinary.com/${cloud}/video/upload/f_auto,q_auto
     }
     .hero-meta div { display: flex; align-items: center; gap: 10px; }
     .hero-meta strong { display: inline; margin-bottom: 0; font-size: 1.1rem; }
-    .hero-actions { flex-direction: column; align-items: stretch; }
-    .hero-actions .btn { width: 100%; justify-content: center; }
   }
 
   /* ── Hero entrance — CSS-only stagger (above fold, no observer) ── */

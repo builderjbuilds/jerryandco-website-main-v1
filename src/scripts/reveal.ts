@@ -25,8 +25,8 @@
       });
     },
     {
-      threshold: 0.08,
-      rootMargin: '0px 0px -40px 0px', // trigger slightly before element hits bottom of viewport
+      threshold: 0.04,
+      rootMargin: '0px 0px 40px 0px', // pre-fire before element reaches viewport edge
     }
   );
 

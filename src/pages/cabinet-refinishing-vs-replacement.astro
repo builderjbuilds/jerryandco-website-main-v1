@@ -291,7 +291,7 @@ const cld = (path: string, w = 960) =>
   .chart-figure {
     margin: 0 auto;
     text-align: center;
-    max-width: 540px;
+    max-width: 800px;
   }
   .cost-chart-svg {
     width: 100%;
@@ -488,7 +488,7 @@ const cld = (path: string, w = 960) =>
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 8px 40px rgba(20,36,31,0.12);
-    max-width: 960px;
+    max-width: 1120px;
     margin: clamp(32px,4vw,56px) auto 0;
   }
   .ba-half {
@@ -529,7 +529,7 @@ const cld = (path: string, w = 960) =>
     gap: 24px;
     align-items: center;
     margin: 40px auto 0;
-    max-width: 540px;
+    max-width: 720px;
   }
   .cc-thumb { display:flex; flex-direction:column; gap:8px; }
   :global(.cc-thumb .ph) { border-radius:3px; }
@@ -546,5 +546,32 @@ const cld = (path: string, w = 960) =>
     .ba-split { grid-template-columns: 1fr; }
     .cost-contrast { grid-template-columns: 1fr; }
     .cc-vs { padding: 4px 0; }
+  }
+
+  /* Comparison table: scroll hint + sticky first column on mobile */
+  @media (max-width: 640px) {
+    .compare-table-wrap {
+      position: relative;
+    }
+    .compare-table-wrap::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      background: linear-gradient(to right, transparent, var(--bone-deep));
+      pointer-events: none;
+    }
+    /* Freeze the Feature label column so row context stays visible */
+    .compare-table th:first-child,
+    .compare-table td:first-child {
+      position: sticky;
+      left: 0;
+      background: var(--bone-deep);
+      z-index: 1;
+      box-shadow: 2px 0 4px rgba(30, 57, 52, 0.06);
+    }
+    .compare-table th:first-child { background: var(--bone-deep); }
   }
 </style>

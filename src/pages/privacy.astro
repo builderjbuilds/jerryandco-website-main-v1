@@ -353,4 +353,21 @@ const EFFECTIVE = 'July 1, 2026';
     .legal-wrap { grid-template-columns: 1fr; }
     .legal-toc { position: static; }
   }
+
+  /* Legal table: constrain header cells, allow body text to wrap */
+  @media (max-width: 560px) {
+    .legal-table-wrap { position: relative; }
+    .legal-table-wrap::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 32px;
+      background: linear-gradient(to right, transparent, var(--bone));
+      pointer-events: none;
+    }
+    .legal-table th { white-space: normal; word-break: break-word; }
+    .legal-table td { word-break: break-word; }
+  }
 </style>

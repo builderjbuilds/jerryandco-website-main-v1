@@ -1,0 +1,1836 @@
+{
+  "schema_version": "1.0",
+  "generated": "2026-07-01",
+  "skill": "jerryco-visual-prompting",
+  "cloud": "dxuuydoee",
+  "cloudinary_base": "https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_{width}/{public_id}.jpg",
+  "notes": [
+    "All prompts authored per the jerryco-visual-prompting skill workflow (SKILL.md + all references).",
+    "Engine: Higgsfield MCP primary. Call models_explore before generating to confirm current model name, aspect_ratios, and parameters.",
+    "Upload reference images via media_upload → media_confirm; pass returned media_id — never a raw URL.",
+    "Negative prompts: embed in positive prompt for Seedream (no negative field). For Flux/Ideogram use separate negative_prompt field.",
+    "status=wall-off: real footage or real client photography — do NOT generate. Flag for real capture.",
+    "status=real-project: real client project — generate only as AI stand-in; mark placeholder in manifest until replaced with actual photography.",
+    "Congruence Checklist must pass before submitting any asset to Higgsfield.",
+    "Brand hex always in parentheses. Never name a color without its hex."
+  ],
+
+  "assets": [
+
+    {
+      "id": "hero-after-kitchen-white",
+      "public_id": "hero/hero-after-kitchen-white",
+      "page": "/ (homepage)",
+      "component": "HeroCarousel.astro",
+      "context": "Carousel slide 1 — hero background fullscreen",
+      "dimensions": { "aspect": "16/9", "native_width": 1600, "srcset_widths": [800, 1200, 1600] },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P3",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF5", "LF3"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a compact Somerville triple-decker condo galley kitchen, 8-foot ceiling, camera at the open doorway at standing eye-level (5.5ft) looking straight toward the back wall over the sink, slight left-of-center to capture the full run of upper and lower cabinets on both sides. TRANSFORMATION: cabinets refinished in deep forest green (#1E3934), factory-smooth matte 2K polyurethane finish, warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop with a faint gray vein, subway tile backsplash in bone white (#F7F3EA) with thin charcoal grout. Bright natural morning window light entering from the window directly above the sink, rendering the factory finish with a soft controlled sheen. Stainless undermount sink, no people, no staged items on counters. Magazine-quality interior design editorial photography. The 2K finish surface reads factory-smooth and matte — not glossy plastic. Hero-format 16:9 composition, subject fills the frame corner to corner. No HDR, no lens flare, no vignette, no stock-photo feel.",
+        "negative": "cartoon, illustration, painting, watercolor, staged styling, stock photo feel, fake looking finishes, AI artifacts, glossy sheen on cabinets, people, logos, text overlay, multiple blown light sources, ceiling cut off, barrel distortion, mismatched shadows",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore(action:'recommend', goal:'photorealistic interior editorial 16:9')",
+        "aspect_ratio": "16:9",
+        "higgsfield_notes": "Seedream v4.5 recommended for interior stills. Embed negatives at end of positive prompt if using Seedream."
+      }
+    },
+
+    {
+      "id": "hero-before-after-split",
+      "public_id": "hero/hero-before-after-split",
+      "page": "/ (homepage)",
+      "component": "HeroCarousel.astro",
+      "context": "Carousel slide 2 — split before/after panel",
+      "dimensions": { "aspect": "16/9", "native_width": 1600, "srcset_widths": [800, 1200, 1600] },
+      "status": "placeholder",
+      "asset_type": "before-after-still",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF6", "LF3"],
+      "shot_type": "editorial",
+      "pair_notes": "Single wide 16:9 image with a hard vertical center split — left half BEFORE, right half AFTER. Must read as the exact same kitchen from the same camera angle.",
+      "prompt": {
+        "positive": "Photorealistic wide interior photograph split exactly down the vertical center — LEFT HALF: documentary before-state of an Arlington 1950s colonial kitchen, 9-foot ceiling, camera at the doorway corner at standing eye-level looking toward the sink wall, honey-oak builder-grade cabinets yellowed with age, grease-stained lower rail at the cabinet corner near the range, hardware tarnished brass, laminate countertop with one worn edge seam, fluorescent overhead light. RIGHT HALF: the exact same room, same camera, same layout, same ceiling, BLEMISHES FULLY RESOLVED: honey-oak yellowing gone — uniform deep forest green (#1E3934) factory-smooth matte 2K polyurethane finish; grease-stained corner gone — clean even surface; tarnished hardware replaced — warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height; laminate countertop replaced — white quartz; warm natural window light from the left. The split line is sharp and clean. No people, no staged items, no text overlays. Interior design editorial photography meets documentary contrast photography. 16:9 hero format.",
+        "negative": "cartoon, illustration, watercolor, stock photo, AI artifacts, different room geometry on left vs right, ceiling cut off, barrel distortion, dramatic vignette, HDR glow, mold or structural damage, people, logos",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "hero-bathroom-refresh",
+      "public_id": "hero/hero-bathroom-refresh",
+      "page": "/ (homepage)",
+      "component": "HeroCarousel.astro",
+      "context": "Carousel slide 3 — bathroom hero",
+      "dimensions": { "aspect": "16/9", "native_width": 1600, "srcset_widths": [800, 1200, 1600] },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P3",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF5", "LF8", "LF3"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a compact Boston condo bathroom, 8-foot ceiling, gut-free refresh result. Camera positioned in the doorway at standing eye-level (5.5ft) on a 24mm wide lens looking straight toward the back wall, capturing the full width of the narrow room — alcove tub-shower on the left with a straight curtain rod, pedestal sink centered on the right wall, toilet on the back wall to the right of center, single window above the toilet. TRANSFORMATION COMPLETE: subway tile in bone white (#F7F3EA) from floor to ceiling in the wet zone with thin charcoal grout lines in a stacked horizontal bond, pedestal sink bone white, matte black fixtures and hardware throughout, fresh semi-gloss white paint on walls outside the tile zone, bright diffused natural light from the window above the toilet. Factory-smooth, pristine, magazine-grade. No people, no staged bath products. Interior design editorial photography, 16:9 hero format, no HDR, no vignette, no stock-photo feel.",
+        "negative": "cartoon, illustration, staging, stock photo, AI artifacts, clawfoot tub in compact room, wall-mount pedestal sink contradiction, multiple blown light sources, dirty grout, caulk yellowing, people, logos, text",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "hero-hallway-install",
+      "public_id": "hero/hero-hallway-install",
+      "page": "/ (homepage)",
+      "component": "HeroCarousel.astro",
+      "context": "Carousel slide 4 — condo building-compliant hallway protection",
+      "dimensions": { "aspect": "16/9", "native_width": 1600, "srcset_widths": [800, 1200, 1600] },
+      "status": "placeholder",
+      "asset_type": "process",
+      "persona": "P3",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF3", "LF7"],
+      "shot_type": "commercial-craft",
+      "prompt": {
+        "positive": "Photorealistic commercial craft documentation photograph of a clean, well-protected corridor in a Boston condo building — a triple-decker hallway with period wood trim baseboards, painted walls, and original hardwood floor. The full floor of the hallway is protected with clean heavy-duty Masonite board laid flat and edge-to-edge, the wall corners protected with foam edge guards, two labeled cabinet doors in bone white (#F7F3EA) standing neatly against the protected wall ready for reinstall. A single pair of nitrile-gloved hands adjusting the door position. Bright overhead corridor light, even and clean. No people beyond hands, no faces, no brand logos on any tool or protection material. Wide 16:9 composition, camera at mid-hall standing height (5.5ft) looking down the corridor toward a condo unit door at the far end slightly open. Craft trade documentation photography — honest, calm, controlled-site feel. No stock photo, no AI artifacts, no vignette.",
+        "negative": "cartoon, illustration, dirty or damaged hallway, graffiti, litter, brand logos, people with faces, floors unprotected, dramatic shadows, stock photo, HDR glow, lens flare",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "hero-video-poster",
+      "public_id": "hero/hero-video-poster",
+      "page": "/ (homepage)",
+      "component": "HeroCarousel.astro (video mode)",
+      "context": "Video poster still for hero-video-poster.mp4",
+      "dimensions": { "aspect": "16/9", "native_width": 1600 },
+      "status": "wall-off",
+      "asset_type": "video-poster",
+      "notes": "Real footage asset. Do NOT generate. Needs real on-site video capture. The poster still should match the opening frame of the real video."
+    },
+
+    {
+      "id": "condo-hoa-documentation",
+      "public_id": "condo/hoa-documentation",
+      "page": "/ (homepage)",
+      "component": "index.astro — condo-ready card 1",
+      "context": "HOA documentation card — 'No board rejections. No project delays.'",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "process-trust",
+      "persona": "P3",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF3", "LF7"],
+      "shot_type": "lifestyle",
+      "prompt": {
+        "positive": "Photorealistic candid lifestyle photograph of a professional contractor (hands and forearms only, dark brown skin tone, wearing a clean dark polo, no logos) and a building manager reviewing a printed HOA renovation approval document together at a table in the lobby of a Boston condo building — period tile floor visible, painted concrete walls, warm incandescent overhead light. The document is face-up and clearly a multi-page renovation approval form, a clipboard holding additional insurance certificate pages. A clean folder with a Jerry & Co. written quote visible underneath (no fabricated text readable, just the presence of a document). No faces in focus — photographed from slightly above and behind the contractor, so hands and documents are sharp and faces are softly blurred or out of frame. Candid lifestyle photography, aspirational, 4:3 composition. No brand logos, no text overlays, no stock-photo staging.",
+        "negative": "cartoon, illustration, stock photo, faces in sharp focus with identifiable features, brand logos on documents, fabricated legal text, cluttered background, staged styling, AI artifacts, lens flare, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "condo-neighbor-safe-process",
+      "public_id": "condo/neighbor-safe-process",
+      "page": "/ (homepage)",
+      "component": "index.astro — condo-ready card 2",
+      "context": "Zero Neighbor Drama card — low-VOC, contained workspace",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "process",
+      "persona": "P3",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF3", "LF7", "LF5"],
+      "shot_type": "commercial-craft",
+      "prompt": {
+        "positive": "Photorealistic commercial craft documentation photograph of the interior of a compact Somerville condo kitchen during a cabinet refinishing job — full plastic dust containment sealed floor to ceiling around the cabinet zone, heavy-duty clear poly sheeting taped tightly at every seam, clean Masonite protection on the hardwood floor, all appliances masked and tagged. Nitrile-gloved hands applying a final piece of tape to the plastic sheeting at the counter edge. No spray equipment visible yet — this is the contained-and-ready setup. Bright overhead kitchen work light. Camera at mid-kitchen standing height (5.5ft) on a 35mm lens, looking across at the contained zone. No people beyond gloved hands, no brand logos, no faces. Craft trade documentation photography — clean, controlled, calm. 4:3 composition. No stock photo, no AI artifacts, no staged clutter.",
+        "negative": "cartoon, illustration, dirty space, brand logos on tools or tape, people with faces, unprotected floor, staged styling, stock photo, HDR glow, vignette, AI artifacts",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "condo-building-logistics",
+      "public_id": "condo/building-logistics",
+      "page": "/ (homepage)",
+      "component": "index.astro — condo-ready card 3",
+      "context": "Building logistics card — elevator scheduling, no homeowner contact with mgmt",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "process-trust",
+      "persona": "P3",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF3"],
+      "shot_type": "commercial-craft",
+      "prompt": {
+        "positive": "Photorealistic craft documentation photograph inside the service elevator of a Boston condo building — a contractor (gloved hands and forearms visible, dark brown skin tone, clean work clothes, no logos) steadying a stack of labeled cabinet doors wrapped in clean moving blankets on a wheeled cart, the elevator doors open in the background, corridor visible. Interior elevator walls are padded with protective moving blankets, floor protected with flat Masonite board. Overhead fluorescent elevator light, clean and functional. Camera at chest height (4ft) inside the elevator looking toward the open doors, 35mm equivalent lens. No faces in focus. Craft trade documentation photography, 4:3 composition. No stock photo, no AI artifacts, no brand logos, no vignette.",
+        "negative": "cartoon, illustration, stock photo, faces in focus, brand logos, unprotected floor, dirty elevator, dramatic shadows, HDR, AI artifacts, lens flare",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "services-cabinet-refinishing",
+      "public_id": "services/cabinet-refinishing",
+      "page": "/ (homepage) + /guides/cabinet-refinishing/ (hero)",
+      "component": "index.astro service card + guide hero",
+      "context": "Featured service card — 2K factory finish, $1,800–$9,500",
+      "dimensions": { "aspect": "16/10", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "service-result",
+      "persona": "P1",
+      "awareness": "product-aware",
+      "lf_drives": ["LF6", "LF8", "LF3"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of an Arlington colonial kitchen, 9-foot ceiling, camera at the doorway corner at standing eye-level (5.5ft) looking toward the sink wall on a 35mm lens. Cabinets refinished in deep forest green (#1E3934), factory-smooth matte 2K polyurethane finish, warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertops with faint gray vein, white subway tile backsplash with thin charcoal grout. L-shaped layout — full run of uppers and lowers on two walls, a window above the sink on the far wall, natural morning light entering from the left. Range on the right wall. Hardwood floor. No people, no staged items on counters or open shelving. Magazine-quality interior design editorial photography. The 2K finish reads factory-smooth and controlled — not glossy-plastic. 16:9 composition. No HDR, no lens flare, no vignette, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, glossy-plastic finish, people, logos, text, ceiling cut off, barrel distortion, mismatched shadows, wrong scale furniture",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "services-bathroom-refresh",
+      "public_id": "services/bathroom-refresh",
+      "page": "/ (homepage) + /guides/bathroom-refresh/ (hero)",
+      "component": "index.astro service card + guide hero",
+      "context": "Service card — gut-free bathroom refresh, $2,800–$6,500",
+      "dimensions": { "aspect": "16/10", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "service-result",
+      "persona": "P3",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF5", "LF8"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a compact Cambridge triple-decker condo bathroom, 8-foot ceiling. Camera at the doorway at standing eye-level (5.5ft) on a 24mm lens looking straight toward the back wall. Gut-free refresh result: white subway tile floor-to-ceiling in the wet zone in a horizontal stacked bond with thin white grout, matte black fixtures — towel bar, toilet paper holder, faucet, and showerhead — vanity cabinet refinished in soft sage (#8FAF8A) factory-smooth matte 2K polyurethane, white round undermount sink, chrome mirror above the vanity, single window on the left wall with natural diffused light. Alcove tub-shower on the left wall with a straight curtain rod and a clean white linen curtain. Toilet on the right side back wall. No people, no bath products staged on the vanity or tub edge. Interior design editorial photography, 16:9 composition. Bright, calm, aspirational. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staging, stock photo, AI artifacts, clawfoot tub, wall-mount pedestal contradiction, multiple blown light sources, grout darkening, caulk yellowing, people, logos",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "services-interior-painting",
+      "public_id": "services/interior-painting",
+      "page": "/ (homepage) + /guides/interior-painting/ (hero)",
+      "component": "index.astro service card + guide hero",
+      "context": "Service card — lead-safe interior painting, $1,400–$6,500",
+      "dimensions": { "aspect": "16/10", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "service-result",
+      "persona": "P2",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF1", "LF5", "LF8"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a living room in a Medford pre-1978 colonial condo, 9-foot ceiling, camera at a corner at standing eye-level (5.5ft) on a 24mm lens looking diagonally across the room toward two large double-hung windows on the far wall. AFTER painting result: walls uniformly painted in bone white (#F7F3EA) semi-gloss, crisp white trim at the baseboard and window surrounds, ceiling uniformly fresh white with zero yellowing at any line or edge. Bright natural midday light from the two windows. Basic furniture in place — a plain sofa centered under the windows and a side table — no staged decorative objects. No people. Interior design editorial photography, listing-ready and airy. 16:9 composition. No HDR, no vignette, no lens flare, no AI artifacts, no staged styling.",
+        "negative": "cartoon, illustration, staged styling, decorative clutter, stock photo, AI artifacts, patchy paint, visible brush marks, yellowing ceiling, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "services-full-bathroom-reno",
+      "public_id": "services/full-bathroom-reno",
+      "page": "/ (homepage) + /guides/bathroom-renovation/ (hero)",
+      "component": "index.astro service card + guide hero",
+      "context": "Service card — full bathroom renovation, $6,500–$18,000",
+      "dimensions": { "aspect": "16/10", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "service-result",
+      "persona": "P1",
+      "awareness": "product-aware",
+      "lf_drives": ["LF6", "LF8", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a full gut-renovated bathroom in an Arlington colonial, 9-foot ceiling. Camera positioned in the open doorway at standing eye-level (5.5ft) on a 24mm lens looking toward the back wall. Full gut renovation result: 12x24 large-format dark slate-gray porcelain tile on walls and floor in a horizontal stacked bond with thin charcoal grout, freestanding matte black tub faucet, floating wall-mount vanity in charcoal matte (#2C2C2C) 2K polyurethane finish with a white undermount rectangular sink, a frameless pivot-door glass shower on the left with brushed brass rain showerhead, tall window on the back wall with frosted glass and natural light. Matte black fixtures throughout. No people, no staged products. Interior design editorial photography, full gut result, 16:9 composition. Premium, precise, magazine-grade. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staging, stock photo, AI artifacts, grout darkening, caulk separation, people, logos, mismatched fixtures, barrel distortion, ceiling cut off",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "services-multi-unit",
+      "public_id": "services/multi-unit",
+      "page": "/ (homepage)",
+      "component": "index.astro service card",
+      "context": "Service card — multi-unit cabinet & bath refresh, custom pricing",
+      "dimensions": { "aspect": "16/10", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "service-result",
+      "persona": "P4",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF1", "LF3"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a clean, freshly refinished rental unit kitchen in a Malden multifamily building, 8-foot ceiling. Camera at the kitchen doorway at standing eye-level (5.5ft) on a 35mm lens looking toward the back wall. Cabinets refinished in warm taupe (#9E8E7E) factory-smooth matte 2K polyurethane, brushed nickel bar-pull hardware, clean laminate countertop in light gray, white painted walls, vinyl plank flooring in light oak tone. Everything turnover-ready and immaculate — rental grade but finished to a high consistent standard. No people, no staged items. Wide overhead fluorescent tube light on, supplementing natural window light from the single window above the sink. Commercial craft documentation meets editorial photography, 16:9 composition. Clean, functional, dependable — not luxury, but clearly professional. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, luxury staging, stock photo, AI artifacts, branded tools, people, logos, dirty space, cluttered counters, HDR glow",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "process-step-01-video-walkthrough",
+      "public_id": "process/step-01-video-walkthrough",
+      "page": "/ (homepage)",
+      "component": "index.astro process section",
+      "context": "Step 1 — video estimate call, 60-min estimate, no in-person appointment",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "process",
+      "persona": "P3",
+      "awareness": "most-aware",
+      "lf_drives": ["LF3", "LF5"],
+      "shot_type": "lifestyle",
+      "prompt": {
+        "positive": "Photorealistic candid lifestyle photograph of a homeowner (a woman, late 30s, South Asian appearance, wearing casual home clothes) holding a smartphone in portrait orientation showing a live video call in progress — the screen displays a generic video call interface with a circular green avatar and a call timer visible, no brand logos. She is standing in her dated Somerville condo kitchen looking toward her upper cabinets, pointing at a honey-oak cabinet door. Camera behind and to the side of her, at her shoulder height (5ft), so her face is seen from the side at roughly 45 degrees — recognizable but not a full-face portrait. The kitchen background shows original oak cabinets, dated laminate countertop, natural window light from behind her. The phone screen is bright and readable but no platform logo visible. Candid lifestyle photography, aspirational, 4:3 composition. No brand logos, no text overlays, no stock-photo styling, no posed smile.",
+        "negative": "cartoon, illustration, brand logos on phone (FaceTime, Zoom, Google), stock photo posed smile, AI artifacts, cluttered background, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "process-step-02-prep-containment",
+      "public_id": "process/step-02-prep-containment",
+      "page": "/ (homepage)",
+      "component": "index.astro process section",
+      "context": "Step 2 — Day 1 masking, tagging, containment",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "process",
+      "persona": "P3",
+      "awareness": "product-aware",
+      "lf_drives": ["LF3", "LF7"],
+      "shot_type": "commercial-craft",
+      "prompt": {
+        "positive": "Photorealistic commercial craft documentation photograph inside a compact Somerville condo kitchen mid-setup on day one. Full dust containment in place: heavy-duty clear poly sheeting sealed floor to ceiling around the full cabinet zone, all seams taped tight, appliances masked with brown kraft paper and blue painter's tape, cabinet doors already removed and stacked neatly — each door tagged with a small white card label and a number visible. Masonite board covering the full hardwood floor. Two pairs of nitrile-gloved hands — dark brown skin tone — pressing tape firmly along the last seam at the cabinet box edge. Overhead kitchen work light bright and even. Camera at counter height (3.5ft) on a 35mm lens looking across the contained workspace. No faces, no brand logos on tools or tape. Commercial craft documentation photography, 4:3 composition. Clean, systematic, trustworthy.",
+        "negative": "cartoon, illustration, dirty space, brand logos, faces, unprotected floor, disorganized setup, staged styling, stock photo, HDR, vignette, AI artifacts",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "process-step-03-hand-sand",
+      "public_id": "process/step-03-hand-sand",
+      "page": "/ (homepage)",
+      "component": "index.astro process section",
+      "context": "Step 3 — Day 2 hand-sanding with cork block, no power tools",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "process",
+      "persona": "P3",
+      "awareness": "product-aware",
+      "lf_drives": ["LF3", "LF7"],
+      "shot_type": "commercial-craft",
+      "prompt": {
+        "positive": "Photorealistic commercial craft documentation photograph of two nitrile-gloved hands (dark brown skin tone) hand-sanding a flat-panel shaker cabinet door laid on a clean drop cloth on a workbench, using a cork sanding block wrapped in 120-grit sandpaper. The sanding motion is mid-stroke across the center panel of the door. The door surface shows the original honey-oak factory finish being keyed before priming — a slight scuff texture visible under raking work light. No power tools. Single overhead LED work light from above-left, casting a gentle raking shadow across the door surface to show the texture. Camera at workbench height (3.5ft) on a 50mm lens, door fills roughly two-thirds of the frame. No brand logos on cork block or sandpaper. Commercial craft documentation photography, shallow DOF with the sanding surface and cork block sharp, background workbench softly blurred. 4:3 composition.",
+        "negative": "cartoon, illustration, power sander, brand logos, faces, drop cloth absent, dirty workbench, staged styling, stock photo, HDR, vignette, AI artifacts",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "process-step-04-spray-finish",
+      "public_id": "process/step-04-spray-finish",
+      "page": "/ (homepage)",
+      "component": "index.astro process section",
+      "context": "Step 4 — 2K polyurethane HVLP spray application",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "asmr-mechanism",
+      "persona": "P3",
+      "awareness": "product-aware",
+      "lf_drives": ["LF3", "LF6"],
+      "shot_type": "commercial-craft",
+      "prompt": {
+        "positive": "Photorealistic macro commercial craft documentation photograph of an HVLP spray gun (handheld, no brand logo visible on the gun body) applying a glass-smooth coat of bone white (#F7F3EA) 2K polyurethane to a flat-panel shaker cabinet door suspended vertically on a spray rack in a clean spray enclosure. The wet coat is mid-application — the left half of the door surface shows the fresh wet edge catching a raking work light from the upper left, the right half still in the previous dry coat. The wet edge shows a controlled, factory-smooth lay — zero orange peel, zero runs. Camera at the same height as the door center (3.5ft) on an 85mm portrait lens, the spray nozzle tip and the wet door surface are in sharp focus, the spray gun body and background blurred. Close distance — door fills 70% of the frame. No faces, no brand logos on the spray gun. Commercial craft documentation photography, dramatic but controlled raking light from upper left. 4:3 composition.",
+        "negative": "cartoon, illustration, brand logos on spray gun, faces, messy overspray, orange peel texture in the finish, runs or sags in paint, staged styling, stock photo, HDR, AI artifacts",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "process-step-05-cure-walkthrough",
+      "public_id": "process/step-05-cure-walkthrough",
+      "page": "/ (homepage)",
+      "component": "index.astro process section",
+      "context": "Step 5 — final walkthrough, touch-up bottle, 2-year guarantee",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "founder-trust",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF3", "LF8", "LF5"],
+      "shot_type": "lifestyle",
+      "prompt": {
+        "positive": "Photorealistic candid lifestyle photograph of a finished Arlington colonial kitchen after cabinet refinishing — cabinets in deep forest green (#1E3934) factory-smooth matte 2K polyurethane, warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height reinstalled, white quartz countertop clean. On the counter near the edge sits a small labeled color-matched touch-up bottle (no readable text, just the shape and color) and a printed written fixed-price quote document face-up (no specific text readable, just the presence of a formal document). Camera at counter height (3.5ft) in a slight overhead angle on a 50mm lens looking across the counter toward the cabinet run, natural window light from the left. No people. The scene conveys: the job is finished, everything is accounted for, nothing was missed. Lifestyle photography, aspiration meets calm competence. 4:3 composition. No stock photo, no staged styling, no logos, no AI artifacts, no HDR.",
+        "negative": "cartoon, illustration, people, brand logos, fabricated text on documents, staged styling, stock photo, AI artifacts, HDR, vignette, lens flare, dirty counters",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "featured-somerville-cabinet",
+      "public_id": "featured/somerville-cabinet",
+      "page": "/ (homepage gallery)",
+      "component": "index.astro gallery grid",
+      "context": "Gallery tile — Cabinet refinishing, Somerville condo, deep forest green",
+      "dimensions": { "aspect": "3/4", "native_width": 600, "native_height": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P3",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF6", "LF4"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph in portrait orientation (3:4) of a compact Somerville triple-decker condo galley kitchen, 8-foot ceiling. Camera at the far end of the galley at standing eye-level (5.5ft) on a 35mm lens looking toward the window at the opposite end, capturing both runs of upper and lower cabinets in full. Cabinets refinished in deep forest green (#1E3934) factory-smooth matte 2K polyurethane, matte black cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop, natural light streaming in from the window ahead creating a backlit glow that illuminates the factory surface. No people, no staged items. Magazine-quality, design-forward, 3:4 portrait composition. The finish reads factory-smooth — controlled matte, not glossy-plastic. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, glossy-plastic finish, people, logos, ceiling cut off, barrel distortion, wide-angle distortion",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "3:4"
+      }
+    },
+
+    {
+      "id": "featured-cambridge-bathroom",
+      "public_id": "featured/cambridge-bathroom",
+      "page": "/ (homepage gallery)",
+      "component": "index.astro gallery grid",
+      "context": "Gallery tile — Bathroom refresh, Cambridge triple-decker, gut-free",
+      "dimensions": { "aspect": "3/4", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P3",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF5", "LF4"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph in portrait orientation (3:4) of a compact Cambridge triple-decker condo bathroom, 8-foot ceiling, gut-free refresh result. Camera at the doorway at standing eye-level (5.5ft) on a 24mm lens looking straight toward the back wall. White subway tile floor-to-ceiling in the wet zone, horizontal stacked bond, thin charcoal grout. Vanity cabinet refinished in navy shaker (#1B2A4A) factory-smooth matte 2K polyurethane, white rectangular undermount sink, brushed brass faucet and fixtures. Alcove tub-shower on the left with a straight curtain rod. Natural diffused light from a frosted window on the right wall. No people, no staged bath products. 3:4 portrait composition, magazine-quality editorial. No HDR, no vignette, no AI artifacts, no staged styling.",
+        "negative": "cartoon, illustration, staging, stock photo, AI artifacts, clawfoot tub, people, logos, grout darkening, caulk yellowing, multiple blown light sources",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "3:4"
+      }
+    },
+
+    {
+      "id": "featured-arlington-painting",
+      "public_id": "featured/arlington-painting",
+      "page": "/ (homepage gallery)",
+      "component": "index.astro gallery grid",
+      "context": "Gallery tile — Interior painting, Arlington condo, pre-listing refresh",
+      "dimensions": { "aspect": "3/4", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P2",
+      "awareness": "most-aware",
+      "lf_drives": ["LF1", "LF8", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph in portrait orientation (3:4) of a bright living room in an Arlington colonial, 9-foot ceiling, after interior painting for pre-listing. Camera at the corner at standing eye-level (5.5ft) on a 24mm lens. Walls freshly painted in bone white (#F7F3EA) semi-gloss, crisp bright white trim at the baseboard, two double-hung windows on the far wall streaming natural afternoon light. A basic sofa and coffee table in the same positions from before — no decorative staging. Ceiling uniformly fresh white, zero yellowing at any edge. Clean, airy, listing-ready. 3:4 portrait composition. No staged decor, no people, no logos. Interior design editorial, listing-grade photography. No HDR, no vignette, no AI artifacts.",
+        "negative": "cartoon, illustration, staged decor, stock photo, AI artifacts, patchy walls, visible brush marks, yellowing ceiling, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "3:4"
+      }
+    },
+
+    {
+      "id": "featured-medford-cabinet",
+      "public_id": "featured/medford-cabinet",
+      "page": "/ (homepage gallery)",
+      "component": "index.astro gallery grid",
+      "context": "Gallery tile — Cabinet refinishing, Medford condo conversion, bone white",
+      "dimensions": { "aspect": "3/4", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF6", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph in portrait orientation (3:4) of a Medford condo conversion kitchen, 8-foot ceiling, L-shaped layout. Camera at the doorway at standing eye-level (5.5ft) on a 35mm lens. Cabinets refinished in bone white (#F7F3EA) — COOL: slightly grey-white, no warm yellow tint — factory-smooth matte 2K polyurethane. Brushed nickel bar-pull hardware. Light gray quartz countertop. Single window above the sink on the far wall, natural morning light. Hardwood floor. No people, no staged items. Magazine-quality editorial photography, 3:4 portrait composition. The finish reads factory-smooth matte — zero brush marks, zero texture variation. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, warm creamy yellow tint on the cabinets (must be cool grey-white), people, logos, ceiling cut off, barrel distortion",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "3:4"
+      }
+    },
+
+    {
+      "id": "featured-malden-multi",
+      "public_id": "featured/malden-multi",
+      "page": "/ (homepage gallery)",
+      "component": "index.astro gallery grid",
+      "context": "Gallery tile — Cabinet refinishing, Malden 3-unit multi-family turnover",
+      "dimensions": { "aspect": "3/4", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P4",
+      "awareness": "most-aware",
+      "lf_drives": ["LF1", "LF3"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph in portrait orientation (3:4) of a clean rental unit kitchen in a Malden multifamily building, 8-foot ceiling. Camera at the kitchen doorway at standing eye-level (5.5ft) on a 35mm lens looking toward the back wall. Cabinets refinished in warm taupe (#9E8E7E) factory-smooth matte 2K polyurethane, brushed nickel bar-pull hardware, clean laminate countertop in light gray, white painted walls, overhead fluorescent tube light on, vinyl plank floor in light oak. Turnover-ready — immaculate, functional, professional. Single window above the sink. No people, no staged items. Commercial craft meets editorial photography, 3:4 portrait composition. Clean and dependable — not luxury, but clearly professional-grade. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, luxury staging, stock photo, AI artifacts, people, logos, dirty space, cluttered counters, HDR glow, dramatic vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "3:4"
+      }
+    },
+
+    {
+      "id": "featured-everett-bathroom",
+      "public_id": "featured/everett-bathroom",
+      "page": "/ (homepage gallery)",
+      "component": "index.astro gallery grid",
+      "context": "Gallery tile — Bathroom refresh, Everett condo board-approved update",
+      "dimensions": { "aspect": "3/4", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P4",
+      "awareness": "most-aware",
+      "lf_drives": ["LF1", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph in portrait orientation (3:4) of a compact Everett multifamily condo bathroom, 8-foot ceiling, board-approved refresh result. Camera at the doorway at standing eye-level (5.5ft) on a 24mm lens. Charcoal matte (#2C2C2C) vanity cabinet refinished in 2K polyurethane, white rectangular undermount sink, polished chrome fixtures, subway tile in warm taupe (#9E8E7E) horizontal stacked bond with white grout, clean and turnover-ready. Alcove tub-shower on the left. Overhead fluorescent light on, neutral and even. No people, no staged products. Clean, functional, professional rental-grade result. 3:4 portrait composition. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, grout darkening, caulk yellowing, clawfoot tub, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "3:4"
+      }
+    },
+
+    {
+      "id": "featured-woburn-painting",
+      "public_id": "featured/woburn-painting",
+      "page": "/ (homepage gallery)",
+      "component": "index.astro gallery grid",
+      "context": "Gallery tile — Interior painting, Woburn owner-occupied colonial refresh",
+      "dimensions": { "aspect": "3/4", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF5", "LF8", "LF6"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph in portrait orientation (3:4) of a Woburn 1960s colonial master bedroom after owner-occupied painting refresh, 9-foot ceiling. Camera at the corner at standing eye-level (5.5ft) on a 35mm lens looking diagonally toward the two windows on the far wall. Walls painted in warm taupe (#9E8E7E) eggshell, white ceiling uniformly fresh with zero yellowing at any edge or trim line, crisp white baseboard and window casings. Basic queen bed with a solid-color duvet and two pillows in the same position, a bedside table, natural afternoon light from the two windows. No decorative staging beyond the furniture. No people. Interior design editorial photography, restful and settled, 3:4 portrait composition. No staged styling, no logos, no AI artifacts, no HDR, no vignette.",
+        "negative": "cartoon, illustration, staged decor, stock photo, AI artifacts, patchy walls, brush marks, yellowing ceiling, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "3:4"
+      }
+    },
+
+    {
+      "id": "featured-winchester-kitchen",
+      "public_id": "featured/winchester-kitchen",
+      "page": "/ (homepage gallery)",
+      "component": "index.astro gallery grid",
+      "context": "Gallery tile — Kitchen refresh, Winchester cabinets + paint bundle",
+      "dimensions": { "aspect": "3/4", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF6", "LF8", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph in portrait orientation (3:4) of a Winchester colonial kitchen, 9-foot ceiling, cabinets-plus-painting bundle result. Camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens. Cabinets refinished in champagne (#E8D9B0) — WARM: distinctly gold-beige — factory-smooth matte 2K polyurethane, brushed nickel cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, quartz countertop in a warm cream tone, walls freshly painted in bone white (#F7F3EA) semi-gloss, ceiling white. L-shaped layout, three-wall with island. Warm natural late-afternoon light from two windows on the left wall, rendering the champagne finish with warm golden undertones. No people, no staged items. Magazine-quality interior design editorial photography, premium colonial feel. 3:4 portrait composition. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, cool grey-white cabinets (must read warm gold-beige), people, logos, ceiling cut off, barrel distortion",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "3:4"
+      }
+    },
+
+    {
+      "id": "cta-finished-kitchen-wide",
+      "public_id": "cta/finished-kitchen-wide",
+      "page": "/ (homepage CTA band background)",
+      "component": "index.astro close-CTA section",
+      "context": "Full-bleed background behind the final estimate CTA section",
+      "dimensions": { "aspect": "16/9", "native_width": 1600 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF5", "LF6"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior wide-angle photograph of an Arlington colonial kitchen fully transformed, 9-foot ceiling. Camera at the far doorway corner at standing eye-level (5.5ft) on a 24mm wide lens looking across the full L-shaped kitchen. Cabinets refinished in deep forest green (#1E3934) factory-smooth matte 2K polyurethane, warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop, white subway tile backsplash, warm natural late-morning window light from the window above the sink. The image is intended to be used as a full-bleed background with a dark semi-transparent overlay — it should read as beautiful and aspirational without competing with overlaid text. Horizontal composition fills the full 16:9 frame corner to corner. No people, no staged items. Interior design editorial photography, magazine-quality. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, text, ceiling cut off, barrel distortion, HDR glow, heavy vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "about-jeremiah-spraying",
+      "public_id": "about/jeremiah-spraying",
+      "page": "/about/",
+      "component": "about.astro",
+      "context": "Founder in action — spraying 2K polyurethane on a cabinet door",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "needs-real-capture",
+      "asset_type": "founder-trust",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF3", "LF6"],
+      "shot_type": "commercial-craft",
+      "notes": "Preferred: real photography of Jeremiah Ugbine on the job. If generating as AI stand-in, flag explicitly in manifest. Do not present synthetic founder as real photograph.",
+      "prompt": {
+        "positive": "Photorealistic commercial craft documentation photograph of a professional contractor — Black man, 30s, athletic build, clean navy work shirt with no logos, nitrile gloves — applying 2K polyurethane to a flat-panel shaker cabinet door with an HVLP spray gun in a clean spray enclosure. Mid-spray action: the wet coat is visibly laying on the door in a controlled left-to-right pass, raking work light from upper left catching the wet edge. Camera at 3.5ft (workbench height) on an 85mm portrait lens, looking slightly up at the door and the spray pass — face of contractor visible in profile at the edge of frame, slightly soft-focused, with the spray pass and wet door surface in sharp focus as the hero of the image. No brand logos on spray gun or shirt. Commercial craft documentation photography, 4:3 composition. Controlled, competent, owner-present storytelling.",
+        "negative": "cartoon, illustration, brand logos, unprotected floor, unsafe PPE, posed studio portrait, stock photo, AI artifacts, overspray mess, orange peel texture in finish, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — consider Higgsfield Soul/character reference if Jeremiah's photos are available",
+        "aspect_ratio": "4:3",
+        "higgsfield_notes": "If real photos of Jeremiah are available, upload via show_characters to create a Soul reference. Use the Soul as character consistency input for all founder media."
+      }
+    },
+
+    {
+      "id": "about-finished-cabinet-detail",
+      "public_id": "about/finished-cabinet-detail",
+      "page": "/about/",
+      "component": "about.astro",
+      "context": "Close-up detail shot of a finished 2K cabinet surface",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "asmr-mechanism",
+      "persona": "P1",
+      "awareness": "product-aware",
+      "lf_drives": ["LF3", "LF6"],
+      "shot_type": "commercial-craft",
+      "prompt": {
+        "positive": "Photorealistic extreme macro commercial craft photograph of a shaker-style flat-panel cabinet door surface finished in deep forest green (#1E3934) 2K polyurethane. Shot at 6–8 inches on a macro lens. Factory-smooth matte finish — subtle wood grain just barely visible beneath the paint under raking light. A gentle 45-degree raking work light from the upper left reveals the perfect surface planarity — zero brush marks, zero texture variation, zero orange peel. The faint shadow of the routed panel groove at the lower right edge of the frame confirms this is a cabinet door surface, not a paint chip. Fills the entire frame edge to edge. No text, no labels, no hands, no props. Commercial product photography, 4:3 composition. The finish reads factory-grade — controlled matte, chip-resistant, manufactured.",
+        "negative": "cartoon, illustration, paint chip feel, flat color rectangle, glossy sheen, wrong hex color, no wood grain visible, text or labels, hands, props, HDR, AI artifacts, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "about-client-handoff",
+      "public_id": "about/client-handoff",
+      "page": "/about/",
+      "component": "about.astro",
+      "context": "Client handoff moment — finished project, homeowner review",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "social-proof",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF3", "LF5"],
+      "shot_type": "lifestyle",
+      "prompt": {
+        "positive": "Photorealistic candid lifestyle photograph of a project handoff moment in a finished Arlington colonial kitchen — cabinets in deep forest green (#1E3934) factory-smooth matte 2K polyurethane, brass hardware, white quartz countertop. A homeowner (a woman, 45, standing at the counter looking at the cabinet run with a quiet satisfied expression, face slightly turned away from camera — no full-face portrait) and a contractor (gloved hands visible adjusting a cabinet door, only hands and one shoulder in frame). A printed written fixed-price quote and a small labeled touch-up bottle sit on the counter in the foreground. Natural morning window light from the left. Camera at counter height (3.5ft) on a 50mm lens. No staged staging, no posed smiles, no brand logos. Candid lifestyle photography, warm and human. 4:3 composition. No stock-photo feel, no AI artifacts, no HDR.",
+        "negative": "cartoon, illustration, posed smiles, stock photo, AI artifacts, brand logos, fabricated text on documents, staged styling, people with faces in sharp focus, HDR, vignette, multiple competing light sources",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "guarantee-finished-result",
+      "public_id": "guarantee/finished-result",
+      "page": "/guarantee/",
+      "component": "guarantee.astro",
+      "context": "Close-up of 2K polyurethane finish on a cabinet door — guarantee proof",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "asmr-mechanism",
+      "persona": "P1",
+      "awareness": "product-aware",
+      "lf_drives": ["LF3", "LF6"],
+      "shot_type": "commercial-craft",
+      "prompt": {
+        "positive": "Photorealistic macro commercial craft photograph of a shaker-style flat-panel cabinet door center panel surface, deep forest green (#1E3934) factory-smooth matte 2K polyurethane finish. Shot at 6–8 inches on a macro lens. Raking light from 45 degrees upper left — the raking light reveals the absolute planarity of the factory surface: zero brush marks, zero roller texture, zero orange peel, zero run marks. Subtle ghost of wood grain just barely visible beneath the matte finish. Faint shadow of the routed panel groove at one edge confirms this is a cabinet door, not a paint chip. Fills the entire frame. No text, no labels, no hands, no props. Commercial product photography standard, 4:3 composition. Reads as factory-grade manufacturing quality — the surface is the claim.",
+        "negative": "cartoon, illustration, paint chip feel, flat color rectangle without texture, glossy sheen, wrong hex, no grain visible, text, hands, props, AI artifacts, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "guarantee-touchup-kit",
+      "public_id": "guarantee/touchup-kit",
+      "page": "/guarantee/",
+      "component": "guarantee.astro",
+      "context": "Color-matched touch-up bottle — included at project close",
+      "dimensions": { "aspect": "1/1", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "product",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF3"],
+      "shot_type": "product",
+      "prompt": {
+        "positive": "Photorealistic commercial product photograph of a small cylindrical touch-up paint bottle (like a nail polish bottle in size, roughly 2 inches tall) on a clean bone white (#F7F3EA) surface, soft directional light from the upper left. The bottle is labeled with a hand-written label reading just a color swatch — a deep forest green (#1E3934) painted square and a handwritten project reference number, no other readable text, no brand logos. Contact shadow beneath the bottle confirms it is sitting on the surface. Bottle color matches deep forest green (#1E3934). Clean, minimal, purposeful — the kind of thing a professional leaves behind. 1:1 square composition. Commercial product photography, no complex background, no competing objects, no hands in frame. No brand logos on bottle cap or label, no fabricated text beyond the color swatch square.",
+        "negative": "cartoon, illustration, brand logos on bottle, floating product with no contact shadow, complex background, hands in frame, multiple shadows, color cast from background, fabricated text beyond color swatch, AI artifacts, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "1:1"
+      }
+    },
+
+    {
+      "id": "vs-replacement-before",
+      "public_id": "vs-replacement/before",
+      "page": "/cabinet-refinishing-vs-replacement/",
+      "component": "cabinet-refinishing-vs-replacement.astro",
+      "context": "Before state — dated oak builder-grade cabinets, Somerville",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "before-state",
+      "persona": "P3",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "documentary",
+      "pair_partner": "vs-replacement-after",
+      "prompt": {
+        "positive": "Photorealistic documentary interior photograph of a compact Somerville triple-decker condo kitchen, 8-foot ceiling, camera at the open doorway at standing eye-level (5.5ft) on a 35mm lens looking toward the back wall — galley layout with one run of upper and lower cabinets on the left wall and a short run above the range on the right wall, a window above the sink on the back wall. BEFORE state: builder-grade honey-oak cabinets, the oak finish yellowed unevenly with age — most noticeably in the upper-left corner of the upper cabinet run, scuff marks on the lower cabinets at kick height near the range (approximately 4 inches wide), laminate countertop in a light beige with one worn seam near the sink, fluorescent overhead strip light, linoleum floor in a dated pattern. Natural window light from above the sink, somewhat flat. No people. Honest documentary photography — specific, localized wear, not exaggerated or cartoonish. 4:3 composition.",
+        "negative": "cartoon, exaggerated damage, mold, structural collapse, flooding, pest evidence, uniform damage across entire surface, theatrical decay, stock photo, staged styling, AI artifacts, people, logos, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "vs-replacement-after",
+      "public_id": "vs-replacement/after",
+      "page": "/cabinet-refinishing-vs-replacement/",
+      "component": "cabinet-refinishing-vs-replacement.astro",
+      "context": "After state — same cabinets refinished in deep forest green 2K poly",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P3",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF8", "LF5"],
+      "shot_type": "editorial",
+      "pair_partner": "vs-replacement-before",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of the exact same Somerville triple-decker condo galley kitchen, 8-foot ceiling. ROOM ANCHOR — identical camera at the open doorway at standing eye-level (5.5ft) on a 35mm lens looking toward the back wall, same galley layout: one run of upper and lower cabinets on the left wall, short run above the range on the right wall, window above the sink on the back wall, same linoleum floor, same overhead light position. BLEMISHES FULLY RESOLVED: the honey-oak yellowing is gone — uniform deep forest green (#1E3934) factory-smooth matte 2K polyurethane finish; the scuff marks on the lower cabinet at kick height near the range are gone — clean even surface; the worn laminate countertop seam is gone — white quartz countertop. TRANSFORMATION: cabinets in deep forest green (#1E3934) matte 2K polyurethane, matte black cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop, natural morning window light from above the sink now rendering the finish with a soft controlled sheen. RESULT QUALITY: immaculate professional result. No people, no staged items. Interior design editorial photography, 4:3 composition.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, different room layout from before shot, glossy-plastic finish, retained defects from before state, people, logos, ceiling cut off, barrel distortion, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — use vs-replacement-before as reference image for spatial consistency",
+        "aspect_ratio": "4:3",
+        "higgsfield_notes": "Upload vs-replacement-before via media_upload → media_confirm. Pass returned media_id as reference to maintain room spatial anchor."
+      }
+    },
+
+    {
+      "id": "cost-refinish-kitchen",
+      "public_id": "cost/refinish-kitchen",
+      "page": "/cabinet-refinishing-vs-replacement/",
+      "component": "cabinet-refinishing-vs-replacement.astro",
+      "context": "Cost comparison — refinish result at $3K–$9K",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P2",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF1", "LF8"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a finished cabinet refinishing result in a Medford colonial kitchen, 9-foot ceiling. Camera at the doorway at standing eye-level (5.5ft) on a 35mm lens. Cabinets in bone white (#F7F3EA) — cool, slightly grey-white — factory-smooth matte 2K polyurethane, brushed nickel bar-pull hardware, white quartz countertop. Natural morning light from the window above the sink. Listing-grade and airy. No people, no staged items. Interior design editorial photography, 4:3 composition. The existing cabinet boxes are clearly preserved — no new cabinet frames, no new boxes — the transformation is in the finish only. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, warm yellow tint on cabinets, new cabinet boxes, full kitchen remodel appearance, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "cost-replace-kitchen",
+      "public_id": "cost/replace-kitchen",
+      "page": "/cabinet-refinishing-vs-replacement/",
+      "component": "cabinet-refinishing-vs-replacement.astro",
+      "context": "Cost comparison — full replacement at $20K–$50K",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "reference-product",
+      "persona": "P2",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF1"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a kitchen mid full-cabinet-replacement renovation — cabinets removed, raw plywood substructure and bare wall studs visible at the upper cabinet zone, new semi-assembled Ikea-style cabinet boxes staged in the middle of the floor, countertop ripped out showing raw plywood substrate, subfloor partially protected. A large dumpster visible through the exterior door in the background. Overhead work light. Camera at the doorway at standing eye-level (5.5ft) on a 35mm lens. No people. Documentary photography — honest, functional, messy in a realistic renovation way. Shows the real cost of full replacement: disruption, dumpster, structural exposure. 4:3 composition. No brand logos on the cabinet boxes. No stock photo, no AI artifacts, no HDR.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, brand logos on cabinet boxes, people, fabricated logos, HDR, vignette, structural collapse, unsafe conditions beyond normal renovation disruption",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "financing-aspirational-kitchen",
+      "public_id": "financing/aspirational-kitchen",
+      "page": "/financing/",
+      "component": "financing.astro — page hero background",
+      "context": "Hero background — aspirational kitchen result, financing CTA context",
+      "dimensions": { "aspect": "16/9", "native_width": 1600 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P3",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF5", "LF6"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a Somerville triple-decker condo kitchen, 8-foot ceiling, fully transformed. Camera at the open doorway corner at standing eye-level (5.5ft) on a 24mm wide lens, capturing the full run of cabinets. Cabinets refinished in navy shaker (#1B2A4A) factory-smooth matte 2K polyurethane, warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, light gray quartz countertop, white subway tile backsplash with thin charcoal grout. Natural morning window light from the window above the sink. No people, no staged items. 16:9 wide composition, subject fills frame corner to corner. Magazine-quality interior design editorial photography. Intended as a full-bleed background with overlay — reads as beautiful and aspirational without competing with text. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, ceiling cut off, barrel distortion, HDR glow, heavy vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "financing-small-kitchen",
+      "public_id": "financing/small-kitchen",
+      "page": "/financing/",
+      "component": "financing.astro — tier card (starting at)",
+      "context": "Small kitchen tier — entry-level refinishing scope, ~$2K",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P3",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a compact Boston studio condo kitchenette, 8-foot ceiling — a small, single-wall galley with upper and lower cabinets on one wall only, roughly 8 linear feet total. Cabinets refinished in soft sage (#8FAF8A) factory-smooth matte 2K polyurethane, matte black bar-pull hardware, white laminate countertop clean and streak-free, white painted walls, single window above the sink. Camera at 8 feet back at standing eye-level (5.5ft) on a 35mm lens looking straight at the cabinet wall. Bright natural window light. No people, no staged items. Interior design editorial photography, 4:3 composition. The small scope is honest — this is a kitchenette, not a full kitchen — but the result is beautiful. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, ceiling cut off, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "financing-full-kitchen",
+      "public_id": "financing/full-kitchen",
+      "page": "/financing/",
+      "component": "financing.astro — tier card (mid-range)",
+      "context": "Full kitchen tier — standard refinishing scope, ~$4K–$6K",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF6", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a standard L-shaped kitchen in a Medford colonial condo, 9-foot ceiling. Cabinets refinished in deep forest green (#1E3934) factory-smooth matte 2K polyurethane, warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop, subway tile backsplash in bone white with thin charcoal grout. Camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens. Natural morning window light from the window above the sink. No people, no staged items. Interior design editorial photography, 4:3 composition. A full standard kitchen — uppers and lowers on two walls, one window wall, a range on the right. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, ceiling cut off, barrel distortion, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "financing-large-kitchen",
+      "public_id": "financing/large-kitchen",
+      "page": "/financing/",
+      "component": "financing.astro — tier card (large scope)",
+      "context": "Large kitchen tier — full colonial scope with island, ~$7K–$9.5K",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF6", "LF8", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a large three-wall-with-island kitchen in a Winchester colonial, 9-foot ceiling. Cabinets refinished in deep forest green (#1E3934) factory-smooth matte 2K polyurethane, warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop with island waterfall edge, farmhouse sink below a window on the far wall, subway tile backsplash in bone white with thin charcoal grout. Camera at the doorway at standing eye-level (5.5ft) on a 24mm wide lens looking toward the island and the back wall. Warm natural morning light from two windows. No people, no staged items. Interior design editorial photography, 4:3 composition. This is the large scope — three walls of cabinetry plus an island — the premium tier. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, ceiling cut off, barrel distortion, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "swatch-deep-forest",
+      "public_id": "colors/swatch-deep-forest",
+      "page": "/colors/",
+      "component": "colors.astro",
+      "context": "Brand color swatch — Deep Forest #1E3934",
+      "dimensions": { "aspect": "1/1", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "color-swatch",
+      "persona": "all",
+      "awareness": "product-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "product",
+      "prompt": {
+        "positive": "Photorealistic macro product photograph of a flat-panel shaker cabinet door center panel surface, deep forest green (#1E3934) 2K polyurethane factory-smooth matte finish, rendered as a pure color swatch. Camera directly overhead at 90 degrees, completely perpendicular — zero parallax. Single large diffused softbox from directly above, shadowless and uniform, rendering the color flat and true-to-chip. The entire 1:1 frame filled edge-to-edge with the painted door surface — no surrounding objects, no hands, no labels, no background. The color reads exactly as deep forest green (#1E3934): a deep, slightly teal-toned dark green, not black, not military olive. Subtle wood grain beneath the matte finish confirms paint on wood. Commercial color swatch photography standard. 1:1 square.",
+        "negative": "cartoon, illustration, color shift from correct hex, glossy sheen, orange peel, brush marks, text, labels, hands, props, background color contamination, shadows, AI artifacts, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — high-precision image model for color accuracy",
+        "aspect_ratio": "1:1",
+        "color_hex": "#1E3934",
+        "color_name": "Deep Forest"
+      }
+    },
+
+    {
+      "id": "swatch-bone-white",
+      "public_id": "colors/swatch-bone-white",
+      "page": "/colors/",
+      "component": "colors.astro",
+      "context": "Brand color swatch — Bone White #F7F3EA",
+      "dimensions": { "aspect": "1/1", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "color-swatch",
+      "persona": "all",
+      "awareness": "product-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "product",
+      "prompt": {
+        "positive": "Photorealistic macro product photograph of a flat-panel shaker cabinet door center panel surface, bone white (#F7F3EA) 2K polyurethane factory-smooth matte finish. Camera directly overhead at 90 degrees, zero parallax. Single large diffused softbox from directly above, uniform and shadowless. Entire 1:1 frame filled edge-to-edge. Color reads exactly as bone white (#F7F3EA): a warm off-white with slight cream undertone — NOT a cool bright white, not cream yellow. Warm and quiet. Subtle wood grain beneath the matte finish. Commercial color swatch photography standard. 1:1 square.",
+        "negative": "cartoon, illustration, color shift to cool pure white or warm yellow, text, labels, hands, background contamination, shadows, glossy sheen, AI artifacts, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "1:1",
+        "color_hex": "#F7F3EA",
+        "color_name": "Bone White"
+      }
+    },
+
+    {
+      "id": "swatch-soft-sage",
+      "public_id": "colors/swatch-soft-sage",
+      "page": "/colors/",
+      "component": "colors.astro",
+      "context": "Brand color swatch — Soft Sage #8FAF8A",
+      "dimensions": { "aspect": "1/1", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "color-swatch",
+      "persona": "all",
+      "awareness": "product-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "product",
+      "prompt": {
+        "positive": "Photorealistic macro product photograph of a flat-panel shaker cabinet door center panel surface, soft sage (#8FAF8A) 2K polyurethane factory-smooth matte finish. Camera directly overhead at 90 degrees, zero parallax. Single large diffused softbox from directly above, uniform and shadowless. Entire 1:1 frame filled edge-to-edge. Color reads exactly as soft sage (#8FAF8A): a muted, desaturated sage green — medium value, not dark, not bright, not yellow-green, not gray-green. Dusty botanical herb tone. Subtle wood grain beneath. Commercial color swatch photography standard. 1:1 square.",
+        "negative": "cartoon, illustration, too saturated, too dark or too light, yellow-green or gray contamination, text, labels, hands, background, shadows, glossy sheen, AI artifacts, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "1:1",
+        "color_hex": "#8FAF8A",
+        "color_name": "Soft Sage"
+      }
+    },
+
+    {
+      "id": "swatch-charcoal-matte",
+      "public_id": "colors/swatch-charcoal-matte",
+      "page": "/colors/",
+      "component": "colors.astro",
+      "context": "Brand color swatch — Charcoal Matte #2C2C2C",
+      "dimensions": { "aspect": "1/1", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "color-swatch",
+      "persona": "all",
+      "awareness": "product-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "product",
+      "prompt": {
+        "positive": "Photorealistic macro product photograph of a flat-panel shaker cabinet door center panel surface, charcoal matte (#2C2C2C) 2K polyurethane factory-smooth matte finish. Camera directly overhead at 90 degrees, zero parallax. Single large diffused softbox from directly above, uniform and shadowless. Entire 1:1 frame filled edge-to-edge. Color reads exactly as charcoal matte (#2C2C2C): a very dark neutral gray, almost-black but with clear warmth and gray identity — not black (#0A0A0A), not cool steel gray. Matte finish means no specular highlight. Subtle wood grain beneath. Commercial color swatch photography standard. 1:1 square.",
+        "negative": "cartoon, illustration, pure black, glossy sheen or specular highlight, text, labels, hands, background, shadows, cool blue-gray tint, AI artifacts, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "1:1",
+        "color_hex": "#2C2C2C",
+        "color_name": "Charcoal Matte"
+      }
+    },
+
+    {
+      "id": "swatch-navy-shaker",
+      "public_id": "colors/swatch-navy-shaker",
+      "page": "/colors/",
+      "component": "colors.astro",
+      "context": "Brand color swatch — Navy Shaker #1B2A4A",
+      "dimensions": { "aspect": "1/1", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "color-swatch",
+      "persona": "all",
+      "awareness": "product-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "product",
+      "prompt": {
+        "positive": "Photorealistic macro product photograph of a flat-panel shaker cabinet door center panel surface, navy shaker (#1B2A4A) 2K polyurethane factory-smooth matte finish. Camera directly overhead at 90 degrees, zero parallax. Single large diffused softbox from directly above, uniform and shadowless. Entire 1:1 frame filled edge-to-edge. Color reads exactly as navy shaker (#1B2A4A): a deep, dark navy blue — clearly blue, not black, not teal, not indigo. Classic painted navy kitchen cabinetry tone with depth. Matte finish with no specular highlight. Subtle wood grain beneath. Commercial color swatch photography standard. 1:1 square.",
+        "negative": "cartoon, illustration, black, teal or green contamination, purple shift, glossy sheen, text, labels, hands, background, shadows, AI artifacts, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "1:1",
+        "color_hex": "#1B2A4A",
+        "color_name": "Navy Shaker"
+      }
+    },
+
+    {
+      "id": "swatch-warm-taupe",
+      "public_id": "colors/swatch-warm-taupe",
+      "page": "/colors/",
+      "component": "colors.astro",
+      "context": "Brand color swatch — Warm Taupe #9E8E7E",
+      "dimensions": { "aspect": "1/1", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "color-swatch",
+      "persona": "all",
+      "awareness": "product-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "product",
+      "prompt": {
+        "positive": "Photorealistic macro product photograph of a flat-panel shaker cabinet door center panel surface, warm taupe (#9E8E7E) 2K polyurethane factory-smooth matte finish. Camera directly overhead at 90 degrees, zero parallax. Single large diffused softbox from directly above, uniform and shadowless. Entire 1:1 frame filled edge-to-edge. Color reads exactly as warm taupe (#9E8E7E): a mid-value warm brownish-gray — clearly warmer than cool gray, not as brown as khaki, sandy-warm base tone. Matte finish. Subtle wood grain beneath. Commercial color swatch photography standard. 1:1 square.",
+        "negative": "cartoon, illustration, cool gray contamination, too brown or too beige, text, labels, hands, background, shadows, glossy sheen, AI artifacts, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "1:1",
+        "color_hex": "#9E8E7E",
+        "color_name": "Warm Taupe"
+      }
+    },
+
+    {
+      "id": "swatch-matte-black",
+      "public_id": "colors/swatch-matte-black",
+      "page": "/colors/",
+      "component": "colors.astro",
+      "context": "Brand color swatch — Matte Black #0A0A0A",
+      "dimensions": { "aspect": "1/1", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "color-swatch",
+      "persona": "all",
+      "awareness": "product-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "product",
+      "prompt": {
+        "positive": "Photorealistic macro product photograph of a flat-panel shaker cabinet door center panel surface, matte black (#0A0A0A) 2K polyurethane factory-smooth matte finish. Camera directly overhead at 90 degrees, zero parallax. Single large diffused softbox from directly above, uniform and shadowless. Entire 1:1 frame filled edge-to-edge. Color reads as near-absolute matte black (#0A0A0A): no specular highlight, no gloss, an even flat absorptive surface with only the faintest diffuse response to overhead softbox confirming matte-painted-wood. Subtle wood grain nearly invisible but barely present. Critical: reads as black with no gray identity — distinct from charcoal (#2C2C2C). Commercial color swatch photography standard. 1:1 square.",
+        "negative": "cartoon, illustration, glossy sheen or any specular highlight, gray identity, charcoal appearance, text, labels, hands, background, shadows, AI artifacts, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — high-precision model required for near-black",
+        "aspect_ratio": "1:1",
+        "color_hex": "#0A0A0A",
+        "color_name": "Matte Black"
+      }
+    },
+
+    {
+      "id": "swatch-champagne",
+      "public_id": "colors/swatch-champagne",
+      "page": "/colors/",
+      "component": "colors.astro",
+      "context": "Brand color swatch — Champagne #E8D9B0",
+      "dimensions": { "aspect": "1/1", "native_width": 600 },
+      "status": "placeholder",
+      "asset_type": "color-swatch",
+      "persona": "all",
+      "awareness": "product-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "product",
+      "prompt": {
+        "positive": "Photorealistic macro product photograph of a flat-panel shaker cabinet door center panel surface, champagne (#E8D9B0) 2K polyurethane factory-smooth matte finish. Camera directly overhead at 90 degrees, zero parallax. Single large diffused softbox from directly above, uniform and shadowless. Entire 1:1 frame filled edge-to-edge. Color reads exactly as champagne (#E8D9B0): a light, warm gold-beige — clearly warmer than bone white (#F7F3EA), with a golden sandy warmth reminiscent of warm wheat. Not cream, not yellow, not beige-gray — warm gold-sand. Matte finish. Subtle wood grain beneath. Commercial color swatch photography standard. 1:1 square.",
+        "negative": "cartoon, illustration, cool shift, too yellow, cream without gold undertone, gray contamination, text, labels, hands, background, shadows, glossy sheen, AI artifacts, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "1:1",
+        "color_hex": "#E8D9B0",
+        "color_name": "Champagne"
+      }
+    },
+
+    {
+      "id": "town-medford-hero",
+      "public_id": "areas/medford-hero",
+      "page": "/cabinet-refinishing-medford/",
+      "component": "cabinet-refinishing-[town].astro — town hero",
+      "context": "Medford town page hero — P1 colonial, cabinet refinishing",
+      "dimensions": { "aspect": "16/9", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P1",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF8", "LF6", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a Medford 1950s colonial kitchen, 9-foot ceiling, after cabinet refinishing. Camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens. Cabinets in bone white (#F7F3EA) — cool slightly-grey — factory-smooth matte 2K polyurethane, brushed nickel bar-pull hardware, light gray quartz countertop, natural morning window light. L-shaped layout, hardwood floor. No people, no staged items. Interior design editorial photography, 16:9 hero format. No HDR, no vignette, no AI artifacts, no stock-photo feel.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, warm yellow tint on cabinets, people, logos, ceiling cut off, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "town-medford-before",
+      "public_id": "projects/medford-cabinet-01-before",
+      "page": "/cabinet-refinishing-medford/",
+      "component": "cabinet-refinishing-[town].astro — project before",
+      "context": "Medford B/A pair — before state, dated oak, P1 colonial",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "before-state",
+      "persona": "P1",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "documentary",
+      "pair_partner": "town-medford-after",
+      "prompt": {
+        "positive": "Photorealistic documentary interior photograph of a Medford colonial kitchen, 9-foot ceiling, before state. Camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens. Honey-oak builder-grade cabinets yellowed unevenly with age — the upper-right cabinet panel near the range hood shows the most yellowing with an amber cast, a grease stain visible along the upper rail at the range hood surround approximately 6 inches wide and 2 inches tall. Laminate countertop in light beige with a worn edge seam at the corner near the range. Fluorescent strip light overhead. No people. Honest documentary, specific and localized. 4:3 composition.",
+        "negative": "cartoon, exaggerated damage, mold, structural issues, theatrical decay, staged styling, stock photo, AI artifacts, people, logos, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-medford-after",
+      "public_id": "projects/medford-cabinet-01-after",
+      "page": "/cabinet-refinishing-medford/",
+      "component": "cabinet-refinishing-[town].astro — project after",
+      "context": "Medford B/A pair — after state, bone white 2K poly, same camera",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF6"],
+      "shot_type": "editorial",
+      "pair_partner": "town-medford-before",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of the same Medford colonial kitchen, same camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens, same layout. BLEMISHES FULLY RESOLVED: oak yellowing gone — uniform bone white (#F7F3EA) cool-grey matte 2K polyurethane; grease stain at the range hood rail gone — clean even surface; worn laminate seam gone — light gray quartz. TRANSFORMATION: brushed nickel bar-pull hardware, natural morning window light. RESULT QUALITY: factory-smooth, immaculate. No people, no staged items. Interior design editorial photography, 4:3 composition.",
+        "negative": "cartoon, illustration, warm yellow tint on cabinets, staged styling, stock photo, AI artifacts, different room layout, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — use town-medford-before as reference",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-malden-hero",
+      "public_id": "areas/malden-hero",
+      "page": "/cabinet-refinishing-malden/",
+      "component": "cabinet-refinishing-[town].astro — town hero",
+      "context": "Malden town page hero — P3/P4 multifamily, rental turnover",
+      "dimensions": { "aspect": "16/9", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P4",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF1", "LF3"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a Malden 3-unit multifamily kitchen, 8-foot ceiling, after cabinet refinishing and interior painting. Camera at the open doorway at standing eye-level (5.5ft) on a 35mm lens. Cabinets in warm taupe (#9E8E7E) factory-smooth matte 2K polyurethane, brushed nickel bar-pull hardware, laminate countertop in light gray, freshly painted bone white (#F7F3EA) semi-gloss walls, vinyl plank floor in light oak. Turnover-ready. Overhead fluorescent light, natural window light supplementing. No people, no staged items. Commercial craft meets editorial photography, 16:9 hero format. No HDR, no vignette, no AI artifacts.",
+        "negative": "cartoon, illustration, luxury staging, stock photo, AI artifacts, people, logos, dirty space, HDR glow",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "town-malden-before",
+      "public_id": "projects/malden-painting-01-before",
+      "page": "/cabinet-refinishing-malden/",
+      "component": "cabinet-refinishing-[town].astro — project before",
+      "context": "Malden B/A pair — before state, worn rental unit",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "before-state",
+      "persona": "P4",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF1"],
+      "shot_type": "documentary",
+      "pair_partner": "town-malden-after",
+      "prompt": {
+        "positive": "Photorealistic documentary interior photograph of a Malden rental unit kitchen, 8-foot ceiling, before state. Camera at the doorway at standing eye-level (5.5ft) on a 35mm lens. Honey-oak builder-grade cabinets, one lower cabinet door with a 2-inch paint chip at the lower-left corner near the kick plate — exposing raw MDF, dark spot on the raw edge. Walls in dated off-white with two scuff marks at counter height approximately 4 inches wide each, 30 inches above the floor. Laminate countertop with a 3-inch burn mark near the range. Linoleum floor with wear pattern at the sink. Fluorescent overhead light. No people. Honest documentary, rental turnover condition. 4:3 composition.",
+        "negative": "cartoon, exaggerated damage, mold, structural issues, theatrical decay, staged styling, stock photo, AI artifacts, people, logos, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-malden-after",
+      "public_id": "projects/malden-painting-01-after",
+      "page": "/cabinet-refinishing-malden/",
+      "component": "cabinet-refinishing-[town].astro — project after",
+      "context": "Malden B/A pair — after state, warm taupe cabinets + painted walls, same camera",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P4",
+      "awareness": "most-aware",
+      "lf_drives": ["LF1", "LF3"],
+      "shot_type": "editorial",
+      "pair_partner": "town-malden-before",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of the same Malden rental unit kitchen, same camera at the doorway at standing eye-level (5.5ft) on a 35mm lens, same layout. BLEMISHES FULLY RESOLVED: paint chip at lower-left cabinet door corner gone — warm taupe (#9E8E7E) 2K polyurethane uniform edge to edge; wall scuff marks gone — bone white (#F7F3EA) semi-gloss freshly painted; burn mark near range gone — laminate countertop in clean light gray. TRANSFORMATION: brushed nickel bar-pull hardware, vinyl plank floor clean. RESULT QUALITY: turnover-ready, professional. No people, no staged items. 4:3 composition.",
+        "negative": "cartoon, illustration, luxury staging, staged styling, stock photo, AI artifacts, retained defects, different room layout, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — use town-malden-before as reference",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-everett-hero",
+      "public_id": "areas/everett-hero",
+      "page": "/cabinet-refinishing-everett/",
+      "component": "cabinet-refinishing-[town].astro — town hero",
+      "context": "Everett town page hero — P4 landlord, bathroom refresh",
+      "dimensions": { "aspect": "16/9", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P4",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF1", "LF3"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a compact Everett condo bathroom, 8-foot ceiling, after gut-free refresh for landlord turnover. Camera at the doorway at standing eye-level (5.5ft) on a 24mm lens. Vanity in charcoal matte (#2C2C2C) 2K polyurethane, white rectangular undermount sink, polished chrome fixtures, subway tile in warm taupe (#9E8E7E) horizontal stacked bond with white grout, alcove tub-shower on the left. Overhead fluorescent light, even and clean. Turnover-ready, professional. No people, no staged products. 16:9 hero format, no HDR, no vignette, no AI artifacts.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, grout darkening, caulk yellowing, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "town-everett-before",
+      "public_id": "projects/everett-bathroom-01-before",
+      "page": "/cabinet-refinishing-everett/",
+      "component": "cabinet-refinishing-[town].astro — project before",
+      "context": "Everett B/A pair — bathroom before state, rental turnover wear",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "before-state",
+      "persona": "P4",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF1"],
+      "shot_type": "documentary",
+      "pair_partner": "town-everett-after",
+      "prompt": {
+        "positive": "Photorealistic documentary interior photograph of a compact Everett rental condo bathroom, 8-foot ceiling, before state. Camera at the doorway at standing eye-level (5.5ft) on a 24mm lens. Dated white builder-grade vanity cabinet, worn laminate peeling at the bottom drawer corner — a 3-inch strip of edge banding lifting, raw particleboard edge darkened from moisture. Faucet in chrome with lime-scale ring buildup at the base of both handles. Tub surround tile grout in the wet zone darkened to gray in the horizontal grout lines on the left two tiles of the middle row. Caulk at the tub-wall corner yellowed and separating in one 8-inch segment. Fluorescent strip light on. No people. Honest documentary, localized. 4:3 composition.",
+        "negative": "cartoon, exaggerated damage, mold, sewage, structural collapse, theatrical decay, staged styling, stock photo, AI artifacts, people, logos, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-everett-after",
+      "public_id": "projects/everett-bathroom-01-after",
+      "page": "/cabinet-refinishing-everett/",
+      "component": "cabinet-refinishing-[town].astro — project after",
+      "context": "Everett B/A pair — bathroom after state, vanity refinished, same camera",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P4",
+      "awareness": "most-aware",
+      "lf_drives": ["LF1", "LF3"],
+      "shot_type": "editorial",
+      "pair_partner": "town-everett-before",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of the same Everett rental condo bathroom, same camera at the doorway at standing eye-level (5.5ft) on a 24mm lens, same layout. BLEMISHES FULLY RESOLVED: peeling laminate at vanity drawer corner gone — charcoal matte (#2C2C2C) 2K polyurethane uniform edge to edge; lime-scale faucet buildup gone — polished chrome clean; darkened grout lines in wet zone gone — re-grouted, clean uniform white; yellowed separated caulk at tub-wall corner gone — fresh bright white caulk bead continuous. TRANSFORMATION: charcoal matte (#2C2C2C) vanity, polished chrome hardware, clean white tile. RESULT QUALITY: turnover-ready, professional. No people, no staged products. 4:3 composition.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, retained defects, different room layout, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — use town-everett-before as reference",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-arlington-hero",
+      "public_id": "areas/arlington-hero",
+      "page": "/cabinet-refinishing-arlington/",
+      "component": "cabinet-refinishing-[town].astro — town hero",
+      "context": "Arlington town page hero — P1 equity-rich colonial, premium refinish",
+      "dimensions": { "aspect": "16/9", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P1",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF8", "LF6", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of an Arlington 1950s colonial kitchen, 9-foot ceiling, after premium cabinet refinishing. Camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens. L-shaped layout, cabinets in deep forest green (#1E3934) factory-smooth matte 2K polyurethane, warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop, white subway tile backsplash with thin charcoal grout, hardwood floor. Natural morning window light. No people, no staged items. Magazine-quality interior design editorial photography, 16:9 hero format. No HDR, no vignette, no AI artifacts.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, ceiling cut off, barrel distortion, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "town-arlington-before",
+      "public_id": "projects/arlington-painting-01-before",
+      "page": "/cabinet-refinishing-arlington/",
+      "component": "cabinet-refinishing-[town].astro — project before",
+      "context": "Arlington B/A pair — before state, dated honey-oak colonial",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "before-state",
+      "persona": "P1",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "documentary",
+      "pair_partner": "town-arlington-after",
+      "prompt": {
+        "positive": "Photorealistic documentary interior photograph of an Arlington colonial kitchen, 9-foot ceiling, before state. Camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens. L-shaped honey-oak builder-grade cabinets yellowed unevenly — the two upper cabinet doors to the left of the range hood show the most yellowing, a noticeably darker amber. The lower cabinet door to the right of the dishwasher has a scuff mark approximately 3 inches wide at pull height from foot contact over years. Laminate countertop in speckled almond with one edge seam visible near the sink corner. Fluorescent ceiling strip light. No people. Honest documentary, localized and specific. 4:3 composition.",
+        "negative": "cartoon, exaggerated damage, mold, structural issues, theatrical decay, staged styling, stock photo, AI artifacts, people, logos, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-arlington-after",
+      "public_id": "projects/arlington-painting-01-after",
+      "page": "/cabinet-refinishing-arlington/",
+      "component": "cabinet-refinishing-[town].astro — project after",
+      "context": "Arlington B/A pair — after state, deep forest green 2K poly, same camera",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF6"],
+      "shot_type": "editorial",
+      "pair_partner": "town-arlington-before",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of the same Arlington colonial kitchen, same camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens, same L-shaped layout. BLEMISHES FULLY RESOLVED: uneven yellowing on upper cabinet doors gone — uniform deep forest green (#1E3934) matte 2K polyurethane; scuff mark at pull height on lower cabinet door gone — clean even surface. TRANSFORMATION: warm brass cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop, white subway tile backsplash with thin charcoal grout. RESULT QUALITY: magazine-quality, immaculate. No people, no staged items. Interior design editorial photography, 4:3 composition.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, retained defects, different room layout, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — use town-arlington-before as reference",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-somerville-hero",
+      "public_id": "areas/somerville-hero",
+      "page": "/cabinet-refinishing-somerville/",
+      "component": "cabinet-refinishing-[town].astro — town hero",
+      "context": "Somerville town page hero — P3 triple-decker condo, compact galley",
+      "dimensions": { "aspect": "16/9", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P3",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF8", "LF5", "LF4"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a compact Somerville triple-decker condo galley kitchen, 8-foot ceiling, after cabinet refinishing. Camera at the far end of the galley at standing eye-level (5.5ft) on a 35mm lens looking toward the window at the opposite end, capturing both runs of upper and lower cabinets. Cabinets in deep forest green (#1E3934) factory-smooth matte 2K polyurethane, matte black cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop. Natural light from the window ahead. No people, no staged items. Interior design editorial photography, 16:9 hero format. No HDR, no vignette, no AI artifacts.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, ceiling cut off, barrel distortion, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "town-somerville-before",
+      "public_id": "projects/somerville-cabinet-01-before",
+      "page": "/cabinet-refinishing-somerville/",
+      "component": "cabinet-refinishing-[town].astro — project before",
+      "context": "Somerville B/A pair — before state, compact galley, P3 triple-decker",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "before-state",
+      "persona": "P3",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "documentary",
+      "pair_partner": "town-somerville-after",
+      "prompt": {
+        "positive": "Photorealistic documentary interior photograph of a compact Somerville triple-decker galley kitchen, 8-foot ceiling, before state. Camera at the far end of the galley at standing eye-level (5.5ft) on a 35mm lens looking toward the single window above the sink. Both runs of upper and lower cabinets in dated honey-oak, yellowed unevenly. The upper cabinet door second from the right on the left run has a chip at the top edge approximately 1.5 inches wide, raw MDF visible. The lower cabinet drawer face on the right run near the range has a 4-inch horizontal scratch at mid-height. Laminate countertop in almond with worn edge at the corner. Linoleum floor. Fluorescent strip overhead. No people. Honest documentary, localized defects. 4:3 composition.",
+        "negative": "cartoon, exaggerated damage, mold, structural issues, theatrical decay, staged styling, stock photo, AI artifacts, people, logos, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-somerville-after",
+      "public_id": "projects/somerville-cabinet-01-after",
+      "page": "/cabinet-refinishing-somerville/",
+      "component": "cabinet-refinishing-[town].astro — project after",
+      "context": "Somerville B/A pair — after state, deep forest green, same galley",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P3",
+      "awareness": "most-aware",
+      "lf_drives": ["LF8", "LF5"],
+      "shot_type": "editorial",
+      "pair_partner": "town-somerville-before",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of the same Somerville triple-decker galley kitchen, same camera at the far end looking toward the window on a 35mm lens, same layout. BLEMISHES FULLY RESOLVED: chip at upper cabinet door top edge gone — deep forest green (#1E3934) 2K polyurethane uniform edge to edge; horizontal scratch on lower drawer face gone — clean even surface. TRANSFORMATION: deep forest green (#1E3934) factory-smooth matte 2K polyurethane on all doors, matte black cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop. RESULT QUALITY: design-forward, magazine quality. No people, no staged items. Interior design editorial photography, 4:3 composition.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, retained defects, different room layout, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — use town-somerville-before as reference",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-cambridge-hero",
+      "public_id": "areas/cambridge-hero",
+      "page": "/cabinet-refinishing-cambridge/",
+      "component": "cabinet-refinishing-[town].astro — town hero",
+      "context": "Cambridge town page hero — P2/P3, pre-sale or condo refresh",
+      "dimensions": { "aspect": "16/9", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P2",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF1", "LF8", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a Cambridge Victorian triple-decker condo kitchen, 8-foot ceiling, after cabinet refinishing for pre-listing. Camera at the doorway at standing eye-level (5.5ft) on a 35mm lens. Galley-style layout, cabinets in bone white (#F7F3EA) cool-grey factory-smooth matte 2K polyurethane, brushed nickel bar-pull hardware, white quartz countertop, subway tile backsplash in bone white with thin charcoal grout. Natural afternoon window light from a window on the left wall. No people, no staged items. Listing-ready, airy, aspirational. Interior design editorial photography, 16:9 hero format. No HDR, no vignette, no AI artifacts.",
+        "negative": "cartoon, illustration, warm yellow-tinted cabinets, staged styling, stock photo, AI artifacts, people, logos, ceiling cut off, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "town-cambridge-before",
+      "public_id": "projects/cambridge-cabinet-01-before",
+      "page": "/cabinet-refinishing-cambridge/",
+      "component": "cabinet-refinishing-[town].astro — project before",
+      "context": "Cambridge B/A pair — before state, Victorian triple-decker, dated paint",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "before-state",
+      "persona": "P2",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF8", "LF1"],
+      "shot_type": "documentary",
+      "pair_partner": "town-cambridge-after",
+      "prompt": {
+        "positive": "Photorealistic documentary interior photograph of a Cambridge Victorian triple-decker condo kitchen, 8-foot ceiling, before state. Camera at the doorway at standing eye-level (5.5ft) on a 35mm lens. Galley-style layout, white-painted MDF builder-grade cabinets from the late 1990s — paint yellowed and chalky, visible crazing on the lower-left lower-cabinet door panel — a 4-inch network of paint crazing cracks centered on the panel. The upper-right cabinet door has a finger-shaped discoloration near the pull from years of grease contact. Fluorescent strip overhead. Linoleum floor. No people. Honest documentary, localized defects. 4:3 composition.",
+        "negative": "cartoon, exaggerated damage, mold, structural issues, theatrical decay, staged styling, stock photo, AI artifacts, people, logos, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-cambridge-after",
+      "public_id": "projects/cambridge-cabinet-01-after",
+      "page": "/cabinet-refinishing-cambridge/",
+      "component": "cabinet-refinishing-[town].astro — project after",
+      "context": "Cambridge B/A pair — after state, bone white 2K poly, same camera",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P2",
+      "awareness": "most-aware",
+      "lf_drives": ["LF1", "LF8"],
+      "shot_type": "editorial",
+      "pair_partner": "town-cambridge-before",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of the same Cambridge Victorian galley kitchen, same camera at the doorway at standing eye-level (5.5ft) on a 35mm lens, same layout. BLEMISHES FULLY RESOLVED: paint crazing at lower-left lower-cabinet panel gone — bone white (#F7F3EA) 2K polyurethane uniform and smooth; grease discoloration near the upper-right cabinet pull gone — clean even surface. TRANSFORMATION: bone white (#F7F3EA) cool-grey matte 2K polyurethane throughout, brushed nickel bar-pull hardware, white quartz countertop, subway tile backsplash. Natural afternoon window light. RESULT QUALITY: listing-ready, airy, immaculate. No people, no staged items. Interior design editorial photography, 4:3 composition.",
+        "negative": "cartoon, illustration, warm yellow tint, staged styling, stock photo, AI artifacts, retained defects, different room layout, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — use town-cambridge-before as reference",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-woburn-hero",
+      "public_id": "areas/woburn-hero",
+      "page": "/cabinet-refinishing-woburn/",
+      "component": "cabinet-refinishing-[town].astro — town hero",
+      "context": "Woburn town page hero — P1/P4 mixed, cabinet + painting bundle",
+      "dimensions": { "aspect": "16/9", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P1",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF5", "LF8"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a Woburn colonial kitchen, 9-foot ceiling, after cabinet refinishing and interior painting bundle. Camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens. L-shaped layout. Cabinets in warm taupe (#9E8E7E) factory-smooth matte 2K polyurethane, brushed nickel cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop. Walls freshly painted in bone white (#F7F3EA) semi-gloss, white ceiling, white trim. Natural morning window light. No people, no staged items. Interior design editorial photography, 16:9 hero format. Warm and settled. No HDR, no vignette, no AI artifacts.",
+        "negative": "cartoon, illustration, staged styling, stock photo, AI artifacts, people, logos, ceiling cut off, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "town-woburn-before",
+      "public_id": "projects/woburn-painting-01-before",
+      "page": "/cabinet-refinishing-woburn/",
+      "component": "cabinet-refinishing-[town].astro — project before",
+      "context": "Woburn B/A pair — before state, dated colonial kitchen, ambient yellowing",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "before-state",
+      "persona": "P1",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "documentary",
+      "pair_partner": "town-woburn-after",
+      "prompt": {
+        "positive": "Photorealistic documentary interior photograph of a Woburn colonial kitchen, 9-foot ceiling, before state. Camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens. Honey-oak upper and lower cabinets yellowed uniformly across the room — entire kitchen has an amber cast, particularly visible on the two upper cabinet doors framing the range hood. Walls off-white, also yellowed, most visible on the ceiling directly above the fluorescent strip — a slightly darkened halo approximately 12 inches in diameter around the fixture. Laminate countertop in dated almond pattern. Fluorescent ceiling strip. No people. Honest documentary, specific localized aging. 4:3 composition.",
+        "negative": "cartoon, exaggerated damage, mold, structural issues, theatrical decay, staged styling, stock photo, AI artifacts, people, logos, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-woburn-after",
+      "public_id": "projects/woburn-painting-01-after",
+      "page": "/cabinet-refinishing-woburn/",
+      "component": "cabinet-refinishing-[town].astro — project after",
+      "context": "Woburn B/A pair — after state, warm taupe cabinets + painted walls",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF5", "LF8"],
+      "shot_type": "editorial",
+      "pair_partner": "town-woburn-before",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of the same Woburn colonial kitchen, same camera at the doorway corner at standing eye-level (5.5ft) on a 35mm lens, same layout. BLEMISHES FULLY RESOLVED: amber yellowing across all cabinets gone — uniform warm taupe (#9E8E7E) 2K polyurethane; off-white wall yellowing and ceiling halo gone — walls in bone white (#F7F3EA) semi-gloss, ceiling uniform bright white with zero yellowing at any edge or fixture surround. TRANSFORMATION: warm taupe (#9E8E7E) factory-smooth matte 2K polyurethane on cabinets, brushed nickel cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, white quartz countertop. RESULT QUALITY: warm, settled, immaculate. No people, no staged items. Interior design editorial photography, 4:3 composition.",
+        "negative": "cartoon, illustration, staged styling, retained amber yellowing, stock photo, AI artifacts, different room layout, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — use town-woburn-before as reference",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-winchester-hero",
+      "public_id": "areas/winchester-hero",
+      "page": "/cabinet-refinishing-winchester/",
+      "component": "cabinet-refinishing-[town].astro — town hero",
+      "context": "Winchester town page hero — P1 highest equity colonial, premium scope",
+      "dimensions": { "aspect": "16/9", "native_width": 1200 },
+      "status": "placeholder",
+      "asset_type": "hero-still",
+      "persona": "P1",
+      "awareness": "solution-aware",
+      "lf_drives": ["LF6", "LF8", "LF5"],
+      "shot_type": "editorial",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of a large Winchester colonial kitchen, 9-foot ceiling, three-wall layout with island, after premium cabinet refinishing. Camera at the doorway at standing eye-level (5.5ft) on a 24mm wide lens. Cabinets in champagne (#E8D9B0) warm gold-beige factory-smooth matte 2K polyurethane, brushed nickel cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, warm cream quartz countertop with island waterfall edge, farmhouse sink below a window on the far wall, subway tile backsplash in bone white with thin warm grout. Warm natural late-afternoon light from two windows on the left wall. No people, no staged items. Magazine-quality interior design editorial photography, premium colonial. 16:9 hero format. No HDR, no vignette, no AI artifacts.",
+        "negative": "cartoon, illustration, staged styling, cool-grey or white cabinets (must read warm gold-beige), stock photo, AI artifacts, people, logos, ceiling cut off, barrel distortion, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "16:9"
+      }
+    },
+
+    {
+      "id": "town-winchester-before",
+      "public_id": "projects/winchester-cabinet-01-before",
+      "page": "/cabinet-refinishing-winchester/",
+      "component": "cabinet-refinishing-[town].astro — project before",
+      "context": "Winchester B/A pair — before state, large colonial with island, P1 premium",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "before-state",
+      "persona": "P1",
+      "awareness": "problem-aware",
+      "lf_drives": ["LF8"],
+      "shot_type": "documentary",
+      "pair_partner": "town-winchester-after",
+      "prompt": {
+        "positive": "Photorealistic documentary interior photograph of a large Winchester colonial kitchen, 9-foot ceiling, three-wall with island, before state. Camera at the doorway at standing eye-level (5.5ft) on a 24mm wide lens. Honey-maple raised-panel cabinets, the maple finish yellowed to an orange-amber cast, particularly on the island cabinet panels — the two island-facing cabinet doors showing a deeper amber than the perimeter cabinets. The lower drawer to the left of the range has a 2-inch handle-shaped indent from a heavy pan repeatedly rested against it. White laminate countertop slightly yellowed at the perimeter seams. Fluorescent strip overhead. No people. Honest documentary, localized. 4:3 composition.",
+        "negative": "cartoon, exaggerated damage, mold, structural issues, theatrical decay, staged styling, stock photo, AI artifacts, people, logos, HDR",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "town-winchester-after",
+      "public_id": "projects/winchester-cabinet-01-after",
+      "page": "/cabinet-refinishing-winchester/",
+      "component": "cabinet-refinishing-[town].astro — project after",
+      "context": "Winchester B/A pair — after state, champagne 2K poly, same large kitchen",
+      "dimensions": { "aspect": "4/3", "native_width": 800 },
+      "status": "placeholder",
+      "asset_type": "after-editorial",
+      "persona": "P1",
+      "awareness": "most-aware",
+      "lf_drives": ["LF6", "LF8"],
+      "shot_type": "editorial",
+      "pair_partner": "town-winchester-before",
+      "prompt": {
+        "positive": "Photorealistic editorial interior photograph of the same Winchester colonial kitchen, same camera at the doorway at standing eye-level (5.5ft) on a 24mm wide lens, same three-wall-with-island layout. BLEMISHES FULLY RESOLVED: orange-amber yellowing on all cabinets and island doors gone — champagne (#E8D9B0) warm gold-beige 2K polyurethane uniform throughout; drawer indent left of range gone — clean even surface. TRANSFORMATION: champagne (#E8D9B0) factory-smooth matte 2K polyurethane on all cabinets and island, brushed nickel cup-pull hardware, each cup pull centered horizontally on the cabinet door face at door rail height, warm cream quartz countertop with island waterfall edge. RESULT QUALITY: premium, magazine-quality, the definitive before/after. No people, no staged items. Interior design editorial photography, 4:3 composition.",
+        "negative": "cartoon, illustration, staged styling, cool-grey or white cabinets, stock photo, AI artifacts, retained defects, different room layout, people, logos, HDR, vignette",
+        "engine": "Higgsfield",
+        "model": "confirm via models_explore — use town-winchester-before as reference",
+        "aspect_ratio": "4:3"
+      }
+    },
+
+    {
+      "id": "guide-cabinet-workbook",
+      "public_id": "projects/ceri-charlestown-after",
+      "page": "/guides/cabinet-refinishing/",
+      "component": "guides/[service].astro — workbookPhoto",
+      "context": "Guide workbook photo — real Charlestown project, client Ceri",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Ceri, Charlestown, cabinet refinishing + rental repairs, $13,500. Do NOT generate. Needs real photography."
+    },
+    {
+      "id": "guide-cabinet-before",
+      "public_id": "projects/ceri-charlestown-before",
+      "page": "/guides/cabinet-refinishing/",
+      "component": "guides/[service].astro — outcomeBefore",
+      "context": "Guide before photo — real Charlestown project, client Ceri",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Ceri, Charlestown. Do NOT generate."
+    },
+    {
+      "id": "guide-cabinet-close",
+      "public_id": "projects/ceri-charlestown-hero",
+      "page": "/guides/cabinet-refinishing/",
+      "component": "guides/[service].astro — closePhoto",
+      "context": "Guide close-up — real Charlestown project, client Ceri",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Ceri, Charlestown. Do NOT generate."
+    },
+    {
+      "id": "guide-bathroom-refresh-workbook",
+      "public_id": "projects/julia-boston-workbook",
+      "page": "/guides/bathroom-refresh/",
+      "component": "guides/[service].astro — workbookPhoto",
+      "context": "Guide workbook photo — real Boston project, client Julia",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Julia, Boston, bathroom refresh + custom storage, $11,200. Do NOT generate."
+    },
+    {
+      "id": "guide-bathroom-refresh-before",
+      "public_id": "projects/julia-boston-before",
+      "page": "/guides/bathroom-refresh/",
+      "component": "guides/[service].astro — outcomeBefore",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Julia, Boston. Do NOT generate."
+    },
+    {
+      "id": "guide-bathroom-refresh-after",
+      "public_id": "projects/julia-boston-after",
+      "page": "/guides/bathroom-refresh/",
+      "component": "guides/[service].astro — outcomeAfter",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Julia, Boston. Do NOT generate."
+    },
+    {
+      "id": "guide-bathroom-refresh-close",
+      "public_id": "projects/julia-boston-close",
+      "page": "/guides/bathroom-refresh/",
+      "component": "guides/[service].astro — closePhoto",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Julia, Boston. Do NOT generate."
+    },
+    {
+      "id": "guide-painting-workbook",
+      "public_id": "projects/nick-somerville-workbook",
+      "page": "/guides/interior-painting/",
+      "component": "guides/[service].astro — workbookPhoto",
+      "context": "Guide workbook photo — real Somerville project, client Nick",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Nick, Somerville, bathroom refresh, $7,400. Do NOT generate."
+    },
+    {
+      "id": "guide-painting-before",
+      "public_id": "projects/nick-somerville-before",
+      "page": "/guides/interior-painting/",
+      "component": "guides/[service].astro — outcomeBefore",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Nick, Somerville. Do NOT generate."
+    },
+    {
+      "id": "guide-painting-after",
+      "public_id": "projects/nick-somerville-after",
+      "page": "/guides/interior-painting/",
+      "component": "guides/[service].astro — outcomeAfter",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Nick, Somerville. Do NOT generate."
+    },
+    {
+      "id": "guide-painting-close",
+      "public_id": "projects/nick-somerville-close",
+      "page": "/guides/interior-painting/",
+      "component": "guides/[service].astro — closePhoto",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Nick, Somerville. Do NOT generate."
+    },
+    {
+      "id": "guide-bathroom-reno-workbook",
+      "public_id": "projects/alyssa-charlestown-workbook",
+      "page": "/guides/bathroom-renovation/",
+      "component": "guides/[service].astro — workbookPhoto",
+      "context": "Guide workbook photo — real Charlestown project, client Alyssa",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Alyssa, Charlestown, bathroom refresh, $6,800, bone white vanity, matte black fixtures. Do NOT generate."
+    },
+    {
+      "id": "guide-bathroom-reno-before",
+      "public_id": "projects/alyssa-charlestown-before",
+      "page": "/guides/bathroom-renovation/",
+      "component": "guides/[service].astro — outcomeBefore",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Alyssa, Charlestown. Do NOT generate."
+    },
+    {
+      "id": "guide-bathroom-reno-after",
+      "public_id": "projects/alyssa-charlestown-after",
+      "page": "/guides/bathroom-renovation/",
+      "component": "guides/[service].astro — outcomeAfter",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Alyssa, Charlestown. Do NOT generate."
+    },
+    {
+      "id": "guide-bathroom-reno-close",
+      "public_id": "projects/alyssa-charlestown-close",
+      "page": "/guides/bathroom-renovation/",
+      "component": "guides/[service].astro — closePhoto",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Alyssa, Charlestown. Do NOT generate."
+    },
+    {
+      "id": "project-julia-kitchen-boston-before",
+      "public_id": "projects/julia-kitchen-boston-before",
+      "page": "internal — projects.json",
+      "context": "Real client project — Julia, Boston, cabinet refinishing, $3,700, bone white",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Do NOT generate. Needs real before photography."
+    },
+    {
+      "id": "project-julia-kitchen-boston-after",
+      "public_id": "projects/julia-kitchen-boston-after",
+      "page": "internal — projects.json",
+      "context": "Real client project — Julia, Boston, cabinet refinishing, $3,700, bone white",
+      "status": "wall-off",
+      "asset_type": "real-project",
+      "notes": "REAL CLIENT WORK — Do NOT generate. Needs real after photography."
+    }
+  ],
+
+  "wall_off_summary": {
+    "description": "These assets must NEVER be AI-generated. Real photography only.",
+    "items": [
+      { "public_id": "hero/hero-video-poster.mp4", "reason": "Real on-site video footage" },
+      { "public_id": "projects/ceri-charlestown-before", "reason": "Real client project — Ceri, Charlestown" },
+      { "public_id": "projects/ceri-charlestown-after", "reason": "Real client project — Ceri, Charlestown" },
+      { "public_id": "projects/ceri-charlestown-hero", "reason": "Real client project — Ceri, Charlestown" },
+      { "public_id": "projects/alyssa-charlestown-before", "reason": "Real client project — Alyssa, Charlestown" },
+      { "public_id": "projects/alyssa-charlestown-after", "reason": "Real client project — Alyssa, Charlestown" },
+      { "public_id": "projects/julia-boston-before", "reason": "Real client project — Julia, Boston bathroom" },
+      { "public_id": "projects/julia-boston-after", "reason": "Real client project — Julia, Boston bathroom" },
+      { "public_id": "projects/julia-kitchen-boston-before", "reason": "Real client project — Julia, Boston kitchen" },
+      { "public_id": "projects/julia-kitchen-boston-after", "reason": "Real client project — Julia, Boston kitchen" },
+      { "public_id": "projects/nick-somerville-before", "reason": "Real client project — Nick, Somerville" },
+      { "public_id": "projects/nick-somerville-after", "reason": "Real client project — Nick, Somerville" }
+    ]
+  },
+
+  "generation_workflow": {
+    "step_1": "Call models_explore(action:'recommend', goal:'<asset_type and aspect ratio>') to confirm the best model before each generation batch.",
+    "step_2": "For before/after pairs: generate BEFORE first, upload via media_upload → media_confirm, pass media_id as reference when generating AFTER to maintain room spatial consistency.",
+    "step_3": "For founder media (about/jeremiah-spraying): if real photos of Jeremiah Ugbine are available, upload via show_characters to create a Soul reference before generating any founder-presence assets.",
+    "step_4": "Check balance via balance() before submitting large batches.",
+    "step_5": "After generation, review with job_display(). If result does not pass the 15-point Congruence Checklist, regenerate — do not upload a failing asset to Cloudinary.",
+    "congruence_checklist": [
+      "Camera anchor correct (height + lens specified)",
+      "Architectural truth intact (8ft vs 9ft ceiling, room type matches persona)",
+      "Light source spec honored (single source, direction specified)",
+      "Negative space controlled (counters clear unless specified)",
+      "Photographic style locked (editorial vs documentary vs product — not mixed)",
+      "Brand color hex parenthetical present in prompt",
+      "Color reading accurate (bone ≠ yellow, champagne = warm gold-beige, matte-black ≠ charcoal)",
+      "Persona match (P1 colonial, P3 triple-decker, P4 rental — not mixed)",
+      "Awareness stage match (before = documentary defect, after = editorial aspiration)",
+      "LF drives served (fear resolved, social proof visible, comfort legible)",
+      "Before/after spatial anchor identical when pair",
+      "Defect formula in before: [what]+[where]+[how much]+[plausible cause] — never mold/sewage/structural",
+      "No staged items on counters unless specified",
+      "No brand logos, no people's faces in sharp focus (hands OK for craft shots)",
+      "No stock-photo feel, no HDR, no vignette (unless specified)"
+    ]
+  }
+}

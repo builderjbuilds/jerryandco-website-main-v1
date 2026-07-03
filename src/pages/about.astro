@@ -330,9 +330,9 @@ const founderSrcset = [800, 1200, 1600].map(w => `${cld('brand/founder-jeremiah'
   }
   .cred-chip:last-child { border-right: none; }
   .cred-label {
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--gold);
     font-family: var(--font-sans);
@@ -545,6 +545,19 @@ const founderSrcset = [800, 1200, 1600].map(w => `${cld('brand/founder-jeremiah'
     .owner-compare { grid-template-columns: 1fr; }
     .condo-cards { grid-template-columns: 1fr; }
     .hero-creds { flex-wrap: wrap; }
+  }
+
+  /* Stats card: stack vertically so all 3 items sit in their own row */
+  @media (max-width: 560px) {
+    .hero-creds {
+      flex-direction: column;
+      width: fit-content;
+    }
+    .cred-chip {
+      border-right: none;
+      border-bottom: 1px solid rgba(247, 243, 234, 0.12);
+    }
+    .cred-chip:last-child { border-bottom: none; }
   }
 
   /* ── Hero entrance — CSS-only stagger ────────────────────────── */

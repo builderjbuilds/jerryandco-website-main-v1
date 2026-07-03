@@ -14,13 +14,7 @@ const townLinks = [
 <header>
   <nav class="nav" aria-label="Main navigation">
     <a class="brand" href="/" aria-label="Jerry & Co. Home Improvement — home">
-      <img
-        class="logo-img"
-        src="/img/brand/logo-horizontal-light.png"
-        alt="Jerry & Co. Home Improvement"
-        height="34"
-        width="auto"
-      />
+      <img class="logo-img" src="/img/brand/logo-navbar.png" alt="Jerry & Co. Home Improvement" height="44" width="auto" />
     </a>
 
     <!-- Desktop nav -->
@@ -143,10 +137,8 @@ const townLinks = [
     text-decoration: none;
     color: var(--bone);
     flex-shrink: 0;
-    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
   }
-  .brand:hover { transform: scale(1.04); opacity: 0.9; }
-  .logo-img { height: 34px; width: auto; display: block; }
+  .logo-img { height: 44px; width: auto; display: block; }
 
   .nav-links {
     display: flex;
@@ -248,6 +240,11 @@ const townLinks = [
     display: flex;
     align-items: center;
     gap: 16px;
+  }
+  :global(.nav-cta .btn) {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 0 18px;
   }
   .nav-phone {
     font-size: 17px;
@@ -365,10 +362,13 @@ const townLinks = [
   .mobile-nav {
     position: fixed;
     inset: 0;
+    width: 100%;
+    max-width: 100vw;
     background: var(--ink);
     z-index: 49;
     padding: 80px 24px 120px;
     overflow-y: auto;
+    overflow-x: hidden;
     transform: translateX(100%);
     visibility: hidden;
     transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.32s;
@@ -425,7 +425,20 @@ const townLinks = [
   }
   .mobile-phone-cta svg { width: 18px; height: 18px; flex-shrink: 0; }
   .mobile-phone-cta:hover { background: var(--gold); color: var(--ink); }
-  .mobile-cta { margin-top: 12px; }
+  .mobile-nav .mobile-phone-cta,
+  .mobile-nav .mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .mobile-nav .mobile-cta { margin-top: 12px; }
 
   /* Hamburger → X morph on open — driven by aria-expanded, no JS class needed */
   #navOpen[aria-expanded="true"] span:nth-child(1) {

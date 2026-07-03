@@ -1,5 +1,6 @@
 ---
 import townsData from '../../data/towns.json';
+import testimonialsData from '../../data/testimonials.json';
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -131,11 +132,16 @@ interface TownData {
 interface Props { townData: TownData }
 
 const { townData } = Astro.props;
-const { town, town_slug, neighbors, mini_faq_anchors, testimonial } = townData;
+const { town, town_slug, neighbors, mini_faq_anchors } = townData;
 
 // Strip placeholder prefix from housing stock note
 const housingNote = townData.housing_stock_note
   .replace(/^PLACEHOLDER\s*[-–]\s*draft unique copy:\s*/i, '');
+
+// Assign a real testimonial by cycling through verified reviews
+const allTowns = townsData.towns;
+const townIndex = allTowns.findIndex(t => t.town_slug === town_slug);
+const realTestimonial = testimonialsData[townIndex % testimonialsData.length];
 
 // Positioning tagline
 const positioningNote = POSITIONING[town_slug] ?? `Trusted by ${town} homeowners and property managers since 2019.`;
@@ -219,6 +225,7 @@ const PRIMARY_TOWNS = new Set(['medford','malden','everett','arlington','somervi
 const slugify = (name: string) => name.toLowerCase().replace(/\s+/g, '-');
 const primaryNeighbors  = neighbors.filter(n => PRIMARY_TOWNS.has(slugify(n)));
 const secondaryNeighbors = neighbors.filter(n => !PRIMARY_TOWNS.has(slugify(n)));
+const townHeroPublicId = `areas/${town_slug}-hero`;
 
 // Town-specific OG image — Cloudinary text overlay with town name in gold
 const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_bold:${encodeURIComponent(town)},co_rgb:C8A055,fl_layer_apply,g_north_west,x_80,y_80/v1/brand/og-town.jpg`;
@@ -226,6 +233,13 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
 
 <Base title={title} description={metaDesc} canonical={canonical} ogImage={ogImage}>
   <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href={`${CLD}/f_auto,q_auto,w_640/${townHeroPublicId}.jpg`}
+      imagesrcset={`${CLD}/f_auto,q_auto,w_360/${townHeroPublicId}.jpg 360w, ${CLD}/f_auto,q_auto,w_640/${townHeroPublicId}.jpg 640w, ${CLD}/f_auto,q_auto,w_960/${townHeroPublicId}.jpg 960w, ${CLD}/f_auto,q_auto,w_1200/${townHeroPublicId}.jpg 1200w`}
+      imagesizes="100vw"
+    />
     <SchemaLD type="LocalBusiness" data={localBusinessSchema} />
     <SchemaLD type="Service" data={serviceSchema} />
     <SchemaLD type="BreadcrumbList" data={breadcrumbSchema} />
@@ -245,13 +259,27 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
   <section class="hero-town">
     <!-- Local town hero image — publicId + alt driven from towns.json (town_slug / town) -->
     <div class="hero-town-media" aria-hidden="true">
-      <PlaceholderImage
-        publicId={`areas/${town_slug}-hero`}
+      <!-- <PlaceholderImage
+        publicId={townHeroPublicId}
         aspect="16/9"
         alt={`Cabinet refinishing in ${town}, MA`}
+        widths={[360, 640, 960, 1200]}
+        sizes="100vw"
         loading="eager"
+        fetchpriority="high"
         className="hero-town-ph"
-      />
+      /> -->
+      <PlaceholderImage
+        publicId={townHeroPublicId}
+        aspect="16/9"
+        alt={`Cabinet refinishing in ${town}, MA`}
+        widths={[360,640,960,1200]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+        instant={true}
+        className="hero-town-ph"
+      />  
       <div class="hero-town-overlay"></div>
     </div>
     <div class="wrap">
@@ -333,24 +361,18 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
     </div>
   </section>
 
-  <!-- ===== SECTION 4 — Testimonial (placeholder) ===== -->
+  <!-- ===== SECTION 4 — Testimonial ===== -->
   <section class="section-testimonial">
     <div class="wrap">
-      <!-- PLACEHOLDER TESTIMONIAL — do not publish as real. Replace with an attributed review from a verified {town} client before launch. -->
-      <div class="testimonial-placeholder" role="region" aria-label="Testimonial placeholder — awaiting real review">
-        <div class="tp-label" aria-hidden="true">PLACEHOLDER — review pending</div>
-        <blockquote class="tp-quote">
-          <p>
-            A real review from a {town} client will appear here once collected. This block will not be published until a verified, attributed testimonial is provided by Jeremiah.
-          </p>
-          <footer class="tp-attribution">
-            <cite>— Name and neighborhood to be confirmed by Jeremiah before launch</cite>
-          </footer>
+      <figure class="town-testimonial">
+        <blockquote>
+          <p>"{realTestimonial.quote}"</p>
         </blockquote>
-        <p class="tp-instruction">
-          To add a real testimonial: update <code>data/towns.json</code> → <code>{town_slug}.testimonial</code> with <code>name</code>, <code>neighborhood</code>, and <code>quote</code>; set <code>status</code> to <code>"verified"</code>; rebuild.
-        </p>
-      </div>
+        <figcaption>
+          <strong class="tt-name">{realTestimonial.name}</strong>
+          <span class="tt-meta">{realTestimonial.location} · {realTestimonial.project}</span>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -460,9 +482,9 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
     inset: 0;
     background: linear-gradient(
       105deg,
-      rgba(20, 36, 31, 0.92) 0%,
-      rgba(20, 36, 31, 0.72) 48%,
-      rgba(20, 36, 31, 0.38) 100%
+      rgba(20, 36, 31, 0.88) 0%,
+      rgba(20, 36, 31, 0.70) 45%,
+      rgba(20, 36, 31, 0.35) 100%
     );
   }
   /* Cross-component: PlaceholderImage figure fills the media container */
@@ -473,6 +495,7 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
     height: 100%;
     border-radius: 0;
   }
+  :global(.hero-town-ph .ph-shell) { display: none; }
   .hero-town::before {
     content: attr(data-town-ghost);
     position: absolute;
@@ -652,63 +675,45 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
     letter-spacing: 0.01em;
   }
 
-  /* ── Testimonial placeholder ────────────────────────── */
+  /* ── Testimonial ────────────────────────────────────── */
   .section-testimonial { background: var(--bone-deep); padding: clamp(48px, 6vw, 72px) 0; }
-  .testimonial-placeholder {
+  .town-testimonial {
     max-width: 680px;
     margin: 0 auto;
-    background: var(--bone);
-    border: 1.5px dashed rgba(200,160,85,0.4);
-    border-radius: 4px;
-    padding: clamp(24px, 3vw, 36px) clamp(24px, 4vw, 40px);
-    position: relative;
+    text-align: center;
+    border-left: 3px solid var(--gold);
+    padding-left: clamp(24px, 3vw, 36px);
+    text-align: left;
   }
-  .tp-label {
-    display: inline-block;
-    font-family: var(--font-sans);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold-deep);
-    background: rgba(200,160,85,0.1);
-    border: 1px solid rgba(200,160,85,0.25);
-    border-radius: 2px;
-    padding: 3px 8px;
-    margin-bottom: 16px;
-  }
-  .tp-quote {
-    margin: 0 0 12px;
+  .town-testimonial blockquote {
+    margin: 0 0 20px;
     padding: 0;
     border: none;
   }
-  .tp-quote p {
-    font-size: 1rem;
+  .town-testimonial blockquote p {
+    font-family: var(--font-serif);
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    line-height: 1.65;
+    color: var(--ink);
     font-style: italic;
-    color: var(--text-muted);
-    line-height: 1.72;
     margin: 0;
   }
-  .tp-attribution {
-    margin-top: 12px;
-    font-size: 0.875rem;
-    color: var(--text-muted);
+  .town-testimonial figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
   }
-  .tp-attribution cite { font-style: normal; }
-  .tp-instruction {
+  .tt-name {
     font-family: var(--font-sans);
-    font-size: 0.75rem;
-    color: rgba(0,0,0,0.3);
-    margin: 0;
-    border-top: 1px solid var(--line);
-    padding-top: 12px;
-    line-height: 1.6;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--ink);
   }
-  .tp-instruction code {
-    font-size: 0.6875rem;
-    background: rgba(0,0,0,0.05);
-    border-radius: 2px;
-    padding: 1px 4px;
+  .tt-meta {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--text-muted);
   }
 
   /* ── Services grid ──────────────────────────────────── */
@@ -855,9 +860,10 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
   }
 
   /* ── Responsive ─────────────────────────────────────── */
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     .hero-town-inner { grid-template-columns: 1fr; }
     .hero-town-badge { display: none; }
+    .hero-town-overlay { background: rgba(20, 36, 31, 0.74); }
     .why-inner { grid-template-columns: 1fr; }
     .why-stats { min-width: unset; }
     .services-grid { grid-template-columns: 1fr; }

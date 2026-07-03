@@ -9,6 +9,18 @@ const integrated = !!merchantId;
   </div>
 ) : (
   <div class="wisetack-placeholder">
+    <figure class="wp-photo">
+      <img
+        src="https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_800/financing/approval-concept.jpg"
+        srcset="https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_480/financing/approval-concept.jpg 480w, https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_800/financing/approval-concept.jpg 800w"
+        sizes="(max-width: 600px) 480px, 800px"
+        alt="Homeowner reviewing financing approval on a phone"
+        width="800"
+        height="603"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
     <div class="wp-icon" aria-hidden="true">
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="4" y="11" width="40" height="28" rx="4" stroke="currentColor" stroke-width="2.5"/>
@@ -72,6 +84,21 @@ const integrated = !!merchantId;
     gap: 16px;
     max-width: 520px;
     margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .wp-photo {
+    margin: calc(-1 * clamp(40px, 5vw, 64px)) calc(-1 * clamp(32px, 4vw, 56px)) 0;
+    width: calc(100% + 2 * clamp(32px, 4vw, 56px));
+    align-self: stretch;
+    flex-shrink: 0;
+  }
+  .wp-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
   }
 
   .wp-icon {

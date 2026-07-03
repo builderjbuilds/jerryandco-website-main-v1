@@ -1,4 +1,16 @@
 ---
+// interface Props {
+//   publicId: string;
+//   alt: string;
+//   aspect?: string;
+//   widths?: number[];
+//   sizes?: string;
+//   loading?: 'eager' | 'lazy';
+//   fetchpriority?: 'high' | 'low' | 'auto';
+//   className?: string;
+//   caption?: string;
+// }
+
 interface Props {
   publicId: string;
   alt: string;
@@ -9,7 +21,21 @@ interface Props {
   fetchpriority?: 'high' | 'low' | 'auto';
   className?: string;
   caption?: string;
+
+  instant?: boolean;   // NEW
 }
+
+// const {
+//   publicId,
+//   alt,
+//   aspect = '4/3',
+//   widths = [480, 800, 1200, 1600],
+//   sizes = '100vw',
+//   loading = 'lazy',
+//   fetchpriority,
+//   className,
+//   caption,
+// } = Astro.props;
 
 const {
   publicId,
@@ -21,6 +47,7 @@ const {
   fetchpriority,
   className,
   caption,
+  instant = false,
 } = Astro.props;
 
 const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dxuuydoee';
@@ -29,9 +56,27 @@ const cldUrl = (w: number) =>
 
 const src = cldUrl(widths[Math.floor(widths.length / 2)] ?? widths[0]);
 const srcset = widths.map(w => `${cldUrl(w)} ${w}w`).join(', ');
----
 
-<figure class:list={['ph', className]} style={`--ph-aspect:${aspect}`}>
+// 20px LQIP — loads in ~50ms, the browser naturally blurs it when upscaled
+const lqipSrc = `https://res.cloudinary.com/${cloud}/image/upload/f_jpg,w_20,q_auto:low/${publicId}.jpg`;
+---
+<figure
+
+  class:list={[
+
+    'ph',
+
+    className,
+
+    { 'ph--instant': instant }
+
+  ]}
+
+  style={`--ph-aspect:${aspect}; --ph-lqip:url(${lqipSrc})`}
+
+>
+<!-- <figure class:list={['ph', className]} style={`--ph-aspect:${aspect}; --ph-lqip:url(${lqipSrc})`}> -->
+  
   <div class="ph-shell" aria-hidden="true">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>

@@ -346,7 +346,7 @@ const cld = (path: string, w = 800) =>
   .section-covered { background: var(--bone); }
   .covered-layout {
     display: grid;
-    grid-template-columns: 1fr clamp(260px, 30vw, 420px);
+    grid-template-columns: 1fr clamp(340px, 40vw, 540px);
     gap: clamp(40px, 5vw, 80px);
     align-items: start;
   }
@@ -444,7 +444,7 @@ const cld = (path: string, w = 800) =>
     border-radius: 3px;
     overflow: hidden;
     box-shadow: 0 8px 40px rgba(20,36,31,0.14);
-    max-width: clamp(240px, 30vw, 380px);
+    max-width: clamp(300px, 40vw, 480px);
   }
   :global(.touchup-visual .ph) { border-radius:0; }
 
@@ -544,7 +544,7 @@ const cld = (path: string, w = 800) =>
   /* ── Responsive ─────────────────────────────────────── */
   @media (max-width: 900px) {
     .touchup-inner { grid-template-columns: 1fr; }
-    .touchup-visual { display: none; }
+    .touchup-visual { max-width: 420px; }
     .accountability-cols { grid-template-columns: 1fr; }
     .addendum-items { grid-template-columns: 1fr; }
     .not-covered-grid { grid-template-columns: 1fr; }

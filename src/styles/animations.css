@@ -13,7 +13,7 @@
 
 /* ── Keyframes ────────────────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(22px); }
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -23,25 +23,25 @@
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.96); }
+  from { opacity: 0; transform: scale(0.97); }
   to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slideRight {
-  from { opacity: 0; transform: translateX(-20px); }
+  from { opacity: 0; transform: translateX(-14px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideLeft {
-  from { opacity: 0; transform: translateX(20px); }
+  from { opacity: 0; transform: translateX(14px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 
 /* ── Reveal utility — JS adds .is-visible to trigger ──────── */
 [data-reveal].is-visible {
   animation-fill-mode: both;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  animation-duration: 0.65s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 0.38s;
 }
 
 [data-reveal="up"].is-visible    { animation-name: fadeUp; }
@@ -51,13 +51,13 @@
 [data-reveal="right"].is-visible { animation-name: slideLeft; }
 
 /* ── Stagger delay tokens ─────────────────────────────────── */
-[data-delay].is-visible { animation-duration: 0.6s; }
-[data-delay="1"].is-visible { animation-delay: 0.07s; }
-[data-delay="2"].is-visible { animation-delay: 0.14s; }
-[data-delay="3"].is-visible { animation-delay: 0.21s; }
-[data-delay="4"].is-visible { animation-delay: 0.29s; }
-[data-delay="5"].is-visible { animation-delay: 0.37s; }
-[data-delay="6"].is-visible { animation-delay: 0.46s; }
+[data-delay].is-visible { animation-duration: 0.38s; }
+[data-delay="1"].is-visible { animation-delay: 0.04s; }
+[data-delay="2"].is-visible { animation-delay: 0.08s; }
+[data-delay="3"].is-visible { animation-delay: 0.12s; }
+[data-delay="4"].is-visible { animation-delay: 0.17s; }
+[data-delay="5"].is-visible { animation-delay: 0.22s; }
+[data-delay="6"].is-visible { animation-delay: 0.27s; }
 
 /* ── Hero entrance — CSS-only (above fold, no observer needed) */
 @keyframes heroFadeUp {
@@ -65,22 +65,22 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Mobile — tighter motion ──────────────────────────────── */
+/* ── Mobile — minimal motion ──────────────────────────────── */
 @media (max-width: 600px) {
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
+    from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes slideRight {
-    from { opacity: 0; transform: translateX(-12px); }
+    from { opacity: 0; transform: translateX(-8px); }
     to   { opacity: 1; transform: translateX(0); }
   }
   @keyframes slideLeft {
-    from { opacity: 0; transform: translateX(12px); }
+    from { opacity: 0; transform: translateX(8px); }
     to   { opacity: 1; transform: translateX(0); }
   }
-  [data-delay="2"].is-visible { animation-delay: 0.09s; }
-  [data-delay="3"].is-visible { animation-delay: 0.16s; }
-  [data-delay="4"].is-visible { animation-delay: 0.22s; }
-  [data-delay="5"].is-visible { animation-delay: 0.28s; }
+  [data-delay="2"].is-visible { animation-delay: 0.05s; }
+  [data-delay="3"].is-visible { animation-delay: 0.09s; }
+  [data-delay="4"].is-visible { animation-delay: 0.13s; }
+  [data-delay="5"].is-visible { animation-delay: 0.17s; }
 }

@@ -142,9 +142,39 @@ const { testimonials } = Astro.props;
     strips[cur].classList.add('active');
   }
 
-  wrap.querySelector('.tc-prev')?.addEventListener('click', () => go(cur - 1));
-  wrap.querySelector('.tc-next')?.addEventListener('click', () => go(cur + 1));
-  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+  // ── Auto-advance ────────────────────────────────────
+  const DELAY = 5000;
+  let userPaused = false;
+  let visible    = true; // updated by IntersectionObserver
+
+  // Single persistent interval — tick() checks flags so nothing stops/starts it
+  function tick() {
+    if (!userPaused && visible) go(cur + 1);
+  }
+  let timer = setInterval(tick, DELAY);
+
+  function resetTimer() {
+    // Restart the 5s countdown from now after any manual navigation
+    clearInterval(timer);
+    timer = setInterval(tick, DELAY);
+  }
+
+  // Pause while the user's pointer or focus is inside the carousel
+  wrap.addEventListener('mouseenter', () => { userPaused = true; });
+  wrap.addEventListener('mouseleave', () => { userPaused = false; });
+  wrap.addEventListener('focusin',    () => { userPaused = true; });
+  wrap.addEventListener('focusout',   () => { userPaused = false; });
+
+  // Skip ticks while scrolled off-screen (saves battery/CPU, no start/stop complexity)
+  new IntersectionObserver(
+    ([e]) => { visible = e.isIntersecting; },
+    { threshold: 0 }
+  ).observe(wrap);
+
+  // Manual navigation — also resets the autocycle countdown
+  wrap.querySelector('.tc-prev')?.addEventListener('click', () => { go(cur - 1); resetTimer(); });
+  wrap.querySelector('.tc-next')?.addEventListener('click', () => { go(cur + 1); resetTimer(); });
+  dots.forEach((d, i) => d.addEventListener('click', () => { go(i); resetTimer(); }));
 
   // Swipe support
   let sx = 0;
@@ -153,7 +183,7 @@ const { testimonials } = Astro.props;
     track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', e => {
       const dx = sx - e.changedTouches[0].clientX;
-      if (Math.abs(dx) > 44) go(cur + (dx > 0 ? 1 : -1));
+      if (Math.abs(dx) > 44) { go(cur + (dx > 0 ? 1 : -1)); resetTimer(); }
     }, { passive: true });
   }
 })();
@@ -331,11 +361,27 @@ const { testimonials } = Astro.props;
   background: rgba(247, 243, 234, 0.22);
   cursor: pointer;
   padding: 0;
+  position: relative;
   transition: background 0.2s, transform 0.2s;
 }
 .tc-dot.active {
   background: var(--gold);
   transform: scale(1.5);
+}
+/* Spinning ring shows autocycle countdown — resets automatically when .active moves */
+.tc-dot.active::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  border-top-color: var(--gold);
+  opacity: 0.7;
+  animation: tc-ring 5s linear;
+}
+@keyframes tc-ring {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 .tc-dot:hover:not(.active) {
   background: rgba(247, 243, 234, 0.45);
