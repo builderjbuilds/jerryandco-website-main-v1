@@ -115,6 +115,7 @@ const town = location.split(',')[0];
         loading="eager"
         fetchpriority="high"
         className="proj-hero-ph"
+        instant={true}
       />
       <div class="proj-hero-overlay"></div>
     </div>
@@ -331,27 +332,52 @@ const town = location.split(',')[0];
     position: relative;
     overflow: hidden;
   }
-  .proj-hero-media {
+  /* .proj-hero-media {
     position: absolute;
     inset: 0;
     z-index: 0;
+  } */
+  .proj-hero-media{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
   }
-  :global(.proj-hero-ph) {
-    position: absolute;
-    inset: 0;
-    aspect-ratio: unset;
-    height: 100%;
-    border-radius: 0;
+  
+  :global(.proj-hero-ph){
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    aspect-ratio:unset;
+    border-radius:0;
+    z-index:0;
   }
-  .proj-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      108deg,
-      rgba(20, 36, 31, 0.94) 0%,
-      rgba(20, 36, 31, 0.76) 50%,
-      rgba(20, 36, 31, 0.46) 100%
-    );
+
+  :global(.proj-hero-ph img){
+      width:100%;
+      height:100%;
+      object-fit:cover;
+  }
+  :global(.proj-hero-ph .ph-shell){
+    display:none;
+  }
+  .proj-hero-overlay{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0,0,0,0) 35%,
+            rgba(0,0,0,.18) 100%
+        ),
+        linear-gradient(
+            105deg,
+            rgba(20,36,31,.88) 0%,
+            rgba(20,36,31,.70) 45%,
+            rgba(20,36,31,.35) 100%
+        );  
   }
   .proj-hero-inner {
     position: relative;

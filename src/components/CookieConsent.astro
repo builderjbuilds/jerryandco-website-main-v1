@@ -58,9 +58,17 @@
     transform: translateY(0);
     opacity: 1;
   }
-  .cc-bar.cc-hide {
+  /* .cc-bar.cc-hide {
     transform: translateY(100%);
     opacity: 0;
+  } */
+  .cc-bar.cc-hide,
+  .cc-bar[hidden] {
+    transform: translateY(100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    display: none;
   }
   .cc-text {
     font-size: 13px;

@@ -477,7 +477,7 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
     overflow: hidden;
   }
   /* Gradient overlay — mirrors home hero, keeps text legible */
-  .hero-town-overlay {
+  /* .hero-town-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -486,16 +486,53 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
       rgba(20, 36, 31, 0.70) 45%,
       rgba(20, 36, 31, 0.35) 100%
     );
+  } */
+
+  .hero-town-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    background: linear-gradient(
+        105deg,
+        rgba(20,36,31,.88) 0%,
+        rgba(20,36,31,.70) 45%,
+        rgba(20,36,31,.35) 100%
+    );
   }
+
   /* Cross-component: PlaceholderImage figure fills the media container */
-  :global(.hero-town-ph) {
+  /* :global(.hero-town-ph) {
     position: absolute;
     inset: 0;
     aspect-ratio: unset;
     height: 100%;
     border-radius: 0;
   }
-  :global(.hero-town-ph .ph-shell) { display: none; }
+  :global(.hero-town-ph .ph-shell) { display: none; } */
+
+  :global(.hero-town-ph) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: unset;
+  border-radius: 0;
+  z-index: 0;
+  }
+
+  :global(.hero-town-ph .ph-shell) {
+    display: none;
+  }
+
+  :global(.hero-town-ph .ph-img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
   .hero-town::before {
     content: attr(data-town-ghost);
     position: absolute;
@@ -509,6 +546,8 @@ const ogImage = `${CLD}/f_auto,q_auto,w_1200,h_630,c_fill/l_text:Montserrat_52_b
     pointer-events: none;
     letter-spacing: -0.05em;
   }
+
+  
   .hero-town-inner {
     display: grid;
     grid-template-columns: 1fr auto;

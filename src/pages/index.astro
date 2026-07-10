@@ -792,6 +792,9 @@ const processSteps = [
       opacity: 0.92;
       transform: translateY(0);
     }
+    .close-cta-overlay{
+    background:rgba(20,36,31,.74);
+    }
   }
 
   /* ── Condo cards tablet (2-col only between 641–880px) */
@@ -800,7 +803,27 @@ const processSteps = [
   }
 
   /* ── Close CTA background image ───────────────────── */
-  .close-cta-bg { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  /* .close-cta-bg { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; } */
+  .close-cta-bg{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+  }
+
+  :global(.close-cta-ph){
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+
+  aspect-ratio:unset;
+  border-radius:0;
+
+  z-index:0;
+  }
   .close-cta-overlay { position:absolute; inset:0; background:linear-gradient(105deg,rgba(20, 36, 31,0.88) 0%,rgba(20, 36, 31,0.70) 45%,rgba(20, 36, 31,0.35) 100%); }
   :global(.close-cta-ph) { position:absolute; inset:0; aspect-ratio:unset; height:100%; border-radius:0; }
   .close-cta .wrap { position:relative; z-index:1; }

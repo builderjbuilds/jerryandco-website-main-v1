@@ -901,18 +901,20 @@
 /* ═══════════════════════════════════════════════════
    MOBILE STICKY CTA BAR  — all pages at ≤768px
 ═══════════════════════════════════════════════════ */
-.mobile-cta-bar {
+/* .mobile-cta-bar {
   display: none;
   position: fixed;
-  bottom: 0;
   left: 0;
   right: 0;
+  bottom: env(safe-area-inset-bottom);
   z-index: 200;
   background: var(--gold);
   border-top: 1px solid var(--gold-deep);
-  padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+  padding: 8px 16px;
   transform: translateY(0);
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+  transition:
+    transform .28s cubic-bezier(.22,1,.36,1),
+    opacity .28s ease;
 }
 .mobile-cta-bar.is-hero-visible {
   transform: translateY(110%);
@@ -944,7 +946,7 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-}
+} */
 
 /* ═══════════════════════════════════════════════════
    RESPONSIVE
@@ -982,8 +984,8 @@
   .form-row { grid-template-columns: 1fr; }
   .trust-row { justify-content: flex-start; gap: 16px 28px; }
   /* Mobile sticky CTA — show bar, offset footer */
-  .mobile-cta-bar { display: block; }
-  footer { padding-bottom: 60px; }
+  /* .mobile-cta-bar { display: block; }
+  footer {  padding-bottom: calc(84px + env(safe-area-inset-bottom));} */
 }
 
 @media (max-width: 480px) {

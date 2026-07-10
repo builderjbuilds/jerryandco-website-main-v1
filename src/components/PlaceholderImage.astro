@@ -61,19 +61,12 @@ const srcset = widths.map(w => `${cldUrl(w)} ${w}w`).join(', ');
 const lqipSrc = `https://res.cloudinary.com/${cloud}/image/upload/f_jpg,w_20,q_auto:low/${publicId}.jpg`;
 ---
 <figure
-
   class:list={[
-
     'ph',
-
     className,
-
     { 'ph--instant': instant }
-
   ]}
-
   style={`--ph-aspect:${aspect}; --ph-lqip:url(${lqipSrc})`}
-
 >
 <!-- <figure class:list={['ph', className]} style={`--ph-aspect:${aspect}; --ph-lqip:url(${lqipSrc})`}> -->
   

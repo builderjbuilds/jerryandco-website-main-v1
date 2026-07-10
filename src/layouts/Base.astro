@@ -72,13 +72,6 @@ const {
   <body>
     <slot />
     <CookieConsent />
-    <!-- Mobile sticky estimate CTA — visible on all pages at ≤768px -->
-    <div class="mobile-cta-bar" aria-label="Get a free estimate">
-      <a href="/#estimate" data-ph-event="cta_clicked" data-ph-label="mobile_sticky_cta">
-        Get my free estimate
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
     <!-- Global PostHog CTA click handler — picks up any [data-ph-event] element -->
     <script>
       document.addEventListener('click', (e: MouseEvent) => {
@@ -94,38 +87,6 @@ const {
     <!-- Phase 2 scroll-reveal IntersectionObserver -->
     <script>
       import '../scripts/reveal';
-    </script>
-    <!-- Hide mobile CTA bar while hero or footer is visible -->
-    <script>
-      (function () {
-        const hero   = document.querySelector<HTMLElement>(
-          '.hero, .hero-about, .hero-gallery, .hero-process, .proj-hero, .proj-index-hero, .guide-hero, .page-hero'
-        );
-        const footer = document.querySelector<HTMLElement>('footer');
-        const bar    = document.querySelector<HTMLElement>('.mobile-cta-bar');
-        if (!bar) return;
-
-        let heroVisible   = false;
-        let footerVisible = false;
-
-        function sync() {
-          bar.classList.toggle('is-hero-visible', heroVisible || footerVisible);
-        }
-
-        if (hero) {
-          new IntersectionObserver(
-            ([e]) => { heroVisible = e.isIntersecting; sync(); },
-            { threshold: 0 }
-          ).observe(hero);
-        }
-
-        if (footer) {
-          new IntersectionObserver(
-            ([e]) => { footerVisible = e.isIntersecting; sync(); },
-            { threshold: 0 }
-          ).observe(footer);
-        }
-      })();
     </script>
   </body>
 </html>
