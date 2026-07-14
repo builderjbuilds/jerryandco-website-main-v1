@@ -23,6 +23,11 @@
     if (value === 'no' && typeof (window as any).posthog !== 'undefined') {
       (window as any).posthog.opt_out_capturing();
     }
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('consent', 'update', {
+        analytics_storage: value === 'yes' ? 'granted' : 'denied',
+      });
+    }
   }
 
   // Show only if no stored preference

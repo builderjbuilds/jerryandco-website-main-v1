@@ -68,6 +68,23 @@ const {
         }
       </script>
     )}
+
+    <!-- Google Analytics 4 — consent-gated via Google Consent Mode v2 -->
+    {import.meta.env.PUBLIC_GA_MEASUREMENT_ID && (
+      <script defer define:vars={{ gaId: import.meta.env.PUBLIC_GA_MEASUREMENT_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        // Default to denied; CookieConsent.astro grants on accept. Opt-out stays denied.
+        gtag('consent', 'default', {
+          analytics_storage: localStorage.getItem('jc-consent') === 'yes' ? 'granted' : 'denied',
+        });
+        gtag('config', gaId, { anonymize_ip: true });
+      </script>
+    )}
+    {import.meta.env.PUBLIC_GA_MEASUREMENT_ID && (
+      <script defer src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_MEASUREMENT_ID}`}></script>
+    )}
   </head>
   <body>
     <slot />

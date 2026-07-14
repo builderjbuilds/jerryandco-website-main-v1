@@ -201,6 +201,8 @@ const { beforeSrc, afterSrc, beforeAlt, afterAlt, caption } = Astro.props;
     padding: 0;
     -webkit-appearance: none;
     appearance: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
   }
   /* Keep thumb invisible but still tabbable/focusable */
   .ba-range::-webkit-slider-thumb {
@@ -249,23 +251,58 @@ const { beforeSrc, afterSrc, beforeAlt, afterAlt, caption } = Astro.props;
 
     function update(val: number) {
       const pct = Math.max(0, Math.min(100, val));
-      afterClip.style.clipPath = `inset(0 0 0 ${100 - pct}%)`;
+      afterClip.style.clipPath = `inset(0 0 0 ${pct}%)`;
       handle.style.left = `${pct}%`;
+      range.value = String(pct);
       range.setAttribute('aria-valuenow', String(Math.round(pct)));
     }
 
-    range.addEventListener('input', () => update(Number(range.value)));
-
     // Fire PostHog event once per slider (first interaction only)
     let dragged = false;
-    range.addEventListener('input', () => {
+    function markDragged() {
       if (!dragged) {
         dragged = true;
         if (typeof window !== 'undefined' && (window as any).posthog) {
           (window as any).posthog.capture('before_after_dragged');
         }
       }
-    }, { passive: true });
+    }
+
+    function pctFromClientX(clientX: number) {
+      const rect = slider.getBoundingClientRect();
+      return ((clientX - rect.left) / rect.width) * 100;
+    }
+
+    // Drive dragging via Pointer Events instead of the native range-thumb
+    // drag: iOS Safari silently drops touch-driven `input` events on a
+    // heavily restyled range input, so we can't rely on it there even
+    // though it works fine on Android/desktop. The <input> is kept for
+    // keyboard/screen-reader access.
+    let pointerDragging = false;
+
+    slider.addEventListener('pointerdown', (e: PointerEvent) => {
+      pointerDragging = true;
+      slider.setPointerCapture(e.pointerId);
+      update(pctFromClientX(e.clientX));
+      markDragged();
+    });
+
+    slider.addEventListener('pointermove', (e: PointerEvent) => {
+      if (!pointerDragging) return;
+      update(pctFromClientX(e.clientX));
+    });
+
+    function endDrag() {
+      pointerDragging = false;
+    }
+    slider.addEventListener('pointerup', endDrag);
+    slider.addEventListener('pointercancel', endDrag);
+
+    // Keyboard (arrow keys) still drives the native range input directly.
+    range.addEventListener('input', () => {
+      update(Number(range.value));
+      markDragged();
+    });
 
     // Initialize to center
     update(50);
