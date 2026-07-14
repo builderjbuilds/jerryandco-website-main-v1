@@ -612,6 +612,21 @@ const towns = [
     const closeBtn   = document.getElementById('msfClose') as HTMLButtonElement | null;
     const formAction = msf.dataset.formAction ?? '';
 
+    // Estimating engine lead intake — starts the 4-hour quote SLA clock and
+    // fires the 15-minute SMS acknowledgment. Fire-and-forget, alongside
+    // (never instead of) the Formspark submission above: never throws,
+    // never blocks, never affects the user's success state if the engine
+    // is slow or unreachable.
+    const ENGINE_INTAKE_URL = 'https://portal.jerryandcohome.com/api/v1/leads/intake';
+    function sendToEngine(payload: Record<string, string>) {
+      fetch(ENGINE_INTAKE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).catch(() => {});
+    }
+
     // ── Fullscreen takeover ──────────────────────────────────────
     // Once the visitor commits past Step 1, the form takes the whole
     // viewport so they stay focused on finishing instead of scrolling
@@ -740,12 +755,20 @@ const towns = [
 
     let partialSent = false;
     async function sendPartialCapture() {
-      if (partialSent || !formAction || !nameInput || !phoneInput || !emailInput) return;
+      if (partialSent || !nameInput || !phoneInput || !emailInput) return;
       const phoneOk = validPhone(phoneInput.value);
       const emailOk = validEmail(emailInput.value);
       if (!phoneOk && !emailOk) return; // nothing reachable yet
 
       partialSent = true;
+      sendToEngine({
+        ...getStepData(),
+        name:  nameInput.value.trim(),
+        phone: phoneOk ? toDigits(phoneInput.value) : '',
+        email: emailOk ? emailInput.value.trim().toLowerCase() : '',
+        lead_status: 'partial',
+      });
+      if (!formAction) return;
       try {
         const res = await fetch(formAction, {
           method: 'POST',
@@ -824,6 +847,8 @@ const towns = [
         const hidden = contactForm.querySelector<HTMLInputElement>(`input[type="hidden"][name="${key}"]`);
         if (hidden) hidden.value = val;
       });
+
+      sendToEngine(payload);
 
       try {
         if (formAction) {
