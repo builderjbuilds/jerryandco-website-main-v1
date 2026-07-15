@@ -149,6 +149,17 @@ const towns = [
         <input type="text" name="finish_color" id="msf-color" placeholder="e.g. deep forest green, matte white" autocomplete="off" />
       </div>
     </div>
+    <div class="form-row single">
+      <div class="field">
+        <label for="msf-description">Tell us about your project <span class="field-opt">(optional)</span></label>
+        <textarea
+          name="project_description"
+          id="msf-description"
+          rows="4"
+          placeholder="What's the current situation, and what are you hoping for? The more detail, the faster and more accurate your estimate."
+        ></textarea>
+      </div>
+    </div>
 
     <div class="msf-nav">
       <button type="button" class="msf-back" data-back="1">← Back</button>
@@ -211,6 +222,7 @@ const towns = [
       <input type="hidden" name="timeline" />
       <input type="hidden" name="project_size" />
       <input type="hidden" name="finish_color" />
+      <input type="hidden" name="project_description" />
       <input type="hidden" name="building_notes" />
       <!-- Honeypot (Formspark spam guard) -->
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
@@ -796,6 +808,7 @@ const towns = [
         timeline:       get('input[name="timeline"]:checked'),
         project_size:   get('[name="project_size"]'),
         finish_color:   get('[name="finish_color"]'),
+        project_description: (msf!.querySelector<HTMLTextAreaElement>('[name="project_description"]')?.value ?? ''),
         building_notes: (msf!.querySelector<HTMLTextAreaElement>('[name="building_notes"]')?.value ?? ''),
       };
     };
