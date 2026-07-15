@@ -121,13 +121,14 @@ const towns = [
       </div>
       <div class="form-row single">
         <div class="field">
-          <label for="qif-details">Anything else we should know? <span class="field-opt">(optional)</span></label>
-          <textarea name="project_description" id="qif-details" rows="3" placeholder="Size, condition, desired color/finish, access notes — whatever you've got."></textarea>
+          <label for="qif-details"><span id="qif-details-label">Tell us about your project</span> <span class="field-opt" id="qif-details-opt">(optional)</span><span class="field-req" id="qif-details-req" hidden>*</span></label>
+          <textarea name="project_description" id="qif-details" rows="3" placeholder="Size, condition, desired color/finish, access notes — whatever you've got." aria-describedby="qerr-details"></textarea>
+          <span class="field-error" id="qerr-details" role="alert" aria-live="polite" hidden></span>
         </div>
       </div>
       <div class="form-row single">
         <div class="field">
-          <label for="qif-photos">Photos <span class="field-opt">(optional, up to 4 — the fastest way to get an accurate estimate)</span></label>
+          <label for="qif-photos">Photos <span class="field-opt">(optional, up to 4 — the fastest way to get an accurate estimate, especially if we're mid-job and can't pick up right away)</span></label>
           <input type="file" id="qif-photos" accept="image/jpeg,image/png,image/heic" multiple />
           <span id="qif-photos-count" class="qif-photos-count"></span>
         </div>
@@ -322,6 +323,55 @@ const towns = [
         });
       });
     });
+
+    // Description field label/requirement follows the chosen project type —
+    // "Something else" gives no other signal about scope, so the
+    // description becomes the only thing the estimating engine (and the
+    // owner, reviewing later) has to go on. Every other type keeps it
+    // optional but still contextually labeled, since a filled-in
+    // description + photos is what lets AI Draft produce something useful
+    // when nobody's available to call the lead back right away.
+    const DETAIL_LABELS: Record<string, string> = {
+      'cabinet-refinishing': 'Tell us about your cabinets',
+      'bathroom-refresh': 'Tell us about your bathroom',
+      'interior-painting': 'Tell us about the space you want painted',
+      'full-bathroom-reno': 'Tell us about your bathroom renovation',
+      'kitchen-refresh': 'Tell us about your kitchen',
+      'something-else': "What's the project?",
+    };
+    const detailsLabel = document.getElementById('qif-details-label') as HTMLElement | null;
+    const detailsOpt   = document.getElementById('qif-details-opt') as HTMLElement | null;
+    const detailsReq   = document.getElementById('qif-details-req') as HTMLElement | null;
+    const detailsInput = document.getElementById('qif-details') as HTMLTextAreaElement | null;
+    const errDetails   = document.getElementById('qerr-details') as HTMLElement | null;
+
+    function isSomethingElse(): boolean {
+      return (qif!.querySelector<HTMLInputElement>('input[name="project_type"]:checked')?.value ?? '') === 'something-else';
+    }
+    function syncDetailsLabel() {
+      const type = qif!.querySelector<HTMLInputElement>('input[name="project_type"]:checked')?.value;
+      if (detailsLabel) detailsLabel.textContent = (type && DETAIL_LABELS[type]) || 'Tell us about your project';
+      const required = isSomethingElse();
+      if (detailsOpt) detailsOpt.hidden = required;
+      if (detailsReq) detailsReq.hidden = !required;
+      if (detailsInput) {
+        detailsInput.placeholder = required
+          ? "What are you looking to get done? A sentence or two is enough to get started."
+          : 'Size, condition, desired color/finish, access notes — whatever you\'ve got.';
+      }
+    }
+    qif.querySelectorAll<HTMLInputElement>('input[name="project_type"]').forEach((input) => {
+      input.addEventListener('change', syncDetailsLabel);
+    });
+    detailsInput?.addEventListener('blur', () => {
+      if (isSomethingElse() && detailsInput.value.trim().length === 0) {
+        detailsInput.setAttribute('aria-invalid', 'true');
+        if (errDetails) { errDetails.textContent = 'Give us a quick description — this is the only thing we know about "Something else."'; errDetails.hidden = false; }
+      } else {
+        detailsInput.removeAttribute('aria-invalid');
+        if (errDetails) { errDetails.textContent = ''; errDetails.hidden = true; }
+      }
+    });
     qif.querySelectorAll<HTMLButtonElement>('.msf-back').forEach((btn) => {
       btn.addEventListener('click', () => setStep(Number(btn.dataset.back)));
     });
@@ -374,10 +424,15 @@ const towns = [
       e.preventDefault();
       if (!contactForm || !nameInput || !phoneInput || !emailInput) return;
 
-      let firstError: HTMLInputElement | null = null;
+      let firstError: HTMLInputElement | HTMLTextAreaElement | null = null;
       if (!validName(nameInput.value)) { showErr(nameInput, errName!, 'Enter your full name.'); firstError ??= nameInput; } else clearErr(nameInput, errName!);
       if (!validPhone(phoneInput.value)) { showErr(phoneInput, errPhone!, 'Enter a 10-digit US phone number.'); firstError ??= phoneInput; } else clearErr(phoneInput, errPhone!);
       if (!validEmail(emailInput.value)) { showErr(emailInput, errEmail!, 'Enter a valid email address.'); firstError ??= emailInput; } else clearErr(emailInput, errEmail!);
+      if (isSomethingElse() && detailsInput && detailsInput.value.trim().length === 0) {
+        detailsInput.setAttribute('aria-invalid', 'true');
+        if (errDetails) { errDetails.textContent = 'Give us a quick description — this is the only thing we know about "Something else."'; errDetails.hidden = false; }
+        firstError ??= detailsInput;
+      }
       if (firstError) { firstError.focus(); return; }
 
       if (errorEl) errorEl.hidden = true;
