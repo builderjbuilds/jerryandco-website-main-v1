@@ -2,8 +2,10 @@
 // Condensed, dedicated-link intake — for team quick-entry and for routing an
 // already-warm/hot lead directly (text, QR code, referral) instead of the
 // full 4-step marketing form on the homepage. Two steps instead of four:
-// drops the "Access & notes" step and photo upload (deferred to the
-// follow-up call) and merges size/color/description into one optional field.
+// drops the separate "Access & notes" step (merged into one optional
+// description field) but keeps photo upload — it's the single highest-
+// leverage field for estimate accuracy, especially for the AI Draft
+// feature, which reads attached photos directly.
 // Posts only to the estimating engine (not Formspark) — Formspark is the
 // homepage form's own legacy notification path; the engine already owns
 // owner alerting and the SLA clock for every lead regardless of entry point.
@@ -123,6 +125,13 @@ const towns = [
           <textarea name="project_description" id="qif-details" rows="3" placeholder="Size, condition, desired color/finish, access notes — whatever you've got."></textarea>
         </div>
       </div>
+      <div class="form-row single">
+        <div class="field">
+          <label for="qif-photos">Photos <span class="field-opt">(optional, up to 4 — the fastest way to get an accurate estimate)</span></label>
+          <input type="file" id="qif-photos" accept="image/jpeg,image/png,image/heic" multiple />
+          <span id="qif-photos-count" class="qif-photos-count"></span>
+        </div>
+      </div>
 
       <div class="msf-error" id="qifError" hidden>
         <p>Something went wrong — please try again or call <a href="tel:+13476026801">(347) 602-6801</a>.</p>
@@ -190,6 +199,7 @@ const towns = [
   .msf-back-row { margin-top: var(--sp-3); text-align: center; }
 
   .qif-bot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .qif-photos-count { display: block; margin-top: 6px; font-size: 13px; color: var(--text-muted); }
 
   .msf-success { text-align: center; padding: var(--sp-6) var(--sp-3); }
   .msf-success[hidden] { display: none; }
@@ -217,6 +227,41 @@ const towns = [
     const successEl   = document.getElementById('qifSuccess') as HTMLElement | null;
 
     const ENGINE_INTAKE_URL = 'https://portal.jerryandcohome.com/api/v1/leads/intake';
+
+    // ── Photos (optional, up to 4) — same cap/behavior as the homepage form.
+    const MAX_PHOTOS = 4;
+    const MAX_PHOTO_BYTES = 5_000_000;
+    const photosInput = document.getElementById('qif-photos') as HTMLInputElement | null;
+    const photosCount = document.getElementById('qif-photos-count') as HTMLElement | null;
+    photosInput?.addEventListener('change', () => {
+      if (!photosCount) return;
+      const files = Array.from(photosInput.files ?? []);
+      if (files.length === 0) { photosCount.textContent = ''; return; }
+      const over = files.length > MAX_PHOTOS;
+      const tooBig = files.some((f) => f.size > MAX_PHOTO_BYTES);
+      const used = files.slice(0, MAX_PHOTOS);
+      let msg = used.length + ' of ' + files.length + ' photo(s) selected';
+      if (over) msg += ' — only the first ' + MAX_PHOTOS + ' will be sent';
+      if (tooBig) msg += '; some are over 5MB and will be skipped';
+      photosCount.textContent = msg;
+    });
+    function readFileAsDataUrl(file: File): Promise<string> {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+    async function collectPhotos(): Promise<string[]> {
+      const files = Array.from(photosInput?.files ?? []).slice(0, MAX_PHOTOS);
+      const results: string[] = [];
+      for (const file of files) {
+        if (file.size > MAX_PHOTO_BYTES) continue;
+        try { results.push(await readFileAsDataUrl(file)); } catch { /* skip unreadable file */ }
+      }
+      return results;
+    }
 
     const toDigits  = (v: string) => v.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
     const validPhone = (v: string) => toDigits(v).length === 10;
@@ -352,10 +397,11 @@ const towns = [
       if (gotcha) { (payload as Record<string, unknown>)._gotcha = gotcha; }
 
       try {
+        const photos = await collectPhotos();
         const res = await fetch(ENGINE_INTAKE_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(photos.length ? { ...payload, photos } : payload),
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
