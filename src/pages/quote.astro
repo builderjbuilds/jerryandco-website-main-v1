@@ -55,6 +55,11 @@ const breadcrumbSchema = {
   .quote-wrap {
     max-width: 620px;
   }
+  /* Give the form more room to breathe on larger screens, matching the
+     QuickIntakeForm's own min-width:640px 3-column type-card layout. */
+  @media (min-width: 700px) {
+    .quote-wrap { max-width: 760px; }
+  }
   .section-head { margin-bottom: var(--sp-5); text-align: center; }
   .eyebrow {
     font-size: 13px;
