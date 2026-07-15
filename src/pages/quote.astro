@@ -1,0 +1,79 @@
+---
+// Dedicated intake portal — for team quick-entry (phone/in-person leads)
+// and for routing an already-warm/hot lead directly (text, QR code,
+// referral) so they skip the homepage's full marketing funnel. Not
+// auth-gated: the same page/copy works whether a team member is entering
+// on the client's behalf or the client is filling it out themselves.
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SchemaLD from '../components/SchemaLD.astro';
+import QuickIntakeForm from '../components/QuickIntakeForm.astro';
+
+const title = 'Start Your Project | Jerry & Co. Home Improvement';
+const description =
+  'Tell us about your cabinet refinishing, painting, or bathroom refresh project — two quick steps to a written estimate. MA HIC #208336.';
+const canonical = 'https://www.jerryandcohome.com/quote/';
+
+const breadcrumbSchema = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohome.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Start Your Project', item: canonical },
+  ],
+};
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <Fragment slot="head">
+    <SchemaLD type="BreadcrumbList" data={breadcrumbSchema} />
+  </Fragment>
+
+  <Header />
+
+  <section class="quote-hero">
+    <div class="wrap quote-wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Greater Boston · MA HIC #208336</p>
+        <h1>Let's get your project started.</h1>
+        <p class="lede">
+          Cabinet refinishing, interior painting, or a bathroom refresh — tell us the basics
+          and we'll follow up with a written estimate, usually the same day.
+        </p>
+      </div>
+
+      <QuickIntakeForm />
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .quote-hero {
+    padding: clamp(48px, 7vw, 88px) 0 clamp(64px, 8vw, 100px);
+  }
+  .quote-wrap {
+    max-width: 620px;
+  }
+  .section-head { margin-bottom: var(--sp-5); text-align: center; }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: var(--sp-2);
+  }
+  .quote-hero h1 {
+    font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--sp-2);
+  }
+  .lede {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    max-width: 48ch;
+    margin: 0 auto;
+  }
+</style>

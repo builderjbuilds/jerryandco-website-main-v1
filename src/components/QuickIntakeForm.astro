@@ -1,0 +1,317 @@
+---
+// Condensed, dedicated-link intake — for team quick-entry and for routing an
+// already-warm/hot lead directly (text, QR code, referral) instead of the
+// full 4-step marketing form on the homepage. Two steps instead of four:
+// drops the "Access & notes" step and photo upload (deferred to the
+// follow-up call) and merges size/color/description into one optional field.
+// Posts only to the estimating engine (not Formspark) — Formspark is the
+// homepage form's own legacy notification path; the engine already owns
+// owner alerting and the SLA clock for every lead regardless of entry point.
+const towns = [
+  'Medford', 'Malden', 'Everett', 'Arlington', 'Somerville', 'Cambridge',
+  'Woburn', 'Winchester', 'Stoneham', 'Burlington', 'Wilmington', 'Reading', 'Other',
+];
+---
+
+<div class="form-card qif" id="qif">
+  <h3>Tell us about your project</h3>
+  <p class="sub">Two quick steps — you'll hear from us within the hour.</p>
+
+  <!-- Progress -->
+  <div class="qif-progress">
+    <div class="qif-track"><div class="qif-fill" id="qifFill" style="width: 50%"></div></div>
+    <div class="qif-labels">
+      <span class="qif-label qif-label--active" data-step-label="1">Project</span>
+      <span class="qif-label" data-step-label="2">Contact</span>
+    </div>
+  </div>
+
+  <!-- ── Step 1: Project ─────────────────────────── -->
+  <div class="qif-step" id="qifStep1" data-step="1">
+    <div class="type-cards" role="group" aria-label="Project type">
+      <label class="type-card" for="q-type-cabinet">
+        <input type="radio" name="project_type" id="q-type-cabinet" value="cabinet-refinishing" checked />
+        <span class="type-card-name">Cabinet Refinishing</span>
+      </label>
+      <label class="type-card" for="q-type-bathroom">
+        <input type="radio" name="project_type" id="q-type-bathroom" value="bathroom-refresh" />
+        <span class="type-card-name">Bathroom Refresh</span>
+      </label>
+      <label class="type-card" for="q-type-painting">
+        <input type="radio" name="project_type" id="q-type-painting" value="interior-painting" />
+        <span class="type-card-name">Interior Painting</span>
+      </label>
+      <label class="type-card" for="q-type-reno">
+        <input type="radio" name="project_type" id="q-type-reno" value="full-bathroom-reno" />
+        <span class="type-card-name">Full Bathroom Reno</span>
+      </label>
+      <label class="type-card" for="q-type-kitchen">
+        <input type="radio" name="project_type" id="q-type-kitchen" value="kitchen-refresh" />
+        <span class="type-card-name">Kitchen Refresh</span>
+      </label>
+      <label class="type-card" for="q-type-other">
+        <input type="radio" name="project_type" id="q-type-other" value="something-else" />
+        <span class="type-card-name">Something else</span>
+      </label>
+    </div>
+
+    <div class="qif-field-group">
+      <div class="qif-field-label">Property</div>
+      <div class="chip-field" role="group" aria-label="Property type">
+        <label class="fchip" for="q-pt-condo"><input type="radio" name="property_type" id="q-pt-condo" value="own-condo" checked /><span>Own condo</span></label>
+        <label class="fchip" for="q-pt-sfh"><input type="radio" name="property_type" id="q-pt-sfh" value="single-family" /><span>Single-family</span></label>
+        <label class="fchip" for="q-pt-landlord"><input type="radio" name="property_type" id="q-pt-landlord" value="landlord" /><span>Landlord/multi-unit</span></label>
+        <label class="fchip" for="q-pt-renting"><input type="radio" name="property_type" id="q-pt-renting" value="renting" /><span>Renting</span></label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label for="qif-town">Town</label>
+        <select name="town" id="qif-town">
+          <option value="">Select your town</option>
+          {towns.map((t) => (
+            <option value={t.toLowerCase().replace(/[\s/]+/g, '-')}>{t}</option>
+          ))}
+        </select>
+      </div>
+      <div class="field">
+        <div class="qif-field-label" style="margin-bottom:5px">Timeline</div>
+        <div class="chip-field" role="group" aria-label="Timeline">
+          <label class="fchip" for="q-tl-asap"><input type="radio" name="timeline" id="q-tl-asap" value="asap" checked /><span>ASAP</span></label>
+          <label class="fchip" for="q-tl-30"><input type="radio" name="timeline" id="q-tl-30" value="within-30-days" /><span>30 days</span></label>
+          <label class="fchip" for="q-tl-3mo"><input type="radio" name="timeline" id="q-tl-3mo" value="1-3-months" /><span>1-3 mo</span></label>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-gold btn-block qif-next" data-next="2">Continue →</button>
+  </div>
+
+  <!-- ── Step 2: Contact ─────────────────────────── -->
+  <div class="qif-step" id="qifStep2" data-step="2" hidden>
+    <form id="qifContactForm" novalidate>
+      <input type="hidden" name="project_type" />
+      <input type="hidden" name="property_type" />
+      <input type="hidden" name="town" />
+      <input type="hidden" name="timeline" />
+      <input type="text" name="_gotcha" class="qif-bot" tabindex="-1" autocomplete="off" />
+
+      <div class="form-row">
+        <div class="field">
+          <label for="qif-name">Full name</label>
+          <input type="text" id="qif-name" name="name" required autocomplete="name" aria-describedby="qerr-name" />
+          <span class="field-error" id="qerr-name" role="alert" aria-live="polite" hidden></span>
+        </div>
+        <div class="field">
+          <label for="qif-phone">Phone</label>
+          <input type="tel" id="qif-phone" name="phone" required autocomplete="tel" placeholder="(347) 000-0000" aria-describedby="qerr-phone" />
+          <span class="field-error" id="qerr-phone" role="alert" aria-live="polite" hidden></span>
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="field">
+          <label for="qif-email">Email</label>
+          <input type="email" id="qif-email" name="email" required autocomplete="email" aria-describedby="qerr-email" />
+          <span class="field-error" id="qerr-email" role="alert" aria-live="polite" hidden></span>
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="field">
+          <label for="qif-details">Anything else we should know? <span class="field-opt">(optional)</span></label>
+          <textarea name="project_description" id="qif-details" rows="3" placeholder="Size, condition, desired color/finish, access notes — whatever you've got."></textarea>
+        </div>
+      </div>
+
+      <div class="msf-error" id="qifError" hidden>
+        <p>Something went wrong — please try again or call <a href="tel:+13476026801">(347) 602-6801</a>.</p>
+      </div>
+
+      <button type="submit" class="btn btn-gold btn-block" id="qifSubmit">Send my project details</button>
+    </form>
+    <div class="msf-back-row">
+      <button type="button" class="msf-back" data-back="1">← Back</button>
+    </div>
+  </div>
+
+  <!-- ── Success ──────────────────────────────────── -->
+  <div class="msf-success" id="qifSuccess" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>
+    </svg>
+    <h3>Thanks — we've got it.</h3>
+    <p>You'll get a text confirmation shortly and a written estimate within a few hours.</p>
+  </div>
+</div>
+
+<style>
+  .qif-progress { margin-bottom: var(--sp-4); }
+  .qif-track { height: 3px; background: var(--line); border-radius: 999px; overflow: hidden; margin-bottom: 10px; }
+  .qif-fill { height: 100%; background: var(--gold); border-radius: 999px; transition: width 0.35s ease; }
+  .qif-labels { display: flex; justify-content: space-between; }
+  .qif-label { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); opacity: 0.5; }
+  .qif-label--active { color: var(--gold-deep); opacity: 1; }
+
+  .type-cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); margin: 0 0 var(--sp-3); }
+  .type-card { display: block; border: 1.5px solid rgba(30, 57, 52, 0.15); border-radius: 3px; padding: var(--sp-2) var(--sp-3); cursor: pointer; transition: border-color 0.15s, background 0.15s; position: relative; }
+  .type-card:hover { border-color: rgba(200, 160, 85, 0.5); }
+  .type-card:has(input:checked) { border-color: var(--gold); background: rgba(200, 160, 85, 0.06); }
+  .type-card input { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; }
+  .type-card-name { display: block; font-size: 14px; font-weight: 600; color: var(--forest); }
+
+  .qif-field-group { margin-bottom: var(--sp-3); }
+  .qif-field-label { font-size: 13px; font-weight: 600; color: var(--forest); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: var(--sp-1); }
+  .chip-field { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fchip { display: inline-flex; align-items: center; border: 1.5px solid rgba(30, 57, 52, 0.15); border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.15s; position: relative; }
+  .fchip:hover { border-color: var(--forest); color: var(--forest); }
+  .fchip:has(input:checked) { border-color: var(--forest); background: var(--forest); color: var(--bone); }
+  .fchip input { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; }
+
+  .field-opt { font-size: 12px; font-weight: 400; color: var(--text-muted); text-transform: lowercase; }
+  .field-error { display: block; font-size: 14px; color: #8B2323; margin-top: 5px; line-height: 1.4; }
+  .field-error[hidden] { display: none; }
+  input[aria-invalid="true"] { border-color: rgba(139,35,35,0.6) !important; }
+
+  .msf-error { background: rgba(160, 50, 50, 0.07); border: 1px solid rgba(160, 50, 50, 0.18); border-radius: var(--radius-xs); padding: var(--sp-2) var(--sp-3); margin-bottom: var(--sp-3); }
+  .msf-error[hidden] { display: none; }
+  .msf-error p { font-size: 14px; color: #8B2323; margin: 0; }
+  .msf-error a { color: #8B2323; font-weight: 600; }
+
+  .msf-back { background: none; border: none; font-family: var(--font-sans); font-size: 15px; font-weight: 500; color: var(--text-muted); cursor: pointer; padding: 0; }
+  .msf-back:hover { color: var(--forest); }
+  .msf-back-row { margin-top: var(--sp-3); text-align: center; }
+
+  .qif-bot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .msf-success { text-align: center; padding: var(--sp-6) var(--sp-3); }
+  .msf-success[hidden] { display: none; }
+  .msf-success svg { width: 44px; height: 44px; color: var(--gold-deep); margin: 0 auto var(--sp-3); }
+  .msf-success p { color: var(--text-muted); font-size: 15px; line-height: 1.65; max-width: 36ch; margin: 0 auto; }
+
+  @media (max-width: 420px) { .type-cards { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  (function () {
+    const qif = document.getElementById('qif') as HTMLElement | null;
+    if (!qif) return;
+
+    const fill        = document.getElementById('qifFill') as HTMLElement | null;
+    const stepLabels  = qif.querySelectorAll<HTMLElement>('[data-step-label]');
+    const steps       = qif.querySelectorAll<HTMLElement>('.qif-step');
+    const contactForm = document.getElementById('qifContactForm') as HTMLFormElement | null;
+    const submitBtn   = document.getElementById('qifSubmit') as HTMLButtonElement | null;
+    const errorEl     = document.getElementById('qifError') as HTMLElement | null;
+    const successEl   = document.getElementById('qifSuccess') as HTMLElement | null;
+
+    const ENGINE_INTAKE_URL = 'https://portal.jerryandcohome.com/api/v1/leads/intake';
+
+    const toDigits  = (v: string) => v.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
+    const validPhone = (v: string) => toDigits(v).length === 10;
+    const validEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+    const validName  = (v: string) => v.trim().length >= 2 && /\S/.test(v.trim());
+
+    function showErr(input: HTMLInputElement, msgEl: HTMLElement, msg: string) {
+      input.setAttribute('aria-invalid', 'true');
+      msgEl.textContent = msg;
+      msgEl.hidden = false;
+    }
+    function clearErr(input: HTMLInputElement, msgEl: HTMLElement) {
+      input.removeAttribute('aria-invalid');
+      msgEl.textContent = '';
+      msgEl.hidden = true;
+    }
+
+    function setStep(n: number) {
+      steps.forEach((s) => { s.hidden = Number(s.dataset.step) !== n; });
+      if (fill) fill.style.width = `${n === 1 ? 50 : 100}%`;
+      stepLabels.forEach((l) => {
+        l.classList.toggle('qif-label--active', Number(l.dataset.stepLabel) <= n);
+      });
+      qif!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    qif.querySelectorAll<HTMLButtonElement>('.qif-next').forEach((btn) => {
+      btn.addEventListener('click', () => setStep(Number(btn.dataset.next)));
+    });
+    qif.querySelectorAll<HTMLButtonElement>('.msf-back').forEach((btn) => {
+      btn.addEventListener('click', () => setStep(Number(btn.dataset.back)));
+    });
+
+    const getStepData = () => {
+      const get = (sel: string) => qif!.querySelector<HTMLInputElement>(sel)?.value ?? '';
+      return {
+        project_type:  get('input[name="project_type"]:checked'),
+        property_type: get('input[name="property_type"]:checked'),
+        town:          get('[name="town"]'),
+        timeline:      get('input[name="timeline"]:checked'),
+      };
+    };
+
+    const nameInput  = contactForm?.querySelector<HTMLInputElement>('#qif-name');
+    const phoneInput = contactForm?.querySelector<HTMLInputElement>('#qif-phone');
+    const emailInput = contactForm?.querySelector<HTMLInputElement>('#qif-email');
+    const errName    = document.getElementById('qerr-name') as HTMLElement | null;
+    const errPhone   = document.getElementById('qerr-phone') as HTMLElement | null;
+    const errEmail   = document.getElementById('qerr-email') as HTMLElement | null;
+
+    if (nameInput && errName) nameInput.addEventListener('blur', () => {
+      if (!validName(nameInput.value)) showErr(nameInput, errName, 'Enter your full name.');
+      else clearErr(nameInput, errName);
+    });
+    if (phoneInput && errPhone) phoneInput.addEventListener('blur', () => {
+      if (!validPhone(phoneInput.value)) showErr(phoneInput, errPhone, 'Enter a 10-digit US phone number.');
+      else clearErr(phoneInput, errPhone);
+    });
+    if (emailInput && errEmail) emailInput.addEventListener('blur', () => {
+      if (!validEmail(emailInput.value)) showErr(emailInput, errEmail, 'Enter a valid email address.');
+      else clearErr(emailInput, errEmail);
+    });
+
+    contactForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!contactForm || !nameInput || !phoneInput || !emailInput) return;
+
+      let firstError: HTMLInputElement | null = null;
+      if (!validName(nameInput.value)) { showErr(nameInput, errName!, 'Enter your full name.'); firstError ??= nameInput; } else clearErr(nameInput, errName!);
+      if (!validPhone(phoneInput.value)) { showErr(phoneInput, errPhone!, 'Enter a 10-digit US phone number.'); firstError ??= phoneInput; } else clearErr(phoneInput, errPhone!);
+      if (!validEmail(emailInput.value)) { showErr(emailInput, errEmail!, 'Enter a valid email address.'); firstError ??= emailInput; } else clearErr(emailInput, errEmail!);
+      if (firstError) { firstError.focus(); return; }
+
+      if (errorEl) errorEl.hidden = true;
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+      const description = (contactForm.querySelector<HTMLTextAreaElement>('[name="project_description"]')?.value ?? '').trim();
+      const payload = {
+        ...getStepData(),
+        project_description: description,
+        name: nameInput.value.trim(),
+        phone: toDigits(phoneInput.value),
+        email: emailInput.value.trim().toLowerCase(),
+        lead_status: 'complete',
+        source: 'quote_portal',
+      };
+      const gotcha = (contactForm.querySelector<HTMLInputElement>('[name="_gotcha"]')?.value ?? '');
+      if (gotcha) { (payload as Record<string, unknown>)._gotcha = gotcha; }
+
+      try {
+        const res = await fetch(ENGINE_INTAKE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        if (typeof (window as any).posthog !== 'undefined') {
+          (window as any).posthog.capture('quote_portal_submitted', { project_type: payload.project_type });
+        }
+        steps.forEach((s) => { s.hidden = true; });
+        if (successEl) successEl.hidden = false;
+        if (fill) fill.style.width = '100%';
+      } catch {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send my project details'; }
+        if (errorEl) errorEl.hidden = false;
+      }
+    });
+  })();
+</script>
