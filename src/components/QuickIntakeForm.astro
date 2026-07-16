@@ -143,7 +143,7 @@ const towns = [
         </div>
         <div class="form-row single">
           <div class="field">
-            <label for="qif-photos">Photos <span class="field-opt">(optional, up to 4 — the fastest way to get an accurate estimate, especially if we're mid-job and can't pick up right away)</span></label>
+            <label for="qif-photos">Photos <span class="field-opt">(optional, up to 8 — the fastest way to get an accurate estimate, especially if we're mid-job and can't pick up right away)</span></label>
             <input type="file" id="qif-photos" accept="image/jpeg,image/png,image/heic" multiple />
             <span id="qif-photos-count" class="qif-photos-count"></span>
           </div>
@@ -264,8 +264,8 @@ const towns = [
 
     const ENGINE_INTAKE_URL = 'https://portal.jerryandcohome.com/api/v1/leads/intake';
 
-    // ── Photos (optional, up to 4) — same cap/behavior as the homepage form.
-    const MAX_PHOTOS = 4;
+    // ── Photos (optional, up to 8) — same cap/behavior as the homepage form.
+    const MAX_PHOTOS = 8;
     const MAX_PHOTO_BYTES = 5_000_000;
     const photosInput = document.getElementById('qif-photos') as HTMLInputElement | null;
     const photosCount = document.getElementById('qif-photos-count') as HTMLElement | null;

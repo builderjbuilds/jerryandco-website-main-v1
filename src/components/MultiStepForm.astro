@@ -185,7 +185,7 @@ const towns = [
 
     <div class="form-row single">
       <div class="field">
-        <label for="msf-photos">Photos <span class="field-opt">(optional, up to 4)</span></label>
+        <label for="msf-photos">Photos <span class="field-opt">(optional, up to 8)</span></label>
         <input type="file" id="msf-photos" accept="image/jpeg,image/png,image/heic" multiple />
         <span id="msf-photos-count" class="msf-photos-count"></span>
       </div>
@@ -648,11 +648,11 @@ const towns = [
       }).catch(() => {});
     }
 
-    // ── Photos (optional, up to 4) — engine only, never sent to Formspark.
+    // ── Photos (optional, up to 8) — engine only, never sent to Formspark.
     // No client-side compression: a typical phone photo (2-4MB) fits the
     // engine's 5MB/photo cap fine; anyone with larger files is pointed at
     // the email fallback instead of silently failing.
-    const MAX_PHOTOS = 4;
+    const MAX_PHOTOS = 8;
     const MAX_PHOTO_BYTES = 5_000_000;
     const photosInput = document.getElementById('msf-photos') as HTMLInputElement | null;
     const photosCount = document.getElementById('msf-photos-count') as HTMLElement | null;
