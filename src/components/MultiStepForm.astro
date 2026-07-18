@@ -648,12 +648,16 @@ const towns = [
       }).catch(() => {});
     }
 
-    // ── Photos (optional, up to 8) — engine only, never sent to Formspark.
-    // No client-side compression: a typical phone photo (2-4MB) fits the
-    // engine's 5MB/photo cap fine; anyone with larger files is pointed at
-    // the email fallback instead of silently failing.
-    const MAX_PHOTOS = 8;
-    const MAX_PHOTO_BYTES = 5_000_000;
+    // ── Photos (optional, up to 20) — engine only, never sent to Formspark.
+    // Raised from 8 to support detailed remote estimating. Compressed
+    // client-side (resized + re-encoded) before upload so a 20-photo set
+    // stays fast and reliable on a site visit's cell connection —
+    // uncompressed originals at this count could otherwise mean
+    // 60-150MB per submission.
+    const MAX_PHOTOS = 20;
+    const MAX_PHOTO_BYTES = 15_000_000; // original file, pre-compression
+    const MAX_DIMENSION = 1600;
+    const JPEG_QUALITY = 0.8;
     const photosInput = document.getElementById('msf-photos') as HTMLInputElement | null;
     const photosCount = document.getElementById('msf-photos-count') as HTMLElement | null;
     photosInput?.addEventListener('change', () => {
@@ -665,7 +669,7 @@ const towns = [
       const used = files.slice(0, MAX_PHOTOS);
       let msg = used.length + ' of ' + files.length + ' photo(s) selected';
       if (over) msg += ' — only the first ' + MAX_PHOTOS + ' will be sent';
-      if (tooBig) msg += '; some are over 5MB and will be skipped';
+      if (tooBig) msg += '; some are over 15MB and will be skipped';
       photosCount.textContent = msg;
     });
     function readFileAsDataUrl(file: File): Promise<string> {
@@ -676,12 +680,28 @@ const towns = [
         reader.readAsDataURL(file);
       });
     }
+    async function compressImage(file: File): Promise<string> {
+      try {
+        const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+        const scale = Math.min(1, MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+        const w = Math.round(bitmap.width * scale);
+        const h = Math.round(bitmap.height * scale);
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) throw new Error('no 2d context');
+        ctx.drawImage(bitmap, 0, 0, w, h);
+        return canvas.toDataURL('image/jpeg', JPEG_QUALITY);
+      } catch {
+        return readFileAsDataUrl(file); // fallback: send original, uncompressed
+      }
+    }
     async function collectPhotos(): Promise<string[]> {
       const files = Array.from(photosInput?.files ?? []).slice(0, MAX_PHOTOS);
       const results: string[] = [];
       for (const file of files) {
         if (file.size > MAX_PHOTO_BYTES) continue;
-        try { results.push(await readFileAsDataUrl(file)); } catch { /* skip unreadable file */ }
+        try { results.push(await compressImage(file)); } catch { /* skip unreadable file */ }
       }
       return results;
     }
