@@ -16,11 +16,12 @@ const canonical = 'https://www.jerryandcohome.com/nj/book-site-visit/';
 // calendar rather than standing up a separate "NJ Site Visit" calendar until
 // there's an actual reporting need to split them.
 const calendarId = import.meta.env.PUBLIC_GHL_CALENDAR_ID_NJ_VISIT || '0314MPZa1KanvzVKExix';
+const panelImg = 'https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_900/nj-design-build/scheduler-left-panel.jpg';
 ---
 
 <Base title={title} description={description} canonical={canonical}>
   <div class="shell">
-    <div class="panel">
+    <div class="panel" style={`--panel-bg:url('${panelImg}')`}>
       <div class="panel-inner">
         <div class="logo">
           <svg width="28" height="28" viewBox="0 0 30 30" fill="none"><path d="M4 15L15 5L26 15" stroke="#F7F3EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 13V25H23V13" stroke="#F7F3EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 25V18H17V25" stroke="#C8A055" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -76,7 +77,9 @@ const calendarId = import.meta.env.PUBLIC_GHL_CALENDAR_ID_NJ_VISIT || '0314MPZa1
   .shell { display: grid; grid-template-columns: minmax(320px, 42%) 1fr; min-height: 100vh; }
 
   .panel {
-    background: linear-gradient(165deg, var(--forest) 0%, var(--ink) 100%);
+    background: linear-gradient(165deg, rgba(30,57,52,0.93) 0%, rgba(20,36,31,0.97) 100%), var(--panel-bg);
+    background-size: cover;
+    background-position: center;
     color: var(--bone);
     padding: 48px 44px;
     position: relative;

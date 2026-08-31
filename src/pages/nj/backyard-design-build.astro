@@ -23,6 +23,7 @@ const canonical = 'https://www.jerryandcohome.com/nj/backyard-design-build/';
 
 const heroImg = 'https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_1920/nj-design-build/hero-backyard-addition.jpg';
 const ctaImg = 'https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_1920/nj-design-build/section-final-cta.jpg';
+const areasImg = 'https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_1920/nj-design-build/section-service-area.jpg';
 
 const services = [
   {
@@ -212,7 +213,7 @@ const breadcrumbSchema = {
     </div>
   </section>
 
-  <section class="nj-areas" id="areas">
+  <section class="nj-areas" id="areas" style={`--areas-bg:url('${areasImg}')`}>
     <div class="wrap">
       <h2>Your Town — Yes, We Work There</h2>
       <p class="lede">Serving Bergen, Passaic, Essex, and Hudson Counties as an extension of Jerry &amp; Co.'s NY-Metro Division — the same design-build motion already running in Westchester and Nassau County, NY.</p>
@@ -330,12 +331,18 @@ const breadcrumbSchema = {
 
   .nj-sample { background: var(--bone-deep); padding: 72px 0; }
 
-  .nj-areas { background: #fff; text-align: center; padding: 72px 0; }
-  .nj-areas h2 { font-family: var(--font-serif); font-size: 28px; color: var(--forest); margin-bottom: 12px; }
-  .nj-areas p.lede { font-size: 14.5px; color: var(--text-muted); max-width: 640px; margin: 0 auto 30px; line-height: 1.6; }
+  .nj-areas {
+    background: linear-gradient(165deg, rgba(20,38,34,0.82) 0%, rgba(20,38,34,0.90) 100%), var(--areas-bg);
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 72px 0;
+  }
+  .nj-areas h2 { font-family: var(--font-serif); font-size: 28px; color: var(--bone); margin-bottom: 12px; }
+  .nj-areas p.lede { font-size: 14.5px; color: #D9E2DD; max-width: 640px; margin: 0 auto 30px; line-height: 1.6; }
   .area-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 820px; margin: 0 auto 18px; }
-  .area-chip { background: var(--bone); border: 1px solid var(--line); border-radius: 20px; padding: 8px 16px; font-size: 12.5px; font-weight: 600; color: var(--forest); }
-  .nj-areas .note { font-size: 12.5px; color: var(--text-muted); }
+  .area-chip { background: rgba(247,243,234,0.1); border: 1px solid rgba(247,243,234,0.28); border-radius: 20px; padding: 8px 16px; font-size: 12.5px; font-weight: 600; color: var(--bone); }
+  .nj-areas .note { font-size: 12.5px; color: #B9C4BE; }
 
   .nj-testimonials { background: var(--forest); color: var(--bone); padding: 72px 0; }
   .nj-testimonials .eyebrow { color: var(--gold); text-align: center; }
