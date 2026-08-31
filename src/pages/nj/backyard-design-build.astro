@@ -86,10 +86,15 @@ const processSteps = [
 
 const areaChips = ['Lyndhurst', 'Rutherford', 'Ridgewood', 'Hackensack', 'Paramus', 'Teaneck', 'Fort Lee', 'Clifton', 'Montclair', 'Jersey City'];
 
+// Real headshots, pulled from the same /img/testimonials/ set used on the
+// MA cabinet-refinishing homepage (data/testimonials.json) — these are
+// actual named clients' real photos, not AI-generated, so they satisfy the
+// build spec's Section 8 constraint (no fabricated likenesses) more
+// directly than the SVG monogram fallback did.
 const testimonials = [
-  { initial: 'C', quote: 'Jerry has completed multiple projects for us over the years, from repairs and finish work to larger renovations. His craftsmanship, reliability, and attention to detail are consistently outstanding. We trust him completely and wouldn’t hesitate to recommend Jerry & Co. to others.', who: 'Ceri L.' },
-  { initial: 'A', quote: 'Jerry transformed our outdated bathroom into a bright, timeless space we absolutely love. He was professional, communicative, and detail-oriented throughout the entire project. The craftsmanship exceeded our expectations.', who: 'Alyssa A.' },
-  { initial: 'J', quote: 'Working with Jerry was a fantastic experience from start to finish. He listened carefully to our vision, helped us make smart design decisions, and delivered exceptional quality throughout.', who: 'Julia T.' },
+  { headshot: 'ceri-charlestown-ma_testimonial-headshot.jpg', quote: 'Jerry has completed multiple projects for us over the years, from repairs and finish work to larger renovations. His craftsmanship, reliability, and attention to detail are consistently outstanding. We trust him completely and wouldn’t hesitate to recommend Jerry & Co. to others.', who: 'Ceri L.' },
+  { headshot: 'alyssa-charlestown-ma_testimonial-headshot.jpg', quote: 'Jerry transformed our outdated bathroom into a bright, timeless space we absolutely love. He was professional, communicative, and detail-oriented throughout the entire project. The craftsmanship exceeded our expectations.', who: 'Alyssa A.' },
+  { headshot: 'julia-boston-ma_testimonial-headshot.jpg', quote: 'Working with Jerry was a fantastic experience from start to finish. He listened carefully to our vision, helped us make smart design decisions, and delivered exceptional quality throughout.', who: 'Julia T.' },
 ];
 
 const faqItems = [
@@ -232,7 +237,7 @@ const breadcrumbSchema = {
       <div class="t-grid">
         {testimonials.map((t) => (
           <div class="t-card">
-            <div class="avatar" aria-hidden="true">{t.initial}</div>
+            <img class="avatar" src={`/img/testimonials/${t.headshot}`} alt={`${t.who}, Jerry & Co. client`} loading="lazy" />
             <div class="stars">★★★★★</div>
             <p>&ldquo;{t.quote}&rdquo;</p>
             <div class="who">— {t.who}</div>
@@ -351,8 +356,8 @@ const breadcrumbSchema = {
   .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .t-card { text-align: center; }
   .avatar {
-    width: 52px; height: 52px; border-radius: 50%; margin: 0 auto 10px; background: var(--gold); color: var(--forest);
-    display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-size: 20px; font-weight: 600;
+    width: 52px; height: 52px; border-radius: 50%; margin: 0 auto 10px; object-fit: cover;
+    border: 2px solid var(--gold);
   }
   .stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
   .t-card p { font-size: 13px; font-style: italic; line-height: 1.6; color: #E7EDE9; }

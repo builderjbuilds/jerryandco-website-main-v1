@@ -24,11 +24,8 @@ const panelImg = 'https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_aut
     <div class="panel" style={`--panel-bg:url('${panelImg}')`}>
       <div class="panel-inner">
         <div class="logo">
-          <svg width="28" height="28" viewBox="0 0 30 30" fill="none"><path d="M4 15L15 5L26 15" stroke="#F7F3EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 13V25H23V13" stroke="#F7F3EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 25V18H17V25" stroke="#C8A055" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div>
-            <div class="word">JERRY &amp; CO.</div>
-            <div class="sub">NJ / NY-Metro Design-Build</div>
-          </div>
+          <img src="/img/brand/logo-horizontal-02-white-transparent.png" alt="Jerry & Co. Home Improvement LLC" class="logo-img" />
+          <div class="sub">NJ / NY-Metro Design-Build</div>
         </div>
 
         <div class="eyebrow">Last Step — Lock In Your Time</div>
@@ -86,8 +83,8 @@ const panelImg = 'https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_aut
     overflow: hidden;
   }
   .panel-inner { position: relative; max-width: 440px; }
-  .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 36px; }
-  .logo .word { font-family: var(--font-serif); font-size: 19px; font-weight: 600; letter-spacing: 0.02em; color: var(--bone); line-height: 1.1; }
+  .logo { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 36px; }
+  .logo-img { height: 44px; width: auto; display: block; }
   .logo .sub { font-size: 9px; letter-spacing: 0.14em; color: #B9C4BE; text-transform: uppercase; }
   .eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 14px; }
   .panel h1 { font-family: var(--font-serif); font-size: clamp(26px, 2.6vw, 34px); line-height: 1.2; margin-bottom: 16px; color: var(--bone); }
