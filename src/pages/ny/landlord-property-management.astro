@@ -1,0 +1,144 @@
+---
+// Funnel B — NY Landlord / Developer / Property Manager.
+// Spec: JerryCo_OutdoorLiving_Division_Launch_Strategy.md, Section 2.3.3.
+import Base from '../../layouts/Base.astro';
+import NYHeader from '../../components/ny/NYHeader.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTABand from '../../components/CTABand.astro';
+import NYLeadForm from '../../components/ny/NYLeadForm.astro';
+import NYFooter from '../../components/ny/NYFooter.astro';
+import NYTrustChips from '../../components/ny/NYTrustChips.astro';
+import NYProcessSteps from '../../components/ny/NYProcessSteps.astro';
+import PlaceholderImage from '../../components/PlaceholderImage.astro';
+
+const title = 'Preferred-Vendor Contractor for Westchester Landlords & PMs | Jerry & Co.';
+const description =
+  'One reliable contractor, guaranteed turnaround windows, and preferred-vendor pricing for Westchester County landlords, property managers, and developers.';
+const canonical = 'https://www.jerryandcohome.com/ny/landlord-property-management/';
+
+// See fencing-sheds-patios.astro for the reasoning behind this flag — same
+// site-wide A2P 10DLC caution, confirm the NY number's status before go-live.
+const NY_LEAD_FORMS_ENABLED = true;
+
+const breadcrumbSchema = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohome.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Landlord & Property Manager Services — NY', item: canonical },
+  ],
+};
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', ...breadcrumbSchema })} />
+  </Fragment>
+
+  <NYHeader ctaHref="#ny-lead-form-b" ctaLabel="Book My Call" />
+
+  <section class="ny-hero">
+    <div class="wrap">
+      <Breadcrumb crumbs={[{ label: 'Outdoor Living', href: '/ny/' }, { label: 'Landlord & Property Manager Services' }]} />
+      <div class="estimate-grid">
+        <div class="ny-hero-copy" data-reveal="left">
+          <p class="eyebrow">Landlords · Property Managers · Developers — Westchester County</p>
+          <h1>One Contractor, Guaranteed Turnaround, Preferred-Vendor Pricing.</h1>
+          <p class="lede">
+            You've probably called two or three contractors for a turnover or repair and
+            gotten one callback — who then missed the date. Jerry &amp; Co. gives you one
+            number to call, a committed turnaround window in writing, and pricing that
+            scales with how much work you send our way.
+          </p>
+          <NYTrustChips />
+        </div>
+        <div data-reveal="right">
+          {NY_LEAD_FORMS_ENABLED ? (
+            <NYLeadForm
+              funnel="B"
+              calendarId="ppZpG8jAyotOx7q4Msgf"
+              heading="Book a 15-minute preferred-vendor call"
+              submitLabel="Book My Call"
+            />
+          ) : (
+            <div class="form-card">
+              <p class="form-paused-headline">Online booking is briefly paused.</p>
+              <p class="form-paused-sub">
+                Call or text us directly — <a href="tel:+13476026801">(347) 602-6801</a>.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ny-trust">
+    <div class="wrap">
+      <div class="ny-trust-grid">
+        <div class="section-head left" data-reveal="up">
+          <p class="eyebrow">You're not buying craftsmanship — you're buying certainty</p>
+          <h2>The actual cost isn't the invoice. It's the vacancy.</h2>
+          <p>
+            Every landlord and PM we talk to has the same story: a contractor quotes a date,
+            doesn't show, doesn't answer, and now a unit sits empty another two weeks. Jerry
+            &amp; Co. commits to a written turnaround window on every job and gives you one
+            direct line instead of a rotating cast of subs — insured, permit-coordinated, and
+            built to be the last contractor you have to vet.
+          </p>
+        </div>
+        <PlaceholderImage
+          publicId="ny/aspirational/landlord-turnover-repair"
+          alt="Concept rendering of a completed fence/turnover repair at a Westchester multi-family rental — aspirational, not an actual completed project"
+          aspect="4/3"
+          className="ny-trust-img"
+          caption="Concept rendering — real Westchester projects coming soon"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <NYProcessSteps
+    eyebrow="How the preferred-vendor relationship works"
+    headline="Four steps to one number you actually call back."
+    steps={[
+      { title: '15-minute call', body: 'We learn your portfolio, typical turnover volume, and where your current process breaks down.' },
+      { title: 'Written scope + pricing', body: 'Preferred-vendor rates and a standing turnaround SLA, in writing — not a verbal promise.' },
+      { title: 'Insured crew, on schedule', body: 'The crew that shows up is the crew that was scheduled — no rotating subs, no re-explaining the property.' },
+      { title: 'One number to call, every time', body: 'Every future job routes through the same point of contact — turnover, repair, or a new unit coming online.' },
+    ]}
+  />
+
+  <CTABand
+    eyebrow="For Westchester property owners"
+    headline="Set up your standing turnaround SLA"
+    ctaText="Book my call"
+    ctaHref="#ny-lead-form-b"
+    reassurance="15 minutes, no obligation — pricing and turnaround commitment in writing after the call."
+  />
+
+  <NYFooter />
+</Base>
+
+<style>
+  .ny-hero { padding: clamp(32px, 4vw, 56px) 0 clamp(56px, 6vw, 88px); background: #fff; }
+  .ny-hero h1 {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+  .ny-hero-copy :global(.ny-trust-chips) { margin-top: 24px; }
+  .ny-trust { background: var(--bone-deep); }
+  .ny-trust-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  :global(.ny-trust-img) { border-radius: var(--radius-sm); }
+  @media (max-width: 780px) {
+    .ny-trust-grid { grid-template-columns: 1fr; }
+  }
+  .form-paused-headline { font-weight: 600; margin-bottom: 8px; }
+  .form-paused-sub { color: var(--text-muted); }
+  .form-paused-sub a { color: var(--forest); font-weight: 600; }
+</style>

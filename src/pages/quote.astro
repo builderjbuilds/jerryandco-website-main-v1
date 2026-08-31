@@ -10,6 +10,13 @@ import Footer from '../components/Footer.astro';
 import SchemaLD from '../components/SchemaLD.astro';
 import QuickIntakeForm from '../components/QuickIntakeForm.astro';
 
+// TEMPORARY: QuickIntakeForm collects phone numbers, which GHL flags as a
+// competing SMS opt-in source alongside the chat widget during A2P 10DLC
+// campaign review. Disabled site-wide until the campaign is approved —
+// re-enable by flipping this flag back to true. See MultiStepForm.astro's
+// counterpart flag in index.astro.
+const LEAD_FORMS_ENABLED = false;
+
 const title = 'Start Your Project | Jerry & Co. Home Improvement';
 const description =
   'Tell us about your cabinet refinishing, painting, or bathroom refresh project — two quick steps to a written estimate. MA HIC #208336.';
@@ -41,7 +48,17 @@ const breadcrumbSchema = {
         </p>
       </div>
 
-      <QuickIntakeForm />
+      {LEAD_FORMS_ENABLED ? (
+        <QuickIntakeForm />
+      ) : (
+        <div class="form-paused" data-reveal="up">
+          <p class="form-paused-headline">Online quote requests are briefly paused.</p>
+          <p class="form-paused-sub">
+            Call or text us directly and we'll get your estimate started —
+            <a href="tel:+13476026801">(347) 602-6801</a>.
+          </p>
+        </div>
+      )}
     </div>
   </section>
 
@@ -54,6 +71,24 @@ const breadcrumbSchema = {
   }
   .quote-wrap {
     max-width: 620px;
+  }
+  .form-paused {
+    border: 1px solid var(--line);
+    background: var(--bone-deep);
+    border-radius: var(--radius-lg, 12px);
+    padding: var(--sp-5);
+    text-align: center;
+  }
+  .form-paused-headline {
+    font-weight: 600;
+    margin-bottom: var(--sp-2);
+  }
+  .form-paused-sub {
+    color: var(--text-muted);
+  }
+  .form-paused-sub a {
+    color: var(--forest);
+    font-weight: 600;
   }
   /* Give the form more room to breathe on larger screens, matching the
      QuickIntakeForm's own min-width:640px 3-column type-card layout. */

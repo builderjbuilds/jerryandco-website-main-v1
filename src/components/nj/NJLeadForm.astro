@@ -1,0 +1,256 @@
+---
+// NJ Design-Build — lead intake form (ported from mockup 2's #intake-form).
+// Posts to the same shared /api/ghl-lead-relay route the NY funnels use
+// (see src/pages/ny/../NYLeadForm.astro), with funnel='D' so the relay
+// routes into the NY Design-Build pipeline with NJ-specific tags/fields
+// (Section 5/7.1 of the build spec).
+//
+// No hydration directive needed — this is a plain Astro component with an
+// inline <script> (same pattern as NYLeadForm.astro), which Astro always
+// ships and runs client-side regardless of client:* directives.
+//
+// Two-page handoff (build spec Section 4.2's stated default): on success we
+// stash the lead record in sessionStorage — NOT localStorage, since that's
+// the one thing this build spec explicitly moves away from — and send the
+// visitor to /nj/book-site-visit/ to pick a time on the real GHL calendar.
+---
+
+<div class="form-card nj-lead-card" id="nj-intake-form-card">
+  <h2>Lock In Your Site Visit</h2>
+  <p class="fee-note">Bring your plans if you've got them — no plans yet, we'll help you get there. <strong>Visit fee depends on your project</strong> and is confirmed based on your answers below before you book a time. Either way, you leave with a fixed price and a start date, not a ballpark.</p>
+
+  <form class="nj-lead-form" id="nj-intake-form" novalidate>
+    <input type="text" name="_gotcha" class="nj-bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+    <div class="field">
+      <label for="nj-fullName">Full Name <span class="req">*</span></label>
+      <input id="nj-fullName" name="fullName" type="text" placeholder="Your full name" required autocomplete="name" />
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label for="nj-email">Email <span class="req">*</span></label>
+        <input id="nj-email" name="email" type="email" placeholder="Your email address" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="nj-phone">Phone <span class="req">*</span></label>
+        <input id="nj-phone" name="phone" type="tel" placeholder="Mobile number" required autocomplete="tel" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="nj-street">Street Address <span class="req">*</span></label>
+      <input id="nj-street" name="street" type="text" placeholder="Enter your full address" required autocomplete="street-address" />
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label for="nj-city">City <span class="req">*</span></label>
+        <input id="nj-city" name="city" type="text" placeholder="e.g. Lyndhurst" required autocomplete="address-level2" />
+      </div>
+      <div class="field">
+        <label for="nj-state">State <span class="req">*</span></label>
+        <input id="nj-state" name="state" type="text" placeholder="e.g. NJ" required autocomplete="address-level1" value="NJ" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label for="nj-postal">Postal Code <span class="req">*</span></label>
+        <input id="nj-postal" name="postal" type="text" placeholder="ZIP code" required autocomplete="postal-code" />
+      </div>
+      <div class="field">
+        <label for="nj-county">County</label>
+        <input id="nj-county" name="county" type="text" placeholder="e.g. Bergen" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="nj-projectType">Project Type <span class="req">*</span></label>
+      <select id="nj-projectType" name="projectType" required>
+        <option value="">Select one…</option>
+        <option value="deck_addition_enclosure">Deck / Addition / Patio Enclosure (Design-Build)</option>
+        <option value="fencing">Fencing</option>
+        <option value="hardscaping">Hardscaping / Patio</option>
+        <option value="decking">Decking (no addition)</option>
+        <option value="other">Other outdoor project</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="nj-plansStatus">Do you already have plans or blueprints prepared? <span class="req">*</span></label>
+      <select id="nj-plansStatus" name="plansStatus" required>
+        <option value="">Select one…</option>
+        <option value="plans_and_zoning_ready">Yes — plans and zoning approval ready</option>
+        <option value="plans_only">Yes — plans ready, zoning not yet approved</option>
+        <option value="no_plans_yet">No — need design help too</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label for="nj-timeline">Timeline <span class="req">*</span></label>
+        <select id="nj-timeline" name="timeline" required>
+          <option value="">Select one…</option>
+          <option value="asap">ASAP</option>
+          <option value="1_3_months">1–3 months</option>
+          <option value="3_6_months">3–6 months</option>
+          <option value="researching">Just researching</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="nj-budget">Rough Budget Range</label>
+        <select id="nj-budget" name="budget">
+          <option value="">Select one…</option>
+          <option value="under_25k">Under $25K</option>
+          <option value="25_50k">$25K–$50K</option>
+          <option value="50_90k">$50K–$90K</option>
+          <option value="90k_plus">$90K+</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="nj-message">Tell Us About Your Project</label>
+      <textarea id="nj-message" name="message" placeholder="e.g. Converting our existing patio into a sunroom — elevated platform, exterior stairs, electric, roofing. Zoning approved, blueprints ready."></textarea>
+    </div>
+
+    <div class="consent">
+      <input type="checkbox" id="nj-consentUpdates" name="consentUpdates" required />
+      <label for="nj-consentUpdates">By checking this box, I consent to receive non-marketing text messages from <b>Jerry &amp; Co. Home Improvement LLC</b> about project request related information and updates.</label>
+    </div>
+    <div class="consent">
+      <input type="checkbox" id="nj-consentMarketing" name="consentMarketing" />
+      <label for="nj-consentMarketing">By checking this box, I consent to receive marketing and promotional messages including special offers, discounts, and updates from <b>Jerry &amp; Co. Home Improvement LLC</b> at the phone number provided. Frequency may vary.</label>
+    </div>
+
+    <p class="required-note">* Required</p>
+    <button type="submit" class="btn btn-gold btn-block" data-ph-event="nj_lead_submit" data-ph-label="funnel_d_nj_design_build">Start My Site Visit Request</button>
+    <p class="nj-form-status" role="status" aria-live="polite"></p>
+    <p class="fine-print">We'll bring proof of registration and insurance to the walk-through — see it before you commit to anything.</p>
+  </form>
+
+  <div class="form-success">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <h3>Got It — Now Pick Your Site Visit Time</h3>
+    <p>Your project details are on their way to our team. You don't have to wait for us to call — grab a time on the calendar right now, and Jerry will already have your details before he shows up.</p>
+    <div class="nj-confirm-recap" id="nj-confirm-recap"></div>
+    <a href="/nj/book-site-visit/" class="btn btn-gold" id="nj-book-visit-link">Choose Your Site Visit Time →</a>
+    <p class="fine-print" style="margin-top:16px;">Prefer to skip the wait? Email <a href="mailto:support@jerryandcohome.com">support@jerryandcohome.com</a> and mention this page.</p>
+  </div>
+</div>
+
+<style>
+  .nj-lead-card { position: relative; background: #fff; border-radius: 14px; padding: 34px 32px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.28); }
+  .nj-lead-card h2 { font-size: 22px; color: var(--forest); text-align: center; margin-bottom: 6px; }
+  .fee-note { text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 22px; line-height: 1.5; }
+  .fee-note strong { color: var(--gold-deep); }
+  .req { color: var(--gold-deep); }
+  .nj-bot-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .required-note { font-size: 10px; color: var(--text-muted); text-align: right; margin: 4px 0 0; }
+  .fine-print { margin-top: 12px; text-align: center; font-size: 11.5px; color: var(--text-muted); line-height: 1.5; }
+  .fine-print a { color: var(--gold-deep); }
+  .consent { display: flex; gap: 8px; align-items: flex-start; margin: 12px 0; font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+  .consent input { width: auto; margin-top: 2px; }
+  .consent label { font-size: 11px; font-weight: 400; margin: 0; }
+  .nj-form-status { font-size: 14px; margin: 12px 0 0; min-height: 1.3em; text-align: center; }
+  .nj-form-status[data-state='error'] { color: #a3402f; }
+  .form-success { display: none; text-align: center; }
+  .form-success.show { display: block; }
+  .nj-confirm-recap { margin: 20px 0; text-align: left; background: var(--bone); border-radius: 8px; padding: 14px 16px; font-size: 13px; color: var(--text); }
+  .nj-confirm-recap div { padding: 3px 0; }
+  .nj-confirm-recap b { color: var(--forest); }
+</style>
+
+<script>
+  const card = document.getElementById('nj-intake-form-card');
+  const form = document.getElementById('nj-intake-form') as HTMLFormElement | null;
+  const statusEl = card?.querySelector<HTMLElement>('.nj-form-status');
+  const successEl = card?.querySelector<HTMLElement>('.form-success');
+  const recapEl = document.getElementById('nj-confirm-recap');
+  const bookLink = document.getElementById('nj-book-visit-link') as HTMLAnchorElement | null;
+  const submitBtn = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  function escapeHtml(v: string) {
+    return v.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] || c));
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (statusEl) { statusEl.removeAttribute('data-state'); statusEl.textContent = ''; }
+
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+    data.funnel = 'D';
+    data.source = window.location.pathname;
+
+    if (data._gotcha) return; // honeypot — let the relay silently drop it
+
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting…'; }
+
+    try {
+      const res = await fetch('/api/ghl-lead-relay', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (!res.ok || !result.ok) {
+        throw new Error(result.error || 'Something went wrong. Please email us directly.');
+      }
+
+      // Session-scoped handoff to the scheduler page — not localStorage.
+      try {
+        sessionStorage.setItem('jerryco_nj_last_lead', JSON.stringify({
+          fullName: data.fullName,
+          phone: data.phone,
+          email: data.email,
+          street: data.street,
+          city: data.city,
+          state: data.state,
+          projectType: data.projectType,
+        }));
+      } catch { /* sessionStorage unavailable — scheduler just won't prefill */ }
+
+      form.style.display = 'none';
+      successEl?.classList.add('show');
+      if (recapEl) {
+        recapEl.innerHTML =
+          `<div><b>Name:</b> ${escapeHtml(data.fullName || '')}</div>` +
+          `<div><b>Address:</b> ${escapeHtml([data.street, data.city, data.state, data.postal].filter(Boolean).join(', '))}</div>` +
+          `<div><b>Project:</b> ${escapeHtml(data.projectType || '')}</div>` +
+          `<div><b>Timeline:</b> ${escapeHtml(data.timeline || '')}</div>`;
+      }
+
+      if (typeof (window as any).posthog !== 'undefined') {
+        (window as any).posthog.capture('nj_lead_converted', { funnel: 'D' });
+      }
+    } catch (err: any) {
+      // Relay failed — fall back to the mockup's original mailto: safety net
+      // so nothing is silently lost (build spec Section 7.1 step 5 / Section 8).
+      if (statusEl) {
+        statusEl.dataset.state = 'error';
+        statusEl.textContent = "Couldn't submit online — we've opened an email with your details instead. Send it and we'll follow up directly.";
+      }
+      const bodyLines = [
+        'New site-visit request — NJ/NY-Metro Design-Build funnel (relay failed, sent via fallback)',
+        '',
+        `Name: ${data.fullName || ''}`,
+        `Email: ${data.email || ''}`,
+        `Phone: ${data.phone || ''}`,
+        `Address: ${[data.street, data.city, data.state, data.postal].filter(Boolean).join(', ')}`,
+        `County: ${data.county || '(not given)'}`,
+        `Project type: ${data.projectType || ''}`,
+        `Plans status: ${data.plansStatus || ''}`,
+        `Timeline: ${data.timeline || ''}`,
+        `Budget range: ${data.budget || '(not given)'}`,
+        `Message: ${data.message || '(none)'}`,
+      ].join('\n');
+      const mailto = `mailto:support@jerryandcohome.com?subject=${encodeURIComponent('New Site Visit Request — ' + (data.fullName || 'New request'))}&body=${encodeURIComponent(bodyLines)}`;
+      try { window.open(mailto, '_blank'); } catch { /* popup blocked — status message still tells them what happened */ }
+
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Start My Site Visit Request'; }
+    }
+  });
+</script>

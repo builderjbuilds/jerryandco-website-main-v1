@@ -1,0 +1,213 @@
+---
+// Funnel C — NY Design-Build (decks, additions, patio/deck enclosures).
+// This is a PAID front-end offer, not a free-estimate funnel — see Section 2.4
+// of JerryCo_OutdoorLiving_Division_Launch_Strategy.md ("capital on margin").
+import Base from '../../layouts/Base.astro';
+import NYHeader from '../../components/ny/NYHeader.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTABand from '../../components/CTABand.astro';
+import NYLeadForm from '../../components/ny/NYLeadForm.astro';
+import NYFooter from '../../components/ny/NYFooter.astro';
+import NYTrustChips from '../../components/ny/NYTrustChips.astro';
+import NYProcessSteps from '../../components/ny/NYProcessSteps.astro';
+import PlaceholderImage from '../../components/PlaceholderImage.astro';
+
+const title = 'Backyard Additions & Enclosures, Designed and Permitted Right | Jerry & Co.';
+const description =
+  'A paid design phase gets you an exact, permitted, fixed-price quote for your deck, addition, or patio/deck enclosure — before anyone swings a hammer.';
+const canonical = 'https://www.jerryandcohome.com/ny/backyard-additions-design-build/';
+
+// See fencing-sheds-patios.astro for the reasoning behind this flag — same
+// site-wide A2P 10DLC caution, confirm the NY number's status before go-live.
+const NY_LEAD_FORMS_ENABLED = true;
+
+const breadcrumbSchema = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohome.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Backyard Additions & Design-Build — NY', item: canonical },
+  ],
+};
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', ...breadcrumbSchema })} />
+  </Fragment>
+
+  <NYHeader ctaHref="#ny-lead-form-c" ctaLabel="Book My Design Consultation" />
+
+  <section class="ny-hero">
+    <div class="wrap">
+      <Breadcrumb crumbs={[{ label: 'Outdoor Living', href: '/ny/' }, { label: 'Backyard Additions & Design-Build' }]} />
+      <div class="estimate-grid">
+        <div class="ny-hero-copy" data-reveal="left">
+          <p class="eyebrow">Decks · Additions · Patio &amp; Deck Enclosures — Westchester County</p>
+          <h1>Backyard Additions &amp; Enclosures, Designed and Permitted Right the First Time.</h1>
+          <p class="lede">
+            Most backyard-addition projects go sideways because someone gave a verbal
+            number without a real design or a permit plan behind it. Jerry &amp; Co. does
+            it differently — a paid design phase gets you an exact, permitted, fixed-price
+            build quote before anyone swings a hammer.
+          </p>
+          <NYTrustChips />
+        </div>
+        <div data-reveal="right">
+          {NY_LEAD_FORMS_ENABLED ? (
+            <NYLeadForm
+              funnel="C"
+              calendarId="0314MPZa1KanvzVKExix"
+              heading="Start your design consultation"
+              submitLabel="Book My Design Consultation"
+            />
+          ) : (
+            <div class="form-card">
+              <p class="form-paused-headline">Online booking is briefly paused.</p>
+              <p class="form-paused-sub">
+                Call or text us directly — <a href="tel:+13476026801">(347) 602-6801</a>.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ny-trust">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Why we charge for a real design instead of a free guess</p>
+        <h2>A free estimate for a structural project is almost always a guess.</h2>
+        <p>
+          Guesses turn into change orders, permit delays, and blown budgets mid-build. Our
+          paid design phase gets a licensed partner GC on-site to measure, coordinate
+          permitted drawings, and hand you a firm, fixed-price build quote — not a range.
+          It's the same reason architects charge for drawings before a general contractor
+          ever bids the job. It's also where we talk through composite vs. wood decking —
+          composite now outsells wood nationally because it skips the annual staining and
+          holds up better through a Westchester winter, and it's a material decision that
+          belongs in the design phase, not a change order after framing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ny-tiers">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Design-fee tiers — credited toward your build</p>
+        <h2>Every dollar is credited toward your build contract.</h2>
+        <p>Sign within the window below and you're not paying twice — you're paying for certainty up front.</p>
+      </div>
+      <div class="ny-tier-grid" data-reveal="up">
+        <div class="ny-tier-card">
+          <PlaceholderImage
+            publicId="ny/aspirational/design-tier-1-small-deck"
+            alt="Concept rendering of a small cedar deck under construction — aspirational, not an actual completed project"
+            aspect="4/3"
+            className="ny-tier-img"
+            caption="Concept rendering"
+            loading="lazy"
+          />
+          <p class="ny-tier-name">Tier 1</p>
+          <h3>$750</h3>
+          <p>Small deck or single-structure patio enclosure. Credited toward your build if signed within 30 days.</p>
+        </div>
+        <div class="ny-tier-card is-featured">
+          <PlaceholderImage
+            publicId="ny/aspirational/design-tier-2-larger-deck"
+            alt="Concept rendering of a larger two-level deck with a small addition — aspirational, not an actual completed project"
+            aspect="4/3"
+            className="ny-tier-img"
+            caption="Concept rendering"
+            loading="lazy"
+          />
+          <p class="ny-tier-name">Tier 2</p>
+          <h3>$1,500</h3>
+          <p>Larger deck or small addition. Credited toward your build if signed within 30 days.</p>
+        </div>
+        <div class="ny-tier-card">
+          <PlaceholderImage
+            publicId="ny/aspirational/design-tier-3-three-season-room"
+            alt="Concept rendering of a three-season room addition — aspirational, not an actual completed project"
+            aspect="4/3"
+            className="ny-tier-img"
+            caption="Concept rendering"
+            loading="lazy"
+          />
+          <p class="ny-tier-name">Tier 3</p>
+          <h3>$2,500</h3>
+          <p>Full patio/deck enclosure or three-season room. Credited toward your build if signed within 45 days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <NYProcessSteps
+    eyebrow="How it works"
+    headline="From booked consultation to firm build quote."
+    steps={[
+      { title: 'Book & pay the design fee', body: 'Confirmed on booking — you\'ll get an invoice automatically once your consultation is scheduled.' },
+      { title: 'Site visit & measure', body: 'We walk the project in person and coordinate permitted drawings with our licensed partner GC.' },
+      { title: 'Firm, fixed-price build quote', body: 'An exact number, not a range — sign within your credit window and the design fee comes off the top.' },
+      { title: 'Insured build, final walkthrough', body: 'Your partner GC pulls the permit and builds to it. We walk the finished addition with you before we call it done.' },
+    ]}
+  />
+
+  <CTABand
+    eyebrow="A considered purchase, not a quick quote"
+    headline="Book your paid design consultation"
+    ctaText="Book my design consultation"
+    ctaHref="#ny-lead-form-c"
+    reassurance="Design services delivered in partnership with a licensed New York General Contractor."
+  />
+
+  <NYFooter />
+</Base>
+
+<style>
+  .ny-hero { padding: clamp(32px, 4vw, 56px) 0 clamp(56px, 6vw, 88px); background: #fff; }
+  .ny-hero h1 {
+    font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+  .ny-hero-copy :global(.ny-trust-chips) { margin-top: 24px; }
+  .ny-trust { background: var(--bone-deep); }
+  .form-paused-headline { font-weight: 600; margin-bottom: 8px; }
+  .form-paused-sub { color: var(--text-muted); }
+  .form-paused-sub a { color: var(--forest); font-weight: 600; }
+
+  .ny-tier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .ny-tier-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: clamp(28px, 3vw, 40px);
+    box-shadow: 0 2px 0 var(--line), 0 12px 48px rgba(20, 36, 31, 0.06);
+    position: relative;
+  }
+  :global(.ny-tier-img) { border-radius: calc(var(--radius-sm) - 4px); margin-bottom: 16px; }
+  .ny-tier-card.is-featured { border-color: var(--gold); }
+  .ny-tier-card.is-featured::before {
+    content: 'MOST BOOKED';
+    position: absolute; top: -11px; left: 24px;
+    background: var(--gold); color: var(--ink);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    padding: 5px 10px; border-radius: var(--radius-pill);
+  }
+  .ny-tier-name {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold-deep); margin: 0 0 6px;
+  }
+  .ny-tier-card h3 { font-size: 1.75rem; margin-bottom: 8px; }
+  .ny-tier-card p:last-child { color: var(--text-muted); font-size: 15px; margin-top: 8px; }
+
+  @media (max-width: 780px) {
+    .ny-tier-grid { grid-template-columns: 1fr; }
+  }
+</style>

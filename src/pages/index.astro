@@ -9,6 +9,13 @@ import PlaceholderImage from '../components/PlaceholderImage.astro';
 import TestimonialsCarousel from '../components/TestimonialsCarousel.astro';
 import testimonials from '../../data/testimonials.json';
 
+// TEMPORARY: MultiStepForm collects phone numbers, which GHL flags as a
+// competing SMS opt-in source alongside the chat widget during A2P 10DLC
+// campaign review. Disabled site-wide until the campaign is approved —
+// re-enable by flipping this flag back to true. See QuickIntakeForm's
+// counterpart flag in quote.astro.
+const LEAD_FORMS_ENABLED = false;
+
 const title = 'Cabinet Refinishing Boston | From $2,000 | Factory 2K Finish | Jerry & Co.';
 const description = 'Factory-grade cabinet refinishing for Boston condo owners. HOA-compliant, low-VOC, done in 2–5 days. MA HIC #208336.';
 
@@ -364,7 +371,17 @@ const processSteps = [
         <p class="estimate-reassurance">Local accountability beats a national warranty — and if refinishing isn't the right call for your cabinets, we'll tell you upfront, not after a deposit.</p>
         <p class="estimate-reassurance">Send 4–6 photos or a short video walkthrough — even filmed on your phone — and you'll typically have a written quote the same day.</p>
       </div>
-      <MultiStepForm />
+      {LEAD_FORMS_ENABLED ? (
+        <MultiStepForm />
+      ) : (
+        <div class="form-paused" data-reveal="up">
+          <p class="form-paused-headline">Online estimate requests are briefly paused.</p>
+          <p class="form-paused-sub">
+            Call or text us directly and we'll get your estimate started —
+            <a href="tel:+13476026801">(347) 602-6801</a>.
+          </p>
+        </div>
+      )}
     </div>
   </section>
 
@@ -460,6 +477,28 @@ const processSteps = [
 </Base>
 
 <style>
+  /* ── Estimate form paused notice ─────────────────────
+     TEMPORARY: mirrors quote.astro's .form-paused while the estimate
+     form is disabled for A2P 10DLC review (LEAD_FORMS_ENABLED flag). */
+  .form-paused {
+    border: 1px solid var(--line);
+    background: var(--bone-deep);
+    border-radius: var(--radius-lg, 12px);
+    padding: var(--sp-5);
+    text-align: center;
+  }
+  .form-paused-headline {
+    font-weight: 600;
+    margin-bottom: var(--sp-2);
+  }
+  .form-paused-sub {
+    color: var(--text-muted);
+  }
+  .form-paused-sub a {
+    color: var(--forest);
+    font-weight: 600;
+  }
+
   /* ── Condo strip ──────────────────────────────────── */
   .condo-strip {
     background: var(--bone-deep);

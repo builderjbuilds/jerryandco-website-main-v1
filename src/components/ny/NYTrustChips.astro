@@ -1,0 +1,55 @@
+---
+// Above-the-fold trust module — the honest substitute for the license badge
+// / named-testimonial pattern the 2026 conversion research flags as
+// highest-converting: Westchester licensing isn't confirmed active yet
+// (Section 2.2 of the launch strategy) and no NY jobs have closed yet to
+// quote, so this chip row carries only claims that are true today.
+interface Props {
+  variant?: 'light' | 'dark';
+}
+const { variant = 'light' } = Astro.props;
+---
+
+<ul class:list={['ny-trust-chips', variant === 'dark' && 'is-dark']} role="list">
+  <li>Insured on every job</li>
+  <li>Permit-coordinated</li>
+  <li>Westchester County</li>
+  <li>Same-day written quote</li>
+</ul>
+
+<style>
+  .ny-trust-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .ny-trust-chips li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--forest);
+    background: rgba(30, 57, 52, 0.06);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+  }
+  .ny-trust-chips li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .ny-trust-chips.is-dark li {
+    color: var(--bone);
+    background: rgba(247, 243, 234, 0.08);
+    border-color: var(--line-dark);
+  }
+</style>

@@ -1,0 +1,116 @@
+---
+// NJ Design-Build — Scheduler. Ported from
+// New NJ Design-Build Funnel Spec/03_scheduler_book-site-visit.html per the
+// build spec Section 4.3. Left panel is a static port; right panel is
+// NJScheduler.astro, which embeds the real GHL calendar instead of the
+// mockup's fixed 4-slot placeholder buttons (see that component's header
+// comment for why).
+import Base from '../../layouts/Base.astro';
+import NJScheduler from '../../components/nj/NJScheduler.astro';
+
+const title = 'Book Your NJ Site Visit | Jerry & Co.';
+const description = "Pick a time for your NJ backyard design-build site visit — Jerry brings a tape measure, not a sales pitch.";
+const canonical = 'https://www.jerryandcohome.com/nj/book-site-visit/';
+
+// Section 7.2's stated default: reuse the existing "NY Design Consultation"
+// calendar rather than standing up a separate "NJ Site Visit" calendar until
+// there's an actual reporting need to split them.
+const calendarId = import.meta.env.PUBLIC_GHL_CALENDAR_ID_NJ_VISIT || '0314MPZa1KanvzVKExix';
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <div class="shell">
+    <div class="panel">
+      <div class="panel-inner">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 30 30" fill="none"><path d="M4 15L15 5L26 15" stroke="#F7F3EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 13V25H23V13" stroke="#F7F3EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 25V18H17V25" stroke="#C8A055" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div class="word">JERRY &amp; CO.</div>
+            <div class="sub">NJ / NY-Metro Design-Build</div>
+          </div>
+        </div>
+
+        <div class="eyebrow">Last Step — Lock In Your Time</div>
+        <h1>Pick a Time. We'll Bring a Tape Measure, Not a Sales Pitch.</h1>
+        <p class="sub">This is the site visit, not a pitch meeting. Jerry walks your actual backyard with you, reviews any plans you've already got, and answers every licensing and insurance question on the spot — so you leave with a real path to a fixed price, not another callback promise.</p>
+
+        <div class="expect">
+          <div class="expect-item">
+            <div class="expect-num">1</div>
+            <div class="expect-text"><b>We measure the real conditions,</b> not a guess from a phone call — grade, setbacks, roofline, where power runs.</div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">2</div>
+            <div class="expect-text"><b>Full verification, no follow-up needed</b> — our NJ build partner's registration number and certificate of insurance, handed to you in person.</div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">3</div>
+            <div class="expect-text"><b>You leave with a clear next step</b> — a firm, fixed-price build quote, or an exact list of what's needed before one.</div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="stack-item"><span class="check">✓</span> Licensed NJ build partner, verified — not a promise, a document</div>
+          <div class="stack-item"><span class="check">✓</span> Fixed-price quote, in writing — no change orders sprung on you later</div>
+          <div class="stack-item"><span class="check">✓</span> One point of contact start to finish — Jerry, not a rotating crew</div>
+          <div class="stack-item"><span class="check">✓</span> Reschedule anytime — just reply to your confirmation text</div>
+        </div>
+
+        <div class="quote-card">
+          <div class="stars">★★★★★</div>
+          <p>&ldquo;Jerry has completed multiple projects for us over the years... His craftsmanship, reliability, and attention to detail are consistently outstanding. We trust him completely and wouldn't hesitate to recommend Jerry &amp; Co. to others.&rdquo;</p>
+          <div class="who">— Ceri L., repeat client</div>
+        </div>
+
+        <div class="panel-footer">Jerry &amp; Co. Home Improvement LLC · MA HIC #208336 · NJ site visits delivered together with our registered NJ build partner.</div>
+      </div>
+    </div>
+
+    <div class="sched">
+      <NJScheduler calendarId={calendarId} />
+    </div>
+  </div>
+</Base>
+
+<style>
+  .shell { display: grid; grid-template-columns: minmax(320px, 42%) 1fr; min-height: 100vh; }
+
+  .panel {
+    background: linear-gradient(165deg, var(--forest) 0%, var(--ink) 100%);
+    color: var(--bone);
+    padding: 48px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-inner { position: relative; max-width: 440px; }
+  .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 36px; }
+  .logo .word { font-family: var(--font-serif); font-size: 19px; font-weight: 600; letter-spacing: 0.02em; color: var(--bone); line-height: 1.1; }
+  .logo .sub { font-size: 9px; letter-spacing: 0.14em; color: #B9C4BE; text-transform: uppercase; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 14px; }
+  .panel h1 { font-family: var(--font-serif); font-size: clamp(26px, 2.6vw, 34px); line-height: 1.2; margin-bottom: 16px; color: var(--bone); }
+  .panel .sub { font-size: 15px; line-height: 1.65; color: #D9E2DD; margin-bottom: 32px; }
+
+  .expect { margin-bottom: 32px; }
+  .expect-item { display: flex; gap: 14px; margin-bottom: 18px; }
+  .expect-num { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--gold); color: var(--ink); font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+  .expect-text { font-size: 13.5px; line-height: 1.55; color: #E7EDE9; }
+  .expect-text b { color: #fff; }
+
+  .stack { border-top: 1px solid var(--line-dark); padding-top: 22px; margin-bottom: 28px; }
+  .stack-item { font-size: 12.5px; line-height: 1.6; color: #D9E2DD; padding: 6px 0; display: flex; gap: 8px; }
+  .stack-item .check { color: var(--gold); flex-shrink: 0; }
+
+  .quote-card { background: rgba(247, 243, 234, 0.07); border: 1px solid rgba(247, 243, 234, 0.14); border-radius: 10px; padding: 18px 20px; margin-bottom: 28px; }
+  .quote-card .stars { color: var(--gold); font-size: 12px; letter-spacing: 2px; margin-bottom: 8px; }
+  .quote-card p { font-size: 12.5px; line-height: 1.6; font-style: italic; color: #E7EDE9; margin: 0 0 8px; }
+  .quote-card .who { font-size: 11.5px; color: var(--gold); font-weight: 600; }
+
+  .panel-footer { font-size: 11px; line-height: 1.6; color: #9FADA6; }
+
+  .sched { padding: 48px 44px; display: flex; flex-direction: column; align-items: center; background: var(--bone); }
+
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; }
+    .panel, .sched { padding: 36px 24px; }
+  }
+</style>

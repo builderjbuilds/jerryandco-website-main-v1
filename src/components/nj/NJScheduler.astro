@@ -1,0 +1,119 @@
+---
+// NJ Design-Build — scheduler right panel. Ported from mockup 3's
+// #booking-form, with ONE deliberate departure the build spec requires
+// (Section 4.3): the mockup's 4-fixed-time-slot buttons were a placeholder
+// that would double-book against Jerry's real calendar, so this ships the
+// real GHL calendar embed instead — same "NY Design Consultation" calendar
+// reused across NY Funnels A/B/C (Section 7.2's stated default: reuse the
+// existing calendar with a modified pre-call question set, rather than
+// standing up a second one before there's a reporting need to split them).
+//
+// Prefill comes from sessionStorage (set by NJLeadForm on submit) — never
+// localStorage, and never the mockup's own multi-submission array.
+interface Props {
+  calendarId: string;
+}
+const { calendarId } = Astro.props;
+---
+
+<div class="nj-sched-inner">
+  <div id="nj-booking-form">
+    <h2>Choose Your Site Visit</h2>
+    <p class="lede">Pick a day and a time that works — the visit runs about 45–60 minutes. Fee is confirmed based on your project (plans-ready visits are lighter than from-scratch design visits) and shown in your confirmation.</p>
+
+    <div class="recap-strip" id="nj-recap-strip"></div>
+
+    <div class="field-block">
+      <label for="nj-f-name">Your Details</label>
+      <input type="text" id="nj-f-name" placeholder="Full name" />
+      <div class="row2">
+        <input type="tel" id="nj-f-phone" placeholder="Mobile number" />
+        <input type="email" id="nj-f-email" placeholder="Email address" />
+      </div>
+      <input type="text" id="nj-f-address" placeholder="Project address (street, city, state)" />
+    </div>
+
+    <div class="field-block">
+      <label>Pick Your Time</label>
+      <div class="nj-calendar-frame">
+        <iframe
+          src={`https://api.leadconnectorhq.com/widget/booking/${calendarId}`}
+          style="width:100%;border:none;overflow:hidden;"
+          scrolling="no"
+          id="nj-calendar-iframe"
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="fine-note">No obligation beyond the visit itself. We'll text and email a reminder 24 hours before. Need to talk first? Email <a href="mailto:support@jerryandcohome.com">support@jerryandcohome.com</a>.</div>
+  </div>
+</div>
+
+<style>
+  .nj-sched-inner { max-width: 560px; width: 100%; }
+  .nj-sched-inner h2 { font-size: 24px; color: var(--forest); margin-bottom: 6px; }
+  .nj-sched-inner .lede { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 28px; }
+
+  .recap-strip { display: none; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 24px; font-size: 12.5px; color: var(--text); }
+  .recap-strip.show { display: block; }
+  .recap-strip b { color: var(--forest); }
+
+  .field-block { margin-bottom: 26px; }
+  .field-block > label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--forest); margin-bottom: 10px; }
+
+  .field-block input {
+    width: 100%; padding: 11px 13px; border: 1px solid var(--line); border-radius: 7px;
+    font-size: 14px; font-family: inherit; background: #FDFCF9; color: var(--text); margin-bottom: 12px;
+  }
+  .field-block input:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .nj-calendar-frame {
+    border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--line);
+    min-height: 620px; background: #fff;
+  }
+  .nj-calendar-frame iframe { width: 100%; height: 620px; border: none; display: block; }
+
+  .fine-note { margin-top: 12px; text-align: center; font-size: 11px; color: var(--text-muted); }
+  .fine-note a { color: var(--gold-deep); }
+
+  @media (max-width: 900px) {
+    .row2 { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  interface StoredLead {
+    fullName?: string; phone?: string; email?: string;
+    street?: string; city?: string; state?: string; projectType?: string;
+  }
+
+  function escapeHtml(v: string) {
+    return v.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] || c));
+  }
+
+  const nameEl = document.getElementById('nj-f-name') as HTMLInputElement | null;
+  const phoneEl = document.getElementById('nj-f-phone') as HTMLInputElement | null;
+  const emailEl = document.getElementById('nj-f-email') as HTMLInputElement | null;
+  const addressEl = document.getElementById('nj-f-address') as HTMLInputElement | null;
+  const recapStrip = document.getElementById('nj-recap-strip');
+
+  try {
+    const raw = sessionStorage.getItem('jerryco_nj_last_lead');
+    if (raw) {
+      const lead: StoredLead = JSON.parse(raw);
+      if (nameEl) nameEl.value = lead.fullName || '';
+      if (phoneEl) phoneEl.value = lead.phone || '';
+      if (emailEl) emailEl.value = lead.email || '';
+      if (addressEl) addressEl.value = [lead.street, lead.city, lead.state].filter(Boolean).join(', ');
+      if (recapStrip) {
+        recapStrip.innerHTML = `Picking up from your project request: <b>${escapeHtml(lead.projectType || 'your project')}</b>${lead.city ? ' in <b>' + escapeHtml(lead.city) + '</b>' : ''}. Not you? Just edit the details below.`;
+        recapStrip.classList.add('show');
+      }
+      sessionStorage.removeItem('jerryco_nj_last_lead');
+    }
+  } catch { /* sessionStorage unavailable — scheduler still works, just unprefilled */ }
+</script>
+
+<!-- GHL calendar embed widget script — same convention as NYLeadForm.astro. -->
+<script src="https://link.msgsndr.com/js/form_embed.js" is:inline></script>

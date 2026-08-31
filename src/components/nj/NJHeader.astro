@@ -1,0 +1,186 @@
+---
+// NJ Design-Build division header — mirrors src/components/ny/NYHeader.astro's
+// reasoning exactly: the shared src/components/Header.astro is entirely MA
+// cabinet-refinishing nav (Services/Why Refinish dropdowns, MA town pages).
+// None of that belongs in front of an NJ backyard-addition visitor, so this
+// is scoped entirely to /nj/*, same visual language (ink/bone/gold, sticky
+// header, same mobile-nav mechanics) as every other division header.
+
+interface Props {
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+const { ctaHref = '/nj/project-request/', ctaLabel = 'Get My Site Visit Started' } = Astro.props;
+
+// Anchor links only resolve on the homepage — from any other /nj/ page they
+// route back to the homepage section first (matches the mockup's own nav,
+// which only ever appears on the homepage).
+const navLinks = [
+  { label: 'Services', href: '/nj/backyard-design-build/#services' },
+  { label: 'Our Process', href: '/nj/backyard-design-build/#process' },
+  { label: 'Sample Estimates', href: '/nj/backyard-design-build/#sample' },
+  { label: 'Service Area', href: '/nj/backyard-design-build/#areas' },
+  { label: 'FAQ', href: '/nj/backyard-design-build/#faq' },
+];
+---
+
+<header>
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand" href="/nj/backyard-design-build/" aria-label="Jerry & Co. NJ Design-Build — home">
+      <img class="logo-img" src="/img/brand/logo-navbar.png" alt="Jerry & Co. Home Improvement — NJ Design-Build Division" height="44" width="auto" />
+    </a>
+
+    <ul class="nav-links" role="list">
+      {navLinks.map((link) => (
+        <li><a href={link.href} class="nav-link">{link.label}</a></li>
+      ))}
+    </ul>
+
+    <div class="nav-cta">
+      <a class="nav-phone" href="mailto:support@jerryandcohome.com">
+        <span class="live-dot" aria-hidden="true"></span>support@jerryandcohome.com
+      </a>
+      <a class="btn btn-gold btn-sm" href={ctaHref}>{ctaLabel}</a>
+    </div>
+
+    <button class="hamburger" id="njNavOpen" aria-label="Open navigation menu" aria-expanded="false" aria-controls="njMobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-scrim" id="njNavScrim" aria-hidden="true"></div>
+  <div class="mobile-nav" id="njMobileNav" role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true">
+    <button class="mobile-close" id="njNavClose" aria-label="Close navigation menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <ul role="list">
+      {navLinks.map((link) => (
+        <li><a href={link.href}>{link.label}</a></li>
+      ))}
+    </ul>
+    <a class="mobile-phone-cta" href="mailto:support@jerryandcohome.com">support@jerryandcohome.com</a>
+    <a class="btn btn-gold btn-block mobile-cta" href={ctaHref}>{ctaLabel}</a>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bone);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px var(--gutter);
+    max-width: 1440px;
+    margin: 0 auto;
+    gap: 24px;
+  }
+  .brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .logo-img { height: 40px; width: auto; display: block; }
+  .nav-links {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 14px; font-weight: 600; list-style: none; margin: 0; padding: 0;
+    flex: 1; justify-content: center;
+  }
+  .nav-link {
+    text-decoration: none; color: var(--forest); opacity: 0.85;
+    transition: opacity 0.15s; padding: 8px 12px; border-radius: 6px; white-space: nowrap;
+  }
+  .nav-link:hover { opacity: 1; color: var(--gold-deep); }
+  .nav-cta { flex-shrink: 0; display: flex; align-items: center; gap: 16px; }
+  .nav-phone {
+    font-size: 13px; font-weight: 600; color: var(--text-muted); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  }
+  .nav-phone:hover { color: var(--forest); }
+  .live-dot { display: none; }
+
+  .hamburger {
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; cursor: pointer; background: none; border: none;
+    min-width: var(--tap-min); min-height: var(--tap-min); padding: 4px; color: var(--forest);
+  }
+  .hamburger span { display: block; width: 22px; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+
+  .mobile-close {
+    position: absolute; top: 16px; right: 16px; display: flex; align-items: center; justify-content: center;
+    min-width: var(--tap-min); min-height: var(--tap-min); background: none; border: none;
+    color: var(--bone); cursor: pointer; opacity: 0.8;
+  }
+  .mobile-close svg { width: 22px; height: 22px; }
+
+  .nav-scrim {
+    position: fixed; inset: 0; background: rgba(5, 14, 10, 0.55);
+    opacity: 0; visibility: hidden; transition: opacity 0.32s ease, visibility 0.32s;
+    z-index: 48; pointer-events: none;
+  }
+  header.nav-open .nav-scrim { opacity: 1; visibility: visible; pointer-events: auto; }
+
+  .mobile-nav {
+    position: fixed; inset: 0; width: 100%; max-width: 100vw; background: var(--ink);
+    z-index: 49; padding: 80px 24px 120px; overflow-y: auto; overflow-x: hidden;
+    transform: translateX(100%); visibility: hidden;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.32s;
+  }
+  .mobile-nav.is-open { transform: translateX(0); visibility: visible; }
+  .mobile-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+  .mobile-nav li { border-bottom: 1px solid var(--line-dark); }
+  .mobile-nav a { display: block; padding: 14px 0; color: rgba(247, 243, 234, 0.85); text-decoration: none; font-size: 16px; }
+  .mobile-nav a:hover { color: var(--bone); }
+  .mobile-phone-cta {
+    display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 24px;
+    padding: 16px 24px; border: 2px solid var(--gold); border-radius: var(--radius-xs);
+    font-size: 16px; font-weight: 700; color: var(--gold); text-decoration: none;
+  }
+  .mobile-phone-cta:hover { background: var(--gold); color: var(--ink); }
+  .mobile-nav .mobile-cta { margin-top: 12px; }
+
+  #njNavOpen[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #njNavOpen[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  #njNavOpen[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 880px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+  }
+</style>
+
+<script>
+  const openBtn  = document.getElementById('njNavOpen')  as HTMLButtonElement | null;
+  const closeBtn = document.getElementById('njNavClose') as HTMLButtonElement | null;
+  const panel    = document.getElementById('njMobileNav') as HTMLElement | null;
+  const scrim    = document.getElementById('njNavScrim')  as HTMLElement | null;
+  const hdr      = openBtn?.closest('header') as HTMLElement | null;
+
+  function openNav() {
+    if (!panel || !openBtn) return;
+    panel.classList.add('is-open');
+    panel.setAttribute('aria-hidden', 'false');
+    hdr?.classList.add('nav-open');
+    openBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    closeBtn?.focus();
+  }
+  function closeNav() {
+    if (!panel || !openBtn) return;
+    panel.classList.remove('is-open');
+    panel.setAttribute('aria-hidden', 'true');
+    hdr?.classList.remove('nav-open');
+    openBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    openBtn.focus();
+  }
+  openBtn?.addEventListener('click', openNav);
+  closeBtn?.addEventListener('click', closeNav);
+  scrim?.addEventListener('click', closeNav);
+  panel?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && panel?.classList.contains('is-open')) closeNav();
+  });
+</script>

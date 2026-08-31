@@ -1,0 +1,372 @@
+---
+// NJ Design-Build — Homepage. Ported line-by-line from
+// New NJ Design-Build Funnel Spec/01_home_design-build-outdoor-living.html
+// per JerryCo_NJ_DesignBuild_Funnel_ClaudeCode_BuildSpec.md Section 4.1.
+//
+// GOVERNANCE (Section 8 of the build spec — binding, checked line-by-line,
+// not just by lint): NJ registration/licensing is attributed to "our
+// registered NJ build partner," never to Jerry & Co. / MA HIC #208336
+// directly. The footer's exact legal line and the trust-bar/positioning
+// copy below preserve the mockup's wording verbatim for this reason.
+import Base from '../../layouts/Base.astro';
+import NJHeader from '../../components/nj/NJHeader.astro';
+import NJFooter from '../../components/nj/NJFooter.astro';
+import NJSampleCarousel from '../../components/nj/NJSampleCarousel.astro';
+import CTABand from '../../components/CTABand.astro';
+import Accordion from '../../components/Accordion.astro';
+import PlaceholderImage from '../../components/PlaceholderImage.astro';
+
+const title = 'Bergen County Backyard Additions — Fixed Price, Verified License | Jerry & Co.';
+const description =
+  "NJ/NY-Metro design-build for backyard additions, decks, and patio enclosures. Fixed-price quote in writing and our NJ build partner's registration verified before you sign anything.";
+const canonical = 'https://www.jerryandcohome.com/nj/backyard-design-build/';
+
+const heroImg = 'https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_1920/nj-design-build/hero-backyard-addition.jpg';
+const ctaImg = 'https://res.cloudinary.com/dxuuydoee/image/upload/f_auto,q_auto,w_1920/nj-design-build/section-final-cta.jpg';
+
+const services = [
+  {
+    icon: '⌂',
+    title: 'Three/Four-Season Room & Patio Conversion',
+    body: 'Convert an existing patio or deck into a real, usable room — elevated platform, exterior stairs, electric, roofing.',
+    proof: 'Recent estimates: $40,000–$95,000 depending on scope',
+    imagePublicId: 'nj-design-build/card-season-room',
+    imageAlt: "View through a four-season room's black-metal-mullioned glass wall onto a landscaped backyard",
+  },
+  {
+    icon: '▤',
+    title: 'Elevated & Structural Decks',
+    body: 'Frost-depth footings, code-compliant railing and stairs, built to hold up — not a weekend Marketplace job.',
+    proof: 'Wood decks recoup ~95% of cost at resale (Remodeling 2025 Cost vs. Value)',
+    imagePublicId: 'nj-design-build/card-elevated-deck',
+    imageAlt: 'An elevated composite deck with slim aluminum cable railing at golden hour',
+  },
+  {
+    icon: '◧',
+    title: 'Patio Enclosures & Screened Rooms',
+    body: 'Close in an existing patio for bugs, weather, and privacy — without a full addition-scale build.',
+    proof: 'Extends usable outdoor months without a full remodel',
+    imagePublicId: 'nj-design-build/card-patio-enclosure',
+    imageAlt: 'A screened patio enclosure with furnished seating visible through the screen',
+  },
+  {
+    icon: '▦',
+    title: 'Hardscape & Paver Patios',
+    body: 'The foundation most other outdoor-living projects get built on top of — graded, drained, and built to spec.',
+    proof: '86% of homebuyers rank a patio a "must-have" feature (NAHB, via HomeLight)',
+    imagePublicId: 'nj-design-build/card-hardscape-patio',
+    imageAlt: 'A finished paver patio with a tight geometric laying pattern',
+  },
+  {
+    icon: '▥',
+    title: 'Outdoor Kitchens & Living Areas',
+    body: 'Built-in grills, counter space, and seating that turns "the backyard" into where people actually gather.',
+    proof: 'Priced as part of a full design-build scope',
+    imagePublicId: 'nj-design-build/card-outdoor-kitchen',
+    imageAlt: 'A built-in outdoor kitchen with stone-faced counter and stainless grill insert',
+  },
+  {
+    icon: '✎',
+    title: 'Have Plans Already?',
+    body: "If you've been through an architect or a previous contractor and already have plans and zoning approval, tell us — the site visit is lighter and faster.",
+    proof: 'Fee confirmed based on your project, not a flat rate',
+    imagePublicId: 'nj-design-build/card-plans-ready',
+    imageAlt: 'Architectural blueprint plans laid flat on a construction table with a tape measure',
+  },
+];
+
+const processSteps = [
+  { title: 'Site Visit', body: "Plans reviewed if you have them, started from scratch if you don't. Fee confirmed based on your project." },
+  { title: 'Verification, Handed to You', body: "Our build partner's NJ registration number and certificate of insurance — in person, no follow-up needed." },
+  { title: 'Fixed-Price Quote', body: 'A real number based on your actual site conditions — not a verbal guess.' },
+  { title: 'Permits & Scheduling', body: 'Our NJ build partner pulls the permit; Jerry manages the calendar and keeps you posted.' },
+  { title: 'Build & Walkthrough', body: 'Jerry stays your single point of contact through the final walkthrough — not just the sale.' },
+];
+
+const areaChips = ['Lyndhurst', 'Rutherford', 'Ridgewood', 'Hackensack', 'Paramus', 'Teaneck', 'Fort Lee', 'Clifton', 'Montclair', 'Jersey City'];
+
+const testimonials = [
+  { initial: 'C', quote: 'Jerry has completed multiple projects for us over the years, from repairs and finish work to larger renovations. His craftsmanship, reliability, and attention to detail are consistently outstanding. We trust him completely and wouldn’t hesitate to recommend Jerry & Co. to others.', who: 'Ceri L.' },
+  { initial: 'A', quote: 'Jerry transformed our outdated bathroom into a bright, timeless space we absolutely love. He was professional, communicative, and detail-oriented throughout the entire project. The craftsmanship exceeded our expectations.', who: 'Alyssa A.' },
+  { initial: 'J', quote: 'Working with Jerry was a fantastic experience from start to finish. He listened carefully to our vision, helped us make smart design decisions, and delivered exceptional quality throughout.', who: 'Julia T.' },
+];
+
+const faqItems = [
+  { id: 'licensed', question: "How do I know you're actually licensed to do this in NJ?", answer: "<p>You'll see our build partner's NJ registration number and certificate of insurance at the site visit — not after you ask twice. Design and project management are handled by Jerry &amp; Co. (MA HIC #208336); the licensed, NJ-registered build partner is the contractor of record on your permit and contract.</p>" },
+  { id: 'design-build', question: 'Do you design it, build it, or both?', answer: '<p>Jerry designs it, estimates it, and manages it start to finish — one point of contact for you the whole way. Our verified NJ build partner holds the permit and runs the crew that actually builds it.</p>' },
+  { id: 'plans-ready', question: 'I already have plans and zoning approval — do I still need a full design visit?', answer: "<p>No — that's a lighter, faster site visit built around reviewing what you already have, not starting from scratch. Tell us in the intake form and we'll price the visit accordingly.</p>" },
+  { id: 'no-plans', question: "What if I don't have plans yet at all?", answer: "<p>That's fine too — we start there. Either way, the site visit ends with a clear next step: a firm quote, or an exact list of what's needed before one.</p>" },
+  { id: 'cost', question: 'How much does a backyard addition like this actually cost?', answer: '<p>It depends on scope, but recent Design-Build estimates for projects like a patio-to-sunroom conversion have ranged roughly $38,000–$95,000 across Good/Better/Best tiers — see the real estimate breakdown above. Your site visit gets you an exact number for your project.</p>' },
+];
+
+const breadcrumbSchema = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohome.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Backyard Design-Build — NJ', item: canonical },
+  ],
+};
+---
+
+<Base title={title} description={description} canonical={canonical} ogImage={heroImg}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', ...breadcrumbSchema })} />
+  </Fragment>
+
+  <NJHeader />
+
+  <section class="nj-hero" style={`--hero-bg:url('${heroImg}')`}>
+    <div class="wrap">
+      <div class="eyebrow">NJ / NY-Metro Design-Build · Backyard Additions &amp; Outdoor Living</div>
+      <h1>Bergen County Backyard Additions — Fixed Price and a Verified License, Before You Sign Anything.</h1>
+      <p class="subhead">Most design-build contractors ask you to trust them first and see the paperwork later. We do it backwards: our NJ build partner's registration and insurance are in your hands at the first visit, a firm price is in writing before a shovel moves, and Jerry is the one person you deal with from the first call to the final walkthrough.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="/nj/project-request/">Get My Site Visit Started</a>
+        <a class="btn btn-outline" href="#process">See How the Process Works</a>
+      </div>
+      <p class="micro-trust">Serving Bergen, Passaic, Essex &amp; Hudson Counties — part of Jerry &amp; Co.'s NY-Metro Design-Build Division.</p>
+    </div>
+  </section>
+
+  <div class="nj-trust-bar">
+    <div class="wrap nj-trust-grid">
+      <div class="nj-trust-chip"><span class="mark">✓</span> NJ-Registered Build Partner — Verified, Not Just Claimed</div>
+      <div class="nj-trust-chip"><span class="mark">✓</span> Design + PM by Jerry &amp; Co. — 7 Years, MA HIC #208336</div>
+      <div class="nj-trust-chip"><span class="mark">✓</span> Fixed-Price Quote — In Writing, No Surprises</div>
+      <div class="nj-trust-chip"><span class="mark">✓</span> One Point of Contact — Not a Rotating Crew</div>
+      <div class="nj-trust-chip"><span class="mark">✓</span> See the License Before You Commit to Anything</div>
+    </div>
+  </div>
+
+  <section class="nj-positioning">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The Three Things Every Backyard-Addition Homeowner Worries About</h2>
+        <p>Solved before you ever sign anything — not promised, solved.</p>
+      </div>
+      <div class="nj-pos-grid">
+        <div class="nj-pos-card">
+          <h3>The License Won't Be a Question Mark</h3>
+          <p>You'll see our NJ build partner's registration number and certificate of insurance at the site visit — not after you ask twice, not after a deposit clears.</p>
+        </div>
+        <div class="nj-pos-card">
+          <h3>One Person Answers the Phone</h3>
+          <p>Jerry designs it, estimates it, and manages it start to finish. Our build partner executes; you never get bounced between a sales rep and a crew you've never met.</p>
+        </div>
+        <div class="nj-pos-card">
+          <h3>The Price on Day 90 Is the Price You Signed</h3>
+          <p>A fixed-price quote in writing, built from your actual site conditions — not a verbal number that grows once the work has already started.</p>
+        </div>
+      </div>
+      <p class="nj-stat-line">7 years building in Greater Boston · Now bringing the same standard to backyard additions across Bergen, Passaic, Essex &amp; Hudson Counties.</p>
+    </div>
+  </section>
+
+  <section class="nj-services" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" style="text-align:center;">What We Build</div>
+        <h2>Backyard Additions &amp; Outdoor Living</h2>
+        <p>From an existing patio you want turned into real square footage, to a build from a bare backyard — same design-build process either way.</p>
+      </div>
+      <div class="nj-svc-grid">
+        {services.map((svc) => (
+          <div class="nj-svc-card">
+            <PlaceholderImage publicId={svc.imagePublicId} alt={svc.imageAlt} aspect="4/3" className="nj-svc-img" loading="lazy" />
+            <h3>{svc.title}</h3>
+            <p>{svc.body}</p>
+            <div class="proof">{svc.proof}</div>
+            <a href="/nj/project-request/">Start this project →</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="nj-process" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" style="text-align:center;">How It Works</div>
+        <h2>The Design-Build Process</h2>
+        <p>Five steps, one point of contact, no surprises in between.</p>
+      </div>
+      <div class="nj-proc-grid">
+        {processSteps.map((step, i) => (
+          <div class="nj-proc-card">
+            <div class="num">{i + 1}</div>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="nj-sample" id="sample">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" style="text-align:center;">Sample Estimates</div>
+        <h2>See How Our Pricing Actually Works</h2>
+        <p>One real project, plus how the same Good/Better/Best method prices out the other project types we build — every figure sourced, nothing invented. Swipe or use the arrows to see more.</p>
+      </div>
+      <NJSampleCarousel />
+    </div>
+  </section>
+
+  <section class="nj-areas" id="areas">
+    <div class="wrap">
+      <h2>Your Town — Yes, We Work There</h2>
+      <p class="lede">Serving Bergen, Passaic, Essex, and Hudson Counties as an extension of Jerry &amp; Co.'s NY-Metro Division — the same design-build motion already running in Westchester and Nassau County, NY.</p>
+      <div class="area-chips">
+        {areaChips.map((town) => <span class="area-chip">{town}</span>)}
+      </div>
+      <p class="note">Not listed? Ask — we've said yes to towns not on this list.</p>
+    </div>
+  </section>
+
+  <section class="nj-testimonials">
+    <div class="wrap">
+      <div class="eyebrow">Testimonials</div>
+      <h2>The Same Standard, Now in Your Backyard</h2>
+      <p class="sub">Real clients on what it's like to work with Jerry — the track record this NJ division is built on.</p>
+      <div class="t-grid">
+        {testimonials.map((t) => (
+          <div class="t-card">
+            <div class="avatar" aria-hidden="true">{t.initial}</div>
+            <div class="stars">★★★★★</div>
+            <p>&ldquo;{t.quote}&rdquo;</p>
+            <div class="who">— {t.who}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="nj-transparency">
+    <div class="wrap">
+      <h2>Two Details. One Visit. A Real Number.</h2>
+      <p class="sub">Tell us about your project and your town — we'll confirm your site-visit fee and get you on the calendar.</p>
+      <div class="promise-grid">
+        <div class="promise"><div class="big">1 day</div><p>Typical turnaround to hear back and get your site visit scheduled</p></div>
+        <div class="promise"><div class="big">In Writing</div><p>Every quote is a fixed price on paper — never a verbal number</p></div>
+        <div class="promise"><div class="big">2 paths</div><p>Plans-ready visits and from-scratch design visits, priced differently and fairly</p></div>
+      </div>
+      <p class="honesty">We'll tell you honestly if a full remodel — not a design-build addition — is the better move for your project, before you pay a deposit.</p>
+    </div>
+  </section>
+
+  <section class="nj-faq" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" style="text-align:center;">Still on the Fence? Fair.</div>
+        <h2>Questions We Get Before Anyone Signs Anything</h2>
+      </div>
+      <div class="faq-wrap">
+        <Accordion items={faqItems} groupLabel="NJ Design-Build FAQ" />
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Ready When You Are"
+    headline="Your Backyard's Been Empty Half the Year — Let's Fix That."
+    ctaText="Get My Site Visit Started"
+    ctaHref="/nj/project-request/"
+    bgImage={ctaImg}
+    reassurance="One site visit. A fee confirmed before you book. A license you see in person. A price in writing."
+  />
+
+  <NJFooter />
+</Base>
+
+<style>
+  .nj-hero {
+    background: linear-gradient(165deg, rgba(20,38,34,0.86) 0%, rgba(20,38,34,0.94) 100%), var(--hero-bg);
+    background-size: cover;
+    background-position: center;
+    color: var(--bone);
+    padding: 76px 0 64px;
+    text-align: center;
+  }
+  .nj-hero .eyebrow { color: var(--gold); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }
+  .nj-hero h1 { font-family: var(--font-serif); font-size: clamp(30px, 4.4vw, 50px); line-height: 1.14; max-width: 920px; margin: 0 auto 20px; color: var(--bone); }
+  .nj-hero .subhead { font-size: 16.5px; line-height: 1.65; color: #D9E2DD; max-width: 680px; margin: 0 auto 30px; }
+  .nj-hero .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+  .nj-hero .micro-trust { font-size: 12.5px; color: #B9C4BE; }
+
+  .nj-trust-bar { background: var(--bone-deep); border-bottom: 1px solid var(--line); padding: 26px 0; }
+  .nj-trust-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .nj-trust-chip { font-size: 12.5px; line-height: 1.5; color: var(--text); font-weight: 600; display: flex; gap: 8px; align-items: flex-start; }
+  .nj-trust-chip .mark { color: var(--gold-deep); flex-shrink: 0; font-size: 14px; }
+  @media (max-width: 900px) { .nj-trust-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .nj-positioning { background: #fff; padding: 72px 0; }
+  .nj-pos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .nj-pos-card { background: var(--bone); border: 1px solid var(--line); border-radius: 12px; padding: 28px 24px; }
+  .nj-pos-card h3 { font-family: var(--font-serif); font-size: 18px; color: var(--forest); margin-bottom: 10px; line-height: 1.3; }
+  .nj-pos-card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+  .nj-stat-line { text-align: center; margin-top: 38px; font-size: 13.5px; color: var(--text-muted); font-weight: 600; }
+  @media (max-width: 860px) { .nj-pos-grid { grid-template-columns: 1fr; } }
+
+  .nj-services { background: var(--bone); padding: 72px 0; }
+  .nj-svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .nj-svc-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 20px 24px 26px; display: flex; flex-direction: column; }
+  :global(.nj-svc-img) { border-radius: 10px; margin-bottom: 16px; }
+  .nj-svc-card h3 { font-family: var(--font-serif); font-size: 17px; color: var(--forest); margin-bottom: 8px; line-height: 1.3; }
+  .nj-svc-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0 0 14px; flex-grow: 1; }
+  .nj-svc-card .proof { font-size: 11.5px; color: var(--gold-deep); font-weight: 700; margin-bottom: 14px; }
+  .nj-svc-card a { font-size: 12.5px; font-weight: 700; color: var(--forest); text-decoration: none; }
+  .nj-svc-card a:hover { color: var(--gold-deep); }
+  @media (max-width: 900px) { .nj-svc-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .nj-svc-grid { grid-template-columns: 1fr; } }
+
+  .nj-process { background: #fff; padding: 72px 0; }
+  .nj-proc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .nj-proc-card { background: var(--forest); color: var(--bone); border-radius: 10px; padding: 22px 18px; }
+  .nj-proc-card .num { width: 28px; height: 28px; border-radius: 50%; background: var(--gold); color: var(--ink); font-weight: 700; font-size: 12.5px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .nj-proc-card h3 { font-family: var(--font-serif); font-size: 14.5px; margin-bottom: 7px; line-height: 1.3; color: var(--bone); }
+  .nj-proc-card p { font-size: 12px; line-height: 1.55; color: #D9E2DD; margin: 0; }
+  @media (max-width: 960px) { .nj-proc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .nj-proc-grid { grid-template-columns: 1fr; } }
+
+  .nj-sample { background: var(--bone-deep); padding: 72px 0; }
+
+  .nj-areas { background: #fff; text-align: center; padding: 72px 0; }
+  .nj-areas h2 { font-family: var(--font-serif); font-size: 28px; color: var(--forest); margin-bottom: 12px; }
+  .nj-areas p.lede { font-size: 14.5px; color: var(--text-muted); max-width: 640px; margin: 0 auto 30px; line-height: 1.6; }
+  .area-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 820px; margin: 0 auto 18px; }
+  .area-chip { background: var(--bone); border: 1px solid var(--line); border-radius: 20px; padding: 8px 16px; font-size: 12.5px; font-weight: 600; color: var(--forest); }
+  .nj-areas .note { font-size: 12.5px; color: var(--text-muted); }
+
+  .nj-testimonials { background: var(--forest); color: var(--bone); padding: 72px 0; }
+  .nj-testimonials .eyebrow { color: var(--gold); text-align: center; }
+  .nj-testimonials h2 { font-family: var(--font-serif); text-align: center; color: #fff; font-size: 28px; margin-bottom: 8px; }
+  .nj-testimonials .sub { text-align: center; color: #B9C4BE; font-size: 13.5px; margin-bottom: 36px; }
+  .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .t-card { text-align: center; }
+  .avatar {
+    width: 52px; height: 52px; border-radius: 50%; margin: 0 auto 10px; background: var(--gold); color: var(--forest);
+    display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-size: 20px; font-weight: 600;
+  }
+  .stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
+  .t-card p { font-size: 13px; font-style: italic; line-height: 1.6; color: #E7EDE9; }
+  .t-card .who { margin-top: 8px; font-style: normal; color: var(--gold); font-size: 12px; font-weight: 600; }
+  @media (max-width: 860px) { .t-grid { grid-template-columns: 1fr; } }
+
+  .nj-transparency { background: var(--bone-deep); text-align: center; padding: 72px 0; }
+  .nj-transparency h2 { font-family: var(--font-serif); font-size: 28px; color: var(--forest); margin-bottom: 10px; }
+  .nj-transparency .sub { font-size: 14.5px; color: var(--text-muted); max-width: 620px; margin: 0 auto 34px; line-height: 1.6; }
+  .promise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 760px; margin: 0 auto 30px; }
+  .promise { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 20px 16px; }
+  .promise .big { font-family: var(--font-serif); font-size: 26px; color: var(--gold-deep); margin-bottom: 6px; }
+  .promise p { font-size: 12.5px; color: var(--text-muted); margin: 0; line-height: 1.5; }
+  .nj-transparency .honesty { font-size: 13px; color: var(--text); font-weight: 600; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+  @media (max-width: 700px) { .promise-grid { grid-template-columns: 1fr; } }
+
+  .nj-faq { background: #fff; padding: 72px 0; }
+  .faq-wrap { max-width: 760px; margin: 0 auto; }
+
+  .section-head { text-align: center; max-width: 680px; margin: 0 auto 44px; }
+  .section-head h2 { font-family: var(--font-serif); font-size: 30px; color: var(--forest); margin-bottom: 12px; }
+  .section-head p { font-size: 15px; color: var(--text-muted); line-height: 1.6; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); font-weight: 700; margin-bottom: 14px; }
+</style>

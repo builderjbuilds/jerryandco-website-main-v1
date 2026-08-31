@@ -1,0 +1,180 @@
+---
+// NJ Design-Build — sample estimates carousel. Ported from mockup 1's
+// vanilla-JS scrollBy carousel (Good/Better/Best cards). Card 1 is tagged
+// "real" (an actual quoted project — highest-priority image-replacement
+// target per the image spec); cards 2-5 are "illustrative" and MUST keep
+// their source-citation line visibly attached per the build spec's
+// no-uncited-claims governance rule (Section 8) — do not move these lines
+// to a shared footnote.
+import PlaceholderImage from '../PlaceholderImage.astro';
+
+interface GBBTier {
+  tier: 'Good' | 'Better' | 'Best';
+  price: string;
+  note: string;
+}
+
+interface SampleCard {
+  tag: 'real' | 'illustrative';
+  title: string;
+  body: string;
+  tiers: GBBTier[];
+  source: string;
+  imagePublicId: string;
+  imageAlt: string;
+}
+
+const cards: SampleCard[] = [
+  {
+    tag: 'real',
+    title: 'Patio-to-Sunroom Conversion, Bergen County',
+    body: "An actual Design-Build estimate from our estimating engine for a Bergen County homeowner converting an existing patio into a four-season room — elevated platform, exterior stairs, electric, and roofing, with zoning already approved.",
+    tiers: [
+      { tier: 'Good', price: '~$38K', note: 'Core structure, standard finishes, code-compliant build' },
+      { tier: 'Better', price: '~$65K', note: 'Upgraded materials, added electric & finish detail' },
+      { tier: 'Best', price: '~$95K', note: 'Full four-season build-out, premium finish package' },
+    ],
+    source: 'A real estimate from a real project we quoted — not a quote for your specific backyard.',
+    imagePublicId: 'nj-design-build/carousel-real-sunroom',
+    imageAlt: 'A converted patio-to-sunroom addition with glass panel walls, warm interior lighting visible at dusk',
+  },
+  {
+    tag: 'illustrative',
+    title: 'Elevated Structural Deck',
+    body: 'How Good/Better/Best would typically price an elevated deck build — frost-depth footings, code-compliant railing and stairs.',
+    tiers: [
+      { tier: 'Good', price: '~$16K', note: 'Pressure-treated wood, standard footprint' },
+      { tier: 'Better', price: '~$24K', note: 'Composite decking, upgraded railing' },
+      { tier: 'Best', price: '~$34K', note: 'Multi-level, premium composite, built-in lighting' },
+    ],
+    source: "Sourced from Remodeling Magazine's 2025 Cost vs. Value Report average deck costs (~$17K wood / ~$24K composite) — illustrative, not a quote for your project.",
+    imagePublicId: 'nj-design-build/carousel-deck',
+    imageAlt: 'An elevated composite deck with slim railing in morning light',
+  },
+  {
+    tag: 'illustrative',
+    title: 'Patio Enclosure & Screened Room',
+    body: 'Closing in an existing patio for bugs, weather, and privacy — a lighter scope than a full insulated four-season addition.',
+    tiers: [
+      { tier: 'Good', price: '~$28K', note: 'Screened frame, basic roof tie-in' },
+      { tier: 'Better', price: '~$45K', note: 'Glass/vinyl panels, electric added' },
+      { tier: 'Best', price: '~$65K', note: 'Insulated, finished ceiling & flooring' },
+    ],
+    source: "Sized against national four-season sunroom cost data (~$75K+ for a full insulated build, per Opendoor's 2025 Cost vs. Value analysis) for this lighter, screened-only scope — illustrative, not a quote for your project.",
+    imagePublicId: 'nj-design-build/carousel-enclosure',
+    imageAlt: 'A screened four-season room addition viewed at golden hour',
+  },
+  {
+    tag: 'illustrative',
+    title: 'Hardscape & Paver Patio',
+    body: 'The graded, drained foundation most other outdoor-living projects get built on top of.',
+    tiers: [
+      { tier: 'Good', price: '~$9K', note: 'Standard paver patio, basic footprint' },
+      { tier: 'Better', price: '~$16K', note: 'Larger footprint, upgraded paver pattern' },
+      { tier: 'Best', price: '~$26K', note: 'Fire feature, lighting, seat walls' },
+    ],
+    source: "Sourced from Remodeling Magazine's 2025 Cost vs. Value Report average backyard patio cost (~$12K) — illustrative, not a quote for your project.",
+    imagePublicId: 'nj-design-build/carousel-hardscape',
+    imageAlt: 'A finished paver patio with a small built-in fire feature edge at dusk',
+  },
+  {
+    tag: 'illustrative',
+    title: 'Outdoor Kitchen & Living Area',
+    body: 'Built-in grill, counter space, and seating that turns the backyard into where people actually gather.',
+    tiers: [
+      { tier: 'Good', price: '~$8K', note: 'Compact grill island, minimal storage' },
+      { tier: 'Better', price: '~$16K', note: 'Grill, prep space, 1–2 added appliances' },
+      { tier: 'Best', price: '~$32K', note: 'Multiple appliances, bar seating, entertainment area' },
+    ],
+    source: "Sourced from Angi's 2026 outdoor kitchen cost data ($6,269–$27,087 typical range, up to $50K+ for high-end builds) — illustrative, not a quote for your project.",
+    imagePublicId: 'nj-design-build/carousel-outdoor-kitchen',
+    imageAlt: 'A built-in outdoor kitchen counter and grill station in daylight',
+  },
+];
+---
+
+<div class="carousel-wrap">
+  <div class="carousel-track" id="nj-carousel-track">
+    {cards.map((card) => (
+      <div class="sample-card">
+        <PlaceholderImage
+          publicId={card.imagePublicId}
+          alt={card.imageAlt}
+          aspect="16/10"
+          className="sample-img"
+          loading="lazy"
+        />
+        <span class={`sample-tag ${card.tag}`}>{card.tag === 'real' ? 'A Real Recent Estimate' : 'Illustrative Estimate'}</span>
+        <h3>{card.title}</h3>
+        <p>{card.body}</p>
+        <div class="gbb-grid">
+          {card.tiers.map((t) => (
+            <div class:list={['gbb-card', { mid: t.tier === 'Better' }]}>
+              <div class="gbb-tier">{t.tier}</div>
+              <div class="gbb-price">{t.price}</div>
+              <p>{t.note}</p>
+            </div>
+          ))}
+        </div>
+        <div class="sample-source">{card.source}</div>
+      </div>
+    ))}
+  </div>
+  <div class="carousel-nav">
+    <button type="button" class="carousel-btn" id="nj-carousel-prev" aria-label="Previous estimate">←</button>
+    <button type="button" class="carousel-btn" id="nj-carousel-next" aria-label="Next estimate">→</button>
+  </div>
+</div>
+
+<style>
+  .carousel-wrap { position: relative; }
+  .carousel-track {
+    display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; padding: 4px 4px 18px; -webkit-overflow-scrolling: touch;
+  }
+  .carousel-track::-webkit-scrollbar { height: 6px; }
+  .carousel-track::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; }
+  .sample-card {
+    flex: 0 0 auto; scroll-snap-align: start; width: min(560px, 86vw);
+    background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px 30px 32px;
+  }
+  :global(.sample-img) { border-radius: 10px; margin-bottom: 18px; }
+  .sample-tag {
+    display: inline-block; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 700; padding: 4px 10px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .sample-tag.real { color: #fff; background: var(--forest); }
+  .sample-tag.illustrative { color: var(--gold-deep); background: #FBF2DE; border: 1px solid var(--gold); }
+  .sample-card h3 { font-size: 21px; color: var(--forest); margin-bottom: 12px; line-height: 1.3; }
+  .sample-card > p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 22px; }
+  .gbb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+  .gbb-card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 10px; text-align: center; }
+  .gbb-card.mid { border-color: var(--gold); background: #FFFBF2; }
+  .gbb-tier { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 5px; }
+  .gbb-price { font-family: var(--font-serif); font-size: 19px; color: var(--forest); margin-bottom: 6px; }
+  .gbb-card p { font-size: 10.5px; color: var(--text-muted); line-height: 1.45; margin: 0; }
+  .sample-source { font-size: 11px; color: var(--text-muted); line-height: 1.5; border-top: 1px solid var(--line); padding-top: 12px; }
+  .carousel-nav { display: flex; justify-content: center; gap: 12px; margin-top: 8px; }
+  .carousel-btn {
+    width: 38px; height: 38px; border-radius: 50%; background: #fff; border: 1px solid var(--line);
+    color: var(--forest); font-size: 16px; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; font-family: inherit;
+  }
+  .carousel-btn:hover { border-color: var(--gold-deep); color: var(--gold-deep); }
+  @media (max-width: 700px) { .gbb-grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const track = document.getElementById('nj-carousel-track');
+  const prev = document.getElementById('nj-carousel-prev');
+  const next = document.getElementById('nj-carousel-next');
+  if (track && prev && next) {
+    const step = () => {
+      const card = track.querySelector<HTMLElement>('.sample-card');
+      const gap = 22;
+      return card ? card.getBoundingClientRect().width + gap : 300;
+    };
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  }
+</script>

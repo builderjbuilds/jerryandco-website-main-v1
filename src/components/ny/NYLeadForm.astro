@@ -1,0 +1,264 @@
+---
+// Jerry & Co. — NY division lead form + reveal-on-submit GHL calendar embed.
+// One component covers all 3 NY funnels (Section 2.3.3 of the strategy doc) —
+// field set changes by `funnel`, everything else (submit handling, success
+// state, calendar reveal) is shared.
+//
+// Reuses the site's existing global form classes (.form-card / .form-row /
+// .field / .form-foot / .form-success — see src/styles/components.css) so
+// this looks identical to every other lead form on the site, no new CSS.
+//
+// Posts to /api/ghl-lead-relay (src/pages/api/ghl-lead-relay.ts), which upserts
+// the contact + opportunity in GHL server-side. On success, reveals the GHL
+// calendar booking iframe below the form instead of navigating away.
+
+interface Props {
+  funnel: 'A' | 'B' | 'C';
+  calendarId: string;
+  heading: string;
+  sub?: string;
+  submitLabel: string;
+}
+
+const { funnel, calendarId, heading, sub, submitLabel } = Astro.props;
+const formId = `ny-lead-form-${funnel.toLowerCase()}`;
+---
+
+<div class="form-card ny-lead-card" id={formId}>
+  <h3>{heading}</h3>
+  {sub && <p class="sub">{sub}</p>}
+
+  <form class="ny-lead-form" data-ny-funnel={funnel}>
+    <input type="text" name="_gotcha" class="ny-bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+    <div class="form-row">
+      <div class="field">
+        <label for={`${formId}-firstName`}>First name</label>
+        <input id={`${formId}-firstName`} name="firstName" type="text" required autocomplete="given-name" />
+      </div>
+      <div class="field">
+        <label for={`${formId}-lastName`}>Last name</label>
+        <input id={`${formId}-lastName`} name="lastName" type="text" required autocomplete="family-name" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label for={`${formId}-phone`}>Phone</label>
+        <input id={`${formId}-phone`} name="phone" type="tel" required autocomplete="tel" />
+      </div>
+      <div class="field">
+        <label for={`${formId}-email`}>Email</label>
+        <input id={`${formId}-email`} name="email" type="email" autocomplete="email" />
+      </div>
+    </div>
+
+    <div class="form-row single">
+      <div class="field">
+        <label for={`${formId}-town`}>Town</label>
+        <input id={`${formId}-town`} name="town" type="text" placeholder={funnel === 'B' ? 'e.g. Yonkers' : 'e.g. White Plains'} required />
+      </div>
+    </div>
+
+    {funnel === 'A' && (
+      <div class="form-row single">
+        <div class="field">
+          <label for={`${formId}-serviceInterest`}>What are you looking to do?</label>
+          <select id={`${formId}-serviceInterest`} name="serviceInterest" required>
+            <option value="">Select one…</option>
+            <option>Fencing</option>
+            <option>Sheds</option>
+            <option>Pergolas</option>
+            <option>Patios/Hardscaping</option>
+            <option>Interior Painting/Refresh</option>
+            <option>Handyman</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+    )}
+
+    {funnel === 'B' && (
+      <>
+        <div class="form-row single">
+          <div class="field">
+            <label for={`${formId}-unitsManaged`}>Units / properties managed</label>
+            <input id={`${formId}-unitsManaged`} name="unitsManaged" type="number" min="1" placeholder="e.g. 12" required />
+          </div>
+        </div>
+        <div class="form-row single">
+          <div class="field">
+            <label for={`${formId}-serviceInterest`}>What do you need most right now?</label>
+            <select id={`${formId}-serviceInterest`} name="serviceInterest" required>
+              <option value="">Select one…</option>
+              <option>Turnover Repairs</option>
+              <option>Fencing</option>
+              <option>Sheds</option>
+              <option>Patios/Hardscaping</option>
+              <option>Interior Painting/Refresh</option>
+              <option>Handyman</option>
+              <option>Ongoing Preferred-Vendor Relationship</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </>
+    )}
+
+    {funnel === 'C' && (
+      <>
+        <div class="form-row">
+          <div class="field">
+            <label for={`${formId}-projectType`}>Project type</label>
+            <select id={`${formId}-projectType`} name="projectType" required>
+              <option value="">Select one…</option>
+              <option>Deck</option>
+              <option>Addition</option>
+              <option>Patio/Deck Enclosure</option>
+              <option>Three-Season Room</option>
+              <option>Gazebo</option>
+              <option>Other Structural</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for={`${formId}-budgetRange`}>Rough budget range</label>
+            <select id={`${formId}-budgetRange`} name="budgetRange" required>
+              <option value="">Select one…</option>
+              <option>Under $5K</option>
+              <option>$5K–15K</option>
+              <option>$15K–30K</option>
+              <option>$30K+</option>
+            </select>
+          </div>
+        </div>
+      </>
+    )}
+
+    <div class="form-row single">
+      <div class="field">
+        <label for={`${formId}-timeline`}>Timeline</label>
+        <select id={`${formId}-timeline`} name="timeline" required>
+          <option value="">Select one…</option>
+          <option>ASAP</option>
+          <option>1–3 months</option>
+          <option>3–6 months</option>
+          <option>Just researching</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-gold btn-block" data-ph-event="ny_lead_submit" data-ph-label={`funnel_${funnel.toLowerCase()}`}>
+      {submitLabel}
+    </button>
+    <p class="ny-form-status" role="status" aria-live="polite"></p>
+  </form>
+
+  <div class="form-success">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <h3>Got it — pick a time below.</h3>
+    <p>We'll also reach out directly if we can't find you on the calendar.</p>
+  </div>
+
+  <div class="ny-calendar-panel" data-calendar-id={calendarId}>
+    <div class="ny-calendar-frame"></div>
+  </div>
+</div>
+
+<style>
+  .ny-lead-card { position: relative; }
+  .ny-bot-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .ny-form-status { font-size: 14px; margin: 12px 0 0; min-height: 1.3em; }
+  .ny-form-status[data-state='error'] { color: #a3402f; }
+
+  .ny-lead-card .form-success { padding: 8px 0 0; }
+
+  .ny-calendar-panel { display: none; margin-top: 8px; }
+  .ny-calendar-panel.is-visible { display: block; }
+  .ny-calendar-frame {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    min-height: 620px;
+    background: #fff;
+  }
+  .ny-calendar-frame iframe { width: 100%; height: 620px; border: none; display: block; }
+</style>
+
+<script>
+  // Scoped per-instance — Astro hoists/bundles this once per page, and
+  // querySelectorAll below scopes to each .ny-lead-card so a page could in
+  // theory host more than one form without collisions.
+  document.querySelectorAll<HTMLElement>('.ny-lead-card').forEach((card) => {
+    const form = card.querySelector<HTMLFormElement>('.ny-lead-form');
+    if (!form) return;
+
+    const statusEl = card.querySelector<HTMLElement>('.ny-form-status');
+    const successEl = card.querySelector<HTMLElement>('.form-success');
+    const calendarPanel = card.querySelector<HTMLElement>('.ny-calendar-panel');
+    const calendarFrame = card.querySelector<HTMLElement>('.ny-calendar-frame');
+    const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (statusEl) { statusEl.removeAttribute('data-state'); statusEl.textContent = ''; }
+
+      const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+      data.funnel = form.dataset.nyFunnel || 'A';
+      data.source = window.location.pathname;
+
+      if (!data.phone && !data.email) {
+        if (statusEl) {
+          statusEl.dataset.state = 'error';
+          statusEl.textContent = 'Enter a phone number or email so we can reach you.';
+        }
+        return;
+      }
+
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting…'; }
+
+      try {
+        const res = await fetch('/api/ghl-lead-relay', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (!res.ok || !result.ok) {
+          throw new Error(result.error || 'Something went wrong. Please call/text us directly.');
+        }
+
+        form.style.display = 'none';
+        successEl?.classList.add('show');
+
+        if (calendarPanel && calendarFrame) {
+          const calendarId = calendarPanel.dataset.calendarId;
+          // Lazy-load the iframe only once the lead has actually converted.
+          if (calendarId && !calendarFrame.querySelector('iframe')) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://api.leadconnectorhq.com/widget/booking/${calendarId}`;
+            calendarFrame.appendChild(iframe);
+          }
+          calendarPanel.classList.add('is-visible');
+          calendarPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        if (typeof (window as any).posthog !== 'undefined') {
+          (window as any).posthog.capture('ny_lead_converted', { funnel: data.funnel });
+        }
+      } catch (err: any) {
+        if (statusEl) {
+          statusEl.dataset.state = 'error';
+          statusEl.textContent = err.message || "Couldn't submit — call/text us directly instead.";
+        }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.originalLabel || 'Submit'; }
+      }
+    });
+
+    if (submitBtn) submitBtn.dataset.originalLabel = submitBtn.textContent || 'Submit';
+  });
+</script>
+
+<!-- GHL calendar embed widget script — loaded once per page that uses this component. -->
+<script src="https://link.msgsndr.com/js/form_embed.js" is:inline></script>

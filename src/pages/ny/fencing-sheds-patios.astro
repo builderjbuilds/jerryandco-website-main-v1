@@ -1,0 +1,208 @@
+---
+// Funnel A — NY Homeowner (fencing, sheds, pergolas, patios, interior refresh).
+// Spec: JerryCo_OutdoorLiving_Division_Launch_Strategy.md, Section 2.3.3.
+import Base from '../../layouts/Base.astro';
+import NYHeader from '../../components/ny/NYHeader.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTABand from '../../components/CTABand.astro';
+import NYLeadForm from '../../components/ny/NYLeadForm.astro';
+import NYFooter from '../../components/ny/NYFooter.astro';
+import NYTrustChips from '../../components/ny/NYTrustChips.astro';
+import NYProcessSteps from '../../components/ny/NYProcessSteps.astro';
+import PlaceholderImage from '../../components/PlaceholderImage.astro';
+
+const title = 'Westchester Fencing, Patios & Outdoor Living | Jerry & Co.';
+const description =
+  'Insured, permit-coordinated fencing, sheds, patios, and outdoor living upgrades across Westchester County. Get a same-day written quote.';
+const canonical = 'https://www.jerryandcohome.com/ny/fencing-sheds-patios/';
+
+// Same safety pattern as src/pages/quote.astro and the homepage's #estimate
+// section: phone-collecting GHL forms are currently gated site-wide pending
+// A2P 10DLC campaign review. The NY division uses its own GHL sub-account and
+// a separate tracking number (Section 2.3.1), which may or may not be under
+// the same review — CONFIRM the NY number's A2P status in GHL before flipping
+// this true in production. Defaults on here since it's a fresh number, not
+// the flagged MA one, but this is a judgment call, not a verified fact.
+const NY_LEAD_FORMS_ENABLED = true;
+
+const breadcrumbSchema = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jerryandcohome.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Fencing, Patios & Outdoor Living — NY', item: canonical },
+  ],
+};
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', ...breadcrumbSchema })} />
+  </Fragment>
+
+  <NYHeader ctaHref="#ny-lead-form-a" ctaLabel="Get My Quote" />
+
+  <section class="ny-hero">
+    <div class="wrap">
+      <Breadcrumb crumbs={[{ label: 'Outdoor Living', href: '/ny/' }, { label: 'Fencing, Patios & Outdoor Living' }]} />
+      <div class="estimate-grid">
+        <div class="ny-hero-copy" data-reveal="left">
+          <p class="eyebrow">Fencing · Sheds · Patios · Outdoor Living — Westchester County</p>
+          <h1>Westchester Backyard Upgrades, Done Right.</h1>
+          <p class="lede">
+            The nights you actually spend outside — not the ones you meant to — start with a
+            fence that makes the yard feel private, a patio that doesn't flood every spring, a
+            shed that isn't an eyesore from the driveway. Fencing, sheds, pergolas, patios, and
+            interior refresh work, quoted same-day by people who show up when they say they will.
+            The same standard Jerry &amp; Co. is known for in Greater Boston, now in Westchester.
+          </p>
+          <NYTrustChips />
+        </div>
+        <div data-reveal="right">
+          {NY_LEAD_FORMS_ENABLED ? (
+            <NYLeadForm
+              funnel="A"
+              calendarId="ppZpG8jAyotOx7q4Msgf"
+              heading="Get your same-day written quote"
+              submitLabel="Get My Quote"
+            />
+          ) : (
+            <div class="form-card">
+              <p class="form-paused-headline">Online quote requests are briefly paused.</p>
+              <p class="form-paused-sub">
+                Call or text us directly and we'll get your estimate started —
+                <a href="tel:+13476026801">(347) 602-6801</a>.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ny-trust">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Why "insured and permit-coordinated" actually matters here</p>
+        <h2>Most backyard contractors in this market skip the paperwork.</h2>
+        <p>
+          No insurance certificate, no permit filing, no inspection — that's how projects end
+          up red-tagged, or how a fence dispute with a neighbor turns into a survey problem
+          you're paying to fix twice. Jerry &amp; Co. runs every project through the same
+          insured, permit-coordinated process regardless of size: a real contract, a real
+          timeline, and work that still looks right when a buyer's inspector walks the yard
+          in five years. Ask any contractor in this price tier for proof of insurance and a
+          permit plan — most can't produce either on the spot.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ny-tiers">
+    <div class="wrap">
+      <div class="section-head" data-reveal="up">
+        <p class="eyebrow">Straightforward pricing, no surprises</p>
+        <h2>Every quote is written and tiered.</h2>
+        <p>So you know exactly what you're choosing between — not a single vague number.</p>
+      </div>
+      <div class="ny-tier-grid" data-reveal="up">
+        <div class="ny-tier-card">
+          <PlaceholderImage
+            publicId="ny/aspirational/tier-good-fence"
+            alt="Concept rendering of a pressure-treated pine picket fence — aspirational, not an actual completed project"
+            aspect="4/3"
+            className="ny-tier-img"
+            caption="Concept rendering"
+            loading="lazy"
+          />
+          <p class="ny-tier-name">Base</p>
+          <h3>Good</h3>
+          <p>Solid, code-compliant materials and a clean install — the right call for rentals and budget-conscious projects.</p>
+        </div>
+        <div class="ny-tier-card is-featured">
+          <PlaceholderImage
+            publicId="ny/aspirational/tier-better-deck"
+            alt="Concept rendering of composite decking and an upgraded cedar fence — aspirational, not an actual completed project"
+            aspect="4/3"
+            className="ny-tier-img"
+            caption="Concept rendering"
+            loading="lazy"
+          />
+          <p class="ny-tier-name">Standard</p>
+          <h3>Better</h3>
+          <p>The option most homeowners choose — composite decking and upgraded fence materials that skip the annual staining and hold up through Northeast winters.</p>
+        </div>
+        <div class="ny-tier-card">
+          <PlaceholderImage
+            publicId="ny/aspirational/tier-premium-patio"
+            alt="Concept rendering of a bluestone paver patio with a cedar pergola — aspirational, not an actual completed project"
+            aspect="4/3"
+            className="ny-tier-img"
+            caption="Concept rendering"
+            loading="lazy"
+          />
+          <p class="ny-tier-name">Premium</p>
+          <h3>Best</h3>
+          <p>Top-tier materials and custom detailing for a backyard that's a genuine selling point.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <NYProcessSteps />
+
+  <CTABand
+    eyebrow="Same-day written quotes"
+    headline="Get your Westchester backyard quote started"
+    ctaText="Get my quote"
+    ctaHref="#ny-lead-form-a"
+    reassurance="No obligation — a 30-minute video walkthrough gets you a same-day written quote."
+  />
+
+  <NYFooter />
+</Base>
+
+<style>
+  .ny-hero { padding: clamp(32px, 4vw, 56px) 0 clamp(56px, 6vw, 88px); background: #fff; }
+  .ny-hero h1 {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+  .ny-hero-copy :global(.ny-trust-chips) { margin-top: 24px; }
+  .ny-trust { background: var(--bone-deep); }
+  .form-paused-headline { font-weight: 600; margin-bottom: 8px; }
+  .form-paused-sub { color: var(--text-muted); }
+  .form-paused-sub a { color: var(--forest); font-weight: 600; }
+
+  .ny-tier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .ny-tier-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: clamp(28px, 3vw, 40px);
+    box-shadow: 0 2px 0 var(--line), 0 12px 48px rgba(20, 36, 31, 0.06);
+    position: relative;
+  }
+  :global(.ny-tier-img) { border-radius: calc(var(--radius-sm) - 4px); margin-bottom: 16px; }
+  .ny-tier-card.is-featured { border-color: var(--gold); }
+  .ny-tier-card.is-featured::before {
+    content: 'MOST BOOKED';
+    position: absolute; top: -11px; left: 24px;
+    background: var(--gold); color: var(--ink);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    padding: 5px 10px; border-radius: var(--radius-pill);
+  }
+  .ny-tier-name {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold-deep); margin: 0 0 6px;
+  }
+  .ny-tier-card p:last-child { color: var(--text-muted); font-size: 15px; margin-top: 8px; }
+
+  @media (max-width: 780px) {
+    .ny-tier-grid { grid-template-columns: 1fr; }
+  }
+</style>

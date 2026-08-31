@@ -1,0 +1,68 @@
+---
+// NJ Design-Build footer — ported from the mockup's 4-col footer, not the
+// shared src/components/Footer.astro (which hardcodes MA-specific
+// LocalBusiness JSON-LD and a Boston-condo newsletter headline that don't
+// apply here). Same visual language (forest/bone/gold), same governance
+// constraint as NYFooter: the licensing line below is EXACT per the build
+// spec (Section 8) — do not shorten or paraphrase it.
+---
+
+<footer class="nj-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="word">JERRY &amp; CO.</div>
+        <p>Design-build backyard additions and outdoor living for Bergen, Passaic, Essex &amp; Hudson Counties — design and project management by Jerry &amp; Co., construction by our verified NJ build partner.</p>
+      </div>
+      <div>
+        <h4>What We Build</h4>
+        <ul>
+          <li><a href="/nj/backyard-design-build/#services">Season Rooms &amp; Patio Conversions</a></li>
+          <li><a href="/nj/backyard-design-build/#services">Elevated Decks</a></li>
+          <li><a href="/nj/backyard-design-build/#services">Patio Enclosures</a></li>
+          <li><a href="/nj/backyard-design-build/#services">Hardscape &amp; Patios</a></li>
+          <li><a href="/nj/project-request/">Get a free site visit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/nj/backyard-design-build/#process">Our Process</a></li>
+          <li><a href="/nj/backyard-design-build/#sample">Sample Estimates</a></li>
+          <li><a href="/nj/backyard-design-build/#faq">FAQ</a></li>
+          <li><a href="/nj/project-request/">Start a Project</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Service Area</h4>
+        <ul>
+          <li>Bergen County, NJ</li>
+          <li>Passaic County, NJ</li>
+          <li>Essex County, NJ</li>
+          <li>Hudson County, NJ</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      © 2026 Jerry &amp; Co. Home Improvement LLC · MA HIC #208336 · NJ Design-Build projects delivered together with our registered NJ build partner · Premium Finish. Local Trust. Zero Surprises.
+    </div>
+  </div>
+</footer>
+
+<style>
+  .nj-footer { background: var(--ink); color: #B9C4BE; padding: 50px 0 26px; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 30px; margin-bottom: 36px; }
+  .foot-brand .word { font-family: var(--font-serif); font-size: 19px; color: var(--bone); margin-bottom: 10px; }
+  .foot-brand p { font-size: 12.5px; line-height: 1.7; color: #96A39C; max-width: 280px; margin: 0; }
+  .nj-footer h4 { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .nj-footer ul { list-style: none; padding: 0; margin: 0; }
+  .nj-footer li { margin-bottom: 9px; font-size: 12.5px; }
+  .nj-footer a { text-decoration: none; color: #B9C4BE; }
+  .nj-footer a:hover { color: var(--gold); }
+  .foot-legal {
+    border-top: 1px solid var(--line-dark);
+    padding-top: 22px; font-size: 11.5px; color: #8B978F; line-height: 1.7; text-align: center;
+  }
+  @media (max-width: 860px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .foot-grid { grid-template-columns: 1fr; } }
+</style>
