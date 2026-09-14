@@ -40,7 +40,10 @@ const { bookingUrl } = Astro.props;
     <div class="field-block">
       <label>Pick Your Time</label>
       <p class="booking-note">You'll pick your time and enter your contact details on the next screen — it opens in a new tab so this page stays put.</p>
-      <a class="btn btn-gold btn-block" id="nj-booking-link" href={bookingUrl} target="_blank" rel="noopener">Choose Your Site Visit Time →</a>
+      <a class="btn btn-gold btn-block" id="nj-booking-link" href={bookingUrl} target="_blank" rel="noopener">
+        <span>Choose Your Site Visit Time</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
 
     <div class="fine-note">No obligation beyond the visit itself. We'll email a reminder before your visit. Need to talk first? Email <a href="mailto:support@jerryandcohome.com">support@jerryandcohome.com</a>.</div>
@@ -66,7 +69,7 @@ const { bookingUrl } = Astro.props;
   .field-block > label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--forest); text-align: center; margin-bottom: 8px; }
   .booking-note { font-size: 12.5px; line-height: 1.55; color: var(--text-muted); text-align: center; margin: 0 0 14px; }
 
-  .btn-block { display: block; width: 100%; text-align: center; }
+  .btn-block { display: flex; width: 100%; align-items: center; justify-content: center; gap: 8px; }
 
   .fine-note { margin-top: 4px; text-align: center; font-size: 11px; color: var(--text-muted); }
   .fine-note a { color: var(--gold-deep); }
