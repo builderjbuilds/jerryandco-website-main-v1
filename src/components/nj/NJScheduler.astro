@@ -2,18 +2,32 @@
 // NJ Design-Build — scheduler right panel. Ported from mockup 3's
 // #booking-form, with ONE deliberate departure the build spec requires
 // (Section 4.3): the mockup's 4-fixed-time-slot buttons were a placeholder
-// that would double-book against Jerry's real calendar, so this ships the
-// real GHL calendar embed instead — same "NY Design Consultation" calendar
-// reused across NY Funnels A/B/C (Section 7.2's stated default: reuse the
-// existing calendar with a modified pre-call question set, rather than
-// standing up a second one before there's a reporting need to split them).
+// that would double-book against Jerry's real calendar, so this ships a real
+// calendar booking link instead.
+//
+// 2026-09-14 — switched from the GHL calendar iframe embed to a direct link
+// to a Google Calendar Appointment Schedule (GHL's server was down, and
+// GHL's booking widget has no fallback of its own — see nj-lead-relay.ts's
+// header comment for the same outage). Tested iframe-embedding the Google
+// page first: the short link (calendar.app.google/...) sets
+// X-Frame-Options: SAMEORIGIN on the redirect hop, and the direct
+// calendar.google.com/calendar/appointments/schedules/... URL is tied to an
+// authenticated session and renders blank for visitors — neither embeds
+// reliably, and Google doesn't officially support iframe embedding of
+// Appointment Schedules for personal (non-Workspace) accounts. A plain
+// outbound link is the robust option, and it also means Google's own
+// booking form (name/email/phone/custom questions) replaces the
+// hand-rolled fields this component used to render above the iframe —
+// no more duplicate, unsynced "Your Details" inputs.
 //
 // Prefill comes from sessionStorage (set by NJLeadForm on submit) — never
-// localStorage, and never the mockup's own multi-submission array.
+// localStorage, and never the mockup's own multi-submission array. It's
+// display-only here (there's no API to hand it to Google's booking form),
+// so it just confirms to the visitor we already have their project details.
 interface Props {
-  calendarId: string;
+  bookingUrl: string;
 }
-const { calendarId } = Astro.props;
+const { bookingUrl } = Astro.props;
 ---
 
 <div class="nj-sched-inner">
@@ -24,28 +38,12 @@ const { calendarId } = Astro.props;
     <div class="recap-strip" id="nj-recap-strip"></div>
 
     <div class="field-block">
-      <label for="nj-f-name">Your Details</label>
-      <input type="text" id="nj-f-name" placeholder="Full name" />
-      <div class="row2">
-        <input type="tel" id="nj-f-phone" placeholder="Mobile number" />
-        <input type="email" id="nj-f-email" placeholder="Email address" />
-      </div>
-      <input type="text" id="nj-f-address" placeholder="Project address (street, city, state)" />
-    </div>
-
-    <div class="field-block">
       <label>Pick Your Time</label>
-      <div class="nj-calendar-frame">
-        <iframe
-          src={`https://api.leadconnectorhq.com/widget/booking/${calendarId}`}
-          style="width:100%;border:none;overflow:hidden;"
-          scrolling="no"
-          id="nj-calendar-iframe"
-        ></iframe>
-      </div>
+      <p class="booking-note">You'll pick your time and enter your contact details on the next screen — it opens in a new tab so this page stays put.</p>
+      <a class="btn btn-gold btn-block" id="nj-booking-link" href={bookingUrl} target="_blank" rel="noopener">Choose Your Site Visit Time →</a>
     </div>
 
-    <div class="fine-note">No obligation beyond the visit itself. We'll text and email a reminder 24 hours before. Need to talk first? Email <a href="mailto:support@jerryandcohome.com">support@jerryandcohome.com</a>.</div>
+    <div class="fine-note">No obligation beyond the visit itself. We'll email a reminder before your visit. Need to talk first? Email <a href="mailto:support@jerryandcohome.com">support@jerryandcohome.com</a>.</div>
   </div>
 </div>
 
@@ -60,26 +58,12 @@ const { calendarId } = Astro.props;
 
   .field-block { margin-bottom: 26px; }
   .field-block > label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--forest); margin-bottom: 10px; }
+  .booking-note { font-size: 12.5px; line-height: 1.55; color: var(--text-muted); margin: 0 0 14px; }
 
-  .field-block input {
-    width: 100%; padding: 11px 13px; border: 1px solid var(--line); border-radius: 7px;
-    font-size: 14px; font-family: inherit; background: #FDFCF9; color: var(--text); margin-bottom: 12px;
-  }
-  .field-block input:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-  .nj-calendar-frame {
-    border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--line);
-    min-height: 620px; background: #fff;
-  }
-  .nj-calendar-frame iframe { width: 100%; height: 620px; border: none; display: block; }
+  .btn-block { display: block; width: 100%; text-align: center; }
 
   .fine-note { margin-top: 12px; text-align: center; font-size: 11px; color: var(--text-muted); }
   .fine-note a { color: var(--gold-deep); }
-
-  @media (max-width: 900px) {
-    .row2 { grid-template-columns: 1fr; }
-  }
 </style>
 
 <script>
@@ -92,28 +76,29 @@ const { calendarId } = Astro.props;
     return v.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] || c));
   }
 
-  const nameEl = document.getElementById('nj-f-name') as HTMLInputElement | null;
-  const phoneEl = document.getElementById('nj-f-phone') as HTMLInputElement | null;
-  const emailEl = document.getElementById('nj-f-email') as HTMLInputElement | null;
-  const addressEl = document.getElementById('nj-f-address') as HTMLInputElement | null;
+  // Same option→label map as NJLeadForm.astro's projectType <select> — the
+  // stored lead only has the raw snake_case value, so translate it back to
+  // human copy for the recap strip instead of showing e.g. "deck_addition_enclosure".
+  const PROJECT_TYPE_LABELS: Record<string, string> = {
+    deck_addition_enclosure: 'Deck / Addition / Patio Enclosure',
+    fencing: 'Fencing',
+    hardscaping: 'Hardscaping / Patio',
+    decking: 'Decking',
+    other: 'your outdoor project',
+  };
+
   const recapStrip = document.getElementById('nj-recap-strip');
 
   try {
     const raw = sessionStorage.getItem('jerryco_nj_last_lead');
     if (raw) {
       const lead: StoredLead = JSON.parse(raw);
-      if (nameEl) nameEl.value = lead.fullName || '';
-      if (phoneEl) phoneEl.value = lead.phone || '';
-      if (emailEl) emailEl.value = lead.email || '';
-      if (addressEl) addressEl.value = [lead.street, lead.city, lead.state].filter(Boolean).join(', ');
+      const projectLabel = (lead.projectType && PROJECT_TYPE_LABELS[lead.projectType]) || 'your project';
       if (recapStrip) {
-        recapStrip.innerHTML = `Picking up from your project request: <b>${escapeHtml(lead.projectType || 'your project')}</b>${lead.city ? ' in <b>' + escapeHtml(lead.city) + '</b>' : ''}. Not you? Just edit the details below.`;
+        recapStrip.innerHTML = `Picking up from your project request: <b>${escapeHtml(projectLabel)}</b>${lead.city ? ' in <b>' + escapeHtml(lead.city) + '</b>' : ''}. We already have your name and contact info — just confirm them again on the booking screen.`;
         recapStrip.classList.add('show');
       }
       sessionStorage.removeItem('jerryco_nj_last_lead');
     }
   } catch { /* sessionStorage unavailable — scheduler still works, just unprefilled */ }
 </script>
-
-<!-- GHL calendar embed widget script — same convention as NYLeadForm.astro. -->
-<script src="https://link.msgsndr.com/js/form_embed.js" is:inline></script>
