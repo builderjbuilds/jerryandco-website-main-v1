@@ -1,9 +1,11 @@
 ---
 // NJ Design-Build — lead intake form (ported from mockup 2's #intake-form).
-// Posts to the same shared /api/ghl-lead-relay route the NY funnels use
-// (see src/pages/ny/../NYLeadForm.astro), with funnel='D' so the relay
-// routes into the NY Design-Build pipeline with NJ-specific tags/fields
-// (Section 5/7.1 of the build spec).
+// Posts to src/pages/api/nj-lead-relay.ts, which forwards to a GHL Workflow's
+// Inbound Webhook trigger (GHL Webhook Integration build spec, Aug 31 2026) —
+// NOT the NY funnels' /api/ghl-lead-relay direct-API route. GHL's own
+// workflow builder owns the contact upsert, tagging, Plans-Ready branch, and
+// opportunity creation on that side; this form just posts the flat payload
+// nj-lead-relay.ts expects.
 //
 // No hydration directive needed — this is a plain Astro component with an
 // inline <script> (same pattern as NYLeadForm.astro), which Astro always
@@ -125,7 +127,10 @@
     </div>
 
     <p class="required-note">* Required</p>
-    <button type="submit" class="btn btn-gold btn-block" data-ph-event="nj_lead_submit" data-ph-label="funnel_d_nj_design_build">Start My Site Visit Request</button>
+    <button type="submit" class="btn btn-gold btn-block" data-ph-event="nj_lead_submit" data-ph-label="funnel_d_nj_design_build">
+      <span class="btn-label">Start My Site Visit Request</span>
+      <span class="spinner" hidden></span>
+    </button>
     <p class="nj-form-status" role="status" aria-live="polite"></p>
     <p class="fine-print">We'll bring proof of registration and insurance to the walk-through — see it before you commit to anything.</p>
   </form>
@@ -139,6 +144,16 @@
     <div class="nj-confirm-recap" id="nj-confirm-recap"></div>
     <a href="/nj/book-site-visit/" class="btn btn-gold" id="nj-book-visit-link">Choose Your Site Visit Time →</a>
     <p class="fine-print" style="margin-top:16px;">Prefer to skip the wait? Email <a href="mailto:support@jerryandcohome.com">support@jerryandcohome.com</a> and mention this page.</p>
+  </div>
+
+  <div class="form-error" id="nj-form-error">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <h3>Couldn't Submit Online</h3>
+    <p>No problem — nothing's lost. Send us your details below and we'll follow up directly, or try again if it was a one-off glitch.</p>
+    <a href="#" class="btn btn-gold btn-block" id="nj-error-mailto" target="_blank" rel="noopener">Email Us Your Details</a>
+    <button type="button" class="btn btn-outline-dark btn-block" id="nj-error-retry">Try Again</button>
   </div>
 </div>
 
@@ -162,6 +177,13 @@
   .nj-confirm-recap { margin: 20px 0; text-align: left; background: var(--bone); border-radius: 8px; padding: 14px 16px; font-size: 13px; color: var(--text); }
   .nj-confirm-recap div { padding: 3px 0; }
   .nj-confirm-recap b { color: var(--forest); }
+
+  .form-error { display: none; text-align: center; }
+  .form-error.show { display: block; }
+  .form-error svg { color: #a3402f; width: 40px; height: 40px; margin-bottom: 12px; }
+  .form-error h3 { font-size: 20px; color: var(--forest); margin-bottom: 8px; }
+  .form-error p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+  .form-error #nj-error-retry { margin-top: 10px; }
 </style>
 
 <script>
@@ -172,28 +194,110 @@
   const recapEl = document.getElementById('nj-confirm-recap');
   const bookLink = document.getElementById('nj-book-visit-link') as HTMLAnchorElement | null;
   const submitBtn = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const spinnerEl = submitBtn?.querySelector<HTMLElement>('.spinner');
+  const errorEl = card?.querySelector<HTMLElement>('.form-error');
+  const errorMailtoLink = document.getElementById('nj-error-mailto') as HTMLAnchorElement | null;
+  const errorRetryBtn = document.getElementById('nj-error-retry') as HTMLButtonElement | null;
+
+  // Shake + highlight any field that fails HTML5 validation (required,
+  // type="email", etc.) — the form carries `novalidate` so the browser
+  // never silently blocks/relies on its own bubble UI alone; this keeps
+  // that same constraint-validation data but makes the rejection visible
+  // and prevents an all-blank submission from ever reaching the relay.
+  function markInvalidFields(f: HTMLFormElement) {
+    const invalids = Array.from(f.querySelectorAll(':invalid')) as HTMLElement[];
+    invalids.forEach((el) => {
+      const wrap = el.closest<HTMLElement>('.field, .consent') || el;
+      wrap.classList.remove('field-invalid');
+      void wrap.offsetWidth; // reflow so a repeated failure replays the shake
+      wrap.classList.add('field-invalid');
+    });
+    return invalids;
+  }
+
+  form?.addEventListener('input', (e) => {
+    const el = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+    if (!el.validity) return;
+    const wrap = el.closest<HTMLElement>('.field, .consent');
+    if (wrap && el.validity.valid) wrap.classList.remove('field-invalid');
+  });
+
+  errorRetryBtn?.addEventListener('click', () => {
+    errorEl?.classList.remove('show');
+    if (form) form.style.display = '';
+  });
+
+  function setLoading(isLoading: boolean) {
+    if (!submitBtn) return;
+    submitBtn.disabled = isLoading;
+    if (isLoading) {
+      submitBtn.setAttribute('data-loading', '');
+    } else {
+      submitBtn.removeAttribute('data-loading');
+    }
+    if (spinnerEl) spinnerEl.hidden = !isLoading;
+  }
 
   function escapeHtml(v: string) {
     return v.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] || c));
   }
 
+  // Maps this form's snake_case select values to the exact label strings the
+  // "NJ Plans Ready" GHL custom field's options use (per the GHL webhook
+  // integration spec, Section 2 step 4) — nj-lead-relay.ts branches on
+  // whether this string starts with "Yes".
+  const PLANS_STATUS_LABELS: Record<string, string> = {
+    plans_and_zoning_ready: 'Yes – zoning approved',
+    plans_only: 'Yes – zoning pending',
+    no_plans_yet: 'No – need design too',
+  };
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (statusEl) { statusEl.removeAttribute('data-state'); statusEl.textContent = ''; }
+    errorEl?.classList.remove('show');
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      markInvalidFields(form);
+      if (statusEl) {
+        statusEl.dataset.state = 'error';
+        statusEl.textContent = 'Please fill in the highlighted fields above.';
+      }
+      return;
+    }
 
     const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
-    data.funnel = 'D';
-    data.source = window.location.pathname;
 
-    if (data._gotcha) return; // honeypot — let the relay silently drop it
+    if (data._gotcha) return; // honeypot — never even hit the relay
 
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting…'; }
+    setLoading(true);
+
+    // GHL Webhook Integration build spec (Aug 31, 2026) — relays through
+    // src/pages/api/nj-lead-relay.ts to a GHL Workflow's Inbound Webhook
+    // trigger, replacing the earlier direct-API /api/ghl-lead-relay call
+    // for this form. That route's LeadPayload shape is flatter than this
+    // form's fields, so map into it here rather than changing the relay
+    // (which is spec-locked to match the GHL workflow's field mapping).
+    const relayPayload = {
+      name: data.fullName,
+      phone: data.phone,
+      email: data.email,
+      address: [data.street, data.city, data.state, data.postal].filter(Boolean).join(', '),
+      projectType: data.projectType,
+      plansStatus: PLANS_STATUS_LABELS[data.plansStatus] || data.plansStatus,
+      timeline: data.timeline,
+      budget: data.budget,
+      notes: data.message,
+      formSource: 'intake',
+      website: data._gotcha, // honeypot field name the relay checks
+    };
 
     try {
-      const res = await fetch('/api/ghl-lead-relay', {
+      const res = await fetch('/api/nj-lead-relay', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(relayPayload),
       });
       const result = await res.json();
       if (!res.ok || !result.ok) {
@@ -227,12 +331,16 @@
         (window as any).posthog.capture('nj_lead_converted', { funnel: 'D' });
       }
     } catch (err: any) {
-      // Relay failed — fall back to the mockup's original mailto: safety net
-      // so nothing is silently lost (build spec Section 7.1 step 5 / Section 8).
-      if (statusEl) {
-        statusEl.dataset.state = 'error';
-        statusEl.textContent = "Couldn't submit online — we've opened an email with your details instead. Send it and we'll follow up directly.";
-      }
+      // Relay failed — show a dedicated error panel instead of firing
+      // window.open() here: by the time this async catch runs, the click
+      // that triggered submit is long gone, so browsers treat that open()
+      // call as an un-requested popup and either block it outright or hand
+      // back an empty about:blank tab with no prefilled fields. A real
+      // anchor the visitor clicks themselves doesn't have that problem —
+      // it's a live user gesture, so the mail client actually opens with
+      // their details already in the body (build spec Section 7.1 step 5 /
+      // Section 8's "nothing silently lost" requirement, just via a link
+      // instead of an auto-fired popup).
       const bodyLines = [
         'New site-visit request — NJ/NY-Metro Design-Build funnel (relay failed, sent via fallback)',
         '',
@@ -247,10 +355,12 @@
         `Budget range: ${data.budget || '(not given)'}`,
         `Message: ${data.message || '(none)'}`,
       ].join('\n');
-      const mailto = `mailto:support@jerryandcohome.com?subject=${encodeURIComponent('New Site Visit Request — ' + (data.fullName || 'New request'))}&body=${encodeURIComponent(bodyLines)}`;
-      try { window.open(mailto, '_blank'); } catch { /* popup blocked — status message still tells them what happened */ }
-
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Start My Site Visit Request'; }
+      if (errorMailtoLink) {
+        errorMailtoLink.href = `mailto:support@jerryandcohome.com?subject=${encodeURIComponent('New Site Visit Request — ' + (data.fullName || 'New request'))}&body=${encodeURIComponent(bodyLines)}`;
+      }
+      form.style.display = 'none';
+      errorEl?.classList.add('show');
+      setLoading(false);
     }
   });
 </script>
